@@ -1,0 +1,64 @@
+{
+  "golden_categories": [
+    {
+      "name": "Basic Email Validation",
+      "description": "Tests for validating standard email addresses without additional constraints.",
+      "golden_group_ids": ["GOLDEN-1"]
+    },
+    {
+      "name": "Domain-Specific Validation",
+      "description": "Tests for validating email addresses with domain-specific rules.",
+      "golden_group_ids": ["GOLDEN-2"]
+    },
+    {
+      "name": "Underscore in Domain",
+      "description": "Tests for validating email addresses with underscores allowed in the domain.",
+      "golden_group_ids": ["GOLDEN-3"]
+    },
+    {
+      "name": "UTF8 Local Part Restriction",
+      "description": "Tests for validating email addresses without UTF8 characters in the local part.",
+      "golden_group_ids": ["GOLDEN-4"]
+    },
+    {
+      "name": "Display Name Support",
+      "description": "Tests for validating email addresses with optional display names.",
+      "golden_group_ids": ["GOLDEN-5"]
+    },
+    {
+      "name": "Required Display Name",
+      "description": "Tests for validating email addresses where display names are mandatory.",
+      "golden_group_ids": ["GOLDEN-6"]
+    },
+    {
+      "name": "IP Domain Validation",
+      "description": "Tests for validating email addresses with IPs allowed in the domain.",
+      "golden_group_ids": ["GOLDEN-7"]
+    },
+    {
+      "name": "Blacklisted Characters in Name",
+      "description": "Tests for validating email addresses with restrictions on specific characters in the name.",
+      "golden_group_ids": ["GOLDEN-8"]
+    },
+    {
+      "name": "Max Length Enforcement",
+      "description": "Tests for validating email addresses with maximum length restrictions.",
+      "golden_group_ids": ["GOLDEN-9"]
+    },
+    {
+      "name": "Ignore Max Length",
+      "description": "Tests for validating email addresses with maximum length ignored.",
+      "golden_group_ids": ["GOLDEN-10", "GOLDEN-11"]
+    },
+    {
+      "name": "Host Blacklist",
+      "description": "Tests for validating email addresses with denylisted domains.",
+      "golden_group_ids": ["GOLDEN-12", "GOLDEN-13"]
+    },
+    {
+      "name": "Host Whitelist",
+      "description": "Tests for validating email addresses with whitelisted domains.",
+      "golden_group_ids": ["GOLDEN-14", "GOLDEN-15"]
+    }
+  ]
+}

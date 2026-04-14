@@ -1,0 +1,180 @@
+{
+  "mode": "blackbox",
+  "approach": "naive",
+  "obligations": [],
+  "test_groups": [
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com",
+        "ftp://example.com",
+        "http://example.com/path?query=1#fragment"
+      ],
+      "invalid": [
+        "example.com",
+        "http://example",
+        "http://example..com",
+        "http://example_com",
+        "http://example.com:port"
+      ],
+      "error": [
+        null,
+        123,
+        {},
+        []
+      ],
+      "title": "Default options",
+      "rationale": "Tests basic URL validation with default options.",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com",
+        "ftp://example.com"
+      ],
+      "invalid": [
+        "example.com",
+        "//example.com"
+      ],
+      "error": [],
+      "title": "require_protocol: true",
+      "rationale": "Ensures URLs must include a protocol.",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_tld": false
+        }
+      ],
+      "valid": [
+        "http://localhost",
+        "http://example"
+      ],
+      "invalid": [
+        "http://example..com",
+        "http://example_com"
+      ],
+      "error": [],
+      "title": "require_tld: false",
+      "rationale": "Allows URLs without a top-level domain.",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_underscores": true
+        }
+      ],
+      "valid": [
+        "http://example_com",
+        "http://sub_domain.example.com"
+      ],
+      "invalid": [
+        "http://example..com"
+      ],
+      "error": [],
+      "title": "allow_underscores: true",
+      "rationale": "Permits underscores in hostnames.",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_trailing_dot": true
+        }
+      ],
+      "valid": [
+        "http://example.com.",
+        "http://example."
+      ],
+      "invalid": [
+        "http://example..com"
+      ],
+      "error": [],
+      "title": "allow_trailing_dot: true",
+      "rationale": "Allows trailing dots in hostnames.",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_protocol_relative_urls": true
+        }
+      ],
+      "valid": [
+        "//example.com",
+        "//example.com/path?query=1#fragment"
+      ],
+      "invalid": [
+        "example.com"
+      ],
+      "error": [],
+      "title": "allow_protocol_relative_urls: true",
+      "rationale": "Permits protocol-relative URLs.",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com"
+      ],
+      "invalid": [
+        "http://user:pass@example.com"
+      ],
+      "error": [],
+      "title": "disallow_auth: true",
+      "rationale": "Fails validation for URLs with authentication components.",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "validate_length": false
+        }
+      ],
+      "valid": [
+        "http://example.com/",
+        "http://example.com/",
+        "http://example.com/",
+        "http://example.com/",
+        "http://example.com/"
+      ],
+      "invalid": [
+        "http://example.com/",
+        "http://example.com/",
+        "http://example.com/"
+      ],
+      "error": [],
+      "title": "validate_length: false",
+      "rationale": "Skips length validation.",
+      "obligations": []
+    }
+  ],
+  "metadata": {
+    "requirement_source": "D:\\TJU\\Software_Testing\\Assignment_1\\source_code\\validator_js\\README.md",
+    "generation_style": "single_pass_with_repair"
+  }
+}

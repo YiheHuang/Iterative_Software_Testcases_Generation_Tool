@@ -1,0 +1,52 @@
+{
+  "generated_categories": [
+    {
+      "generated_category_id": "GENC-1",
+      "name": "Default and Basic URL Validation",
+      "description": "Covers the default behavior and basic validation options for URLs, including standard protocols, host requirements, and optional fragments or query components.",
+      "generated_group_ids": [
+        "GENERATED-1",
+        "GENERATED-3",
+        "GENERATED-10",
+        "GENERATED-11"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "name": "Protocol and Port Requirements",
+      "description": "Validates URLs based on protocol and port requirements, ensuring the presence of these components when specified.",
+      "generated_group_ids": [
+        "GENERATED-2",
+        "GENERATED-4"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "name": "Host Validation Options",
+      "description": "Focuses on host-related validation, including allowing underscores, trailing dots, and whitelist/blacklist configurations.",
+      "generated_group_ids": [
+        "GENERATED-5",
+        "GENERATED-6",
+        "GENERATED-7",
+        "GENERATED-8"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "name": "Authentication and Protocol-Relative URLs",
+      "description": "Validates URLs for authentication components and protocol-relative URLs based on specific options.",
+      "generated_group_ids": [
+        "GENERATED-9",
+        "GENERATED-12"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-5",
+      "name": "Length Validation",
+      "description": "Handles scenarios where length validation is disabled, allowing shorter or empty URLs.",
+      "generated_group_ids": [
+        "GENERATED-13"
+      ]
+    }
+  ]
+}

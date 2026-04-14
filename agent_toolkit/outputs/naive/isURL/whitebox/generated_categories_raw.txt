@@ -1,0 +1,29 @@
+{
+  "generated_categories": [
+    {
+      "name": "Default Validation",
+      "description": "Covers the default behavior of the isURL validator, ensuring common URL formats are validated correctly.",
+      "generated_group_ids": ["GENERATED-1"]
+    },
+    {
+      "name": "Protocol Requirements",
+      "description": "Tests related to the presence or absence of protocols in URLs.",
+      "generated_group_ids": ["GENERATED-2", "GENERATED-5"]
+    },
+    {
+      "name": "Hostname Validation",
+      "description": "Focuses on hostname-specific rules, such as allowing underscores or disabling TLD requirements.",
+      "generated_group_ids": ["GENERATED-3", "GENERATED-4"]
+    },
+    {
+      "name": "Authentication Handling",
+      "description": "Validates behavior when URLs include or exclude authentication components.",
+      "generated_group_ids": ["GENERATED-6"]
+    },
+    {
+      "name": "Length Validation",
+      "description": "Tests related to the enforcement or relaxation of URL length constraints.",
+      "generated_group_ids": ["GENERATED-7"]
+    }
+  ]
+}

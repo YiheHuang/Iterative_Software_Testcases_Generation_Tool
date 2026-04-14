@@ -1,0 +1,34 @@
+{
+  "generated_categories": [
+    {
+      "name": "Default Validation",
+      "description": "Tests the basic URL validation behavior with default options.",
+      "generated_group_ids": ["GENERATED-1"]
+    },
+    {
+      "name": "Protocol Requirements",
+      "description": "Validates URLs with specific protocol-related constraints.",
+      "generated_group_ids": ["GENERATED-2", "GENERATED-6"]
+    },
+    {
+      "name": "Top-Level Domain Handling",
+      "description": "Tests the handling of URLs with or without top-level domains.",
+      "generated_group_ids": ["GENERATED-3"]
+    },
+    {
+      "name": "Hostname Customization",
+      "description": "Validates URLs with custom hostname rules, such as allowing underscores or trailing dots.",
+      "generated_group_ids": ["GENERATED-4", "GENERATED-5"]
+    },
+    {
+      "name": "Authentication Handling",
+      "description": "Ensures proper validation of URLs with or without authentication components.",
+      "generated_group_ids": ["GENERATED-7"]
+    },
+    {
+      "name": "Length Validation",
+      "description": "Tests the behavior of the validator when length validation is disabled.",
+      "generated_group_ids": ["GENERATED-8"]
+    }
+  ]
+}

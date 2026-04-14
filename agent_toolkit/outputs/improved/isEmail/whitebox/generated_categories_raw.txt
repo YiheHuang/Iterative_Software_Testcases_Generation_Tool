@@ -1,0 +1,39 @@
+{
+  "generated_categories": [
+    {
+      "name": "Standard Email Validation",
+      "description": "Covers the baseline validation of standard email formats and basic email structure.",
+      "generated_group_ids": ["GENERATED-1"]
+    },
+    {
+      "name": "Display Name Handling",
+      "description": "Tests the `allow_display_name` and `require_display_name` options for valid and invalid display name formats.",
+      "generated_group_ids": ["GENERATED-2", "GENERATED-3", "GENERATED-8", "GENERATED-11"]
+    },
+    {
+      "name": "UTF-8 Local Part Handling",
+      "description": "Tests the `allow_utf8_local_part` option for handling UTF-8 characters in the local part of an email.",
+      "generated_group_ids": ["GENERATED-4"]
+    },
+    {
+      "name": "Domain Validation",
+      "description": "Tests domain-related options such as `require_tld`, `allow_ip_domain`, and handling of invalid bracketed domains.",
+      "generated_group_ids": ["GENERATED-5", "GENERATED-6", "GENERATED-12"]
+    },
+    {
+      "name": "Length Handling",
+      "description": "Tests the `ignore_max_length` option to ensure emails exceeding the standard length are accepted.",
+      "generated_group_ids": ["GENERATED-7"]
+    },
+    {
+      "name": "Host Blacklist and Whitelist",
+      "description": "Tests the behavior of `host_blacklist` and `host_whitelist` options, including regex patterns.",
+      "generated_group_ids": ["GENERATED-9", "GENERATED-13"]
+    },
+    {
+      "name": "Blacklisted Characters",
+      "description": "Tests the `blacklisted_chars` option to ensure emails containing blacklisted characters in the local part are rejected.",
+      "generated_group_ids": ["GENERATED-10"]
+    }
+  ]
+}

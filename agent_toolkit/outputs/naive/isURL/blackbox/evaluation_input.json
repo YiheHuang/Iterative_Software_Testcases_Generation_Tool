@@ -1,0 +1,529 @@
+{
+  "cases": [
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Default options",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "https://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Default options",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "ftp://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Default options",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://example.com/path?query=1#fragment",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Default options",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Default options",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://example",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Default options",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://example..com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Default options",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://example_com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Default options",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://example.com:port",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Default options",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": null,
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Default options",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": 123,
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Default options",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": {},
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Default options",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": [],
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Default options",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "require_protocol: true",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "input_value": "https://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "require_protocol: true",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "input_value": "ftp://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "require_protocol: true",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "input_value": "example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "require_protocol: true",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "input_value": "//example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "require_protocol: true",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_tld": false
+        }
+      ],
+      "input_value": "http://localhost",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "require_tld: false",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_tld": false
+        }
+      ],
+      "input_value": "http://example",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "require_tld: false",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_tld": false
+        }
+      ],
+      "input_value": "http://example..com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "require_tld: false",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_tld": false
+        }
+      ],
+      "input_value": "http://example_com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "require_tld: false",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_underscores": true
+        }
+      ],
+      "input_value": "http://example_com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "allow_underscores: true",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_underscores": true
+        }
+      ],
+      "input_value": "http://sub_domain.example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "allow_underscores: true",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_underscores": true
+        }
+      ],
+      "input_value": "http://example..com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "allow_underscores: true",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_trailing_dot": true
+        }
+      ],
+      "input_value": "http://example.com.",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "allow_trailing_dot: true",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_trailing_dot": true
+        }
+      ],
+      "input_value": "http://example.",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "allow_trailing_dot: true",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_trailing_dot": true
+        }
+      ],
+      "input_value": "http://example..com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "allow_trailing_dot: true",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_protocol_relative_urls": true
+        }
+      ],
+      "input_value": "//example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "allow_protocol_relative_urls: true",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_protocol_relative_urls": true
+        }
+      ],
+      "input_value": "//example.com/path?query=1#fragment",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "allow_protocol_relative_urls: true",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_protocol_relative_urls": true
+        }
+      ],
+      "input_value": "example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "allow_protocol_relative_urls: true",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "disallow_auth: true",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true
+        }
+      ],
+      "input_value": "https://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "disallow_auth: true",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true
+        }
+      ],
+      "input_value": "http://user:pass@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "disallow_auth: true",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "validate_length": false
+        }
+      ],
+      "input_value": "http://example.com/",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "validate_length: false",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "validate_length": false
+        }
+      ],
+      "input_value": "http://example.com/",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "validate_length: false",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "validate_length": false
+        }
+      ],
+      "input_value": "http://example.com/",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "validate_length: false",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "validate_length": false
+        }
+      ],
+      "input_value": "http://example.com/",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "validate_length: false",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "validate_length": false
+        }
+      ],
+      "input_value": "http://example.com/",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "validate_length: false",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "validate_length": false
+        }
+      ],
+      "input_value": "http://example.com/",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "validate_length: false",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "validate_length": false
+        }
+      ],
+      "input_value": "http://example.com/",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "validate_length: false",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "validate_length": false
+        }
+      ],
+      "input_value": "http://example.com/",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "validate_length: false",
+      "obligations": []
+    }
+  ],
+  "mode": "blackbox",
+  "approach": "naive",
+  "target_source_files": [
+    "src/lib/isURL.js"
+  ]
+}

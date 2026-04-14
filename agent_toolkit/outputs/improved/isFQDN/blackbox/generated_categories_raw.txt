@@ -1,0 +1,19 @@
+{
+  "generated_categories": [
+    {
+      "name": "Default Validation Behavior",
+      "description": "Tests the default behavior of the isFQDN validator without any options provided.",
+      "generated_group_ids": ["GENERATED-1"]
+    },
+    {
+      "name": "Domain Structure Options",
+      "description": "Tests options that modify the structure of valid domain names, such as allowing domains without TLDs, underscores, trailing dots, numeric-only TLDs, and wildcard domains.",
+      "generated_group_ids": ["GENERATED-2", "GENERATED-3", "GENERATED-4", "GENERATED-5", "GENERATED-6"]
+    },
+    {
+      "name": "Length Validation Options",
+      "description": "Tests options that ignore the maximum length validation for domain names.",
+      "generated_group_ids": ["GENERATED-7"]
+    }
+  ]
+}

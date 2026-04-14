@@ -1,0 +1,99 @@
+{
+  "validator_name": "isURL",
+  "golden_categories": [
+    {
+      "golden_category_id": "GC-1",
+      "name": "Basic URL Validation",
+      "description": "Tests for validating standard URLs with or without protocols, including basic syntax and structure.",
+      "golden_group_ids": [
+        "GOLDEN-1",
+        "GOLDEN-2",
+        "GOLDEN-3",
+        "GOLDEN-10"
+      ]
+    },
+    {
+      "golden_category_id": "GC-2",
+      "name": "Custom Protocols and Schemes",
+      "description": "Tests for validating URLs with custom or non-standard protocols and schemes.",
+      "golden_group_ids": [
+        "GOLDEN-4",
+        "GOLDEN-5",
+        "GOLDEN-6",
+        "GOLDEN-7",
+        "GOLDEN-8",
+        "GOLDEN-13"
+      ]
+    },
+    {
+      "golden_category_id": "GC-3",
+      "name": "Underscores and Trailing Dots",
+      "description": "Tests for validating URLs with underscores or trailing dots in the domain.",
+      "golden_group_ids": [
+        "GOLDEN-9",
+        "GOLDEN-11"
+      ]
+    },
+    {
+      "golden_category_id": "GC-4",
+      "name": "Port Validation",
+      "description": "Tests for validating URLs with specific port requirements or formats.",
+      "golden_group_ids": [
+        "GOLDEN-12",
+        "GOLDEN-31"
+      ]
+    },
+    {
+      "golden_category_id": "GC-5",
+      "name": "Protocol and Fragment Options",
+      "description": "Tests for validating URLs with specific protocol, fragment, or query component requirements.",
+      "golden_group_ids": [
+        "GOLDEN-14",
+        "GOLDEN-15",
+        "GOLDEN-16",
+        "GOLDEN-17",
+        "GOLDEN-18",
+        "GOLDEN-21"
+      ]
+    },
+    {
+      "golden_category_id": "GC-6",
+      "name": "Authentication in URLs",
+      "description": "Tests for validating URLs with or without authentication information.",
+      "golden_group_ids": [
+        "GOLDEN-19",
+        "GOLDEN-20",
+        "GOLDEN-27",
+        "GOLDEN-28"
+      ]
+    },
+    {
+      "golden_category_id": "GC-7",
+      "name": "Host and Domain Validation",
+      "description": "Tests for validating URLs with specific host and domain requirements, including whitelists and blacklists.",
+      "golden_group_ids": [
+        "GOLDEN-22",
+        "GOLDEN-23",
+        "GOLDEN-24",
+        "GOLDEN-25"
+      ]
+    },
+    {
+      "golden_category_id": "GC-8",
+      "name": "Security and Vulnerability Checks",
+      "description": "Tests for validating URLs against potential security vulnerabilities or malicious patterns.",
+      "golden_group_ids": [
+        "GOLDEN-26"
+      ]
+    },
+    {
+      "golden_category_id": "GC-9",
+      "name": "Length Validation",
+      "description": "Tests for validating URLs based on their length, including maximum length configurations.",
+      "golden_group_ids": [
+        "GOLDEN-29",
+        "GOLDEN-30"
+      ]
+    }
+  ]
+}

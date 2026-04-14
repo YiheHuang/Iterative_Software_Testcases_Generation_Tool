@@ -1,0 +1,24 @@
+{
+  "generated_categories": [
+    {
+      "name": "Basic Email Validation",
+      "description": "Tests for validating standard email formats and basic options.",
+      "generated_group_ids": ["GENERATED-1", "GENERATED-6"]
+    },
+    {
+      "name": "Display Name Handling",
+      "description": "Tests for email formats with display names, including allowing or requiring them.",
+      "generated_group_ids": ["GENERATED-2", "GENERATED-3"]
+    },
+    {
+      "name": "Domain Configuration",
+      "description": "Tests for email domain configurations, including IP domains and host blacklists.",
+      "generated_group_ids": ["GENERATED-4", "GENERATED-8"]
+    },
+    {
+      "name": "Local Part Restrictions",
+      "description": "Tests for restrictions on the local part of the email, such as UTF8 characters and blacklisted characters.",
+      "generated_group_ids": ["GENERATED-5", "GENERATED-7"]
+    }
+  ]
+}

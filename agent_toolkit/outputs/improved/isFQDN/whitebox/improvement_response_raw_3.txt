@@ -1,0 +1,94 @@
+{
+  "obligations": [
+    {
+      "id": "OB-11",
+      "kind": "whitebox",
+      "rule": "Ensure domains with full-width characters are rejected.",
+      "why": "The source code explicitly disallows full-width characters in domain parts, but this condition is not tested.",
+      "minimal_valid": null,
+      "minimal_invalid": "ａｂｃ.com"
+    },
+    {
+      "id": "OB-12",
+      "kind": "whitebox",
+      "rule": "Ensure domains with spaces in parts are rejected.",
+      "why": "The source code disallows spaces in domain parts, but this condition is not tested.",
+      "minimal_valid": null,
+      "minimal_invalid": "example .com"
+    },
+    {
+      "id": "OB-13",
+      "kind": "whitebox",
+      "rule": "Ensure wildcard domains are correctly stripped before validation.",
+      "why": "The source code removes the `*.` prefix when `allow_wildcard` is enabled, but this behavior is not tested for correctness.",
+      "minimal_valid": "*.example.com",
+      "minimal_invalid": "*.example"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Full-width character rejection",
+      "validator": "isFQDN",
+      "args": [
+        {}
+      ],
+      "valid": [],
+      "invalid": [
+        "ａｂｃ.com",
+        "ｓｕｂ.ｄｏｍａｉｎ.com",
+        "ｅｘａｍｐｌｅ.ｃｏｍ"
+      ],
+      "error": [
+        null
+      ],
+      "rationale": "Tests the rejection of domain parts containing full-width characters, as explicitly disallowed in the source code.",
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "title": "Spaces in domain parts",
+      "validator": "isFQDN",
+      "args": [
+        {}
+      ],
+      "valid": [],
+      "invalid": [
+        "example .com",
+        "sub .domain.com",
+        "example. com"
+      ],
+      "error": [
+        null
+      ],
+      "rationale": "Tests the rejection of domain parts containing spaces, which are explicitly disallowed in the source code.",
+      "obligations": [
+        "OB-12"
+      ]
+    },
+    {
+      "title": "Wildcard stripping validation",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_wildcard": true
+        }
+      ],
+      "valid": [
+        "*.example.com",
+        "*.sub.domain.com"
+      ],
+      "invalid": [
+        "*.example",
+        "*.sub.domain"
+      ],
+      "error": [
+        null
+      ],
+      "rationale": "Tests the behavior of wildcard domains being stripped (`*.` prefix removed) before validation, ensuring correctness of the wildcard handling logic.",
+      "obligations": [
+        "OB-13"
+      ]
+    }
+  ]
+}

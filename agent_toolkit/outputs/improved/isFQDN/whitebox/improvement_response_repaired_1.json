@@ -1,0 +1,30 @@
+{
+  "obligations": [
+    {
+      "id": "OB-11",
+      "kind": "whitebox",
+      "rule": "Ensure domains with spaces in TLD are rejected when require_tld is true.",
+      "why": "The source code explicitly checks for spaces in the TLD when require_tld is true, but this case is not covered in the current suite.",
+      "minimal_valid": null,
+      "minimal_invalid": "example. com"
+    },
+    {
+      "id": "OB-12",
+      "kind": "whitebox",
+      "rule": "Ensure numeric TLDs are rejected when allow_numeric_tld is false.",
+      "why": "The source code has a specific branch to reject numeric TLDs when allow_numeric_tld is false, but this case is not explicitly tested.",
+      "minimal_valid": null,
+      "minimal_invalid": "example.123"
+    },
+    {
+      "id": "OB-13",
+      "kind": "whitebox",
+      "rule": "Ensure domains with parts exceeding 63 characters are rejected when ignore_max_length is false.",
+      "why": "The source code enforces a 63-character limit on domain parts unless ignore_max_length is true, but this case is not explicitly tested.",
+      "minimal_valid": null,
+      "minimal_invalid": "a"  ,
+    "minimal_invalid": "a"  
+    }
+  ],
+  "test_groups": []
+}

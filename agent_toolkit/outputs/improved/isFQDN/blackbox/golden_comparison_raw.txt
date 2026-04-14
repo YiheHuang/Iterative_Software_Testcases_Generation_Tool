@@ -1,0 +1,66 @@
+{
+  "golden_to_generated": [
+    {
+      "golden_category_id": "GC-1",
+      "matched_generated_category_ids": ["GENC-1"],
+      "match_type": "strong",
+      "reason": "The generated category 'Default Validation Behavior' aligns directly with the golden category 'Standard FQDN Validation' as both focus on default FQDN validation without any options."
+    },
+    {
+      "golden_category_id": "GC-2",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "The generated category 'Domain Structure Options' includes validation for trailing dots, which overlaps with the golden category 'Trailing Dot Option'. However, it also includes other options not covered by GC-2."
+    },
+    {
+      "golden_category_id": "GC-3",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "The generated category 'Domain Structure Options' includes validation for domains without TLDs, which overlaps with the golden category 'Non-TLD Validation'. However, it also includes other options not covered by GC-3."
+    },
+    {
+      "golden_category_id": "GC-4",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "The generated category 'Domain Structure Options' includes validation for numeric TLDs when TLD requirement is disabled, which overlaps with the golden category 'Numeric TLD Validation'. However, it also includes other options not covered by GC-4."
+    },
+    {
+      "golden_category_id": "GC-5",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "The generated category 'Domain Structure Options' includes validation for wildcard domains, which overlaps with the golden category 'Wildcard Domain Validation'. However, it also includes other options not covered by GC-5."
+    },
+    {
+      "golden_category_id": "GC-6",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "The generated category 'Domain Structure Options' includes multiple options such as trailing dots, underscores, and numeric TLDs, which overlaps with the golden category 'Combined Options Validation'. However, it also includes other options not covered by GC-6."
+    }
+  ],
+  "generated_to_golden": [
+    {
+      "generated_category_id": "GENC-1",
+      "matched_golden_category_ids": ["GC-1"],
+      "match_type": "strong",
+      "reason": "The generated category 'Default Validation Behavior' aligns directly with the golden category 'Standard FQDN Validation' as both focus on default FQDN validation without any options."
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "matched_golden_category_ids": ["GC-2", "GC-3", "GC-4", "GC-5", "GC-6"],
+      "match_type": "partial",
+      "reason": "The generated category 'Domain Structure Options' spans multiple golden categories as it includes validation for trailing dots, domains without TLDs, numeric TLDs, wildcard domains, and combined options. However, it does not fully align with any single golden category."
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "matched_golden_category_ids": [],
+      "match_type": "none",
+      "reason": "The generated category 'Length Validation Options' focuses on ignoring maximum length validation, which is not covered by any golden category."
+    }
+  ],
+  "novel_generated_categories": [
+    {
+      "generated_category_id": "GENC-3",
+      "reason": "The generated category 'Length Validation Options' introduces a new behavior related to ignoring maximum length validation, which is not represented in the golden categories."
+    }
+  ]
+}

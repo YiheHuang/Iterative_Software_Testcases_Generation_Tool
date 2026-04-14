@@ -1,0 +1,41 @@
+{
+  "validator_name": "isEmail",
+  "mode": "whitebox",
+  "approach": "naive",
+  "obligation_count": 0,
+  "group_count": 7,
+  "prompt_path": "D:\\TJU\\Software_Testing\\Assignment_1\\agent_toolkit\\outputs\\naive\\isEmail\\whitebox\\prompt.txt",
+  "response_path": "D:\\TJU\\Software_Testing\\Assignment_1\\agent_toolkit\\outputs\\naive\\isEmail\\whitebox\\response.json",
+  "evaluation": {
+    "total_cases": 48,
+    "correct_cases": 46,
+    "incorrect_cases": 2,
+    "exact_match_rate": 0.9583333333333334,
+    "output_json_path": "D:\\TJU\\Software_Testing\\Assignment_1\\agent_toolkit\\outputs\\naive\\isEmail\\whitebox\\evaluation_output.json",
+    "coverage_dir": "D:\\TJU\\Software_Testing\\Assignment_1\\agent_toolkit\\outputs\\naive\\isEmail\\whitebox\\coverage"
+  },
+  "golden_analysis": {
+    "summary": {
+      "total_golden_categories": 12,
+      "total_generated_categories": 6,
+      "overlap_golden_categories": 7,
+      "missing_golden_categories": 5,
+      "matched_generated_categories": 6,
+      "novel_generated_categories": 0,
+      "strong_golden_category_matches": 5,
+      "partial_golden_category_matches": 2,
+      "fragmented_golden_matches": 0,
+      "matched_golden_ratio": 0.5833333333333334,
+      "total_golden_groups": 12,
+      "total_generated_groups": 6,
+      "overlap_golden_groups": 7,
+      "missing_golden_groups": 5,
+      "novel_valid_groups": 0,
+      "exact_or_near_overlap_groups": 7,
+      "golden_groups_with_semantic_match": 7,
+      "generated_groups_with_semantic_match": 6,
+      "novel_valid_categories": 0
+    },
+    "comparison_path": "D:\\TJU\\Software_Testing\\Assignment_1\\agent_toolkit\\outputs\\naive\\isEmail\\whitebox\\golden_comparison.json"
+  }
+}

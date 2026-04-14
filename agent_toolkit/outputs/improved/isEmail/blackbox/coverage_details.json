@@ -1,0 +1,627 @@
+{
+  "coverage_total": {
+    "lines": {
+      "total": 80,
+      "covered": 57,
+      "skipped": 0,
+      "pct": 71.25
+    },
+    "statements": {
+      "total": 84,
+      "covered": 59,
+      "skipped": 0,
+      "pct": 70.24
+    },
+    "functions": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 76,
+      "covered": 46,
+      "skipped": 0,
+      "pct": 60.53
+    }
+  },
+  "coverage_files": {
+    "D:\\TJU\\Software_Testing\\Assignment_1\\source_code\\validator_js\\src\\lib\\/isEmail.js": {
+      "lines": {
+        "total": 80,
+        "covered": 57,
+        "skipped": 0,
+        "pct": 71.25
+      },
+      "functions": {
+        "total": 3,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 84,
+        "covered": 59,
+        "skipped": 0,
+        "pct": 70.24
+      },
+      "branches": {
+        "total": 76,
+        "covered": 46,
+        "skipped": 0,
+        "pct": 60.53
+      }
+    }
+  },
+  "uncovered_details": {
+    "D:\\TJU\\Software_Testing\\Assignment_1\\source_code\\validator_js\\src\\lib\\/isEmail.js": {
+      "uncovered_statements": [
+        {
+          "statement_id": "17",
+          "line": 41,
+          "column": 4,
+          "line_text": "    return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 41: return false;"
+        },
+        {
+          "statement_id": "20",
+          "line": 49,
+          "column": 4,
+          "line_text": "    if (display_name_without_quotes === display_name) {",
+          "source_excerpt": "if (display_name_without_quotes === display_name) {\n      return false;\n    }",
+          "summary": "Uncovered statement at line 49: if (display_name_without_quotes === display_name) {\n      return false;\n    }"
+        },
+        {
+          "statement_id": "21",
+          "line": 50,
+          "column": 6,
+          "line_text": "      return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 50: return false;"
+        },
+        {
+          "statement_id": "22",
+          "line": 55,
+          "column": 6,
+          "line_text": "      display_name_without_quotes.split('\"').length === display_name_without_quotes.split('\\\\\"').length;",
+          "source_excerpt": "display_name_without_quotes.split('\"').length === display_name_without_quotes.split('\\\\\"').length",
+          "summary": "Uncovered statement at line 55: display_name_without_quotes.split('\"').length === display_name_without_quotes.split('\\\\\"').length"
+        },
+        {
+          "statement_id": "23",
+          "line": 56,
+          "column": 4,
+          "line_text": "    if (!all_start_with_back_slash) {",
+          "source_excerpt": "if (!all_start_with_back_slash) {\n      return false;\n    }",
+          "summary": "Uncovered statement at line 56: if (!all_start_with_back_slash) {\n      return false;\n    }"
+        },
+        {
+          "statement_id": "24",
+          "line": 57,
+          "column": 6,
+          "line_text": "      return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 57: return false;"
+        },
+        {
+          "statement_id": "36",
+          "line": 86,
+          "column": 8,
+          "line_text": "        return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 86: return false;"
+        },
+        {
+          "statement_id": "40",
+          "line": 93,
+          "column": 4,
+          "line_text": "    return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 93: return false;"
+        },
+        {
+          "statement_id": "45",
+          "line": 101,
+          "column": 4,
+          "line_text": "    return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 101: return false;"
+        },
+        {
+          "statement_id": "47",
+          "line": 105,
+          "column": 4,
+          "line_text": "    return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 105: return false;"
+        },
+        {
+          "statement_id": "50",
+          "line": 118,
+          "column": 4,
+          "line_text": "    user = user.toLowerCase();",
+          "source_excerpt": "user = user.toLowerCase();",
+          "summary": "Uncovered statement at line 118: user = user.toLowerCase();"
+        },
+        {
+          "statement_id": "51",
+          "line": 121,
+          "column": 21,
+          "line_text": "    const username = user.split('+')[0];",
+          "source_excerpt": "user.split('+')[0]",
+          "summary": "Uncovered statement at line 121: user.split('+')[0]"
+        },
+        {
+          "statement_id": "52",
+          "line": 124,
+          "column": 4,
+          "line_text": "    if (!isByteLength(username.replace(/\\./g, ''), { min: 6, max: 30 })) {",
+          "source_excerpt": "if (!isByteLength(username.replace(/\\./g, ''), { min: 6, max: 30 })) {\n      return false;\n    }",
+          "summary": "Uncovered statement at line 124: if (!isByteLength(username.replace(/\\./g, ''), { min: 6, max: 30 })) {\n      return false;\n    }"
+        },
+        {
+          "statement_id": "53",
+          "line": 125,
+          "column": 6,
+          "line_text": "      return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 125: return false;"
+        },
+        {
+          "statement_id": "54",
+          "line": 128,
+          "column": 23,
+          "line_text": "    const user_parts = username.split('.');",
+          "source_excerpt": "username.split('.')",
+          "summary": "Uncovered statement at line 128: username.split('.')"
+        },
+        {
+          "statement_id": "55",
+          "line": 129,
+          "column": 4,
+          "line_text": "    for (let i = 0; i < user_parts.length; i++) {",
+          "source_excerpt": "for (let i = 0; i < user_parts.length; i++) {\n      if (!gmailUserPart.test(user_parts[i])) {\n        return false;\n      }\n    }",
+          "summary": "Uncovered statement at line 129: for (let i = 0; i < user_parts.length; i++) {\n      if (!gmailUserPart.test(user_parts[i])) {\n        return false;\n      }\n    }"
+        },
+        {
+          "statement_id": "56",
+          "line": 129,
+          "column": 17,
+          "line_text": "    for (let i = 0; i < user_parts.length; i++) {",
+          "source_excerpt": "0",
+          "summary": "Uncovered statement at line 129: 0"
+        },
+        {
+          "statement_id": "57",
+          "line": 130,
+          "column": 6,
+          "line_text": "      if (!gmailUserPart.test(user_parts[i])) {",
+          "source_excerpt": "if (!gmailUserPart.test(user_parts[i])) {\n        return false;\n      }",
+          "summary": "Uncovered statement at line 130: if (!gmailUserPart.test(user_parts[i])) {\n        return false;\n      }"
+        },
+        {
+          "statement_id": "58",
+          "line": 131,
+          "column": 8,
+          "line_text": "        return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 131: return false;"
+        },
+        {
+          "statement_id": "60",
+          "line": 140,
+          "column": 4,
+          "line_text": "    return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 140: return false;"
+        },
+        {
+          "statement_id": "69",
+          "line": 160,
+          "column": 8,
+          "line_text": "        return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 160: return false;"
+        },
+        {
+          "statement_id": "71",
+          "line": 166,
+          "column": 4,
+          "line_text": "    if (user.search(new RegExp(`[${options.blacklisted_chars}]+`, 'g')) !== -1) return false;",
+          "source_excerpt": "if (user.search(new RegExp(`[${options.blacklisted_chars}]+`, 'g')) !== -1) return false;",
+          "summary": "Uncovered statement at line 166: if (user.search(new RegExp(`[${options.blacklisted_chars}]+`, 'g')) !== -1) return false;"
+        },
+        {
+          "statement_id": "72",
+          "line": 166,
+          "column": 80,
+          "line_text": "    if (user.search(new RegExp(`[${options.blacklisted_chars}]+`, 'g')) !== -1) return false;",
+          "source_excerpt": "if (user.search(new RegExp(`[${options.blacklisted_chars}]+`, 'g')) !== -1) return false;",
+          "summary": "Uncovered statement at line 166: if (user.search(new RegExp(`[${options.blacklisted_chars}]+`, 'g')) !== -1) return false;"
+        },
+        {
+          "statement_id": "74",
+          "line": 170,
+          "column": 4,
+          "line_text": "    user = user.slice(1, user.length - 1);",
+          "source_excerpt": "user = user.slice(1, user.length - 1);",
+          "summary": "Uncovered statement at line 170: user = user.slice(1, user.length - 1);"
+        },
+        {
+          "statement_id": "75",
+          "line": 171,
+          "column": 4,
+          "line_text": "    return options.allow_utf8_local_part ?",
+          "source_excerpt": "return options.allow_utf8_local_part ?\n      quotedEmailUserUtf8.test(user) :\n      quotedEmailUser.test(user);",
+          "summary": "Uncovered statement at line 171: return options.allow_utf8_local_part ?\n      quotedEmailUserUtf8.test(user) :\n      quotedEmailUser.test(user);"
+        }
+      ],
+      "uncovered_branches": [
+        {
+          "branch_id": "1",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 40,
+          "column": 2,
+          "line_text": "  if (!display_name_without_quotes.trim()) {",
+          "source_excerpt": "if (!display_name_without_quotes.trim()) {\n    return false;\n  }",
+          "condition_excerpt": "!display_name_without_quotes.trim()",
+          "summary": "Uncovered if path `condition_true_branch` at line 40; condition: !display_name_without_quotes.trim()"
+        },
+        {
+          "branch_id": "2",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 46,
+          "column": 2,
+          "line_text": "  if (contains_illegal) {",
+          "source_excerpt": "if (contains_illegal) {\n    // if contains illegal characters,\n    // must to be enclosed in double-quotes, otherwise it's not a valid display name\n    if (display_name_without_quotes === display_name) {\n      return false;\n    }\n\n    // the quotes in display name must start with character symbol \\\n    const all_start_with_back_slash =\n      display_name_without_quotes.split('\"').length === display_name_without_quotes.split('\\\\\"').length;\n    if (!all_start_with_back_slash) {\n      return false;\n    }\n  }",
+          "condition_excerpt": "contains_illegal",
+          "summary": "Uncovered if path `condition_true_branch` at line 46; condition: contains_illegal"
+        },
+        {
+          "branch_id": "3",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 49,
+          "column": 4,
+          "line_text": "    if (display_name_without_quotes === display_name) {",
+          "source_excerpt": "if (display_name_without_quotes === display_name) {\n      return false;\n    }",
+          "condition_excerpt": "display_name_without_quotes === display_name",
+          "summary": "Uncovered if path `condition_true_branch` at line 49; condition: display_name_without_quotes === display_name"
+        },
+        {
+          "branch_id": "3",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 49,
+          "column": 4,
+          "line_text": "    if (display_name_without_quotes === display_name) {",
+          "source_excerpt": "if (display_name_without_quotes === display_name) {\n      return false;\n    }",
+          "condition_excerpt": "display_name_without_quotes === display_name",
+          "summary": "Uncovered if path `condition_false_branch` at line 49; condition: display_name_without_quotes === display_name"
+        },
+        {
+          "branch_id": "4",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 56,
+          "column": 4,
+          "line_text": "    if (!all_start_with_back_slash) {",
+          "source_excerpt": "if (!all_start_with_back_slash) {\n      return false;\n    }",
+          "condition_excerpt": "!all_start_with_back_slash",
+          "summary": "Uncovered if path `condition_true_branch` at line 56; condition: !all_start_with_back_slash"
+        },
+        {
+          "branch_id": "4",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 56,
+          "column": 4,
+          "line_text": "    if (!all_start_with_back_slash) {",
+          "source_excerpt": "if (!all_start_with_back_slash) {\n      return false;\n    }",
+          "condition_excerpt": "!all_start_with_back_slash",
+          "summary": "Uncovered if path `condition_false_branch` at line 56; condition: !all_start_with_back_slash"
+        },
+        {
+          "branch_id": "8",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 81,
+          "column": 6,
+          "line_text": "      if (display_name.endsWith(' ')) {",
+          "source_excerpt": "if (display_name.endsWith(' ')) {\n        display_name = display_name.slice(0, -1);\n      }",
+          "condition_excerpt": "display_name.endsWith(' ')",
+          "summary": "Uncovered if path `condition_false_branch` at line 81; condition: display_name.endsWith(' ')"
+        },
+        {
+          "branch_id": "9",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 85,
+          "column": 6,
+          "line_text": "      if (!validateDisplayName(display_name)) {",
+          "source_excerpt": "if (!validateDisplayName(display_name)) {\n        return false;\n      }",
+          "condition_excerpt": "!validateDisplayName(display_name)",
+          "summary": "Uncovered if path `condition_true_branch` at line 85; condition: !validateDisplayName(display_name)"
+        },
+        {
+          "branch_id": "11",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 92,
+          "column": 2,
+          "line_text": "  if (!options.ignore_max_length && str.length > defaultMaxEmailLength) {",
+          "source_excerpt": "if (!options.ignore_max_length && str.length > defaultMaxEmailLength) {\n    return false;\n  }",
+          "condition_excerpt": "!options.ignore_max_length && str.length > defaultMaxEmailLength",
+          "summary": "Uncovered if path `condition_true_branch` at line 92; condition: !options.ignore_max_length && str.length > defaultMaxEmailLength"
+        },
+        {
+          "branch_id": "13",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 100,
+          "column": 2,
+          "line_text": "  if (options.host_blacklist.length > 0 && checkHost(lower_domain, options.host_blacklist)) {",
+          "source_excerpt": "if (options.host_blacklist.length > 0 && checkHost(lower_domain, options.host_blacklist)) {\n    return false;\n  }",
+          "condition_excerpt": "options.host_blacklist.length > 0 && checkHost(lower_domain, options.host_blacklist)",
+          "summary": "Uncovered if path `condition_true_branch` at line 100; condition: options.host_blacklist.length > 0 && checkHost(lower_domain, options.host_blacklist)"
+        },
+        {
+          "branch_id": "14",
+          "branch_type": "binary-expr",
+          "path_index": 1,
+          "branch_side": "path_1",
+          "line": 100,
+          "column": 43,
+          "line_text": "  if (options.host_blacklist.length > 0 && checkHost(lower_domain, options.host_blacklist)) {",
+          "source_excerpt": "checkHost(lower_domain, options.host_blacklist)",
+          "condition_excerpt": "options.host_blacklist.length > 0 && checkHost(lower_domain, options.host_blacklist)",
+          "summary": "Uncovered binary-expr path `path_1` at line 100; condition: options.host_blacklist.length > 0 && checkHost(lower_domain, options.host_blacklist)"
+        },
+        {
+          "branch_id": "15",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 104,
+          "column": 2,
+          "line_text": "  if (options.host_whitelist.length > 0 && !checkHost(lower_domain, options.host_whitelist)) {",
+          "source_excerpt": "if (options.host_whitelist.length > 0 && !checkHost(lower_domain, options.host_whitelist)) {\n    return false;\n  }",
+          "condition_excerpt": "options.host_whitelist.length > 0 && !checkHost(lower_domain, options.host_whitelist)",
+          "summary": "Uncovered if path `condition_true_branch` at line 104; condition: options.host_whitelist.length > 0 && !checkHost(lower_domain, options.host_whitelist)"
+        },
+        {
+          "branch_id": "16",
+          "branch_type": "binary-expr",
+          "path_index": 1,
+          "branch_side": "path_1",
+          "line": 104,
+          "column": 43,
+          "line_text": "  if (options.host_whitelist.length > 0 && !checkHost(lower_domain, options.host_whitelist)) {",
+          "source_excerpt": "!checkHost(lower_domain, options.host_whitelist)",
+          "condition_excerpt": "options.host_whitelist.length > 0 && !checkHost(lower_domain, options.host_whitelist)",
+          "summary": "Uncovered binary-expr path `path_1` at line 104; condition: options.host_whitelist.length > 0 && !checkHost(lower_domain, options.host_whitelist)"
+        },
+        {
+          "branch_id": "17",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 110,
+          "column": 2,
+          "line_text": "  if (options.domain_specific_validation && (lower_domain === 'gmail.com' || lower_domain === 'googlemail.com')) {",
+          "source_excerpt": "if (options.domain_specific_validation && (lower_domain === 'gmail.com' || lower_domain === 'googlemail.com')) {\n    /*\n    Previously we removed dots for gmail addresses before validating.\n    This was removed because it allows `multiple..dots@gmail.com`\n    to be reported as valid, but it is not.\n    Gmail only normalizes single dots, removing them from here is pointless,\n    should be done in normalizeEmail\n    */\n    user = user.toLowerCase();\n\n    // Removing sub-address from username before gmail validation\n    const username = user.split('+')[0];\n\n    // Dots are not included in gmail length restriction\n    if (!isByteLength(username.replace(/\\./g, ''), { min: 6, max: 30 })) {\n      return false;\n    }\n\n    const user_parts = username.split('.');\n    for (let i = 0; i < user_parts.length; i++) {\n      if (!gmailUserPart.test(user_parts[i])) {\n        return false;\n      }\n    }\n  }",
+          "condition_excerpt": "options.domain_specific_validation && (lower_domain === 'gmail.com' || lower_domain === 'googlemail.com')",
+          "summary": "Uncovered if path `condition_true_branch` at line 110; condition: options.domain_specific_validation && (lower_domain === 'gmail.com' || lower_domain === 'googlemail.com')"
+        },
+        {
+          "branch_id": "18",
+          "branch_type": "binary-expr",
+          "path_index": 1,
+          "branch_side": "path_1",
+          "line": 110,
+          "column": 45,
+          "line_text": "  if (options.domain_specific_validation && (lower_domain === 'gmail.com' || lower_domain === 'googlemail.com')) {",
+          "source_excerpt": "lower_domain === 'gmail.com'",
+          "condition_excerpt": "options.domain_specific_validation && (lower_domain === 'gmail.com' || lower_domain === 'googlemail.com')",
+          "summary": "Uncovered binary-expr path `path_1` at line 110; condition: options.domain_specific_validation && (lower_domain === 'gmail.com' || lower_domain === 'googlemail.com')"
+        },
+        {
+          "branch_id": "18",
+          "branch_type": "binary-expr",
+          "path_index": 2,
+          "branch_side": "path_2",
+          "line": 110,
+          "column": 77,
+          "line_text": "  if (options.domain_specific_validation && (lower_domain === 'gmail.com' || lower_domain === 'googlemail.com')) {",
+          "source_excerpt": "lower_domain === 'googlemail.com'",
+          "condition_excerpt": "options.domain_specific_validation && (lower_domain === 'gmail.com' || lower_domain === 'googlemail.com')",
+          "summary": "Uncovered binary-expr path `path_2` at line 110; condition: options.domain_specific_validation && (lower_domain === 'gmail.com' || lower_domain === 'googlemail.com')"
+        },
+        {
+          "branch_id": "19",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 124,
+          "column": 4,
+          "line_text": "    if (!isByteLength(username.replace(/\\./g, ''), { min: 6, max: 30 })) {",
+          "source_excerpt": "if (!isByteLength(username.replace(/\\./g, ''), { min: 6, max: 30 })) {\n      return false;\n    }",
+          "condition_excerpt": "!isByteLength(username.replace(/\\./g, ''), { min: 6, max: 30 })",
+          "summary": "Uncovered if path `condition_true_branch` at line 124; condition: !isByteLength(username.replace(/\\./g, ''), { min: 6, max: 30 })"
+        },
+        {
+          "branch_id": "19",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 124,
+          "column": 4,
+          "line_text": "    if (!isByteLength(username.replace(/\\./g, ''), { min: 6, max: 30 })) {",
+          "source_excerpt": "if (!isByteLength(username.replace(/\\./g, ''), { min: 6, max: 30 })) {\n      return false;\n    }",
+          "condition_excerpt": "!isByteLength(username.replace(/\\./g, ''), { min: 6, max: 30 })",
+          "summary": "Uncovered if path `condition_false_branch` at line 124; condition: !isByteLength(username.replace(/\\./g, ''), { min: 6, max: 30 })"
+        },
+        {
+          "branch_id": "20",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 130,
+          "column": 6,
+          "line_text": "      if (!gmailUserPart.test(user_parts[i])) {",
+          "source_excerpt": "if (!gmailUserPart.test(user_parts[i])) {\n        return false;\n      }",
+          "condition_excerpt": "!gmailUserPart.test(user_parts[i])",
+          "summary": "Uncovered if path `condition_true_branch` at line 130; condition: !gmailUserPart.test(user_parts[i])"
+        },
+        {
+          "branch_id": "20",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 130,
+          "column": 6,
+          "line_text": "      if (!gmailUserPart.test(user_parts[i])) {",
+          "source_excerpt": "if (!gmailUserPart.test(user_parts[i])) {\n        return false;\n      }",
+          "condition_excerpt": "!gmailUserPart.test(user_parts[i])",
+          "summary": "Uncovered if path `condition_false_branch` at line 130; condition: !gmailUserPart.test(user_parts[i])"
+        },
+        {
+          "branch_id": "21",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 136,
+          "column": 2,
+          "line_text": "  if (options.ignore_max_length === false && (",
+          "source_excerpt": "if (options.ignore_max_length === false && (\n    !isByteLength(user, { max: 64 }) ||\n    !isByteLength(domain, { max: 254 }))\n  ) {\n    return false;\n  }",
+          "condition_excerpt": null,
+          "summary": "Uncovered if path `condition_true_branch` at line 136; snippet: if (options.ignore_max_length === false && (\n    !isByteLength(user, { max: 64 }) ||\n    !isByteLength(domain, { max: 254 }))\n  ) {\n    return false;\n  }"
+        },
+        {
+          "branch_id": "25",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 152,
+          "column": 4,
+          "line_text": "    if (!isIP(domain)) {",
+          "source_excerpt": "if (!isIP(domain)) {\n      if (!domain.startsWith('[') || !domain.endsWith(']')) {\n        return false;\n      }\n\n      let noBracketdomain = domain.slice(1, -1);\n\n      if (noBracketdomain.length === 0 || !isIP(noBracketdomain)) {\n        return false;\n      }\n    }",
+          "condition_excerpt": "!isIP(domain)",
+          "summary": "Uncovered if path `condition_false_branch` at line 152; condition: !isIP(domain)"
+        },
+        {
+          "branch_id": "28",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 159,
+          "column": 6,
+          "line_text": "      if (noBracketdomain.length === 0 || !isIP(noBracketdomain)) {",
+          "source_excerpt": "if (noBracketdomain.length === 0 || !isIP(noBracketdomain)) {\n        return false;\n      }",
+          "condition_excerpt": "noBracketdomain.length === 0 || !isIP(noBracketdomain)",
+          "summary": "Uncovered if path `condition_true_branch` at line 159; condition: noBracketdomain.length === 0 || !isIP(noBracketdomain)"
+        },
+        {
+          "branch_id": "30",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 165,
+          "column": 2,
+          "line_text": "  if (options.blacklisted_chars) {",
+          "source_excerpt": "if (options.blacklisted_chars) {\n    if (user.search(new RegExp(`[${options.blacklisted_chars}]+`, 'g')) !== -1) return false;\n  }",
+          "condition_excerpt": "options.blacklisted_chars",
+          "summary": "Uncovered if path `condition_true_branch` at line 165; condition: options.blacklisted_chars"
+        },
+        {
+          "branch_id": "31",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 166,
+          "column": 4,
+          "line_text": "    if (user.search(new RegExp(`[${options.blacklisted_chars}]+`, 'g')) !== -1) return false;",
+          "source_excerpt": "if (user.search(new RegExp(`[${options.blacklisted_chars}]+`, 'g')) !== -1) return false;",
+          "condition_excerpt": "user.search(new RegExp(`[${options.blacklisted_chars}]+`, 'g')) !== -1",
+          "summary": "Uncovered if path `condition_true_branch` at line 166; condition: user.search(new RegExp(`[${options.blacklisted_chars}]+`, 'g')) !== -1"
+        },
+        {
+          "branch_id": "31",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 166,
+          "column": 4,
+          "line_text": "    if (user.search(new RegExp(`[${options.blacklisted_chars}]+`, 'g')) !== -1) return false;",
+          "source_excerpt": "if (user.search(new RegExp(`[${options.blacklisted_chars}]+`, 'g')) !== -1) return false;",
+          "condition_excerpt": "user.search(new RegExp(`[${options.blacklisted_chars}]+`, 'g')) !== -1",
+          "summary": "Uncovered if path `condition_false_branch` at line 166; condition: user.search(new RegExp(`[${options.blacklisted_chars}]+`, 'g')) !== -1"
+        },
+        {
+          "branch_id": "32",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 169,
+          "column": 2,
+          "line_text": "  if (user[0] === '\"' && user[user.length - 1] === '\"') {",
+          "source_excerpt": "if (user[0] === '\"' && user[user.length - 1] === '\"') {\n    user = user.slice(1, user.length - 1);\n    return options.allow_utf8_local_part ?\n      quotedEmailUserUtf8.test(user) :\n      quotedEmailUser.test(user);\n  }",
+          "condition_excerpt": "user[0] === '\"' && user[user.length - 1] === '\"'",
+          "summary": "Uncovered if path `condition_true_branch` at line 169; condition: user[0] === '\"' && user[user.length - 1] === '\"'"
+        },
+        {
+          "branch_id": "33",
+          "branch_type": "binary-expr",
+          "path_index": 1,
+          "branch_side": "path_1",
+          "line": 169,
+          "column": 25,
+          "line_text": "  if (user[0] === '\"' && user[user.length - 1] === '\"') {",
+          "source_excerpt": "user[user.length - 1] === '\"'",
+          "condition_excerpt": "user[0] === '\"' && user[user.length - 1] === '\"'",
+          "summary": "Uncovered binary-expr path `path_1` at line 169; condition: user[0] === '\"' && user[user.length - 1] === '\"'"
+        },
+        {
+          "branch_id": "34",
+          "branch_type": "cond-expr",
+          "path_index": 0,
+          "branch_side": "ternary_true_branch",
+          "line": 172,
+          "column": 6,
+          "line_text": "      quotedEmailUserUtf8.test(user) :",
+          "source_excerpt": "quotedEmailUserUtf8.test(user)",
+          "condition_excerpt": null,
+          "summary": "Uncovered cond-expr path `ternary_true_branch` at line 172; snippet: quotedEmailUserUtf8.test(user)"
+        },
+        {
+          "branch_id": "34",
+          "branch_type": "cond-expr",
+          "path_index": 1,
+          "branch_side": "ternary_false_branch",
+          "line": 173,
+          "column": 6,
+          "line_text": "      quotedEmailUser.test(user);",
+          "source_excerpt": "quotedEmailUser.test(user)",
+          "condition_excerpt": null,
+          "summary": "Uncovered cond-expr path `ternary_false_branch` at line 173; snippet: quotedEmailUser.test(user)"
+        }
+      ],
+      "uncovered_functions": []
+    }
+  },
+  "coverage_summary_path": "D:\\TJU\\Software_Testing\\Assignment_1\\agent_toolkit\\outputs\\improved\\isEmail\\blackbox\\coverage\\coverage-summary.json",
+  "coverage_final_path": "D:\\TJU\\Software_Testing\\Assignment_1\\agent_toolkit\\outputs\\improved\\isEmail\\blackbox\\coverage\\coverage-final.json"
+}

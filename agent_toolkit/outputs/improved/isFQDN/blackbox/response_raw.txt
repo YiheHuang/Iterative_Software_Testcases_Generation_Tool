@@ -1,0 +1,56 @@
+{
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "blackbox",
+      "rule": "Default behavior: validate standard FQDNs with TLDs, no underscores, no trailing dots, no numeric TLDs, no wildcards, and enforce max length.",
+      "why": "Baseline behavior without options reflects the default validator configuration.",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "example"
+    },
+    {
+      "id": "OB-2",
+      "kind": "blackbox",
+      "rule": "Option `require_tld: false`: allow domains without TLDs.",
+      "why": "Requirement explicitly documents this option as disabling TLD validation.",
+      "minimal_valid": "localhost",
+      "minimal_invalid": null
+    },
+    {
+      "id": "OB-3",
+      "kind": "blackbox",
+      "rule": "Option `allow_underscores: true`: allow underscores in domain names.",
+      "why": "Requirement explicitly documents this option as enabling underscores.",
+      "minimal_valid": "example_domain.com",
+      "minimal_invalid": "example_domain"
+    },
+    {
+      "id": "OB-4",
+      "kind": "blackbox",
+      "rule": "Option `allow_trailing_dot: true`: allow domains ending with a trailing dot.",
+      "why": "Requirement explicitly documents this option as enabling trailing dots.",
+      "minimal_valid": "example.com.",
+      "minimal_invalid": "example."
+    },
+    {
+      "id": "OB-5",
+      "kind": "blackbox",
+      "rule": "Option `allow_numeric_tld: true`: allow numeric-only TLDs.",
+      "why": "Requirement explicitly documents this option as enabling numeric TLDs.",
+      "minimal_valid": "example.123",
+      "minimal_invalid": "example.12a"
+    },
+    {
+      "id": "OB-6",
+      "kind": "blackbox",
+      "rule": "Option `allow_wildcard: true`: allow domains starting with `*.`.",
+      "why": "Requirement explicitly documents this option as enabling wildcard domains.",
+      "minimal_valid": "*.example.com",
+      "minimal_invalid": "*example.com"
+    },
+    {
+      "id": "OB-7",
+      "kind": "blackbox",
+      "rule": "Option `ignore_max_length: true`: allow domains exceeding the standard max length.",
+      "why": "Requirement explicitly documents this option as disabling max length validation.",
+      "minimal_valid": "a"  	}]}

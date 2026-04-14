@@ -1,0 +1,221 @@
+{
+  "mode": "blackbox",
+  "approach": "improved",
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "blackbox",
+      "rule": "Validate standard email format without options.",
+      "why": "Default behavior must correctly identify valid and invalid email formats.",
+      "minimal_valid": "user@example.com",
+      "minimal_invalid": "userexample.com"
+    },
+    {
+      "id": "OB-2",
+      "kind": "blackbox",
+      "rule": "Support display name format when `allow_display_name` is true.",
+      "why": "Option explicitly allows `Display Name <email>` format.",
+      "minimal_valid": "John Doe <john.doe@example.com>",
+      "minimal_invalid": "John Doe john.doe@example.com"
+    },
+    {
+      "id": "OB-3",
+      "kind": "blackbox",
+      "rule": "Reject emails without display name when `require_display_name` is true.",
+      "why": "Option explicitly requires `Display Name <email>` format.",
+      "minimal_valid": "John Doe <john.doe@example.com>",
+      "minimal_invalid": "john.doe@example.com"
+    },
+    {
+      "id": "OB-4",
+      "kind": "blackbox",
+      "rule": "Reject non-ASCII characters in local part when `allow_utf8_local_part` is false.",
+      "why": "Option explicitly disallows UTF-8 characters in the local part.",
+      "minimal_valid": "user@example.com",
+      "minimal_invalid": "usér@example.com"
+    },
+    {
+      "id": "OB-5",
+      "kind": "blackbox",
+      "rule": "Allow emails without TLD when `require_tld` is false.",
+      "why": "Option explicitly permits emails without TLD.",
+      "minimal_valid": "user@localhost",
+      "minimal_invalid": "user@localhost"
+    },
+    {
+      "id": "OB-6",
+      "kind": "blackbox",
+      "rule": "Allow IP addresses in domain when `allow_ip_domain` is true.",
+      "why": "Option explicitly permits IP addresses in the domain part.",
+      "minimal_valid": "user@[192.168.1.1]",
+      "minimal_invalid": "user@[192.168.1.1]"
+    },
+    {
+      "id": "OB-7",
+      "kind": "blackbox",
+      "rule": "Reject emails exceeding the standard max length unless `ignore_max_length` is true.",
+      "why": "Option explicitly disables max length validation.",
+      "minimal_valid": "a@b.com",
+      "minimal_invalid": "a"
+    }
+  ],
+  "test_groups": [
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "user@example.com",
+        "user.name+tag+sorting@example.com",
+        "user_name@example.co.uk"
+      ],
+      "invalid": [
+        "userexample.com",
+        "user@.com",
+        "@example.com",
+        "user@com",
+        "user@.com."
+      ],
+      "error": [
+        123,
+        null,
+        {},
+        []
+      ],
+      "title": "Default behavior: standard email format validation",
+      "rationale": "Covers baseline email validation without any options.",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "valid": [
+        "John Doe <john.doe@example.com>",
+        "Jane Smith <jane.smith@example.org>"
+      ],
+      "invalid": [
+        "John Doe john.doe@example.com",
+        "Jane Smith jane.smith@example.org"
+      ],
+      "error": [],
+      "title": "Allow display name format",
+      "rationale": "Tests `allow_display_name` option allowing `Display Name <email>` format.",
+      "obligations": [
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_display_name": true
+        }
+      ],
+      "valid": [
+        "John Doe <john.doe@example.com>"
+      ],
+      "invalid": [
+        "john.doe@example.com",
+        "user@example.com"
+      ],
+      "error": [],
+      "title": "Require display name format",
+      "rationale": "Tests `require_display_name` option requiring `Display Name <email>` format.",
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_utf8_local_part": false
+        }
+      ],
+      "valid": [
+        "user@example.com"
+      ],
+      "invalid": [
+        "usér@example.com",
+        "üser@example.com"
+      ],
+      "error": [],
+      "title": "Disallow UTF-8 characters in local part",
+      "rationale": "Tests `allow_utf8_local_part` option disallowing non-ASCII characters in the local part.",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_tld": false
+        }
+      ],
+      "valid": [
+        "user@localhost",
+        "user@domain"
+      ],
+      "invalid": [
+        "user@localhost.",
+        "user@domain."
+      ],
+      "error": [],
+      "title": "Allow emails without TLD",
+      "rationale": "Tests `require_tld` option allowing emails without a TLD.",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_ip_domain": true
+        }
+      ],
+      "valid": [
+        "user@[192.168.1.1]",
+        "user@[127.0.0.1]"
+      ],
+      "invalid": [
+        "user@[192.168.1.1].",
+        "user@[127.0.0.1]."
+      ],
+      "error": [],
+      "title": "Allow IP addresses in domain",
+      "rationale": "Tests `allow_ip_domain` option allowing IP addresses in the domain part.",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "ignore_max_length": true
+        }
+      ],
+      "valid": [
+        "a"
+      ],
+      "invalid": [],
+      "error": [],
+      "title": "Ignore max length validation",
+      "rationale": null,
+      "obligations": []
+    }
+  ],
+  "metadata": {
+    "requirement_source": "D:\\TJU\\Software_Testing\\Assignment_1\\source_code\\validator_js\\README.md",
+    "generation_style": "improved_initial_pass"
+  }
+}

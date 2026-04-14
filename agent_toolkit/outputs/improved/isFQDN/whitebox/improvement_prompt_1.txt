@@ -1,0 +1,300 @@
+You are improving an existing whitebox test suite for isFQDN.
+You are given the raw source code and fine-grained uncovered white-box coverage details.
+You must map the uncovered positions back to the source code and design patch tests that target those exact uncovered statements, branches, or functions.
+You must NOT use any golden tests, repository test overlap analysis, or external oracle hints.
+
+Goal:
+- fix incorrect expectations or malformed test cases
+- add only a very small number of new groups to improve runtime correctness and coverage
+- keep the suite conservative and low-redundancy
+
+Return strict JSON with top-level keys obligations and test_groups.
+The returned test_groups should be patch groups only, not a full rewritten suite.
+
+Black-box requirement source:
+Function name: isFQDN
+Black-box requirement source: validator_js README function entry
+Signature summary: isFQDN(str [, options])
+README behavior summary:
+| check if the string is a fully qualified domain name (e.g. domain.com).
+`options` is an object which defaults to `{ require_tld: true, allow_underscores: false, allow_trailing_dot: false, allow_numeric_tld: false, allow_wildcard: false, ignore_max_length: false }`.
+`require_tld` - If set to false the validator will not check if the domain includes a TLD.
+`allow_underscores` - if set to true, the validator will allow underscores in the domain.
+`allow_trailing_dot` - if set to true, the validator will allow the domain to end with a `.` character.
+`allow_numeric_tld` - if set to true, the validator will allow the TLD of the domain to be made up solely of numbers.
+`allow_wildcard` - if set to true, the validator will allow domains starting with `*.` (e.g. `*.example.com` or `*.shop.example.com`).
+`ignore_max_length` - if set to true, the validator will not check for the standard max length of a domain.
+
+Treat the README entry as the authoritative black-box behavior description.
+Infer valid inputs, invalid inputs, option-sensitive behaviors, and edge cases from this description.
+
+
+Source code:
+import assertString from './util/assertString';
+import merge from './util/merge';
+
+const default_fqdn_options = {
+  require_tld: true,
+  allow_underscores: false,
+  allow_trailing_dot: false,
+  allow_numeric_tld: false,
+  allow_wildcard: false,
+  ignore_max_length: false,
+};
+
+export default function isFQDN(str, options) {
+  assertString(str);
+  options = merge(options, default_fqdn_options);
+
+  /* Remove the optional trailing dot before checking validity */
+  if (options.allow_trailing_dot && str[str.length - 1] === '.') {
+    str = str.substring(0, str.length - 1);
+  }
+
+  /* Remove the optional wildcard before checking validity */
+  if (options.allow_wildcard === true && str.indexOf('*.') === 0) {
+    str = str.substring(2);
+  }
+
+  const parts = str.split('.');
+  const tld = parts[parts.length - 1];
+
+  if (options.require_tld) {
+    // disallow fqdns without tld
+    if (parts.length < 2) {
+      return false;
+    }
+
+    if (!options.allow_numeric_tld && !/^([a-z\u00A1-\u00A8\u00AA-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]{2,}|xn[a-z0-9-]{2,})$/i.test(tld)) {
+      return false;
+    }
+
+    // disallow spaces
+    if (/\s/.test(tld)) {
+      return false;
+    }
+  }
+
+  // reject numeric TLDs
+  if (!options.allow_numeric_tld && /^\d+$/.test(tld)) {
+    return false;
+  }
+
+  return parts.every((part) => {
+    if (part.length > 63 && !options.ignore_max_length) {
+      return false;
+    }
+
+    if (!/^[a-z_\u00a1-\uffff0-9-]+$/i.test(part)) {
+      return false;
+    }
+
+    // disallow full-width chars
+    if (/[\uff01-\uff5e]/.test(part)) {
+      return false;
+    }
+
+    // disallow parts starting or ending with hyphen
+    if (/^-|-$/.test(part)) {
+      return false;
+    }
+
+    if (!options.allow_underscores && /_/.test(part)) {
+      return false;
+    }
+
+    return true;
+  });
+}
+
+
+Current generated suite:
+[
+  {
+    "title": "Default behavior validation",
+    "validator": "isFQDN",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "example.com",
+      "sub.domain.com"
+    ],
+    "invalid": [
+      "invalid_domain",
+      "example"
+    ],
+    "error": [
+      123,
+      null,
+      {},
+      []
+    ],
+    "rationale": "Tests the default behavior of the validator with no options provided, ensuring baseline correctness.",
+    "obligations": [
+      "OB-1",
+      "OB-2"
+    ]
+  },
+  {
+    "title": "Underscore allowance",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_underscores": true
+      }
+    ],
+    "valid": [
+      "exa_mple.com",
+      "sub_domain.com"
+    ],
+    "invalid": [
+      "exa_mple",
+      "sub_domain"
+    ],
+    "error": [
+      123,
+      null,
+      {},
+      []
+    ],
+    "rationale": "Tests the behavior when underscores are allowed in domain parts.",
+    "obligations": [
+      "OB-3"
+    ]
+  },
+  {
+    "title": "Trailing dot allowance",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_trailing_dot": true
+      }
+    ],
+    "valid": [
+      "example.com.",
+      "sub.domain.com."
+    ],
+    "invalid": [
+      "example.",
+      "sub.domain."
+    ],
+    "error": [
+      123,
+      null,
+      {},
+      []
+    ],
+    "rationale": "Tests the behavior when trailing dots are allowed in domain names.",
+    "obligations": [
+      "OB-4"
+    ]
+  },
+  {
+    "title": "Numeric TLD allowance",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": true
+      }
+    ],
+    "valid": [
+      "example.123",
+      "sub.domain.456"
+    ],
+    "invalid": [
+      "example.123a",
+      "sub.domain.45a"
+    ],
+    "error": [
+      123,
+      null,
+      {},
+      []
+    ],
+    "rationale": "Tests the behavior when numeric TLDs are allowed.",
+    "obligations": [
+      "OB-5"
+    ]
+  },
+  {
+    "title": "Wildcard allowance",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_wildcard": true
+      }
+    ],
+    "valid": [
+      "*.example.com",
+      "*.sub.domain.com"
+    ],
+    "invalid": [
+      "*example.com",
+      "example.*.com"
+    ],
+    "error": [
+      123,
+      null,
+      {},
+      []
+    ],
+    "rationale": "Tests the behavior when wildcard domains are allowed.",
+    "obligations": [
+      "OB-6"
+    ]
+  },
+  {
+    "title": "Ignore max length",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "ignore_max_length": true
+      }
+    ],
+    "valid": [
+      "a",
+      "a"
+    ],
+    "invalid": [
+      "a"
+    ],
+    "error": [
+      123,
+      null,
+      {},
+      []
+    ],
+    "rationale": "Tests the behavior when domain parts exceeding 63 characters are allowed.",
+    "obligations": [
+      "OB-7"
+    ]
+  }
+]
+
+Runtime feedback allowed for improvement:
+{
+  "summary": {
+    "total_cases": 47,
+    "correct_cases": 42,
+    "incorrect_cases": 5,
+    "exact_match_rate": 0.8936170212765957,
+    "by_expected_kind": {
+      "return": 23,
+      "throw": 24
+    }
+  },
+  "uncovered_details": {}
+}
+
+Instructions:
+- Read the raw source code together with uncovered_details before proposing any patch.
+- Treat uncovered_details as exact white-box targets, not as vague hints.
+- If an uncovered branch or statement cannot be linked back to the provided source code, do not guess.
+- Only propose at most 3 patch groups.
+- Each patch group should contain at most 3 valid values, 3 invalid values, and 1 error value.
+- If uncovered_details are provided, use them only as white-box targets.
+- If uncovered_details are not provided, do not infer any hidden coverage gap.
+- Prefer minimal option-profile-specific groups.
+- Avoid broad extrapolation; every patch should point to a concrete uncovered position or condition in the code.
+- Do not mention or infer any golden test information.

@@ -1,0 +1,356 @@
+Group generated tests into generated categories for validator isURL.
+
+Generated groups:
+[
+  {
+    "title": "Basic URL validation without options",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com",
+      "ftp://example.com"
+    ],
+    "invalid": [
+      "http://exa mple.com",
+      "http://example<.com",
+      "mailto:example@example.com"
+    ],
+    "error": [
+      123,
+      null,
+      {},
+      []
+    ],
+    "rationale": "Covers basic validation rules for URLs without any options, including invalid characters and 'mailto:' rejection.",
+    "obligations": [
+      "OB-1",
+      "OB-2"
+    ],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "Maximum length validation with default options",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com",
+      "http://a.com/"
+    ],
+    "invalid": [
+      "http://"
+    ],
+    "error": [],
+    "rationale": "Tests the default maximum length constraint of 2084 characters.",
+    "obligations": [
+      "OB-3"
+    ],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "Fragment rejection with `allow_fragments: false`",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_fragments": false
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com"
+    ],
+    "invalid": [
+      "http://example.com#fragment",
+      "https://example.com#anotherFragment"
+    ],
+    "error": [
+      null
+    ],
+    "rationale": "Tests rejection of URLs containing fragments when `allow_fragments` is explicitly set to false.",
+    "obligations": [
+      "OB-4"
+    ],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "Query component rejection with `allow_query_components: false`",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_query_components": false
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com"
+    ],
+    "invalid": [
+      "http://example.com?query=value",
+      "https://example.com?query=value&another=value"
+    ],
+    "error": [
+      null
+    ],
+    "rationale": "Tests rejection of URLs containing query components when `allow_query_components` is explicitly set to false.",
+    "obligations": [
+      "OB-5"
+    ],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "Authentication rejection with `disallow_auth: true`",
+    "validator": "isURL",
+    "args": [
+      {
+        "disallow_auth": true
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com"
+    ],
+    "invalid": [
+      "http://user:pass@example.com",
+      "https://username:password@secure.com"
+    ],
+    "error": [
+      null
+    ],
+    "rationale": "Tests rejection of URLs containing authentication components when `disallow_auth` is explicitly set to true.",
+    "obligations": [
+      "OB-6"
+    ],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "Protocol requirement with `require_protocol: true`",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": true
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com"
+    ],
+    "invalid": [
+      "example.com",
+      "www.example.com"
+    ],
+    "error": [
+      null
+    ],
+    "rationale": "Tests rejection of URLs without protocols when `require_protocol` is explicitly set to true.",
+    "obligations": [
+      "OB-7"
+    ],
+    "generated_id": "GENERATED-6"
+  },
+  {
+    "title": "Port requirement with `require_port: true`",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_port": true
+      }
+    ],
+    "valid": [
+      "http://example.com:8080",
+      "https://example.com:443"
+    ],
+    "invalid": [
+      "http://example.com",
+      "https://example.com"
+    ],
+    "error": [
+      null
+    ],
+    "rationale": "Tests rejection of URLs without ports when `require_port` is explicitly set to true.",
+    "obligations": [
+      "OB-8"
+    ],
+    "generated_id": "GENERATED-7"
+  },
+  {
+    "title": "Protocol-relative URLs with `allow_protocol_relative_urls: true`",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_protocol_relative_urls": true
+      }
+    ],
+    "valid": [
+      "//example.com",
+      "//example.com/path"
+    ],
+    "invalid": [
+      "http://example.com",
+      "example.com"
+    ],
+    "error": [
+      null
+    ],
+    "rationale": "Tests acceptance of protocol-relative URLs when `allow_protocol_relative_urls` is explicitly set to true.",
+    "obligations": [
+      "OB-9"
+    ],
+    "generated_id": "GENERATED-8"
+  },
+  {
+    "title": "Invalid port numbers",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_port": true
+      }
+    ],
+    "valid": [
+      "http://example.com:80",
+      "https://example.com:443"
+    ],
+    "invalid": [
+      "http://example.com:70000",
+      "http://example.com:-1",
+      "http://example.com:abcd"
+    ],
+    "error": [
+      null
+    ],
+    "rationale": "Tests rejection of URLs with invalid port numbers, ensuring the port validation logic is exercised.",
+    "obligations": [
+      "OB-10"
+    ],
+    "generated_id": "GENERATED-9"
+  },
+  {
+    "title": "Invalid characters in hostname",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com",
+      "http://sub.example.com"
+    ],
+    "invalid": [
+      "http://exa$mple.com",
+      "http://example!.com",
+      "http://example..com"
+    ],
+    "error": [
+      null
+    ],
+    "rationale": "Tests rejection of URLs with invalid characters in the hostname, ensuring hostname validation logic is exercised.",
+    "obligations": [
+      "OB-11"
+    ],
+    "generated_id": "GENERATED-10"
+  },
+  {
+    "title": "Empty hostname with `require_host: false`",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_host": false
+      }
+    ],
+    "valid": [
+      "//",
+      "//path/to/resource"
+    ],
+    "invalid": [
+      "http://",
+      "https://"
+    ],
+    "error": [
+      null
+    ],
+    "rationale": "Tests acceptance of URLs with empty hostnames when `require_host` is explicitly set to false.",
+    "obligations": [
+      "OB-12"
+    ],
+    "generated_id": "GENERATED-11"
+  },
+  {
+    "title": "Invalid protocols with `require_valid_protocol: true`",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_valid_protocol": true
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com"
+    ],
+    "invalid": [
+      "javascript:alert(1)",
+      "ftp://example.com",
+      "customprotocol://example.com"
+    ],
+    "error": [
+      null
+    ],
+    "rationale": "Tests rejection of URLs with protocols not in the allowed list when `require_valid_protocol` is true.",
+    "obligations": [
+      "OB-13"
+    ],
+    "generated_id": "GENERATED-12"
+  },
+  {
+    "title": "Encoded authentication rejection with `require_protocol: false`",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": false
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com"
+    ],
+    "invalid": [
+      "http://user%3Apass@example.com",
+      "http://user%40example.com@example.com",
+      "http://%61%62%63@example.com"
+    ],
+    "error": [
+      null
+    ],
+    "rationale": "Tests rejection of URLs with encoded authentication components when `require_protocol` is false.",
+    "obligations": [
+      "OB-14"
+    ],
+    "generated_id": "GENERATED-13"
+  },
+  {
+    "title": "Invalid IPv6 formats",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://[2001:db8::1]:8080",
+      "http://[::1]",
+      "http://[2001:db8:85a3::8a2e:370:7334]"
+    ],
+    "invalid": [
+      "http://[2001:db8:::1]:8080",
+      "http://[2001:db8::1::1]",
+      "http://[2001:db8:85a3::8a2e:370:7334:12345]"
+    ],
+    "error": [
+      null
+    ],
+    "rationale": "Tests rejection of URLs with invalid IPv6 formats, ensuring the `wrapped_ipv6` regex is exercised.",
+    "obligations": [
+      "OB-15"
+    ],
+    "generated_id": "GENERATED-14"
+  }
+]

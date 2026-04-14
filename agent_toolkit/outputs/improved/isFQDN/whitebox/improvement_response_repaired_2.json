@@ -1,0 +1,86 @@
+{
+  "obligations": [
+    {
+      "id": "OB-11",
+      "kind": "whitebox",
+      "rule": "Ensure domains with numeric TLDs are rejected when allow_numeric_tld is false.",
+      "why": "The branch rejecting numeric TLDs when allow_numeric_tld is false is not fully covered.",
+      "minimal_valid": null,
+      "minimal_invalid": "example.123"
+    },
+    {
+      "id": "OB-12",
+      "kind": "whitebox",
+      "rule": "Ensure domains with underscores are rejected when allow_underscores is false.",
+      "why": "The branch rejecting underscores in domain parts when allow_underscores is false is not fully covered.",
+      "minimal_valid": null,
+      "minimal_invalid": "example_com"
+    },
+    {
+      "id": "OB-13",
+      "kind": "whitebox",
+      "rule": "Ensure domains exceeding 63 characters in a part are rejected when ignore_max_length is false.",
+      "why": "The branch rejecting overly long domain parts when ignore_max_length is false is not fully covered.",
+      "minimal_valid": null,
+      "minimal_invalid": "a... (64 characters)"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Numeric TLD rejection when allow_numeric_tld is false",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_numeric_tld": false
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "example.123",
+        "sub.domain.456"
+      ],
+      "error": [],
+      "rationale": "Tests rejection of numeric TLDs when allow_numeric_tld is false.",
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "title": "Underscore rejection when allow_underscores is false",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_underscores": false
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "example_com",
+        "sub_domain.com"
+      ],
+      "error": [],
+      "rationale": "Tests rejection of underscores in domain parts when allow_underscores is false.",
+      "obligations": [
+        "OB-12"
+      ]
+    },
+    {
+      "title": "Domain part length rejection when ignore_max_length is false",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "ignore_max_length": false
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      ],
+      "error": [],
+      "rationale": "Tests rejection of domain parts exceeding 63 characters when ignore_max_length is false.",
+      "obligations": [
+        "OB-13"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,623 @@
+{
+  "cases": [
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "input_value": "test@example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Standard email validation",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "input_value": "user.name+tag+sorting@example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Standard email validation",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "input_value": "x@x.au",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Standard email validation",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "input_value": "plainaddress",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Standard email validation",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "input_value": "@missingusername.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Standard email validation",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "input_value": "username@.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Standard email validation",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "input_value": 123,
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Standard email validation",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "input_value": null,
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Standard email validation",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "input_value": {},
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Standard email validation",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "input_value": [],
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Standard email validation",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "input_value": "John Doe <test@example.com>",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Display name handling",
+      "obligations": [
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "input_value": "\"John, Doe\" <test@example.com>",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Display name handling",
+      "obligations": [
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "input_value": "John Doe test@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Display name handling",
+      "obligations": [
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "input_value": "John Doe <test@>",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Display name handling",
+      "obligations": [
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_display_name": true
+        }
+      ],
+      "input_value": "John Doe <test@example.com>",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Require display name",
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_display_name": true
+        }
+      ],
+      "input_value": "test@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Require display name",
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_display_name": true
+        }
+      ],
+      "input_value": "John Doe test@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Require display name",
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_utf8_local_part": true
+        }
+      ],
+      "input_value": "tést@example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "UTF-8 local part handling",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_utf8_local_part": true
+        }
+      ],
+      "input_value": "üñîçødé@example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "UTF-8 local part handling",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_utf8_local_part": true
+        }
+      ],
+      "input_value": "tést@.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "UTF-8 local part handling",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_utf8_local_part": true
+        }
+      ],
+      "input_value": "üñîçødé@.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "UTF-8 local part handling",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_tld": true
+        }
+      ],
+      "input_value": "test@example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Require TLD",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_tld": true
+        }
+      ],
+      "input_value": "test@example",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Require TLD",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_ip_domain": true
+        }
+      ],
+      "input_value": "test@[127.0.0.1]",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Allow IP domain",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_ip_domain": true
+        }
+      ],
+      "input_value": "test@[IPv6:2001:db8::1]",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Allow IP domain",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_ip_domain": true
+        }
+      ],
+      "input_value": "test@[127.0.0.1.1]",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Allow IP domain",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_ip_domain": true
+        }
+      ],
+      "input_value": "test@[IPv6:2001:db8:::1]",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Allow IP domain",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "ignore_max_length": true
+        }
+      ],
+      "input_value": "a@b.",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Ignore max length",
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "input_value": "\"John \\\"Doe\\\"\" <test@example.com>",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Display name with illegal characters",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "input_value": "John \"Doe\" <test@example.com>",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Display name with illegal characters",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "input_value": "\"John, Doe\" test@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Display name with illegal characters",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "host_blacklist": [
+            "blocked.com"
+          ],
+          "host_whitelist": [
+            "allowed.com"
+          ]
+        }
+      ],
+      "input_value": "test@allowed.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Host blacklist and whitelist combination",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "host_blacklist": [
+            "blocked.com"
+          ],
+          "host_whitelist": [
+            "allowed.com"
+          ]
+        }
+      ],
+      "input_value": "test@blocked.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Host blacklist and whitelist combination",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "host_blacklist": [
+            "blocked.com"
+          ],
+          "host_whitelist": [
+            "allowed.com"
+          ]
+        }
+      ],
+      "input_value": "test@other.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Host blacklist and whitelist combination",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "blacklisted_chars": "#"
+        }
+      ],
+      "input_value": "test@example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Blacklisted characters in local part",
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "blacklisted_chars": "#"
+        }
+      ],
+      "input_value": "te#st@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Blacklisted characters in local part",
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "blacklisted_chars": "#"
+        }
+      ],
+      "input_value": "test#@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Blacklisted characters in local part",
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "input_value": "\"   \" <test@example.com>",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Display name with spaces only",
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_ip_domain": true
+        }
+      ],
+      "input_value": "test@[invalid]",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Invalid bracketed domain",
+      "obligations": [
+        "OB-12"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "host_blacklist": [
+            "/blocked\\.com$/"
+          ]
+        }
+      ],
+      "input_value": "test@allowed.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Host blacklist with regex patterns",
+      "obligations": [
+        "OB-13"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "host_blacklist": [
+            "/blocked\\.com$/"
+          ]
+        }
+      ],
+      "input_value": "test@blocked.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Host blacklist with regex patterns",
+      "obligations": [
+        "OB-13"
+      ]
+    }
+  ],
+  "mode": "whitebox",
+  "approach": "improved",
+  "target_source_files": [
+    "src/lib/isEmail.js"
+  ]
+}

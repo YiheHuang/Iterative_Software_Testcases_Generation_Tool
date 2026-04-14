@@ -1,0 +1,133 @@
+{
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "blackbox",
+      "rule": "URLs must not contain spaces or invalid characters.",
+      "why": "Requirement specifies URLs must be valid strings without invalid characters.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://exa mple.com"
+    },
+    {
+      "id": "OB-2",
+      "kind": "blackbox",
+      "rule": "URLs must not start with 'mailto:'.",
+      "why": "Requirement explicitly excludes 'mailto:' URLs.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "mailto:example@example.com"
+    },
+    {
+      "id": "OB-3",
+      "kind": "blackbox",
+      "rule": "URLs must not exceed the maximum allowed length if `validate_length` is true.",
+      "why": "Requirement specifies length validation when `validate_length` is enabled.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://example.com/very/long/url/that/exceeds/the/maximum/allowed/length"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Basic URL validation without options",
+      "validator": "isURL",
+      "args": [{}],
+      "valid": [
+        "http://example.com",
+        "https://example.com",
+        "ftp://example.com",
+        "http://example.com/path?query=1#fragment"
+      ],
+      "invalid": [
+        "http://exa mple.com",
+        "mailto:example@example.com",
+        "http://example.com/very/long/url/that/exceeds/the/maximum/allowed/length",
+        "http://example.com<>"
+      ],
+      "error": [
+        12345,
+        null,
+        true,
+        {}
+      ],
+      "rationale": "Covers basic URL validation with default options, ensuring valid protocols, no invalid characters, and proper length validation.",
+      "obligations": ["OB-1", "OB-2", "OB-3"]
+    },
+    {
+      "title": "Validation with `require_protocol` enabled",
+      "validator": "isURL",
+      "args": [{"require_protocol": true}],
+      "valid": [
+        "http://example.com",
+        "https://example.com",
+        "ftp://example.com"
+      ],
+      "invalid": [
+        "example.com",
+        "//example.com",
+        "mailto:example@example.com"
+      ],
+      "error": [
+        null,
+        12345
+      ],
+      "rationale": "Tests behavior when `require_protocol` is enabled, ensuring URLs must explicitly include a protocol.",
+      "obligations": ["OB-2"]
+    },
+    {
+      "title": "Validation with `allow_underscores` enabled",
+      "validator": "isURL",
+      "args": [{"allow_underscores": true}],
+      "valid": [
+        "http://example_com.com",
+        "https://example_com.com"
+      ],
+      "invalid": [
+        "http://exa mple.com",
+        "mailto:example@example.com"
+      ],
+      "error": [
+        true,
+        {}
+      ],
+      "rationale": "Tests behavior when `allow_underscores` is enabled, allowing underscores in hostnames.",
+      "obligations": ["OB-1", "OB-2"]
+    },
+    {
+      "title": "Validation with `require_host` disabled",
+      "validator": "isURL",
+      "args": [{"require_host": false}],
+      "valid": [
+        "http://",
+        "https://"
+      ],
+      "invalid": [
+        "mailto:example@example.com",
+        "http://exa mple.com"
+      ],
+      "error": [
+        null,
+        []
+      ],
+      "rationale": "Tests behavior when `require_host` is disabled, allowing URLs without a host component.",
+      "obligations": ["OB-1", "OB-2"]
+    },
+    {
+      "title": "Validation with `validate_length` disabled",
+      "validator": "isURL",
+      "args": [{"validate_length": false}],
+      "valid": [
+        "http://example.com/very/long/url/that/exceeds/the/maximum/allowed/length",
+        "http://example.com"
+      ],
+      "invalid": [
+        "http://exa mple.com",
+        "mailto:example@example.com"
+      ],
+      "error": [
+        null,
+        12345
+      ],
+      "rationale": "Tests behavior when `validate_length` is disabled, allowing URLs of any length.",
+      "obligations": ["OB-1", "OB-2"]
+    }
+  ]
+}

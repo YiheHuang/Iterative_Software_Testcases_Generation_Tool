@@ -1,0 +1,379 @@
+{
+  "mode": "whitebox",
+  "approach": "improved",
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "blackbox",
+      "rule": "URLs must not contain spaces or invalid characters.",
+      "why": "Requirement specifies valid URLs must not include whitespace or invalid characters like '<' or '>'.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://exa mple.com"
+    },
+    {
+      "id": "OB-2",
+      "kind": "blackbox",
+      "rule": "URLs starting with 'mailto:' are invalid.",
+      "why": "Requirement explicitly rejects URLs starting with 'mailto:'.",
+      "minimal_valid": null,
+      "minimal_invalid": "mailto:example@example.com"
+    },
+    {
+      "id": "OB-3",
+      "kind": "blackbox",
+      "rule": "URLs must not exceed the maximum allowed length unless validate_length is false.",
+      "why": "Requirement specifies a default maximum length of 2084 unless validate_length is disabled.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": null
+    }
+  ],
+  "test_groups": [
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com",
+        "ftp://example.com"
+      ],
+      "invalid": [
+        "http://exa mple.com",
+        "http://example<.com",
+        "mailto:example@example.com"
+      ],
+      "error": [
+        123,
+        null,
+        {},
+        []
+      ],
+      "title": "Basic URL validation without options",
+      "rationale": "Covers basic validation rules for URLs without any options, including invalid characters and 'mailto:' rejection.",
+      "obligations": [
+        "OB-1",
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com",
+        "http://a.com/"
+      ],
+      "invalid": [
+        "http://"
+      ],
+      "error": [],
+      "title": "Maximum length validation with default options",
+      "rationale": "Tests the default maximum length constraint of 2084 characters.",
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_fragments": false
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com"
+      ],
+      "invalid": [
+        "http://example.com#fragment",
+        "https://example.com#anotherFragment"
+      ],
+      "error": [
+        null
+      ],
+      "title": "Fragment rejection with `allow_fragments: false`",
+      "rationale": "Tests rejection of URLs containing fragments when `allow_fragments` is explicitly set to false.",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_query_components": false
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com"
+      ],
+      "invalid": [
+        "http://example.com?query=value",
+        "https://example.com?query=value&another=value"
+      ],
+      "error": [
+        null
+      ],
+      "title": "Query component rejection with `allow_query_components: false`",
+      "rationale": "Tests rejection of URLs containing query components when `allow_query_components` is explicitly set to false.",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com"
+      ],
+      "invalid": [
+        "http://user:pass@example.com",
+        "https://username:password@secure.com"
+      ],
+      "error": [
+        null
+      ],
+      "title": "Authentication rejection with `disallow_auth: true`",
+      "rationale": "Tests rejection of URLs containing authentication components when `disallow_auth` is explicitly set to true.",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com"
+      ],
+      "invalid": [
+        "example.com",
+        "www.example.com"
+      ],
+      "error": [
+        null
+      ],
+      "title": "Protocol requirement with `require_protocol: true`",
+      "rationale": "Tests rejection of URLs without protocols when `require_protocol` is explicitly set to true.",
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_port": true
+        }
+      ],
+      "valid": [
+        "http://example.com:8080",
+        "https://example.com:443"
+      ],
+      "invalid": [
+        "http://example.com",
+        "https://example.com"
+      ],
+      "error": [
+        null
+      ],
+      "title": "Port requirement with `require_port: true`",
+      "rationale": "Tests rejection of URLs without ports when `require_port` is explicitly set to true.",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_protocol_relative_urls": true
+        }
+      ],
+      "valid": [
+        "//example.com",
+        "//example.com/path"
+      ],
+      "invalid": [
+        "http://example.com",
+        "example.com"
+      ],
+      "error": [
+        null
+      ],
+      "title": "Protocol-relative URLs with `allow_protocol_relative_urls: true`",
+      "rationale": "Tests acceptance of protocol-relative URLs when `allow_protocol_relative_urls` is explicitly set to true.",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_port": true
+        }
+      ],
+      "valid": [
+        "http://example.com:80",
+        "https://example.com:443"
+      ],
+      "invalid": [
+        "http://example.com:70000",
+        "http://example.com:-1",
+        "http://example.com:abcd"
+      ],
+      "error": [
+        null
+      ],
+      "title": "Invalid port numbers",
+      "rationale": "Tests rejection of URLs with invalid port numbers, ensuring the port validation logic is exercised.",
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com",
+        "http://sub.example.com"
+      ],
+      "invalid": [
+        "http://exa$mple.com",
+        "http://example!.com",
+        "http://example..com"
+      ],
+      "error": [
+        null
+      ],
+      "title": "Invalid characters in hostname",
+      "rationale": "Tests rejection of URLs with invalid characters in the hostname, ensuring hostname validation logic is exercised.",
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false
+        }
+      ],
+      "valid": [
+        "//",
+        "//path/to/resource"
+      ],
+      "invalid": [
+        "http://",
+        "https://"
+      ],
+      "error": [
+        null
+      ],
+      "title": "Empty hostname with `require_host: false`",
+      "rationale": "Tests acceptance of URLs with empty hostnames when `require_host` is explicitly set to false.",
+      "obligations": [
+        "OB-12"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_valid_protocol": true
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com"
+      ],
+      "invalid": [
+        "javascript:alert(1)",
+        "ftp://example.com",
+        "customprotocol://example.com"
+      ],
+      "error": [
+        null
+      ],
+      "title": "Invalid protocols with `require_valid_protocol: true`",
+      "rationale": "Tests rejection of URLs with protocols not in the allowed list when `require_valid_protocol` is true.",
+      "obligations": [
+        "OB-13"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": false
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com"
+      ],
+      "invalid": [
+        "http://user%3Apass@example.com",
+        "http://user%40example.com@example.com",
+        "http://%61%62%63@example.com"
+      ],
+      "error": [
+        null
+      ],
+      "title": "Encoded authentication rejection with `require_protocol: false`",
+      "rationale": "Tests rejection of URLs with encoded authentication components when `require_protocol` is false.",
+      "obligations": [
+        "OB-14"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://[2001:db8::1]:8080",
+        "http://[::1]",
+        "http://[2001:db8:85a3::8a2e:370:7334]"
+      ],
+      "invalid": [
+        "http://[2001:db8:::1]:8080",
+        "http://[2001:db8::1::1]",
+        "http://[2001:db8:85a3::8a2e:370:7334:12345]"
+      ],
+      "error": [
+        null
+      ],
+      "title": "Invalid IPv6 formats",
+      "rationale": "Tests rejection of URLs with invalid IPv6 formats, ensuring the `wrapped_ipv6` regex is exercised.",
+      "obligations": [
+        "OB-15"
+      ]
+    }
+  ],
+  "metadata": {
+    "requirement_source": "D:\\TJU\\Software_Testing\\Assignment_1\\source_code\\validator_js\\README.md",
+    "generation_style": "improved_initial_pass",
+    "iteration_count": 5,
+    "improvement_applied": true,
+    "feedback_sources": [
+      "coverage"
+    ],
+    "decision": "stop_after_reverts"
+  }
+}

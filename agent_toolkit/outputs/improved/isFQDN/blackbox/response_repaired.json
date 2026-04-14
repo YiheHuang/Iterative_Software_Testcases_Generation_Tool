@@ -1,0 +1,61 @@
+{
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "blackbox",
+      "rule": "The input must be a string representing a fully qualified domain name (FQDN).",
+      "why": "The function checks if the input is a valid FQDN.",
+      "minimal_valid": "domain.com",
+      "minimal_invalid": "not_a_domain"
+    },
+    {
+      "id": "OB-2",
+      "kind": "blackbox",
+      "rule": "The input must include a TLD unless `require_tld` is set to false.",
+      "why": "The default behavior requires a TLD for valid FQDNs.",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "example"
+    },
+    {
+      "id": "OB-3",
+      "kind": "blackbox",
+      "rule": "The input must not contain underscores unless `allow_underscores` is set to true.",
+      "why": "Underscores are disallowed by default in FQDNs.",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "exa_mple.com"
+    },
+    {
+      "id": "OB-4",
+      "kind": "blackbox",
+      "rule": "The input must not end with a trailing dot unless `allow_trailing_dot` is set to true.",
+      "why": "Trailing dots are disallowed by default in FQDNs.",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "example.com."
+    },
+    {
+      "id": "OB-5",
+      "kind": "blackbox",
+      "rule": "The input must not have a numeric-only TLD unless `allow_numeric_tld` is set to true.",
+      "why": "Numeric-only TLDs are disallowed by default in FQDNs.",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "example.123"
+    },
+    {
+      "id": "OB-6",
+      "kind": "blackbox",
+      "rule": "The input must not start with `*.` unless `allow_wildcard` is set to true.",
+      "why": "Wildcards are disallowed by default in FQDNs.",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "*.example.com"
+    },
+    {
+      "id": "OB-7",
+      "kind": "blackbox",
+      "rule": "The input must not exceed the standard max length unless `ignore_max_length` is set to true.",
+      "why": "Domain length is restricted by default.",
+      "minimal_valid": "a.com",
+      "minimal_invalid": null
+    }
+  ],
+  "test_groups": []
+}

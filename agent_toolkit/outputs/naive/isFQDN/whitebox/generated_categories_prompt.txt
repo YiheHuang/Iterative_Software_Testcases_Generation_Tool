@@ -1,0 +1,214 @@
+Group generated tests into generated categories for validator isFQDN.
+
+Generated groups:
+[
+  {
+    "title": "Default options",
+    "validator": "isFQDN",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "example.com",
+      "sub.domain.com",
+      "xn--fiqs8s.example"
+    ],
+    "invalid": [
+      "example",
+      "example..com",
+      "-example.com",
+      "example-.com",
+      "example_.com",
+      "example.com.",
+      "123"
+    ],
+    "error": [
+      123,
+      null,
+      {},
+      []
+    ],
+    "rationale": "Tests the default behavior of isFQDN with no options provided.",
+    "obligations": [],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "require_tld: false",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": false
+      }
+    ],
+    "valid": [
+      "example",
+      "sub.domain",
+      "xn--fiqs8s"
+    ],
+    "invalid": [
+      "example..",
+      "-example",
+      "example-",
+      "example_",
+      "example."
+    ],
+    "error": [
+      123,
+      null,
+      {},
+      []
+    ],
+    "rationale": "Tests behavior when TLD requirement is disabled.",
+    "obligations": [],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "allow_underscores: true",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_underscores": true
+      }
+    ],
+    "valid": [
+      "example_com",
+      "sub_domain.com",
+      "xn--fiqs8s.example"
+    ],
+    "invalid": [
+      "example..com",
+      "-example.com",
+      "example-.com",
+      "example.com.",
+      "123"
+    ],
+    "error": [
+      123,
+      null,
+      {},
+      []
+    ],
+    "rationale": "Tests behavior when underscores are allowed in domain parts.",
+    "obligations": [],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "allow_trailing_dot: true",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_trailing_dot": true
+      }
+    ],
+    "valid": [
+      "example.com.",
+      "sub.domain.com.",
+      "xn--fiqs8s.example."
+    ],
+    "invalid": [
+      "example..com.",
+      "-example.com.",
+      "example-.com.",
+      "example_.com.",
+      "123."
+    ],
+    "error": [
+      123,
+      null,
+      {},
+      []
+    ],
+    "rationale": "Tests behavior when trailing dots are allowed.",
+    "obligations": [],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "allow_numeric_tld: true",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": true
+      }
+    ],
+    "valid": [
+      "example.123",
+      "sub.domain.456",
+      "xn--fiqs8s.789"
+    ],
+    "invalid": [
+      "example..123",
+      "-example.123",
+      "example-.123",
+      "example_.123",
+      "123"
+    ],
+    "error": [
+      123,
+      null,
+      {},
+      []
+    ],
+    "rationale": "Tests behavior when numeric TLDs are allowed.",
+    "obligations": [],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "allow_wildcard: true",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_wildcard": true
+      }
+    ],
+    "valid": [
+      "*.example.com",
+      "*.sub.domain.com",
+      "*.xn--fiqs8s.example"
+    ],
+    "invalid": [
+      "example.*.com",
+      "*example.com",
+      "example.*",
+      "*example"
+    ],
+    "error": [
+      123,
+      null,
+      {},
+      []
+    ],
+    "rationale": "Tests behavior when wildcard domains are allowed.",
+    "obligations": [],
+    "generated_id": "GENERATED-6"
+  },
+  {
+    "title": "ignore_max_length: true",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "ignore_max_length": true
+      }
+    ],
+    "valid": [
+      "a",
+      "a",
+      "a"
+    ],
+    "invalid": [
+      "example..com",
+      "-example.com",
+      "example-.com",
+      "example_.com",
+      "example.com."
+    ],
+    "error": [
+      123,
+      null,
+      {},
+      []
+    ],
+    "rationale": "Tests behavior when domain length limits are ignored.",
+    "obligations": [],
+    "generated_id": "GENERATED-7"
+  }
+]

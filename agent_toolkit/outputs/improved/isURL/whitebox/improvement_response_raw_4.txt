@@ -1,0 +1,102 @@
+{
+  "obligations": [
+    {
+      "id": "OB-10",
+      "kind": "whitebox",
+      "rule": "Ensure URLs with invalid port numbers are rejected.",
+      "why": "The code explicitly checks for valid port numbers (0 < port <= 65535) but this case is not covered in the current suite.",
+      "minimal_valid": "http://example.com:80",
+      "minimal_invalid": "http://example.com:70000"
+    },
+    {
+      "id": "OB-11",
+      "kind": "whitebox",
+      "rule": "Ensure URLs with invalid characters in the hostname are rejected.",
+      "why": "The code uses `isFQDN` and `isIP` to validate hostnames, but invalid characters in the hostname are not explicitly tested.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://exa$mple.com"
+    },
+    {
+      "id": "OB-12",
+      "kind": "whitebox",
+      "rule": "Ensure URLs with empty hostnames are handled correctly when `require_host` is false.",
+      "why": "The code allows empty hostnames when `require_host` is false, but this behavior is not explicitly tested.",
+      "minimal_valid": "//",
+      "minimal_invalid": "//"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Invalid port numbers",
+      "validator": "isURL",
+      "args": [
+        {
+          "require_port": true
+        }
+      ],
+      "valid": [
+        "http://example.com:80",
+        "https://example.com:443"
+      ],
+      "invalid": [
+        "http://example.com:70000",
+        "http://example.com:-1",
+        "http://example.com:abcd"
+      ],
+      "error": [
+        null
+      ],
+      "rationale": "Tests rejection of URLs with invalid port numbers, ensuring the port validation logic is exercised.",
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "title": "Invalid characters in hostname",
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com",
+        "http://sub.example.com"
+      ],
+      "invalid": [
+        "http://exa$mple.com",
+        "http://example!.com",
+        "http://example..com"
+      ],
+      "error": [
+        null
+      ],
+      "rationale": "Tests rejection of URLs with invalid characters in the hostname, ensuring hostname validation logic is exercised.",
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "title": "Empty hostname with `require_host: false`",
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false
+        }
+      ],
+      "valid": [
+        "//",
+        "//path/to/resource"
+      ],
+      "invalid": [
+        "http://",
+        "https://"
+      ],
+      "error": [
+        null
+      ],
+      "rationale": "Tests acceptance of URLs with empty hostnames when `require_host` is explicitly set to false.",
+      "obligations": [
+        "OB-12"
+      ]
+    }
+  ]
+}

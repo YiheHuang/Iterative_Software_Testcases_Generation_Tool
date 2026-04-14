@@ -1,0 +1,445 @@
+Create stable golden categories for validator isEmail.
+
+Fixed golden groups:
+[
+  {
+    "title": "should validate email addresses",
+    "validator": "isEmail",
+    "args": [],
+    "valid": [
+      "foo@bar.com",
+      "x@x.au",
+      "foo@bar.com.au",
+      "foo+bar@bar.com",
+      "hans.m\u7aefller@test.com",
+      "hans@m\u7aefller.com",
+      "test|123@m\u7aefller.com",
+      "test123+ext@gmail.com",
+      "some.name.midd.leNa.me.and.locality+extension@GoogleMail.com",
+      "\"foobar\"@example.com",
+      "\"  foo  m\u7aefller \"@example.com",
+      "\"foo\\@bar\"@example.com",
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com",
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com",
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@gmail.com",
+      "test@gmail.com",
+      "test.1@gmail.com",
+      "test@1337.com"
+    ],
+    "invalid": [
+      "invalidemail@",
+      "invalid.com",
+      "@invalid.com",
+      "foo@bar.com.",
+      "foo@_bar.com",
+      "somename@\uff47\uff4d\uff41\uff49\uff4c.com",
+      "foo@bar.co.uk.",
+      "z@co.c",
+      "\uff47\uff4d\uff41\uff49\uff4c\uff47\uff4d\uff41\uff49\uff4c\uff47\uff4d\uff41\uff49\uff4c\uff47\uff4d\uff41\uff49\uff4c\uff47\uff4d\uff41\uff49\uff4c@gmail.com",
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com",
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com",
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com",
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com",
+      "test1@invalid.co\u2006m",
+      "test2@invalid.co\u2002m",
+      "test3@invalid.co\u2004m",
+      "test4@invalid.co\u2005m",
+      "test5@invalid.co\u2006m",
+      "test6@invalid.co\u2007m",
+      "test7@invalid.co\u2008m",
+      "test8@invalid.co\u2009m",
+      "test9@invalid.co\u200am",
+      "test10@invalid.co\u202fm",
+      "test11@invalid.co\u205fm",
+      "test12@invalid.co\u3000m",
+      "test13@invalid.co\u3000m",
+      "multiple..dots@stillinvalid.com",
+      "test123+invalid! sub_address@gmail.com",
+      "gmail...ignores...dots...@gmail.com",
+      "ends.with.dot.@gmail.com",
+      "multiple..dots@gmail.com",
+      "wrong()[]\",:;<>@@gmail.com",
+      "\"wrong()[]\",:;<>@@gmail.com",
+      "username@domain.com\ufffd",
+      "username@domain.com\u00a9",
+      "nbsp\u00a0test@test.com",
+      "nbsp_test@te\u00a0st.com",
+      "nbsp_test@test.co\u00a0m",
+      "\"foobar@gmail.com",
+      "\"foo\"bar@gmail.com",
+      "foo\"bar\"@gmail.com"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-1"
+  },
+  {
+    "title": "should validate email addresses with domain specific validation",
+    "validator": "isEmail",
+    "args": [
+      {
+        "domain_specific_validation": true
+      }
+    ],
+    "valid": [
+      "foobar@gmail.com",
+      "foo.bar@gmail.com",
+      "foo.bar@googlemail.com",
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@gmail.com"
+    ],
+    "invalid": [
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@gmail.com",
+      "test@gmail.com",
+      "test.1@gmail.com",
+      ".foobar@gmail.com"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-2"
+  },
+  {
+    "title": "should validate email addresses with underscores in the domain",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_underscores": true
+      }
+    ],
+    "valid": [
+      "foobar@my_sarisari_store.typepad.com"
+    ],
+    "invalid": [],
+    "error": [],
+    "golden_id": "GOLDEN-3"
+  },
+  {
+    "title": "should validate email addresses without UTF8 characters in local part",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_utf8_local_part": false
+      }
+    ],
+    "valid": [
+      "foo@bar.com",
+      "x@x.au",
+      "foo@bar.com.au",
+      "foo+bar@bar.com",
+      "hans@m\u7aefller.com",
+      "test|123@m\u7aefller.com",
+      "test123+ext@gmail.com",
+      "some.name.midd.leNa.me+extension@GoogleMail.com",
+      "\"foobar\"@example.com",
+      "\"foo\\@bar\"@example.com",
+      "\"  foo  bar  \"@example.com"
+    ],
+    "invalid": [
+      "invalidemail@",
+      "invalid.com",
+      "@invalid.com",
+      "foo@bar.com.",
+      "foo@bar.co.uk.",
+      "somename@\uff47\uff4d\uff41\uff49\uff4c.com",
+      "hans.m\u7aefller@test.com",
+      "z@co.c",
+      "t\u00fcst@invalid.com",
+      "nbsp\u00a0test@test.com"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-4"
+  },
+  {
+    "title": "should validate email addresses with display names",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_display_name": true
+      }
+    ],
+    "valid": [
+      "foo@bar.com",
+      "x@x.au",
+      "foo@bar.com.au",
+      "foo+bar@bar.com",
+      "hans.m\u7aefller@test.com",
+      "hans@m\u7aefller.com",
+      "test|123@m\u7aefller.com",
+      "test123+ext@gmail.com",
+      "some.name.midd.leNa.me+extension@GoogleMail.com",
+      "Some Name <foo@bar.com>",
+      "Some Name <x@x.au>",
+      "Some Name <foo@bar.com.au>",
+      "Some Name <foo+bar@bar.com>",
+      "Some Name <hans.m\u7aefller@test.com>",
+      "Some Name <hans@m\u7aefller.com>",
+      "Some Name <test|123@m\u7aefller.com>",
+      "Some Name <test123+ext@gmail.com>",
+      "'Foo Bar, Esq'<foo@bar.com>",
+      "Some Name <some.name.midd.leNa.me+extension@GoogleMail.com>",
+      "Some Middle Name <some.name.midd.leNa.me+extension@GoogleMail.com>",
+      "Name <some.name.midd.leNa.me+extension@GoogleMail.com>",
+      "Name<some.name.midd.leNa.me+extension@GoogleMail.com>",
+      "Some Name <foo@gmail.com>",
+      "Name\ud83c\udf53With\ud83c\udf51Emoji\ud83d\udeb4\u200d\u2640\ufe0f\ud83c\udfc6<test@aftership.com>",
+      "\ud83c\udf47\ud83c\udf57\ud83c\udf51<only_emoji@aftership.com>",
+      "\"<displayNameInBrackets>\"<jh@gmail.com>",
+      "\"\\\"quotes\\\"\"<jh@gmail.com>",
+      "\"name;\"<jh@gmail.com>",
+      "\"name;\" <jh@gmail.com>"
+    ],
+    "invalid": [
+      "invalidemail@",
+      "invalid.com",
+      "@invalid.com",
+      "foo@bar.com.",
+      "foo@bar.co.uk.",
+      "Some Name <invalidemail@>",
+      "Some Name <invalid.com>",
+      "Some Name <@invalid.com>",
+      "Some Name <foo@bar.com.>",
+      "Some Name <foo@bar.co.uk.>",
+      "Some Name foo@bar.co.uk.>",
+      "Some Name <foo@bar.co.uk.",
+      "Some Name < foo@bar.co.uk >",
+      "Name foo@bar.co.uk",
+      "Some Name <some..name@gmail.com>",
+      "Some Name<emoji_in_address\ud83c\udf48@aftership.com>",
+      "invisibleCharacter\u001f<jh@gmail.com>",
+      "<displayNameInBrackets><jh@gmail.com>",
+      "\\\"quotes\\\"<jh@gmail.com>",
+      "\"\"quotes\"\"<jh@gmail.com>",
+      "name;<jh@gmail.com>",
+      "    <jh@gmail.com>",
+      "\"    \"<jh@gmail.com>"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-5"
+  },
+  {
+    "title": "should validate email addresses with required display names",
+    "validator": "isEmail",
+    "args": [
+      {
+        "require_display_name": true
+      }
+    ],
+    "valid": [
+      "Some Name <foo@bar.com>",
+      "Some Name <x@x.au>",
+      "Some Name <foo@bar.com.au>",
+      "Some Name <foo+bar@bar.com>",
+      "Some Name <hans.m\u7aefller@test.com>",
+      "Some Name <hans@m\u7aefller.com>",
+      "Some Name <test|123@m\u7aefller.com>",
+      "Some Name <test123+ext@gmail.com>",
+      "Some Name <some.name.midd.leNa.me+extension@GoogleMail.com>",
+      "Some Middle Name <some.name.midd.leNa.me+extension@GoogleMail.com>",
+      "Name <some.name.midd.leNa.me+extension@GoogleMail.com>",
+      "Name<some.name.midd.leNa.me+extension@GoogleMail.com>"
+    ],
+    "invalid": [
+      "some.name.midd.leNa.me+extension@GoogleMail.com",
+      "foo@bar.com",
+      "x@x.au",
+      "foo@bar.com.au",
+      "foo+bar@bar.com",
+      "hans.m\u7aefller@test.com",
+      "hans@m\u7aefller.com",
+      "test|123@m\u7aefller.com",
+      "test123+ext@gmail.com",
+      "invalidemail@",
+      "invalid.com",
+      "@invalid.com",
+      "foo@bar.com.",
+      "foo@bar.co.uk.",
+      "Some Name <invalidemail@>",
+      "Some Name <invalid.com>",
+      "Some Name <@invalid.com>",
+      "Some Name <foo@bar.com.>",
+      "Some Name <foo@bar.co.uk.>",
+      "Some Name foo@bar.co.uk.>",
+      "Some Name <foo@bar.co.uk.",
+      "Some Name < foo@bar.co.uk >",
+      "Name foo@bar.co.uk"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-6"
+  },
+  {
+    "title": "should validate email addresses with allowed IPs",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_ip_domain": true
+      }
+    ],
+    "valid": [
+      "email@[123.123.123.123]",
+      "email@255.255.255.255"
+    ],
+    "invalid": [
+      "email@0.0.0.256",
+      "email@26.0.0.256",
+      "email@[266.266.266.266]"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-7"
+  },
+  {
+    "title": "should not validate email addresses with blacklisted chars in the name",
+    "validator": "isEmail",
+    "args": [
+      {
+        "blacklisted_chars": "abc\""
+      }
+    ],
+    "valid": [
+      "emil@gmail.com"
+    ],
+    "invalid": [
+      "email@gmail.com",
+      "\"foobr\"@example.com",
+      "\" foo m\u7aefller \"@example.com",
+      "\"foo@br\"@example.com"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-8"
+  },
+  {
+    "title": "should validate really long emails if ignore_max_length is set",
+    "validator": "isEmail",
+    "args": [
+      {
+        "ignore_max_length": false
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "Deleted-user-id-19430-Team-5051deleted-user-id-19430-team-5051XXXXXX@example.com"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-9"
+  },
+  {
+    "title": "should validate really long emails if ignore_max_length is set",
+    "validator": "isEmail",
+    "args": [
+      {
+        "ignore_max_length": true
+      }
+    ],
+    "valid": [
+      "Deleted-user-id-19430-Team-5051deleted-user-id-19430-team-5051XXXXXX@example.com"
+    ],
+    "invalid": [],
+    "error": [],
+    "golden_id": "GOLDEN-10"
+  },
+  {
+    "title": "should validate really long emails if ignore_max_length is set",
+    "validator": "isEmail",
+    "args": [
+      {
+        "ignore_max_length": true
+      }
+    ],
+    "valid": [
+      "Deleted-user-id-19430-Team-5051deleted-user-id-19430-team-5051XXXXXX@Deleted-user-id-19430-Team-5051deleted-user-id-19430-team-5051XXXXXX.com"
+    ],
+    "invalid": [],
+    "error": [],
+    "golden_id": "GOLDEN-11"
+  },
+  {
+    "title": "should not validate email addresses with denylisted domains",
+    "validator": "isEmail",
+    "args": [
+      {
+        "host_blacklist": [
+          "gmail.com",
+          "foo.bar.com"
+        ]
+      }
+    ],
+    "valid": [
+      "email@foo.gmail.com"
+    ],
+    "invalid": [
+      "foo+bar@gmail.com",
+      "email@foo.bar.com"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-12"
+  },
+  {
+    "title": "should allow regular expressions in the host blacklist of isEmail",
+    "validator": "isEmail",
+    "args": [
+      {
+        "host_blacklist": [
+          "bar.com",
+          "foo.com",
+          {}
+        ]
+      }
+    ],
+    "valid": [
+      "email@foobar.com",
+      "email@foo.bar.com",
+      "email@qux.com"
+    ],
+    "invalid": [
+      "email@bar.com",
+      "email@foo.com",
+      "email@a.b.c.foo.com"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-13"
+  },
+  {
+    "title": "should validate only email addresses with whitelisted domains",
+    "validator": "isEmail",
+    "args": [
+      {
+        "host_whitelist": [
+          "gmail.com",
+          "foo.bar.com"
+        ]
+      }
+    ],
+    "valid": [
+      "email@gmail.com",
+      "test@foo.bar.com"
+    ],
+    "invalid": [
+      "foo+bar@test.com",
+      "email@foo.com",
+      "email@bar.com"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-14"
+  },
+  {
+    "title": "should allow regular expressions in the host whitelist of isEmail",
+    "validator": "isEmail",
+    "args": [
+      {
+        "host_whitelist": [
+          "bar.com",
+          "foo.com",
+          {}
+        ]
+      }
+    ],
+    "valid": [
+      "email@bar.com",
+      "email@foo.com",
+      "email@a.b.c.foo.com"
+    ],
+    "invalid": [
+      "email@foobar.com",
+      "email@foo.bar.com",
+      "email@qux.com"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-15"
+  }
+]

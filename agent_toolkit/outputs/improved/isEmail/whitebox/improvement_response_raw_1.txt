@@ -1,0 +1,94 @@
+{
+  "obligations": [
+    {
+      "id": "OB-8",
+      "kind": "whitebox",
+      "rule": "Ensure `validateDisplayName` correctly handles display names with illegal characters that are improperly quoted.",
+      "why": "The `validateDisplayName` function has a branch where display names containing illegal characters must be enclosed in double quotes and properly escaped. This branch is not fully covered.",
+      "minimal_valid": "\"John \\\"Doe\\\"\" <test@example.com>",
+      "minimal_invalid": "John \"Doe\" <test@example.com>"
+    },
+    {
+      "id": "OB-9",
+      "kind": "whitebox",
+      "rule": "Ensure `isEmail` correctly handles `host_blacklist` and `host_whitelist` options when both are provided.",
+      "why": "The combination of `host_blacklist` and `host_whitelist` is not explicitly covered, and the behavior when both are used together needs validation.",
+      "minimal_valid": "test@allowed.com",
+      "minimal_invalid": "test@blocked.com"
+    },
+    {
+      "id": "OB-10",
+      "kind": "whitebox",
+      "rule": "Ensure `isEmail` correctly rejects emails with blacklisted characters in the local part.",
+      "why": "The `blacklisted_chars` option has a branch that rejects emails containing any of the specified characters in the local part. This branch is not fully covered.",
+      "minimal_valid": "test@example.com",
+      "minimal_invalid": "te#st@example.com"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Display name with illegal characters",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "valid": [
+        "\"John \\\"Doe\\\"\" <test@example.com>"
+      ],
+      "invalid": [
+        "John \"Doe\" <test@example.com>",
+        "\"John, Doe\" test@example.com"
+      ],
+      "error": [],
+      "rationale": "Tests the `validateDisplayName` function to ensure display names with illegal characters are properly quoted and escaped.",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "title": "Host blacklist and whitelist combination",
+      "validator": "isEmail",
+      "args": [
+        {
+          "host_blacklist": ["blocked.com"],
+          "host_whitelist": ["allowed.com"]
+        }
+      ],
+      "valid": [
+        "test@allowed.com"
+      ],
+      "invalid": [
+        "test@blocked.com",
+        "test@other.com"
+      ],
+      "error": [],
+      "rationale": "Tests the behavior when both `host_blacklist` and `host_whitelist` options are provided.",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "title": "Blacklisted characters in local part",
+      "validator": "isEmail",
+      "args": [
+        {
+          "blacklisted_chars": "#"
+        }
+      ],
+      "valid": [
+        "test@example.com"
+      ],
+      "invalid": [
+        "te#st@example.com",
+        "test#@example.com"
+      ],
+      "error": [],
+      "rationale": "Tests the `blacklisted_chars` option to ensure emails containing blacklisted characters in the local part are rejected.",
+      "obligations": [
+        "OB-10"
+      ]
+    }
+  ]
+}

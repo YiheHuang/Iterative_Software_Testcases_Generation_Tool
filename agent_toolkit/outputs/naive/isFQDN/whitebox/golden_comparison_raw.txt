@@ -1,0 +1,94 @@
+{
+  "golden_to_generated": [
+    {
+      "golden_category_id": "GC-1",
+      "matched_generated_category_ids": ["GENC-1"],
+      "match_type": "strong",
+      "reason": "Both categories describe the default behavior of FQDN validation without any options."
+    },
+    {
+      "golden_category_id": "GC-2",
+      "matched_generated_category_ids": ["GENC-4"],
+      "match_type": "strong",
+      "reason": "Both categories focus on the validation of FQDNs with trailing dots allowed."
+    },
+    {
+      "golden_category_id": "GC-3",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "GC-3 describes scenarios where TLD requirement is disabled, while GENC-2 broadly covers toggling TLD requirements, including enabling or disabling it."
+    },
+    {
+      "golden_category_id": "GC-4",
+      "matched_generated_category_ids": ["GENC-5"],
+      "match_type": "strong",
+      "reason": "Both categories focus on validating FQDNs with numeric TLDs allowed."
+    },
+    {
+      "golden_category_id": "GC-5",
+      "matched_generated_category_ids": ["GENC-6"],
+      "match_type": "strong",
+      "reason": "Both categories focus on validating FQDNs with wildcard domains enabled."
+    },
+    {
+      "golden_category_id": "GC-6",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "GC-6 describes combined options validation, including trailing dots, underscores, and numeric TLDs, which is not explicitly covered by any single generated category."
+    }
+  ],
+  "generated_to_golden": [
+    {
+      "generated_category_id": "GENC-1",
+      "matched_golden_category_ids": ["GC-1"],
+      "match_type": "strong",
+      "reason": "Both categories describe the default behavior of FQDN validation without any options."
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "matched_golden_category_ids": ["GC-3"],
+      "match_type": "partial",
+      "reason": "GENC-2 broadly covers toggling TLD requirements, while GC-3 specifically focuses on disabling the TLD requirement."
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "matched_golden_category_ids": [],
+      "match_type": "none",
+      "reason": "GENC-3 focuses on underscore handling, which is not explicitly covered by any golden category."
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "matched_golden_category_ids": ["GC-2"],
+      "match_type": "strong",
+      "reason": "Both categories focus on the validation of FQDNs with trailing dots allowed."
+    },
+    {
+      "generated_category_id": "GENC-5",
+      "matched_golden_category_ids": ["GC-4"],
+      "match_type": "strong",
+      "reason": "Both categories focus on validating FQDNs with numeric TLDs allowed."
+    },
+    {
+      "generated_category_id": "GENC-6",
+      "matched_golden_category_ids": ["GC-5"],
+      "match_type": "strong",
+      "reason": "Both categories focus on validating FQDNs with wildcard domains enabled."
+    },
+    {
+      "generated_category_id": "GENC-7",
+      "matched_golden_category_ids": [],
+      "match_type": "none",
+      "reason": "GENC-7 focuses on ignoring domain length limits, which is not explicitly covered by any golden category."
+    }
+  ],
+  "novel_generated_categories": [
+    {
+      "generated_category_id": "GENC-3",
+      "reason": "Underscore handling is a novel behavior not explicitly covered by any golden category."
+    },
+    {
+      "generated_category_id": "GENC-7",
+      "reason": "Domain length limits are a novel behavior not explicitly covered by any golden category."
+    }
+  ]
+}

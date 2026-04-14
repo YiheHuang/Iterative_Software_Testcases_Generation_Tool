@@ -1,0 +1,21 @@
+{
+  "obligations": [
+    {
+      "id": "OB-17",
+      "kind": "whitebox",
+      "rule": "Ensure validation fails for display names containing illegal characters without proper quotes.",
+      "why": "The `validateDisplayName` function checks for illegal characters and requires proper quoting, but this condition is not fully tested.",
+      "minimal_valid": "\"John \\\"Doe\\\"\" <user@example.com>",
+      "minimal_invalid": "John Doe <user@example.com>"
+    },
+    {
+      "id": "OB-18",
+      "kind": "whitebox",
+      "rule": "Ensure validation fails for emails exceeding the maximum length constraint when `ignore_max_length` is false.",
+      "why": "The `isEmail` function checks the length of the email and its parts, but edge cases for exceeding the maximum length are not covered.",
+      "minimal_valid": "a@b.co",
+      "minimal_invalid": "a@b.co"
+    }
+  ],
+  "test_groups": []
+}

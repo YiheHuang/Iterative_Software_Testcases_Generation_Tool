@@ -1,0 +1,146 @@
+[
+  {
+    "title": "Trailing dot allowance",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_trailing_dot": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "sub.domain.",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-4"
+    ]
+  },
+  {
+    "title": "Numeric TLD allowance",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example.123a",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-5"
+    ]
+  },
+  {
+    "title": "Numeric TLD allowance",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "sub.domain.45a",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-5"
+    ]
+  },
+  {
+    "title": "Ignore max length",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "ignore_max_length": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false
+      }
+    ],
+    "input_value": "a",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-7"
+    ]
+  },
+  {
+    "title": "Ignore max length",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "ignore_max_length": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false
+      }
+    ],
+    "input_value": "a",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-7"
+    ]
+  },
+  {
+    "title": "Wildcard stripping validation",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_wildcard": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "*.sub.domain",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-13"
+    ]
+  }
+]

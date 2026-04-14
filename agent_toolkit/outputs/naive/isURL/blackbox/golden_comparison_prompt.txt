@@ -1,0 +1,1344 @@
+Perform bidirectional category matching for isURL.
+
+Fixed golden categories:
+[
+  {
+    "golden_category_id": "GC-1",
+    "name": "Basic URL Validation",
+    "description": "Tests for validating standard URLs with or without protocols, including basic syntax and structure.",
+    "golden_group_ids": [
+      "GOLDEN-1",
+      "GOLDEN-2",
+      "GOLDEN-3",
+      "GOLDEN-10"
+    ]
+  },
+  {
+    "golden_category_id": "GC-2",
+    "name": "Custom Protocols and Schemes",
+    "description": "Tests for validating URLs with custom or non-standard protocols and schemes.",
+    "golden_group_ids": [
+      "GOLDEN-4",
+      "GOLDEN-5",
+      "GOLDEN-6",
+      "GOLDEN-7",
+      "GOLDEN-8",
+      "GOLDEN-13"
+    ]
+  },
+  {
+    "golden_category_id": "GC-3",
+    "name": "Underscores and Trailing Dots",
+    "description": "Tests for validating URLs with underscores or trailing dots in the domain.",
+    "golden_group_ids": [
+      "GOLDEN-9",
+      "GOLDEN-11"
+    ]
+  },
+  {
+    "golden_category_id": "GC-4",
+    "name": "Port Validation",
+    "description": "Tests for validating URLs with specific port requirements or formats.",
+    "golden_group_ids": [
+      "GOLDEN-12",
+      "GOLDEN-31"
+    ]
+  },
+  {
+    "golden_category_id": "GC-5",
+    "name": "Protocol and Fragment Options",
+    "description": "Tests for validating URLs with specific protocol, fragment, or query component requirements.",
+    "golden_group_ids": [
+      "GOLDEN-14",
+      "GOLDEN-15",
+      "GOLDEN-16",
+      "GOLDEN-17",
+      "GOLDEN-18",
+      "GOLDEN-21"
+    ]
+  },
+  {
+    "golden_category_id": "GC-6",
+    "name": "Authentication in URLs",
+    "description": "Tests for validating URLs with or without authentication information.",
+    "golden_group_ids": [
+      "GOLDEN-19",
+      "GOLDEN-20",
+      "GOLDEN-27",
+      "GOLDEN-28"
+    ]
+  },
+  {
+    "golden_category_id": "GC-7",
+    "name": "Host and Domain Validation",
+    "description": "Tests for validating URLs with specific host and domain requirements, including whitelists and blacklists.",
+    "golden_group_ids": [
+      "GOLDEN-22",
+      "GOLDEN-23",
+      "GOLDEN-24",
+      "GOLDEN-25"
+    ]
+  },
+  {
+    "golden_category_id": "GC-8",
+    "name": "Security and Vulnerability Checks",
+    "description": "Tests for validating URLs against potential security vulnerabilities or malicious patterns.",
+    "golden_group_ids": [
+      "GOLDEN-26"
+    ]
+  },
+  {
+    "golden_category_id": "GC-9",
+    "name": "Length Validation",
+    "description": "Tests for validating URLs based on their length, including maximum length configurations.",
+    "golden_group_ids": [
+      "GOLDEN-29",
+      "GOLDEN-30"
+    ]
+  }
+]
+
+Indexed golden groups:
+[
+  {
+    "title": "should validate URLs",
+    "validator": "isURL",
+    "args": [],
+    "valid": [
+      "foobar.com",
+      "www.foobar.com",
+      "foobar.com/",
+      "valid.au",
+      "http://www.foobar.com/",
+      "HTTP://WWW.FOOBAR.COM/",
+      "https://www.foobar.com/",
+      "HTTPS://WWW.FOOBAR.COM/",
+      "http://www.foobar.com:23/",
+      "http://www.foobar.com:65535/",
+      "http://www.foobar.com:5/",
+      "https://www.foobar.com/",
+      "ftp://www.foobar.com/",
+      "http://www.foobar.com/~foobar",
+      "http://user:pass@www.foobar.com/",
+      "http://user:@www.foobar.com/",
+      "http://:pass@www.foobar.com/",
+      "http://user@www.foobar.com",
+      "http://127.0.0.1/",
+      "http://10.0.0.0/",
+      "http://189.123.14.13/",
+      "http://duckduckgo.com/?q=%2F",
+      "http://foobar.com/t$-_.+!*'(),",
+      "http://foobar.com/?foo=bar#baz=qux",
+      "http://foobar.com?foo=bar",
+      "http://foobar.com#baz=qux",
+      "http://www.xn--froschgrn-x9a.net/",
+      "http://xn--froschgrn-x9a.com/",
+      "http://foo--bar.com",
+      "http://h\u00f8yfjellet.no",
+      "http://xn--j1aac5a4g.xn--j1amh",
+      "http://xn------eddceddeftq7bvv7c4ke4c.xn--p1ai",
+      "http://\u043a\u0443\u043b\u0456\u043a.\u0443\u043a\u0440",
+      "test.com?ref=http://test2.com",
+      "http://[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]:80/index.html",
+      "http://[1080:0:0:0:8:800:200C:417A]/index.html",
+      "http://[3ffe:2a00:100:7031::1]",
+      "http://[1080::8:800:200C:417A]/foo",
+      "http://[::192.9.5.5]/ipng",
+      "http://[::FFFF:129.144.52.38]:80/index.html",
+      "http://[2010:836B:4179::836B:4179]",
+      "http://example.com/example.json#/foo/bar",
+      "http://1337.com",
+      "http://evil-site.com@example.com/",
+      "\uff4a\uff41\uff56\uff41\uff53\uff43\uff52\uff49\uff50\uff54:alert(1)@example.com"
+    ],
+    "invalid": [
+      "http://localhost:3000/",
+      "//foobar.com",
+      "xyz://foobar.com",
+      "invalid/",
+      "invalid.x",
+      "invalid.",
+      ".com",
+      "http://com/",
+      "http://300.0.0.1/",
+      "mailto:foo@bar.com",
+      "rtmp://foobar.com",
+      "http://www.xn--.com/",
+      "http://xn--.com/",
+      "http://www.foobar.com:0/",
+      "http://www.foobar.com:70000/",
+      "http://www.foobar.com:99999/",
+      "http://www.-foobar.com/",
+      "http://www.foobar-.com/",
+      "http://foobar/# lol",
+      "http://foobar/? lol",
+      "http://foobar/ lol/",
+      "http://lol @foobar.com/",
+      "http://lol:lol @foobar.com/",
+      "http://lol:lol:lol@foobar.com/",
+      "http://lol: @foobar.com/",
+      "http://www.foo_bar.com/",
+      "http://www.foobar.com/\t",
+      "http://@foobar.com",
+      "http://:@foobar.com",
+      "http://\n@www.foobar.com/",
+      "",
+      "http://foobar.com/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "http://*.foo.com",
+      "*.foo.com",
+      "!.foo.com",
+      "http://example.com.",
+      "http://localhost:61500this is an invalid url!!!!",
+      "////foobar.com",
+      "http:////foobar.com",
+      "https://example.com/foo/<script>alert('XSS')</script>/",
+      "javascript:alert(1);a=';@example.com/alert(1)'",
+      "JaVaScRiPt:alert(1)@example.com",
+      "javascript:/* comment */alert(1)@example.com",
+      "javascript:var a=1; alert(a);@example.com",
+      "javascript:alert(1)@user@example.com",
+      "javascript:alert(1)@example.com?q=safe",
+      "javascript:%61%6c%65%72%74%28%31%29@example.com",
+      "javascript:%22@a.com#\";alert(origin)//",
+      "data:text/html,<script>alert(1)</script>@example.com",
+      "vbscript:msgbox(\"XSS\")@example.com",
+      "//evil-site.com/path@example.com"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-1"
+  },
+  {
+    "title": "should validate URLs without protocol",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_tld": false,
+        "require_valid_protocol": false
+      }
+    ],
+    "valid": [
+      "localhost",
+      "localhost:3000",
+      "service-name:8080",
+      "https://localhost",
+      "http://localhost:3000",
+      "http://service-name:8080",
+      "user:password@localhost",
+      "user:pass@service-name:8080"
+    ],
+    "invalid": [],
+    "error": [],
+    "golden_id": "GOLDEN-2"
+  },
+  {
+    "title": "should validate URLs without protocol",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_tld": false,
+        "require_protocol": true,
+        "require_valid_protocol": false
+      }
+    ],
+    "valid": [
+      "http://localhost:3000",
+      "https://service-name:8080",
+      "custom://localhost"
+    ],
+    "invalid": [
+      "localhost:3000",
+      "service-name:8080",
+      "user:password@localhost"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-3"
+  },
+  {
+    "title": "should validate URLs without protocol",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_tld": false,
+        "require_valid_protocol": false,
+        "protocols": [
+          "custom",
+          "myscheme"
+        ]
+      }
+    ],
+    "valid": [
+      "custom:something",
+      "myscheme:data"
+    ],
+    "invalid": [],
+    "error": [],
+    "golden_id": "GOLDEN-4"
+  },
+  {
+    "title": "should validate URLs with custom protocols",
+    "validator": "isURL",
+    "args": [
+      {
+        "protocols": [
+          "rtmp"
+        ]
+      }
+    ],
+    "valid": [
+      "rtmp://foobar.com",
+      "rtmp:foobar.com"
+    ],
+    "invalid": [
+      "http://foobar.com",
+      "tel:+15551234567"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-5"
+  },
+  {
+    "title": "should validate file URLs without a host",
+    "validator": "isURL",
+    "args": [
+      {
+        "protocols": [
+          "file"
+        ],
+        "require_host": false,
+        "require_tld": false
+      }
+    ],
+    "valid": [
+      "file://localhost/foo.txt",
+      "file:///foo.txt",
+      "file:///"
+    ],
+    "invalid": [
+      "http://foobar.com",
+      "file://"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-6"
+  },
+  {
+    "title": "should validate postgres URLs without a host",
+    "validator": "isURL",
+    "args": [
+      {
+        "protocols": [
+          "postgres"
+        ],
+        "require_host": false
+      }
+    ],
+    "valid": [
+      "postgres://user:pw@/test"
+    ],
+    "invalid": [
+      "http://foobar.com",
+      "postgres://"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-7"
+  },
+  {
+    "title": "should validate URLs with any protocol",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_valid_protocol": false
+      }
+    ],
+    "valid": [
+      "rtmp://foobar.com",
+      "http://foobar.com",
+      "test://foobar.com",
+      "javascript:alert(1);@example.com"
+    ],
+    "invalid": [
+      "mailto:test@example.com"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-8"
+  },
+  {
+    "title": "should validate URLs with underscores",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_underscores": true
+      }
+    ],
+    "valid": [
+      "http://foo_bar.com",
+      "http://pr.example_com.294.example.com/",
+      "http://foo__bar.com",
+      "http://_.example.com"
+    ],
+    "invalid": [],
+    "error": [],
+    "golden_id": "GOLDEN-9"
+  },
+  {
+    "title": "should validate URLs that do not have a TLD",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_tld": false
+      }
+    ],
+    "valid": [
+      "http://foobar.com/",
+      "http://foobar/",
+      "http://localhost/",
+      "foobar/",
+      "foobar"
+    ],
+    "invalid": [],
+    "error": [],
+    "golden_id": "GOLDEN-10"
+  },
+  {
+    "title": "should validate URLs with a trailing dot option",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_trailing_dot": true,
+        "require_tld": false
+      }
+    ],
+    "valid": [
+      "http://example.com.",
+      "foobar."
+    ],
+    "invalid": [],
+    "error": [],
+    "golden_id": "GOLDEN-11"
+  },
+  {
+    "title": "should validate URLs with column and no port",
+    "validator": "isURL",
+    "args": [],
+    "valid": [
+      "http://example.com:",
+      "ftp://example.com:"
+    ],
+    "invalid": [
+      "https://example.com:abc"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-12"
+  },
+  {
+    "title": "should validate sftp protocol URL containing column and no port",
+    "validator": "isURL",
+    "args": [
+      {
+        "protocols": [
+          "sftp"
+        ]
+      }
+    ],
+    "valid": [
+      "sftp://user:pass@terminal.aws.test.nl:/incoming/things.csv"
+    ],
+    "invalid": [],
+    "error": [],
+    "golden_id": "GOLDEN-13"
+  },
+  {
+    "title": "should validate protocol relative URLs",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_protocol_relative_urls": true
+      }
+    ],
+    "valid": [
+      "//foobar.com",
+      "http://foobar.com",
+      "foobar.com"
+    ],
+    "invalid": [
+      "://foobar.com",
+      "/foobar.com",
+      "////foobar.com",
+      "http:////foobar.com"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-14"
+  },
+  {
+    "title": "should not validate URLs with fragments when allow fragments is false",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_fragments": false
+      }
+    ],
+    "valid": [
+      "http://foobar.com",
+      "foobar.com"
+    ],
+    "invalid": [
+      "http://foobar.com#part",
+      "foobar.com#part"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-15"
+  },
+  {
+    "title": "should not validate URLs with query components when allow query components is false",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_query_components": false
+      }
+    ],
+    "valid": [
+      "http://foobar.com",
+      "foobar.com"
+    ],
+    "invalid": [
+      "http://foobar.com?foo=bar",
+      "http://foobar.com?foo=bar&bar=foo",
+      "foobar.com?foo=bar",
+      "foobar.com?foo=bar&bar=foo"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-16"
+  },
+  {
+    "title": "should not validate protocol relative URLs when require protocol is true",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_protocol_relative_urls": true,
+        "require_protocol": true
+      }
+    ],
+    "valid": [
+      "http://foobar.com"
+    ],
+    "invalid": [
+      "//foobar.com",
+      "://foobar.com",
+      "/foobar.com",
+      "foobar.com"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-17"
+  },
+  {
+    "title": "should let users specify whether URLs require a protocol",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": true
+      }
+    ],
+    "valid": [
+      "http://foobar.com/"
+    ],
+    "invalid": [
+      "http://localhost/",
+      "foobar.com",
+      "foobar"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-18"
+  },
+  {
+    "title": "should validate authentication strings if a protocol is not required",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": false
+      }
+    ],
+    "valid": [
+      "user:pw@foobar.com/"
+    ],
+    "invalid": [
+      "user:pw,@foobar.com/"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-19"
+  },
+  {
+    "title": "should reject authentication strings if a protocol is required",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": true
+      }
+    ],
+    "valid": [
+      "http://user:pw@foobar.com/",
+      "https://user:password@example.com",
+      "ftp://admin:pass@ftp.example.com/"
+    ],
+    "invalid": [
+      "user:pw@foobar.com/",
+      "user:password@example.com",
+      "admin:pass@ftp.example.com/"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-20"
+  },
+  {
+    "title": "should reject invalid protocols when require_valid_protocol is enabled",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_valid_protocol": true,
+        "protocols": [
+          "http",
+          "https",
+          "ftp"
+        ]
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com",
+      "ftp://example.com"
+    ],
+    "invalid": [
+      "javascript:alert(1);@example.com",
+      "data:text/html,<script>alert(1)</script>@example.com",
+      "file:///etc/passwd@example.com"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-21"
+  },
+  {
+    "title": "should let users specify a host whitelist",
+    "validator": "isURL",
+    "args": [
+      {
+        "host_whitelist": [
+          "foo.com",
+          "bar.com"
+        ]
+      }
+    ],
+    "valid": [
+      "http://bar.com/",
+      "http://foo.com/"
+    ],
+    "invalid": [
+      "http://foobar.com",
+      "http://foo.bar.com/",
+      "http://qux.com"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-22"
+  },
+  {
+    "title": "should allow regular expressions in the host whitelist",
+    "validator": "isURL",
+    "args": [
+      {
+        "host_whitelist": [
+          "bar.com",
+          "foo.com",
+          {}
+        ]
+      }
+    ],
+    "valid": [
+      "http://bar.com/",
+      "http://foo.com/",
+      "http://images.foo.com/",
+      "http://cdn.foo.com/",
+      "http://a.b.c.foo.com/"
+    ],
+    "invalid": [
+      "http://foobar.com",
+      "http://foo.bar.com/",
+      "http://qux.com"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-23"
+  },
+  {
+    "title": "should let users specify a host blacklist",
+    "validator": "isURL",
+    "args": [
+      {
+        "host_blacklist": [
+          "foo.com",
+          "bar.com"
+        ]
+      }
+    ],
+    "valid": [
+      "http://foobar.com",
+      "http://foo.bar.com/",
+      "http://qux.com"
+    ],
+    "invalid": [
+      "http://bar.com/",
+      "http://foo.com/"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-24"
+  },
+  {
+    "title": "should allow regular expressions in the host blacklist",
+    "validator": "isURL",
+    "args": [
+      {
+        "host_blacklist": [
+          "bar.com",
+          "foo.com",
+          {}
+        ]
+      }
+    ],
+    "valid": [
+      "http://foobar.com",
+      "http://foo.bar.com/",
+      "http://qux.com"
+    ],
+    "invalid": [
+      "http://bar.com/",
+      "http://foo.com/",
+      "http://images.foo.com/",
+      "http://cdn.foo.com/",
+      "http://a.b.c.foo.com/"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-25"
+  },
+  {
+    "title": "GHSA-9965-vmph-33xx vulnerability - protocol delimiter parsing difference",
+    "validator": "isURL",
+    "args": [
+      {
+        "protocols": [
+          "https"
+        ],
+        "host_whitelist": [
+          "example.com"
+        ],
+        "require_host": false
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "javascript:alert(1);a=';@example.com/alert(1)"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-26"
+  },
+  {
+    "title": "should allow rejecting urls containing authentication information",
+    "validator": "isURL",
+    "args": [
+      {
+        "disallow_auth": true
+      }
+    ],
+    "valid": [
+      "doe.com"
+    ],
+    "invalid": [
+      "john@doe.com",
+      "john:john@doe.com"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-27"
+  },
+  {
+    "title": "should accept urls containing authentication information",
+    "validator": "isURL",
+    "args": [
+      {
+        "disallow_auth": false
+      }
+    ],
+    "valid": [
+      "user@example.com",
+      "user:@example.com",
+      "user:password@example.com"
+    ],
+    "invalid": [
+      "user:user:password@example.com",
+      "@example.com",
+      ":@example.com",
+      ":example.com"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-28"
+  },
+  {
+    "title": "should allow user to skip URL length validation",
+    "validator": "isURL",
+    "args": [
+      {
+        "validate_length": false
+      }
+    ],
+    "valid": [
+      "http://foobar.com/f",
+      "http://foobar.com/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    ],
+    "invalid": [],
+    "error": [],
+    "golden_id": "GOLDEN-29"
+  },
+  {
+    "title": "should allow user to configure the maximum URL length",
+    "validator": "isURL",
+    "args": [
+      {
+        "max_allowed_length": 20
+      }
+    ],
+    "valid": [
+      "http://foobar.com/12",
+      "http://foobar.com/"
+    ],
+    "invalid": [
+      "http://foobar.com/123",
+      "http://foobar.com/1234567890"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-30"
+  },
+  {
+    "title": "should validate URLs with port present",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_port": true
+      }
+    ],
+    "valid": [
+      "http://user:pass@www.foobar.com:1",
+      "http://user:@www.foobar.com:65535",
+      "http://127.0.0.1:23",
+      "http://10.0.0.0:256",
+      "http://189.123.14.13:256",
+      "http://duckduckgo.com:65535?q=%2F"
+    ],
+    "invalid": [
+      "http://user:pass@www.foobar.com/",
+      "http://user:@www.foobar.com/",
+      "http://127.0.0.1/",
+      "http://10.0.0.0/",
+      "http://189.123.14.13/",
+      "http://duckduckgo.com/?q=%2F"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-31"
+  }
+]
+
+Generated categories:
+[
+  {
+    "generated_category_id": "GENC-1",
+    "name": "Default Validation",
+    "description": "Tests the basic URL validation behavior with default options.",
+    "generated_group_ids": [
+      "GENERATED-1"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-2",
+    "name": "Protocol Requirements",
+    "description": "Validates URLs with specific protocol-related constraints.",
+    "generated_group_ids": [
+      "GENERATED-2",
+      "GENERATED-6"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-3",
+    "name": "Top-Level Domain Handling",
+    "description": "Tests the handling of URLs with or without top-level domains.",
+    "generated_group_ids": [
+      "GENERATED-3"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-4",
+    "name": "Hostname Customization",
+    "description": "Validates URLs with custom hostname rules, such as allowing underscores or trailing dots.",
+    "generated_group_ids": [
+      "GENERATED-4",
+      "GENERATED-5"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-5",
+    "name": "Authentication Handling",
+    "description": "Ensures proper validation of URLs with or without authentication components.",
+    "generated_group_ids": [
+      "GENERATED-7"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-6",
+    "name": "Length Validation",
+    "description": "Tests the behavior of the validator when length validation is disabled.",
+    "generated_group_ids": [
+      "GENERATED-8"
+    ]
+  }
+]
+
+Indexed generated groups:
+[
+  {
+    "title": "Default options",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com",
+      "ftp://example.com",
+      "http://example.com/path?query=1#fragment"
+    ],
+    "invalid": [
+      "example.com",
+      "http://example",
+      "http://example..com",
+      "http://example_com",
+      "http://example.com:port"
+    ],
+    "error": [
+      null,
+      123,
+      {},
+      []
+    ],
+    "rationale": "Tests basic URL validation with default options.",
+    "obligations": [],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "require_protocol: true",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": true
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com",
+      "ftp://example.com"
+    ],
+    "invalid": [
+      "example.com",
+      "//example.com"
+    ],
+    "error": [],
+    "rationale": "Ensures URLs must include a protocol.",
+    "obligations": [],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "require_tld: false",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_tld": false
+      }
+    ],
+    "valid": [
+      "http://localhost",
+      "http://example"
+    ],
+    "invalid": [
+      "http://example..com",
+      "http://example_com"
+    ],
+    "error": [],
+    "rationale": "Allows URLs without a top-level domain.",
+    "obligations": [],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "allow_underscores: true",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_underscores": true
+      }
+    ],
+    "valid": [
+      "http://example_com",
+      "http://sub_domain.example.com"
+    ],
+    "invalid": [
+      "http://example..com"
+    ],
+    "error": [],
+    "rationale": "Permits underscores in hostnames.",
+    "obligations": [],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "allow_trailing_dot: true",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_trailing_dot": true
+      }
+    ],
+    "valid": [
+      "http://example.com.",
+      "http://example."
+    ],
+    "invalid": [
+      "http://example..com"
+    ],
+    "error": [],
+    "rationale": "Allows trailing dots in hostnames.",
+    "obligations": [],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "allow_protocol_relative_urls: true",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_protocol_relative_urls": true
+      }
+    ],
+    "valid": [
+      "//example.com",
+      "//example.com/path?query=1#fragment"
+    ],
+    "invalid": [
+      "example.com"
+    ],
+    "error": [],
+    "rationale": "Permits protocol-relative URLs.",
+    "obligations": [],
+    "generated_id": "GENERATED-6"
+  },
+  {
+    "title": "disallow_auth: true",
+    "validator": "isURL",
+    "args": [
+      {
+        "disallow_auth": true
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com"
+    ],
+    "invalid": [
+      "http://user:pass@example.com"
+    ],
+    "error": [],
+    "rationale": "Fails validation for URLs with authentication components.",
+    "obligations": [],
+    "generated_id": "GENERATED-7"
+  },
+  {
+    "title": "validate_length: false",
+    "validator": "isURL",
+    "args": [
+      {
+        "validate_length": false
+      }
+    ],
+    "valid": [
+      "http://example.com/",
+      "http://example.com/",
+      "http://example.com/",
+      "http://example.com/",
+      "http://example.com/"
+    ],
+    "invalid": [
+      "http://example.com/",
+      "http://example.com/",
+      "http://example.com/"
+    ],
+    "error": [],
+    "rationale": "Skips length validation.",
+    "obligations": [],
+    "generated_id": "GENERATED-8"
+  }
+]
+
+Runtime evaluation details:
+{
+  "summary": {
+    "total_cases": 42,
+    "correct_cases": 35,
+    "incorrect_cases": 7,
+    "exact_match_rate": 0.8333333333333334,
+    "by_expected_kind": {
+      "return": 38,
+      "throw": 4
+    }
+  },
+  "details": {
+    "failed_results": [
+      {
+        "title": "Default options",
+        "validator": "isURL",
+        "args": [
+          {
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "allow_underscores: true",
+        "validator": "isURL",
+        "args": [
+          {
+            "allow_underscores": true,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http://example_com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "allow_trailing_dot: true",
+        "validator": "isURL",
+        "args": [
+          {
+            "allow_trailing_dot": true,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http://example.",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "allow_protocol_relative_urls: true",
+        "validator": "isURL",
+        "args": [
+          {
+            "allow_protocol_relative_urls": true,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "validate_length: false",
+        "validator": "isURL",
+        "args": [
+          {
+            "validate_length": false,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http://example.com/",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "validate_length: false",
+        "validator": "isURL",
+        "args": [
+          {
+            "validate_length": false,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http://example.com/",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "validate_length: false",
+        "validator": "isURL",
+        "args": [
+          {
+            "validate_length": false,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http://example.com/",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": []
+      }
+    ],
+    "coverage_total": null,
+    "coverage_files": {}
+  }
+}

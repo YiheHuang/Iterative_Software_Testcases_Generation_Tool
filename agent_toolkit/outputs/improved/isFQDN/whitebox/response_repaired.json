@@ -1,0 +1,62 @@
+{
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "blackbox",
+      "rule": "The input must be a valid fully qualified domain name (FQDN) according to the default options.",
+      "why": "Baseline requirement from README behavior summary.",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "invalid_domain"
+    },
+    {
+      "id": "OB-2",
+      "kind": "blackbox",
+      "rule": "The input must include a TLD when `require_tld` is true.",
+      "why": "README specifies `require_tld` defaults to true and mandates a TLD.",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "example"
+    },
+    {
+      "id": "OB-3",
+      "kind": "blackbox",
+      "rule": "Underscores are disallowed unless `allow_underscores` is true.",
+      "why": "README specifies `allow_underscores` defaults to false.",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "exa_mple.com"
+    },
+    {
+      "id": "OB-4",
+      "kind": "blackbox",
+      "rule": "Trailing dots are disallowed unless `allow_trailing_dot` is true.",
+      "why": "README specifies `allow_trailing_dot` defaults to false.",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "example.com."
+    },
+    {
+      "id": "OB-5",
+      "kind": "blackbox",
+      "rule": "Numeric TLDs are disallowed unless `allow_numeric_tld` is true.",
+      "why": "README specifies `allow_numeric_tld` defaults to false.",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "example.123"
+    },
+    {
+      "id": "OB-6",
+      "kind": "blackbox",
+      "rule": "Wildcards are disallowed unless `allow_wildcard` is true.",
+      "why": "README specifies `allow_wildcard` defaults to false.",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "*.example.com"
+    },
+    {
+      "id": "OB-7",
+      "kind": "blackbox",
+      "rule": "Domain parts must not exceed 63 characters unless `ignore_max_length` is true.",
+      "why": "README specifies `ignore_max_length` defaults to false.",
+      "minimal_valid": "a.com",
+      "minimal_invalid": "a"  ,
+    "minimal_invalid": "a"  
+    }
+  ],
+  "test_groups": []
+}

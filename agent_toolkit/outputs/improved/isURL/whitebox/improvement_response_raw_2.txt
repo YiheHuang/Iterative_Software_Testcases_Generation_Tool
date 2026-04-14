@@ -1,0 +1,105 @@
+{
+  "obligations": [
+    {
+      "id": "OB-4",
+      "kind": "whitebox",
+      "rule": "Ensure URLs with fragments are rejected when `allow_fragments` is set to false.",
+      "why": "The branch `if (!options.allow_fragments && includes(url, '#'))` is uncovered.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://example.com#fragment",
+      "minimal_error": null
+    },
+    {
+      "id": "OB-5",
+      "kind": "whitebox",
+      "rule": "Ensure URLs with query components are rejected when `allow_query_components` is set to false.",
+      "why": "The branch `if (!options.allow_query_components && (includes(url, '?') || includes(url, '&')))` is uncovered.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://example.com?query=value",
+      "minimal_error": null
+    },
+    {
+      "id": "OB-6",
+      "kind": "whitebox",
+      "rule": "Ensure URLs with authentication components are rejected when `disallow_auth` is set to true.",
+      "why": "The branch `if (options.disallow_auth)` is uncovered.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://user:pass@example.com",
+      "minimal_error": null
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Fragment rejection with `allow_fragments: false`",
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_fragments": false
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com"
+      ],
+      "invalid": [
+        "http://example.com#fragment",
+        "https://example.com#anotherFragment"
+      ],
+      "error": [
+        null
+      ],
+      "rationale": "Tests rejection of URLs containing fragments when `allow_fragments` is explicitly set to false.",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "title": "Query component rejection with `allow_query_components: false`",
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_query_components": false
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com"
+      ],
+      "invalid": [
+        "http://example.com?query=value",
+        "https://example.com?query=value&another=value"
+      ],
+      "error": [
+        null
+      ],
+      "rationale": "Tests rejection of URLs containing query components when `allow_query_components` is explicitly set to false.",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "title": "Authentication rejection with `disallow_auth: true`",
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com"
+      ],
+      "invalid": [
+        "http://user:pass@example.com",
+        "https://username:password@secure.com"
+      ],
+      "error": [
+        null
+      ],
+      "rationale": "Tests rejection of URLs containing authentication components when `disallow_auth` is explicitly set to true.",
+      "obligations": [
+        "OB-6"
+      ]
+    }
+  ]
+}

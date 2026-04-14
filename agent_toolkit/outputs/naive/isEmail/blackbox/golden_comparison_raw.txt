@@ -1,0 +1,103 @@
+{
+  "golden_to_generated": [
+    {
+      "golden_category_id": "GC-1",
+      "matched_generated_category_ids": ["GENC-1"],
+      "match_type": "strong",
+      "reason": "Both categories focus on basic email validation with default options."
+    },
+    {
+      "golden_category_id": "GC-2",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category explicitly addresses domain-specific validation rules."
+    },
+    {
+      "golden_category_id": "GC-3",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category explicitly addresses underscores in the domain."
+    },
+    {
+      "golden_category_id": "GC-4",
+      "matched_generated_category_ids": ["GENC-4"],
+      "match_type": "strong",
+      "reason": "Both categories focus on restrictions in the local part, including UTF8 character constraints."
+    },
+    {
+      "golden_category_id": "GC-5",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "GENC-2 covers display name handling, but does not distinguish between optional and required display names."
+    },
+    {
+      "golden_category_id": "GC-6",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "GENC-2 covers display name handling, but does not explicitly require display names."
+    },
+    {
+      "golden_category_id": "GC-7",
+      "matched_generated_category_ids": ["GENC-3"],
+      "match_type": "partial",
+      "reason": "GENC-3 includes IP domain validation but also spans other domain configurations, diluting the focus."
+    },
+    {
+      "golden_category_id": "GC-8",
+      "matched_generated_category_ids": ["GENC-4"],
+      "match_type": "partial",
+      "reason": "GENC-4 includes blacklisted character restrictions but also spans other local part constraints."
+    },
+    {
+      "golden_category_id": "GC-9",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category explicitly addresses maximum length enforcement."
+    },
+    {
+      "golden_category_id": "GC-10",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category explicitly addresses ignoring maximum length restrictions."
+    },
+    {
+      "golden_category_id": "GC-11",
+      "matched_generated_category_ids": ["GENC-3"],
+      "match_type": "partial",
+      "reason": "GENC-3 includes host blacklist validation but also spans other domain configurations."
+    },
+    {
+      "golden_category_id": "GC-12",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category explicitly addresses host whitelist validation."
+    }
+  ],
+  "generated_to_golden": [
+    {
+      "generated_category_id": "GENC-1",
+      "matched_golden_category_ids": ["GC-1"],
+      "match_type": "strong",
+      "reason": "GENC-1 aligns with GC-1 in validating standard email formats with default options."
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "matched_golden_category_ids": ["GC-5", "GC-6"],
+      "match_type": "partial",
+      "reason": "GENC-2 covers display name handling but does not distinguish between optional and required display names."
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "matched_golden_category_ids": ["GC-7", "GC-11"],
+      "match_type": "partial",
+      "reason": "GENC-3 spans IP domain validation and host blacklist validation but does not focus exclusively on either."
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "matched_golden_category_ids": ["GC-4", "GC-8"],
+      "match_type": "partial",
+      "reason": "GENC-4 spans UTF8 local part restrictions and blacklisted character constraints but does not focus exclusively on either."
+    }
+  ],
+  "novel_generated_categories": []
+}

@@ -1,0 +1,53 @@
+{
+  "generated_categories": [
+    {
+      "generated_category_id": "GENC-1",
+      "name": "Default Validation",
+      "description": "Covers the default behavior of the isEmail validator, ensuring standard email formats are validated and non-string inputs throw errors.",
+      "generated_group_ids": [
+        "GENERATED-1"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "name": "Display Name Handling",
+      "description": "Tests related to the handling of display names in email addresses, including allowing or requiring display names.",
+      "generated_group_ids": [
+        "GENERATED-2",
+        "GENERATED-3"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "name": "IP Domain Handling",
+      "description": "Validates email addresses with IP domains when the allow_ip_domain option is enabled.",
+      "generated_group_ids": [
+        "GENERATED-4"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "name": "UTF-8 Local Part Restrictions",
+      "description": "Tests the behavior when UTF-8 characters in the local part of the email are disallowed.",
+      "generated_group_ids": [
+        "GENERATED-5"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-5",
+      "name": "Character Blacklisting",
+      "description": "Validates the behavior of the validator when specific characters are blacklisted in the local part of the email.",
+      "generated_group_ids": [
+        "GENERATED-6"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-6",
+      "name": "Host Blacklisting",
+      "description": "Ensures that emails with blacklisted domains are correctly invalidated.",
+      "generated_group_ids": [
+        "GENERATED-7"
+      ]
+    }
+  ]
+}

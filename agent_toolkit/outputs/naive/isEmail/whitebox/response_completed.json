@@ -1,0 +1,94 @@
+{
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "blackbox",
+      "rule": "Validate basic email format with default options.",
+      "why": "Ensure the function correctly identifies valid and invalid email formats.",
+      "minimal_valid": "test@example.com",
+      "minimal_invalid": "test@com"
+    },
+    {
+      "id": "OB-2",
+      "kind": "blackbox",
+      "rule": "Support display name when allow_display_name is true.",
+      "why": "Verify that the function correctly handles display names when explicitly allowed.",
+      "minimal_valid": "John Doe <test@example.com>",
+      "minimal_invalid": "John Doe test@example.com"
+    },
+    {
+      "id": "OB-3",
+      "kind": "blackbox",
+      "rule": "Reject missing display name when require_display_name is true.",
+      "why": "Ensure the function enforces the presence of a display name when required.",
+      "minimal_valid": "John Doe <test@example.com>",
+      "minimal_invalid": "test@example.com"
+    },
+    {
+      "id": "OB-4",
+      "kind": "blackbox",
+      "rule": "Reject emails exceeding the maximum length unless ignore_max_length is true.",
+      "why": "Ensure the function enforces length constraints unless explicitly overridden.",
+      "minimal_valid": "a@b.com",
+      "minimal_invalid": null
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Basic email validation with default options",
+      "validator": "isEmail",
+      "args": [{}],
+      "valid": ["test@example.com", "user.name+tag+sorting@example.com", "user_name@example.co.uk"],
+      "invalid": ["test@com", "plainaddress", "@missingusername.com", "username@.com"],
+      "error": [123, null, {}, []],
+      "rationale": "Covers basic email format validation and ensures non-string inputs are rejected.",
+      "obligations": ["OB-1"]
+    },
+    {
+      "title": "Allow display name in email",
+      "validator": "isEmail",
+      "args": [{"allow_display_name": true}],
+      "valid": ["John Doe <test@example.com>", "\"Jane, Doe\" <jane.doe@example.com>"],
+      "invalid": ["John Doe test@example.com", "John Doe <test@com>", "<test@example.com>"],
+      "error": [123, null, {}, []],
+      "rationale": "Tests the handling of display names when explicitly allowed.",
+      "obligations": ["OB-2"]
+    },
+    {
+      "title": "Require display name in email",
+      "validator": "isEmail",
+      "args": [{"require_display_name": true}],
+      "valid": ["John Doe <test@example.com>", "\"Jane, Doe\" <jane.doe@example.com>"],
+      "invalid": ["test@example.com", "John Doe test@example.com", "<test@example.com>"],
+      "error": [123, null, {}, []],
+      "rationale": "Ensures that the function enforces the presence of a display name when required.",
+      "obligations": ["OB-3"]
+    },
+    {
+      "title": "Ignore maximum length constraint",
+      "validator": "isEmail",
+      "args": [{"ignore_max_length": true}],
+      "valid": [
+        "a@b.com",
+        "very.long.email.address.that.exceeds.standard.length.limit@example.com"
+      ],
+      "invalid": ["test@com", "plainaddress"],
+      "error": [123, null, {}, []],
+      "rationale": "Tests behavior when the maximum length constraint is ignored.",
+      "obligations": ["OB-4"]
+    },
+    {
+      "title": "Reject emails exceeding maximum length",
+      "validator": "isEmail",
+      "args": [{}],
+      "valid": ["a@b.com"],
+      "invalid": [
+        "a@b.com" 
+        , "a@b.com"
+      ],
+      "error": [123, null, {}, []],
+      "rationale": "Ensures that the validator enforces the maximum length constraint when not overridden.",
+      "obligations": ["OB-4"]
+    }
+  ]
+}

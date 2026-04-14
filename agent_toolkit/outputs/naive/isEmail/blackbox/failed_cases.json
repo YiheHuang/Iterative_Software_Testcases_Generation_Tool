@@ -1,0 +1,54 @@
+[
+  {
+    "title": "Allow IP domain",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_ip_domain": true,
+        "allow_display_name": false,
+        "allow_underscores": false,
+        "require_display_name": false,
+        "allow_utf8_local_part": true,
+        "require_tld": true,
+        "blacklisted_chars": "",
+        "ignore_max_length": false,
+        "host_blacklist": [],
+        "host_whitelist": []
+      }
+    ],
+    "input_value": "test@123.123.123.123",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": []
+  },
+  {
+    "title": "Allow IP domain",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_ip_domain": true,
+        "allow_display_name": false,
+        "allow_underscores": false,
+        "require_display_name": false,
+        "allow_utf8_local_part": true,
+        "require_tld": true,
+        "blacklisted_chars": "",
+        "ignore_max_length": false,
+        "host_blacklist": [],
+        "host_whitelist": []
+      }
+    ],
+    "input_value": "user@2001:db8::ff00:42:8329",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": []
+  }
+]

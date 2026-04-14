@@ -1,0 +1,94 @@
+{
+  "obligations": [
+    {
+      "id": "OB-14",
+      "kind": "whitebox",
+      "rule": "Ensure validation fails for display names containing illegal characters without proper quoting.",
+      "why": "The `validateDisplayName` function checks for illegal characters and requires proper quoting, but this condition is not fully covered.",
+      "minimal_valid": "\"John \\\"Doe\\\"\" <test@example.com>",
+      "minimal_invalid": "John \"Doe\" <test@example.com>"
+    },
+    {
+      "id": "OB-15",
+      "kind": "whitebox",
+      "rule": "Ensure validation fails for emails exceeding the maximum allowed length when `ignore_max_length` is false.",
+      "why": "The `isEmail` function checks the length of the local part and domain, but cases exceeding the maximum length are not fully tested.",
+      "minimal_valid": "a@b.com",
+      "minimal_invalid": "a@b.com"  ,
+      "minimal_invalid": "a@b.com"
+    },
+    {
+      "id": "OB-16",
+      "kind": "whitebox",
+      "rule": "Ensure validation fails for bracketed domains that are not valid IP addresses.",
+      "why": "The `isEmail` function checks for valid IPs within brackets, but invalid bracketed domains are not fully tested.",
+      "minimal_valid": "test@[127.0.0.1]",
+      "minimal_invalid": "test@[invalid]"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Display name with illegal characters without quoting",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "valid": [
+        "\"John \\\"Doe\\\"\" <test@example.com>"
+      ],
+      "invalid": [
+        "John \"Doe\" <test@example.com>",
+        "John, Doe <test@example.com>"
+      ],
+      "error": [],
+      "rationale": "Tests the `validateDisplayName` function to ensure display names with illegal characters are properly quoted and escaped.",
+      "obligations": [
+        "OB-14"
+      ]
+    },
+    {
+      "title": "Emails exceeding maximum length",
+      "validator": "isEmail",
+      "args": [
+        {
+          "ignore_max_length": false
+        }
+      ],
+      "valid": [
+        "a@b.com"
+      ],
+      "invalid": [
+        "a@b.com"  ,
+        "a@b.com"
+      ],
+      "error": [],
+      "rationale": "Tests the `ignore_max_length` option to ensure emails exceeding the maximum length are rejected when the option is false.",
+      "obligations": [
+        "OB-15"
+      ]
+    },
+    {
+      "title": "Invalid bracketed domain",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_ip_domain": true
+        }
+      ],
+      "valid": [
+        "test@[127.0.0.1]"
+      ],
+      "invalid": [
+        "test@[invalid]",
+        "test@[127.0.0.1.1]"
+      ],
+      "error": [],
+      "rationale": "Tests the handling of domains enclosed in brackets without valid IPs.",
+      "obligations": [
+        "OB-16"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+Task: generate white-box tests for isFQDN.
+
+        Read the requirement and source code, then directly produce a small first-pass grouped validator.js-style test suite.
+        Do not try to build a detailed obligation hierarchy.
+        Use an empty obligations list unless there is a very obvious single high-level rule to note.
+
+        Requirement specification:
+        Function name: isFQDN
+Black-box requirement source: validator_js README function entry
+Signature summary: isFQDN(str [, options])
+README behavior summary:
+| check if the string is a fully qualified domain name (e.g. domain.com).
+`options` is an object which defaults to `{ require_tld: true, allow_underscores: false, allow_trailing_dot: false, allow_numeric_tld: false, allow_wildcard: false, ignore_max_length: false }`.
+`require_tld` - If set to false the validator will not check if the domain includes a TLD.
+`allow_underscores` - if set to true, the validator will allow underscores in the domain.
+`allow_trailing_dot` - if set to true, the validator will allow the domain to end with a `.` character.
+`allow_numeric_tld` - if set to true, the validator will allow the TLD of the domain to be made up solely of numbers.
+`allow_wildcard` - if set to true, the validator will allow domains starting with `*.` (e.g. `*.example.com` or `*.shop.example.com`).
+`ignore_max_length` - if set to true, the validator will not check for the standard max length of a domain.
+
+Treat the README entry as the authoritative black-box behavior description.
+Infer valid inputs, invalid inputs, option-sensitive behaviors, and edge cases from this description.
+
+
+        Source code:
+        import assertString from './util/assertString';
+import merge from './util/merge';
+
+const default_fqdn_options = {
+  require_tld: true,
+  allow_underscores: false,
+  allow_trailing_dot: false,
+  allow_numeric_tld: false,
+  allow_wildcard: false,
+  ignore_max_length: false,
+};
+
+export default function isFQDN(str, options) {
+  assertString(str);
+  options = merge(options, default_fqdn_options);
+
+  /* Remove the optional trailing dot before checking validity */
+  if (options.allow_trailing_dot && str[str.length - 1] === '.') {
+    str = str.substring(0, str.length - 1);
+  }
+
+  /* Remove the optional wildcard before checking validity */
+  if (options.allow_wildcard === true && str.indexOf('*.') === 0) {
+    str = str.substring(2);
+  }
+
+  const parts = str.split('.');
+  const tld = parts[parts.length - 1];
+
+  if (options.require_tld) {
+    // disallow fqdns without tld
+    if (parts.length < 2) {
+      return false;
+    }
+
+    if (!options.allow_numeric_tld && !/^([a-z\u00A1-\u00A8\u00AA-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]{2,}|xn[a-z0-9-]{2,})$/i.test(tld)) {
+      return false;
+    }
+
+    // disallow spaces
+    if (/\s/.test(tld)) {
+      return false;
+    }
+  }
+
+  // reject numeric TLDs
+  if (!options.allow_numeric_tld && /^\d+$/.test(tld)) {
+    return false;
+  }
+
+  return parts.every((part) => {
+    if (part.length > 63 && !options.ignore_max_length) {
+      return false;
+    }
+
+    if (!/^[a-z_\u00a1-\uffff0-9-]+$/i.test(part)) {
+      return false;
+    }
+
+    // disallow full-width chars
+    if (/[\uff01-\uff5e]/.test(part)) {
+      return false;
+    }
+
+    // disallow parts starting or ending with hyphen
+    if (/^-|-$/.test(part)) {
+      return false;
+    }
+
+    if (!options.allow_underscores && /_/.test(part)) {
+      return false;
+    }
+
+    return true;
+  });
+}
+
+
+        Output guidance:
+        - keep the suite modest in size
+        - each group should focus on one option profile or one branch family
+        - prefer obvious branches and obvious edge cases over exhaustive exploration

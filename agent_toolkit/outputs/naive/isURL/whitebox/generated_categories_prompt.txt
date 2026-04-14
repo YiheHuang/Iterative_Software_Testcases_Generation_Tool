@@ -1,0 +1,158 @@
+Group generated tests into generated categories for validator isURL.
+
+Generated groups:
+[
+  {
+    "title": "Default behavior",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com",
+      "ftp://example.com",
+      "http://example.com/path?query=1#fragment"
+    ],
+    "invalid": [
+      "example.com",
+      "http:/example.com",
+      "http://",
+      "http://example",
+      "http://example..com",
+      "http://example_com"
+    ],
+    "error": [
+      null,
+      123,
+      {},
+      []
+    ],
+    "rationale": "Default behavior validates common URL formats with default options.",
+    "obligations": [],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "require_protocol: true",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": true
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com",
+      "ftp://example.com"
+    ],
+    "invalid": [
+      "example.com",
+      "//example.com"
+    ],
+    "error": [],
+    "rationale": "Ensures URLs must include a protocol when require_protocol is true.",
+    "obligations": [],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "allow_underscores: true",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_underscores": true
+      }
+    ],
+    "valid": [
+      "http://example_com",
+      "http://sub_domain.example.com"
+    ],
+    "invalid": [
+      "http://example..com",
+      "http://example.com_"
+    ],
+    "error": [],
+    "rationale": "Allows underscores in hostnames when allow_underscores is true.",
+    "obligations": [],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "require_tld: false",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_tld": false
+      }
+    ],
+    "valid": [
+      "http://localhost",
+      "http://example"
+    ],
+    "invalid": [
+      "http://example..com",
+      "http://"
+    ],
+    "error": [],
+    "rationale": "Disables the requirement for a top-level domain in hostnames.",
+    "obligations": [],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "allow_protocol_relative_urls: true",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_protocol_relative_urls": true
+      }
+    ],
+    "valid": [
+      "//example.com",
+      "//example.com/path?query=1#fragment"
+    ],
+    "invalid": [
+      "example.com",
+      "http:/example.com"
+    ],
+    "error": [],
+    "rationale": "Allows protocol-relative URLs when allow_protocol_relative_urls is true.",
+    "obligations": [],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "disallow_auth: true",
+    "validator": "isURL",
+    "args": [
+      {
+        "disallow_auth": true
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com"
+    ],
+    "invalid": [
+      "http://user:pass@example.com",
+      "http://user:@example.com"
+    ],
+    "error": [],
+    "rationale": "Disallows URLs with authentication components when disallow_auth is true.",
+    "obligations": [],
+    "generated_id": "GENERATED-6"
+  },
+  {
+    "title": "validate_length: false",
+    "validator": "isURL",
+    "args": [
+      {
+        "validate_length": false
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [],
+    "error": [],
+    "rationale": "Disables validation of URL length when validate_length is false.",
+    "obligations": [],
+    "generated_id": "GENERATED-7"
+  }
+]

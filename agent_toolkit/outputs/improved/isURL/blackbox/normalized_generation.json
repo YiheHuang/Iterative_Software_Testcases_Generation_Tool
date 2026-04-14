@@ -1,0 +1,436 @@
+{
+  "mode": "blackbox",
+  "approach": "improved",
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "blackbox",
+      "rule": "Default behavior: validate URLs with standard protocols, host, and optional fragments or query components.",
+      "why": "Baseline functionality described in the README.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "example.com"
+    },
+    {
+      "id": "OB-2",
+      "kind": "blackbox",
+      "rule": "require_protocol: URLs must include a protocol.",
+      "why": "Option explicitly documented in the README.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "example.com"
+    },
+    {
+      "id": "OB-3",
+      "kind": "blackbox",
+      "rule": "require_host: URLs must include a host.",
+      "why": "Option explicitly documented in the README.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://"
+    },
+    {
+      "id": "OB-4",
+      "kind": "blackbox",
+      "rule": "require_port: URLs must include a port.",
+      "why": "Option explicitly documented in the README.",
+      "minimal_valid": "http://example.com:80",
+      "minimal_invalid": "http://example.com"
+    },
+    {
+      "id": "OB-5",
+      "kind": "blackbox",
+      "rule": "allow_underscores: URLs may include underscores in the host.",
+      "why": "Option explicitly documented in the README.",
+      "minimal_valid": "http://example_com",
+      "minimal_invalid": "http://example.com"
+    },
+    {
+      "id": "OB-6",
+      "kind": "blackbox",
+      "rule": "host_whitelist: Only URLs with hosts matching the whitelist are valid.",
+      "why": "Option explicitly documented in the README.",
+      "minimal_valid": "http://allowed.com",
+      "minimal_invalid": "http://blocked.com"
+    },
+    {
+      "id": "OB-7",
+      "kind": "blackbox",
+      "rule": "host_blacklist: URLs with hosts matching the blacklist are invalid.",
+      "why": "Option explicitly documented in the README.",
+      "minimal_valid": "http://allowed.com",
+      "minimal_invalid": "http://blocked.com"
+    },
+    {
+      "id": "OB-8",
+      "kind": "blackbox",
+      "rule": "allow_trailing_dot: URLs may end with a trailing dot in the host.",
+      "why": "Option explicitly documented in the README.",
+      "minimal_valid": "http://example.com.",
+      "minimal_invalid": "http://example.com"
+    },
+    {
+      "id": "OB-9",
+      "kind": "blackbox",
+      "rule": "allow_protocol_relative_urls: URLs may omit the protocol but start with //.",
+      "why": "Option explicitly documented in the README.",
+      "minimal_valid": "//example.com",
+      "minimal_invalid": "example.com"
+    },
+    {
+      "id": "OB-10",
+      "kind": "blackbox",
+      "rule": "allow_fragments: URLs may include fragments.",
+      "why": "Option explicitly documented in the README.",
+      "minimal_valid": "http://example.com#fragment",
+      "minimal_invalid": "http://example.com"
+    },
+    {
+      "id": "OB-11",
+      "kind": "blackbox",
+      "rule": "allow_query_components: URLs may include query components.",
+      "why": "Option explicitly documented in the README.",
+      "minimal_valid": "http://example.com?query=1",
+      "minimal_invalid": "http://example.com"
+    },
+    {
+      "id": "OB-12",
+      "kind": "blackbox",
+      "rule": "disallow_auth: URLs with authentication components are invalid.",
+      "why": "Option explicitly documented in the README.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://user:pass@example.com"
+    },
+    {
+      "id": "OB-13",
+      "kind": "blackbox",
+      "rule": "validate_length: URLs exceeding max_allowed_length are invalid.",
+      "why": "Option explicitly documented in the README.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": null
+    }
+  ],
+  "test_groups": [
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com",
+        "ftp://example.com",
+        "http://example.com/path?query=1#fragment"
+      ],
+      "invalid": [
+        "example.com",
+        "://example.com",
+        "http:/example.com"
+      ],
+      "error": [
+        123,
+        null,
+        {},
+        []
+      ],
+      "title": "Default behavior validation",
+      "rationale": "Covers the default behavior of validating URLs with standard protocols, host, and optional fragments or query components.",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com"
+      ],
+      "invalid": [
+        "example.com",
+        "www.example.com"
+      ],
+      "error": [
+        null,
+        123
+      ],
+      "title": "require_protocol enabled",
+      "rationale": "Ensures URLs must include a protocol when require_protocol is enabled.",
+      "obligations": [
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": true
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com"
+      ],
+      "invalid": [
+        "http://",
+        "https:///path"
+      ],
+      "error": [
+        null,
+        {}
+      ],
+      "title": "require_host enabled",
+      "rationale": "Ensures URLs must include a host when require_host is enabled.",
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_port": true
+        }
+      ],
+      "valid": [
+        "http://example.com:80",
+        "https://example.com:443"
+      ],
+      "invalid": [
+        "http://example.com",
+        "https://example.com"
+      ],
+      "error": [
+        null,
+        []
+      ],
+      "title": "require_port enabled",
+      "rationale": "Ensures URLs must include a port when require_port is enabled.",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_underscores": true
+        }
+      ],
+      "valid": [
+        "http://example_com",
+        "http://sub_domain.example.com"
+      ],
+      "invalid": [
+        "http://example.com",
+        "http://example_.com"
+      ],
+      "error": [
+        null,
+        123
+      ],
+      "title": "allow_underscores enabled",
+      "rationale": "Allows underscores in the host when allow_underscores is enabled.",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "host_whitelist": [
+            "allowed.com"
+          ]
+        }
+      ],
+      "valid": [
+        "http://allowed.com"
+      ],
+      "invalid": [
+        "http://blocked.com",
+        "http://notallowed.com"
+      ],
+      "error": [
+        null,
+        {}
+      ],
+      "title": "host_whitelist applied",
+      "rationale": "Validates URLs against a whitelist of allowed hosts.",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "host_blacklist": [
+            "blocked.com"
+          ]
+        }
+      ],
+      "valid": [
+        "http://allowed.com"
+      ],
+      "invalid": [
+        "http://blocked.com"
+      ],
+      "error": [
+        null,
+        []
+      ],
+      "title": "host_blacklist applied",
+      "rationale": "Invalidates URLs with hosts matching the blacklist.",
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_trailing_dot": true
+        }
+      ],
+      "valid": [
+        "http://example.com.",
+        "http://subdomain.example.com."
+      ],
+      "invalid": [
+        "http://example.com",
+        "http://example.com.."
+      ],
+      "error": [
+        null,
+        123
+      ],
+      "title": "allow_trailing_dot enabled",
+      "rationale": "Allows URLs to end with a trailing dot in the host.",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_protocol_relative_urls": true
+        }
+      ],
+      "valid": [
+        "//example.com",
+        "//example.com/path"
+      ],
+      "invalid": [
+        "example.com",
+        "/example.com"
+      ],
+      "error": [
+        null,
+        {}
+      ],
+      "title": "allow_protocol_relative_urls enabled",
+      "rationale": "Allows protocol-relative URLs when the option is enabled.",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_fragments": false
+        }
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        "http://example.com#fragment",
+        "http://example.com#"
+      ],
+      "error": [
+        null,
+        []
+      ],
+      "title": "allow_fragments disabled",
+      "rationale": "Disallows fragments in URLs when allow_fragments is disabled.",
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_query_components": false
+        }
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        "http://example.com?query=1",
+        "http://example.com?"
+      ],
+      "error": [
+        null,
+        {}
+      ],
+      "title": "allow_query_components disabled",
+      "rationale": "Disallows query components in URLs when allow_query_components is disabled.",
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true
+        }
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        "http://user:pass@example.com",
+        "http://user@example.com"
+      ],
+      "error": [
+        null,
+        123
+      ],
+      "title": "disallow_auth enabled",
+      "rationale": "Disallows authentication components in URLs when disallow_auth is enabled.",
+      "obligations": [
+        "OB-12"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "validate_length": false
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "http://"
+      ],
+      "invalid": [],
+      "error": [],
+      "title": "validate_length disabled",
+      "rationale": "Disables length validation when validate_length is disabled.",
+      "obligations": [
+        "OB-13"
+      ]
+    }
+  ],
+  "metadata": {
+    "requirement_source": "D:\\TJU\\Software_Testing\\Assignment_1\\source_code\\validator_js\\README.md",
+    "generation_style": "improved_initial_pass"
+  }
+}

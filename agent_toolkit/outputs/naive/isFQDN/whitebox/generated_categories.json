@@ -1,0 +1,60 @@
+{
+  "generated_categories": [
+    {
+      "generated_category_id": "GENC-1",
+      "name": "Default Validation",
+      "description": "Covers the default behavior of the isFQDN validator without any options.",
+      "generated_group_ids": [
+        "GENERATED-1"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "name": "TLD Requirement",
+      "description": "Covers scenarios where the requirement for a top-level domain (TLD) is toggled.",
+      "generated_group_ids": [
+        "GENERATED-2"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "name": "Underscore Handling",
+      "description": "Covers scenarios where underscores are allowed in domain parts.",
+      "generated_group_ids": [
+        "GENERATED-3"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "name": "Trailing Dot Handling",
+      "description": "Covers scenarios where trailing dots are allowed in domain names.",
+      "generated_group_ids": [
+        "GENERATED-4"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-5",
+      "name": "Numeric TLDs",
+      "description": "Covers scenarios where numeric TLDs are allowed.",
+      "generated_group_ids": [
+        "GENERATED-5"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-6",
+      "name": "Wildcard Domains",
+      "description": "Covers scenarios where wildcard domains are allowed.",
+      "generated_group_ids": [
+        "GENERATED-6"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-7",
+      "name": "Domain Length Limits",
+      "description": "Covers scenarios where domain length limits are ignored.",
+      "generated_group_ids": [
+        "GENERATED-7"
+      ]
+    }
+  ]
+}

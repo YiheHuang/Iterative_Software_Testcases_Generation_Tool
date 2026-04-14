@@ -1,0 +1,41 @@
+{
+  "validator_name": "isFQDN",
+  "mode": "blackbox",
+  "approach": "naive",
+  "obligation_count": 0,
+  "group_count": 7,
+  "prompt_path": "D:\\TJU\\Software_Testing\\Assignment_1\\agent_toolkit\\outputs\\naive\\isFQDN\\blackbox\\prompt.txt",
+  "response_path": "D:\\TJU\\Software_Testing\\Assignment_1\\agent_toolkit\\outputs\\naive\\isFQDN\\blackbox\\response.json",
+  "evaluation": {
+    "total_cases": 74,
+    "correct_cases": 70,
+    "incorrect_cases": 4,
+    "exact_match_rate": 0.9459459459459459,
+    "output_json_path": "D:\\TJU\\Software_Testing\\Assignment_1\\agent_toolkit\\outputs\\naive\\isFQDN\\blackbox\\evaluation_output.json",
+    "coverage_dir": "D:\\TJU\\Software_Testing\\Assignment_1\\agent_toolkit\\outputs\\naive\\isFQDN\\blackbox\\coverage"
+  },
+  "golden_analysis": {
+    "summary": {
+      "total_golden_categories": 6,
+      "total_generated_categories": 7,
+      "overlap_golden_categories": 5,
+      "missing_golden_categories": 1,
+      "matched_generated_categories": 5,
+      "novel_generated_categories": 2,
+      "strong_golden_category_matches": 4,
+      "partial_golden_category_matches": 1,
+      "fragmented_golden_matches": 0,
+      "matched_golden_ratio": 0.8333333333333334,
+      "total_golden_groups": 6,
+      "total_generated_groups": 7,
+      "overlap_golden_groups": 5,
+      "missing_golden_groups": 1,
+      "novel_valid_groups": 2,
+      "exact_or_near_overlap_groups": 5,
+      "golden_groups_with_semantic_match": 5,
+      "generated_groups_with_semantic_match": 5,
+      "novel_valid_categories": 2
+    },
+    "comparison_path": "D:\\TJU\\Software_Testing\\Assignment_1\\agent_toolkit\\outputs\\naive\\isFQDN\\blackbox\\golden_comparison.json"
+  }
+}

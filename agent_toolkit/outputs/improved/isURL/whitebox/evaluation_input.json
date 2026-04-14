@@ -1,0 +1,1152 @@
+{
+  "cases": [
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Basic URL validation without options",
+      "obligations": [
+        "OB-1",
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "https://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Basic URL validation without options",
+      "obligations": [
+        "OB-1",
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "ftp://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Basic URL validation without options",
+      "obligations": [
+        "OB-1",
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://exa mple.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Basic URL validation without options",
+      "obligations": [
+        "OB-1",
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://example<.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Basic URL validation without options",
+      "obligations": [
+        "OB-1",
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "mailto:example@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Basic URL validation without options",
+      "obligations": [
+        "OB-1",
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": 123,
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Basic URL validation without options",
+      "obligations": [
+        "OB-1",
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": null,
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Basic URL validation without options",
+      "obligations": [
+        "OB-1",
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": {},
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Basic URL validation without options",
+      "obligations": [
+        "OB-1",
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": [],
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Basic URL validation without options",
+      "obligations": [
+        "OB-1",
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Maximum length validation with default options",
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://a.com/",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Maximum length validation with default options",
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Maximum length validation with default options",
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_fragments": false
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Fragment rejection with `allow_fragments: false`",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_fragments": false
+        }
+      ],
+      "input_value": "https://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Fragment rejection with `allow_fragments: false`",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_fragments": false
+        }
+      ],
+      "input_value": "http://example.com#fragment",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Fragment rejection with `allow_fragments: false`",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_fragments": false
+        }
+      ],
+      "input_value": "https://example.com#anotherFragment",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Fragment rejection with `allow_fragments: false`",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_fragments": false
+        }
+      ],
+      "input_value": null,
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Fragment rejection with `allow_fragments: false`",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_query_components": false
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Query component rejection with `allow_query_components: false`",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_query_components": false
+        }
+      ],
+      "input_value": "https://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Query component rejection with `allow_query_components: false`",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_query_components": false
+        }
+      ],
+      "input_value": "http://example.com?query=value",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Query component rejection with `allow_query_components: false`",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_query_components": false
+        }
+      ],
+      "input_value": "https://example.com?query=value&another=value",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Query component rejection with `allow_query_components: false`",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_query_components": false
+        }
+      ],
+      "input_value": null,
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Query component rejection with `allow_query_components: false`",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Authentication rejection with `disallow_auth: true`",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true
+        }
+      ],
+      "input_value": "https://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Authentication rejection with `disallow_auth: true`",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true
+        }
+      ],
+      "input_value": "http://user:pass@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Authentication rejection with `disallow_auth: true`",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true
+        }
+      ],
+      "input_value": "https://username:password@secure.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Authentication rejection with `disallow_auth: true`",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true
+        }
+      ],
+      "input_value": null,
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Authentication rejection with `disallow_auth: true`",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Protocol requirement with `require_protocol: true`",
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "input_value": "https://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Protocol requirement with `require_protocol: true`",
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "input_value": "example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Protocol requirement with `require_protocol: true`",
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "input_value": "www.example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Protocol requirement with `require_protocol: true`",
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "input_value": null,
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Protocol requirement with `require_protocol: true`",
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_port": true
+        }
+      ],
+      "input_value": "http://example.com:8080",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Port requirement with `require_port: true`",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_port": true
+        }
+      ],
+      "input_value": "https://example.com:443",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Port requirement with `require_port: true`",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_port": true
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Port requirement with `require_port: true`",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_port": true
+        }
+      ],
+      "input_value": "https://example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Port requirement with `require_port: true`",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_port": true
+        }
+      ],
+      "input_value": null,
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Port requirement with `require_port: true`",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_protocol_relative_urls": true
+        }
+      ],
+      "input_value": "//example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Protocol-relative URLs with `allow_protocol_relative_urls: true`",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_protocol_relative_urls": true
+        }
+      ],
+      "input_value": "//example.com/path",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Protocol-relative URLs with `allow_protocol_relative_urls: true`",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_protocol_relative_urls": true
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Protocol-relative URLs with `allow_protocol_relative_urls: true`",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_protocol_relative_urls": true
+        }
+      ],
+      "input_value": "example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Protocol-relative URLs with `allow_protocol_relative_urls: true`",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_protocol_relative_urls": true
+        }
+      ],
+      "input_value": null,
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Protocol-relative URLs with `allow_protocol_relative_urls: true`",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_port": true
+        }
+      ],
+      "input_value": "http://example.com:80",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Invalid port numbers",
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_port": true
+        }
+      ],
+      "input_value": "https://example.com:443",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Invalid port numbers",
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_port": true
+        }
+      ],
+      "input_value": "http://example.com:70000",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Invalid port numbers",
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_port": true
+        }
+      ],
+      "input_value": "http://example.com:-1",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Invalid port numbers",
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_port": true
+        }
+      ],
+      "input_value": "http://example.com:abcd",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Invalid port numbers",
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_port": true
+        }
+      ],
+      "input_value": null,
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Invalid port numbers",
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Invalid characters in hostname",
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://sub.example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Invalid characters in hostname",
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://exa$mple.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Invalid characters in hostname",
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://example!.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Invalid characters in hostname",
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://example..com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Invalid characters in hostname",
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": null,
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Invalid characters in hostname",
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false
+        }
+      ],
+      "input_value": "//",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Empty hostname with `require_host: false`",
+      "obligations": [
+        "OB-12"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false
+        }
+      ],
+      "input_value": "//path/to/resource",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Empty hostname with `require_host: false`",
+      "obligations": [
+        "OB-12"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false
+        }
+      ],
+      "input_value": "http://",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Empty hostname with `require_host: false`",
+      "obligations": [
+        "OB-12"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false
+        }
+      ],
+      "input_value": "https://",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Empty hostname with `require_host: false`",
+      "obligations": [
+        "OB-12"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false
+        }
+      ],
+      "input_value": null,
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Empty hostname with `require_host: false`",
+      "obligations": [
+        "OB-12"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_valid_protocol": true
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Invalid protocols with `require_valid_protocol: true`",
+      "obligations": [
+        "OB-13"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_valid_protocol": true
+        }
+      ],
+      "input_value": "https://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Invalid protocols with `require_valid_protocol: true`",
+      "obligations": [
+        "OB-13"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_valid_protocol": true
+        }
+      ],
+      "input_value": "javascript:alert(1)",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Invalid protocols with `require_valid_protocol: true`",
+      "obligations": [
+        "OB-13"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_valid_protocol": true
+        }
+      ],
+      "input_value": "ftp://example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Invalid protocols with `require_valid_protocol: true`",
+      "obligations": [
+        "OB-13"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_valid_protocol": true
+        }
+      ],
+      "input_value": "customprotocol://example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Invalid protocols with `require_valid_protocol: true`",
+      "obligations": [
+        "OB-13"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_valid_protocol": true
+        }
+      ],
+      "input_value": null,
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Invalid protocols with `require_valid_protocol: true`",
+      "obligations": [
+        "OB-13"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": false
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Encoded authentication rejection with `require_protocol: false`",
+      "obligations": [
+        "OB-14"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": false
+        }
+      ],
+      "input_value": "https://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Encoded authentication rejection with `require_protocol: false`",
+      "obligations": [
+        "OB-14"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": false
+        }
+      ],
+      "input_value": "http://user%3Apass@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Encoded authentication rejection with `require_protocol: false`",
+      "obligations": [
+        "OB-14"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": false
+        }
+      ],
+      "input_value": "http://user%40example.com@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Encoded authentication rejection with `require_protocol: false`",
+      "obligations": [
+        "OB-14"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": false
+        }
+      ],
+      "input_value": "http://%61%62%63@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Encoded authentication rejection with `require_protocol: false`",
+      "obligations": [
+        "OB-14"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": false
+        }
+      ],
+      "input_value": null,
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Encoded authentication rejection with `require_protocol: false`",
+      "obligations": [
+        "OB-14"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://[2001:db8::1]:8080",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Invalid IPv6 formats",
+      "obligations": [
+        "OB-15"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://[::1]",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Invalid IPv6 formats",
+      "obligations": [
+        "OB-15"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://[2001:db8:85a3::8a2e:370:7334]",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Invalid IPv6 formats",
+      "obligations": [
+        "OB-15"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://[2001:db8:::1]:8080",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Invalid IPv6 formats",
+      "obligations": [
+        "OB-15"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://[2001:db8::1::1]",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Invalid IPv6 formats",
+      "obligations": [
+        "OB-15"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://[2001:db8:85a3::8a2e:370:7334:12345]",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Invalid IPv6 formats",
+      "obligations": [
+        "OB-15"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": null,
+      "expected_kind": "throw",
+      "expected": "TypeError",
+      "title": "Invalid IPv6 formats",
+      "obligations": [
+        "OB-15"
+      ]
+    }
+  ],
+  "mode": "whitebox",
+  "approach": "improved",
+  "target_source_files": [
+    "src/lib/isURL.js"
+  ]
+}

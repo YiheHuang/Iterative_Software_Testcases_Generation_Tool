@@ -1,0 +1,131 @@
+Create stable golden categories for validator isFQDN.
+
+Fixed golden groups:
+[
+  {
+    "title": "should validate FQDN",
+    "validator": "isFQDN",
+    "args": [],
+    "valid": [
+      "domain.com",
+      "dom.plato",
+      "a.domain.co",
+      "foo--bar.com",
+      "xn--froschgrn-x9a.com",
+      "rebecca.blackfriday",
+      "1337.com"
+    ],
+    "invalid": [
+      "abc",
+      "256.0.0.0",
+      "_.com",
+      "*.some.com",
+      "s!ome.com",
+      "domain.com/",
+      "/more.com",
+      "domain.com\ufffd",
+      "domain.co\u00a0m",
+      "domain.co\u1680m",
+      "domain.co\u2006m",
+      "domain.co\u2028m",
+      "domain.co\u2029m",
+      "domain.co\u202fm",
+      "domain.co\u205fm",
+      "domain.co\u3000m",
+      "domain.com\udc00",
+      "domain.co\uefffm",
+      "domain.co\ufddam",
+      "domain.co\ufff4m",
+      "domain.com\u00a9",
+      "example.0",
+      "192.168.0.9999",
+      "192.168.0"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-1"
+  },
+  {
+    "title": "should validate FQDN with trailing dot option",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_trailing_dot": true
+      }
+    ],
+    "valid": [
+      "example.com."
+    ],
+    "invalid": [],
+    "error": [],
+    "golden_id": "GOLDEN-2"
+  },
+  {
+    "title": "should invalidate FQDN when not require_tld",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": false
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "example.0",
+      "192.168.0",
+      "192.168.0.9999"
+    ],
+    "error": [],
+    "golden_id": "GOLDEN-3"
+  },
+  {
+    "title": "should validate FQDN when not require_tld but allow_numeric_tld",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": true,
+        "require_tld": false
+      }
+    ],
+    "valid": [
+      "example.0",
+      "192.168.0",
+      "192.168.0.9999"
+    ],
+    "invalid": [],
+    "error": [],
+    "golden_id": "GOLDEN-4"
+  },
+  {
+    "title": "should validate FQDN with wildcard option",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_wildcard": true
+      }
+    ],
+    "valid": [
+      "*.example.com",
+      "*.shop.example.com"
+    ],
+    "invalid": [],
+    "error": [],
+    "golden_id": "GOLDEN-5"
+  },
+  {
+    "title": "should validate FQDN with required allow_trailing_dot, allow_underscores and allow_numeric_tld options",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_trailing_dot": true,
+        "allow_underscores": true,
+        "allow_numeric_tld": true
+      }
+    ],
+    "valid": [
+      "abc.efg.g1h.",
+      "as1s.sad3s.ssa2d."
+    ],
+    "invalid": [],
+    "error": [],
+    "golden_id": "GOLDEN-6"
+  }
+]

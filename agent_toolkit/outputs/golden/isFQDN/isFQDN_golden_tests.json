@@ -1,0 +1,124 @@
+{
+  "test_groups": [
+    {
+      "title": "should validate FQDN",
+      "validator": "isFQDN",
+      "args": [],
+      "valid": [
+        "domain.com",
+        "dom.plato",
+        "a.domain.co",
+        "foo--bar.com",
+        "xn--froschgrn-x9a.com",
+        "rebecca.blackfriday",
+        "1337.com"
+      ],
+      "invalid": [
+        "abc",
+        "256.0.0.0",
+        "_.com",
+        "*.some.com",
+        "s!ome.com",
+        "domain.com/",
+        "/more.com",
+        "domain.com�",
+        "domain.co m",
+        "domain.co m",
+        "domain.co m",
+        "domain.co m",
+        "domain.co m",
+        "domain.co m",
+        "domain.co m",
+        "domain.co　m",
+        "domain.com\udc00",
+        "domain.com",
+        "domain.co﷚m",
+        "domain.co￴m",
+        "domain.com©",
+        "example.0",
+        "192.168.0.9999",
+        "192.168.0"
+      ],
+      "error": []
+    },
+    {
+      "title": "should validate FQDN with trailing dot option",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_trailing_dot": true
+        }
+      ],
+      "valid": [
+        "example.com."
+      ],
+      "invalid": [],
+      "error": []
+    },
+    {
+      "title": "should invalidate FQDN when not require_tld",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "require_tld": false
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "example.0",
+        "192.168.0",
+        "192.168.0.9999"
+      ],
+      "error": []
+    },
+    {
+      "title": "should validate FQDN when not require_tld but allow_numeric_tld",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_numeric_tld": true,
+          "require_tld": false
+        }
+      ],
+      "valid": [
+        "example.0",
+        "192.168.0",
+        "192.168.0.9999"
+      ],
+      "invalid": [],
+      "error": []
+    },
+    {
+      "title": "should validate FQDN with wildcard option",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_wildcard": true
+        }
+      ],
+      "valid": [
+        "*.example.com",
+        "*.shop.example.com"
+      ],
+      "invalid": [],
+      "error": []
+    },
+    {
+      "title": "should validate FQDN with required allow_trailing_dot, allow_underscores and allow_numeric_tld options",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_trailing_dot": true,
+          "allow_underscores": true,
+          "allow_numeric_tld": true
+        }
+      ],
+      "valid": [
+        "abc.efg.g1h.",
+        "as1s.sad3s.ssa2d."
+      ],
+      "invalid": [],
+      "error": []
+    }
+  ]
+}

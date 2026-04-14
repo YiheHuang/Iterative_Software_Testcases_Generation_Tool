@@ -1,0 +1,41 @@
+{
+  "validator_name": "isURL",
+  "mode": "blackbox",
+  "approach": "improved",
+  "obligation_count": 13,
+  "group_count": 13,
+  "prompt_path": "D:\\TJU\\Software_Testing\\Assignment_1\\agent_toolkit\\outputs\\improved\\isURL\\blackbox\\prompt.txt",
+  "response_path": "D:\\TJU\\Software_Testing\\Assignment_1\\agent_toolkit\\outputs\\improved\\isURL\\blackbox\\response.json",
+  "evaluation": {
+    "total_cases": 73,
+    "correct_cases": 66,
+    "incorrect_cases": 7,
+    "exact_match_rate": 0.9041095890410958,
+    "output_json_path": "D:\\TJU\\Software_Testing\\Assignment_1\\agent_toolkit\\outputs\\improved\\isURL\\blackbox\\evaluation_output.json",
+    "coverage_dir": "D:\\TJU\\Software_Testing\\Assignment_1\\agent_toolkit\\outputs\\improved\\isURL\\blackbox\\coverage"
+  },
+  "golden_analysis": {
+    "summary": {
+      "total_golden_categories": 9,
+      "total_generated_categories": 5,
+      "overlap_golden_categories": 8,
+      "missing_golden_categories": 1,
+      "matched_generated_categories": 5,
+      "novel_generated_categories": 0,
+      "strong_golden_category_matches": 4,
+      "partial_golden_category_matches": 4,
+      "fragmented_golden_matches": 0,
+      "matched_golden_ratio": 0.8888888888888888,
+      "total_golden_groups": 9,
+      "total_generated_groups": 5,
+      "overlap_golden_groups": 8,
+      "missing_golden_groups": 1,
+      "novel_valid_groups": 0,
+      "exact_or_near_overlap_groups": 8,
+      "golden_groups_with_semantic_match": 8,
+      "generated_groups_with_semantic_match": 5,
+      "novel_valid_categories": 0
+    },
+    "comparison_path": "D:\\TJU\\Software_Testing\\Assignment_1\\agent_toolkit\\outputs\\improved\\isURL\\blackbox\\golden_comparison.json"
+  }
+}

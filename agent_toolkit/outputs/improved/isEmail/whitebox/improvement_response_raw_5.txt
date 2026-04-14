@@ -1,0 +1,91 @@
+{
+  "obligations": [
+    {
+      "id": "OB-14",
+      "kind": "whitebox",
+      "rule": "Ensure `validateDisplayName` correctly rejects display names containing illegal characters without proper quoting.",
+      "why": "The `validateDisplayName` function contains a branch that checks for illegal characters and ensures they are properly quoted. This branch was not fully covered.",
+      "minimal_valid": "\"John \\\"Doe\\\"\" <test@example.com>",
+      "minimal_invalid": "John \"Doe\" <test@example.com>"
+    },
+    {
+      "id": "OB-15",
+      "kind": "whitebox",
+      "rule": "Ensure `isEmail` correctly handles domains enclosed in brackets without valid IPs.",
+      "why": "The branch that validates bracketed domains (e.g., `[invalid]`) was not fully tested.",
+      "minimal_valid": null,
+      "minimal_invalid": "test@[invalid]"
+    },
+    {
+      "id": "OB-16",
+      "kind": "whitebox",
+      "rule": "Ensure `isEmail` correctly applies regex patterns in `host_blacklist`.",
+      "why": "The branch that applies regex patterns in `host_blacklist` was not fully covered.",
+      "minimal_valid": "test@allowed.com",
+      "minimal_invalid": "test@blocked.com"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Display name with illegal characters",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "valid": [
+        "\"John \\\"Doe\\\"\" <test@example.com>"
+      ],
+      "invalid": [
+        "John \"Doe\" <test@example.com>",
+        "\"John, Doe\" test@example.com"
+      ],
+      "error": [],
+      "rationale": "Tests the `validateDisplayName` function to ensure display names with illegal characters are properly quoted and escaped.",
+      "obligations": [
+        "OB-14"
+      ]
+    },
+    {
+      "title": "Invalid bracketed domain",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_ip_domain": true
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "test@[invalid]"
+      ],
+      "error": [],
+      "rationale": "Tests the handling of domains enclosed in brackets without valid IPs.",
+      "obligations": [
+        "OB-15"
+      ]
+    },
+    {
+      "title": "Host blacklist with regex patterns",
+      "validator": "isEmail",
+      "args": [
+        {
+          "host_blacklist": [
+            "/blocked\\.com$/"
+          ]
+        }
+      ],
+      "valid": [
+        "test@allowed.com"
+      ],
+      "invalid": [
+        "test@blocked.com"
+      ],
+      "error": [],
+      "rationale": "Tests the `host_blacklist` option to ensure regex patterns are correctly applied.",
+      "obligations": [
+        "OB-16"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "obligations": [
+    {
+      "id": "OB-11",
+      "kind": "whitebox",
+      "rule": "Ensure the removal of trailing dots when allow_trailing_dot is true.",
+      "why": "The code explicitly removes trailing dots when allow_trailing_dot is enabled, but this behavior is not covered in the test suite.",
+      "minimal_valid": "example.com.",
+      "minimal_invalid": "example..",
+      "minimal_error": null
+    },
+    {
+      "id": "OB-12",
+      "kind": "whitebox",
+      "rule": "Ensure the removal of wildcard prefix when allow_wildcard is true.",
+      "why": "The code explicitly removes wildcard prefixes when allow_wildcard is enabled, but this behavior is not covered in the test suite.",
+      "minimal_valid": "*.example.com",
+      "minimal_invalid": "*example.com",
+      "minimal_error": null
+    },
+    {
+      "id": "OB-13",
+      "kind": "whitebox",
+      "rule": "Ensure rejection of domain parts exceeding 63 characters when ignore_max_length is false.",
+      "why": "The code checks the length of domain parts against 63 characters when ignore_max_length is false, but this behavior is not covered in the test suite.",
+      "minimal_valid": null,
+      "minimal_invalid": "a"  ,
+      "minimal_error": null
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Trailing dot removal with allow_trailing_dot enabled",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_trailing_dot": true
+        }
+      ],
+      "valid": [
+        "example.com.",
+        "sub.domain.com."
+      ],
+      "invalid": [
+        "example..",
+        "sub..domain.com."
+      ],
+      "error": [
+        null
+      ],
+      "rationale": "Tests the removal of trailing dots when allow_trailing_dot is enabled, ensuring proper handling of trailing dots.",
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "title": "Wildcard prefix removal with allow_wildcard enabled",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_wildcard": true
+        }
+      ],
+      "valid": [
+        "*.example.com",
+        "*.sub.domain.com"
+      ],
+      "invalid": [
+        "*example.com",
+        "example.*.com"
+      ],
+      "error": [
+        null
+      ],
+      "rationale": "Tests the removal of wildcard prefixes when allow_wildcard is enabled, ensuring proper handling of wildcard domains.",
+      "obligations": [
+        "OB-12"
+      ]
+    },
+    {
+      "title": "Domain parts exceeding 63 characters with ignore_max_length disabled",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "ignore_max_length": false
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "a"  ,
+        "subdomainwithaverylongnameexceeding63characters.com"
+      ],
+      "error": [
+        null
+      ],
+      "rationale": "Tests the rejection of domain parts exceeding 63 characters when ignore_max_length is disabled, ensuring proper enforcement of length constraints.",
+      "obligations": [
+        "OB-13"
+      ]
+    }
+  ]
+}
