@@ -327,7 +327,7 @@ pip install -r requirements.txt
 
 ```bash
 cd source_code/validator_js
-npm install
+npm install --legacy-peer-deps
 ```
 
 ### 3. 配置 `agent_toolkit/.env`
