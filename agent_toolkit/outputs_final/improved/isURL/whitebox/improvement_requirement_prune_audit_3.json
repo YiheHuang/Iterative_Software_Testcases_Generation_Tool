@@ -1,0 +1,27 @@
+{
+  "audit": [
+    {
+      "group_title": "Reject invalid characters in URL",
+      "decision": "keep",
+      "reason": "All cases are clearly supported by the requirement, which specifies rejection of spaces and invalid characters like '<' and '>'.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Reject URLs starting with 'mailto:'",
+      "decision": "keep",
+      "reason": "All cases are clearly supported by the requirement, which specifies rejection of URLs starting with 'mailto:'.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Enforce maximum URL length when `validate_length` is true",
+      "decision": "trim",
+      "reason": "The invalid case 'http://example.com/' does not exceed the maximum length and contradicts the requirement. It has been removed.",
+      "removed_valid": [],
+      "removed_invalid": [
+        "http://example.com/"
+      ]
+    }
+  ]
+}

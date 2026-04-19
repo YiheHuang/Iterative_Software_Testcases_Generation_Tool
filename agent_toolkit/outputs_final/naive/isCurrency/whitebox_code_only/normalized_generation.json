@@ -1,0 +1,257 @@
+{
+  "mode": "whitebox_code_only",
+  "approach": "naive",
+  "obligations": [],
+  "test_groups": [
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "$123.45",
+        "$0.99",
+        "$1,234.56",
+        "$0",
+        "$123"
+      ],
+      "invalid": [
+        "123.45",
+        "0.99",
+        "$123,45",
+        "$123.",
+        "$123.456",
+        "$",
+        "123",
+        "$-123.45"
+      ],
+      "title": "Default options",
+      "rationale": "Tests the default behavior with no options provided, focusing on valid currency formats and common edge cases.",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_symbol": true
+        }
+      ],
+      "valid": [
+        "$123.45",
+        "$0.99",
+        "$1,234.56"
+      ],
+      "invalid": [
+        "123.45",
+        "0.99",
+        "1,234.56",
+        "$123,45",
+        "$123.",
+        "$123.456",
+        "$"
+      ],
+      "title": "Require symbol",
+      "rationale": "Ensures that the currency symbol is required when the `require_symbol` option is set.",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_negatives": true
+        }
+      ],
+      "valid": [
+        "$123.45",
+        "-$123.45",
+        "$-123.45",
+        "$123.45",
+        "$0.99",
+        "-$0.99"
+      ],
+      "invalid": [
+        "123.45",
+        "-123.45",
+        "$123,45",
+        "$123.",
+        "$123.456",
+        "$",
+        "123"
+      ],
+      "title": "Allow negatives",
+      "rationale": "Tests the handling of negative values when `allow_negatives` is enabled.",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_decimal": true
+        }
+      ],
+      "valid": [
+        "$123.45",
+        "$0.99",
+        "$1,234.56"
+      ],
+      "invalid": [
+        "$123",
+        "$0",
+        "$1,234",
+        "$123.",
+        "$123.456",
+        "$"
+      ],
+      "title": "Require decimal",
+      "rationale": "Ensures that a decimal portion is required when `require_decimal` is set.",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "decimal_separator": ","
+        }
+      ],
+      "valid": [
+        "$123,45",
+        "$0,99",
+        "$1,234,56"
+      ],
+      "invalid": [
+        "$123.45",
+        "$0.99",
+        "$1,234.56",
+        "$123,",
+        "$123.456",
+        "$"
+      ],
+      "title": "Custom decimal separator",
+      "rationale": "Tests the behavior when a custom decimal separator is used.",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "thousands_separator": "."
+        }
+      ],
+      "valid": [
+        "$1.234,56",
+        "$123,45",
+        "$0,99"
+      ],
+      "invalid": [
+        "$1,234.56",
+        "$123.45",
+        "$0.99",
+        "$123.",
+        "$123,456",
+        "$"
+      ],
+      "title": "Custom thousands separator",
+      "rationale": "Tests the behavior when a custom thousands separator is used.",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "symbol_after_digits": true
+        }
+      ],
+      "valid": [
+        "123.45$",
+        "0.99$",
+        "1,234.56$"
+      ],
+      "invalid": [
+        "$123.45",
+        "$0.99",
+        "$1,234.56",
+        "123$",
+        "123.45",
+        "$"
+      ],
+      "title": "Symbol after digits",
+      "rationale": "Ensures the currency symbol appears after the digits when `symbol_after_digits` is enabled.",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_space_after_symbol": true
+        }
+      ],
+      "valid": [
+        "$ 123.45",
+        "$ 0.99",
+        "$ 1,234.56"
+      ],
+      "invalid": [
+        "$123.45",
+        "$0.99",
+        "$1,234.56",
+        "$ 123",
+        "$"
+      ],
+      "title": "Allow space after symbol",
+      "rationale": "Tests the behavior when spaces are allowed after the currency symbol.",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_space_after_digits": true
+        }
+      ],
+      "valid": [
+        "$123.45 ",
+        "$0.99 ",
+        "$1,234.56 "
+      ],
+      "invalid": [
+        "$123.45",
+        "$0.99",
+        "$1,234.56",
+        "$123 ",
+        "$"
+      ],
+      "title": "Allow space after digits",
+      "rationale": "Tests the behavior when spaces are allowed after the digits.",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "digits_after_decimal": [
+            3
+          ]
+        }
+      ],
+      "valid": [
+        "$123.456",
+        "$0.999",
+        "$1,234.567"
+      ],
+      "invalid": [
+        "$123.45",
+        "$0.99",
+        "$1,234.56",
+        "$123.",
+        "$"
+      ],
+      "title": "Custom digits after decimal",
+      "rationale": "Ensures the correct number of digits after the decimal when `digits_after_decimal` is customized.",
+      "obligations": []
+    }
+  ],
+  "metadata": {
+    "requirement_source": "not_used_code_only_mode",
+    "generation_style": "single_pass_with_repair"
+  }
+}

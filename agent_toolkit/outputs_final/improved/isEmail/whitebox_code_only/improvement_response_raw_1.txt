@@ -1,0 +1,87 @@
+{
+  "obligations": [
+    {
+      "id": "OB-10",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 41: `return false;` and the uncovered branch at line 40: `if (!display_name_without_quotes.trim())`.",
+      "why": "This ensures that the validator correctly handles cases where the display name is empty or consists only of whitespace.",
+      "minimal_valid": "John Doe <john.doe@example.com>",
+      "minimal_invalid": " <john.doe@example.com>"
+    },
+    {
+      "id": "OB-11",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 56: `if (!all_start_with_back_slash)` and its true/false branches.",
+      "why": "This ensures that the validator correctly handles cases where backslashes in the display name are improperly escaped.",
+      "minimal_valid": "\"John \\\"Doe\\\"\" <john.doe@example.com>",
+      "minimal_invalid": "\"John \"Doe\"\" <john.doe@example.com>"
+    },
+    {
+      "id": "OB-12",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered branch at line 92: `if (!options.ignore_max_length && str.length > defaultMaxEmailLength)`.",
+      "why": "This ensures that the validator correctly enforces the maximum email length when `ignore_max_length` is false.",
+      "minimal_valid": "a@b.com",
+      "minimal_invalid": "a_very_long_email_address_that_exceeds_the_maximum_length@example.com"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Empty or whitespace-only display name validation",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "valid": [
+        "John Doe <john.doe@example.com>"
+      ],
+      "invalid": [
+        " <john.doe@example.com>"
+      ],
+      "rationale": "Covers cases where the display name is empty or consists only of whitespace.",
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "title": "Improperly escaped backslashes in display name",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "valid": [
+        "\"John \\\"Doe\\\"\" <john.doe@example.com>"
+      ],
+      "invalid": [
+        "\"John \"Doe\"\" <john.doe@example.com>"
+      ],
+      "rationale": "Covers cases where backslashes in the display name are improperly escaped.",
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "title": "Maximum email length enforcement",
+      "validator": "isEmail",
+      "args": [
+        {
+          "ignore_max_length": false
+        }
+      ],
+      "valid": [
+        "a@b.com"
+      ],
+      "invalid": [
+        "a_very_long_email_address_that_exceeds_the_maximum_length@example.com"
+      ],
+      "rationale": "Ensures that the validator enforces the maximum email length when `ignore_max_length` is false.",
+      "obligations": [
+        "OB-12"
+      ]
+    }
+  ]
+}

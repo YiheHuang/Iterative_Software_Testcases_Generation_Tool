@@ -1,0 +1,49 @@
+{
+  "generated_categories": [
+    {
+      "name": "Default Behavior",
+      "description": "Tests the default behavior of the isCurrency validator without any options provided.",
+      "generated_group_ids": ["GENERATED-1"]
+    },
+    {
+      "name": "Currency Symbol Options",
+      "description": "Tests related to the handling of currency symbols, including custom symbols, symbol placement, and spaces around symbols.",
+      "generated_group_ids": ["GENERATED-2", "GENERATED-3", "GENERATED-4", "GENERATED-5"]
+    },
+    {
+      "name": "Negative Value Handling",
+      "description": "Tests the handling of negative values, including different placements of negative signs and parentheses for negatives.",
+      "generated_group_ids": ["GENERATED-6", "GENERATED-14", "GENERATED-15", "GENERATED-16", "GENERATED-17"]
+    },
+    {
+      "name": "Separator Options",
+      "description": "Tests the handling of thousands and decimal separators.",
+      "generated_group_ids": ["GENERATED-7", "GENERATED-8"]
+    },
+    {
+      "name": "Decimal Precision",
+      "description": "Tests the handling of digits after the decimal point, including fixed and multiple allowed digit counts.",
+      "generated_group_ids": ["GENERATED-9", "GENERATED-13"]
+    },
+    {
+      "name": "Input Validation",
+      "description": "Tests the validation of input types and early return for non-string inputs.",
+      "generated_group_ids": ["GENERATED-10"]
+    },
+    {
+      "name": "Option Merging and Regex Construction",
+      "description": "Tests the merging of options and the construction of regex patterns for specific configurations.",
+      "generated_group_ids": ["GENERATED-11", "GENERATED-12"]
+    },
+    {
+      "name": "Space Handling",
+      "description": "Tests the handling of spaces after digits or symbols.",
+      "generated_group_ids": ["GENERATED-18"]
+    },
+    {
+      "name": "Decimal Requirements",
+      "description": "Tests the requirements and allowances for decimal points in currency values.",
+      "generated_group_ids": ["GENERATED-19", "GENERATED-20", "GENERATED-21"]
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+Group generated tests into generated categories for validator isURL.
+
+Generated groups:
+[
+  {
+    "title": "Basic URL validation",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com",
+      "ftp://example.com",
+      "http://example.com/path?query=value#fragment"
+    ],
+    "invalid": [
+      "",
+      "example.com",
+      "http:/example.com",
+      "http://",
+      "http://example.com:99999",
+      "http://example.com:abc"
+    ],
+    "rationale": "Tests basic URL validation with default options, including valid protocols, host presence, and port range.",
+    "obligations": [],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "Protocol requirement",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": true
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com",
+      "ftp://example.com"
+    ],
+    "invalid": [
+      "example.com",
+      "//example.com",
+      "example.com/path"
+    ],
+    "rationale": "Tests URLs with and without explicit protocols when 'require_protocol' is true.",
+    "obligations": [],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "Host requirement",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_host": false
+      }
+    ],
+    "valid": [
+      "http://",
+      "http://:8080",
+      "//:8080",
+      "ftp://"
+    ],
+    "invalid": [
+      "http://example.com",
+      "https://example.com"
+    ],
+    "rationale": "Tests URLs with and without host presence when 'require_host' is false.",
+    "obligations": [],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "Allow fragments",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_fragments": false
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "http://example.com/path?query=value"
+    ],
+    "invalid": [
+      "http://example.com#fragment",
+      "http://example.com/path#fragment"
+    ],
+    "rationale": "Tests URLs with and without fragments when 'allow_fragments' is false.",
+    "obligations": [],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "Allow query components",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_query_components": false
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "http://example.com/path"
+    ],
+    "invalid": [
+      "http://example.com?query=value",
+      "http://example.com/path?query=value&other=value"
+    ],
+    "rationale": "Tests URLs with and without query components when 'allow_query_components' is false.",
+    "obligations": [],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "Disallow authentication",
+    "validator": "isURL",
+    "args": [
+      {
+        "disallow_auth": true
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com"
+    ],
+    "invalid": [
+      "http://user:pass@example.com",
+      "http://user:@example.com",
+      "http://:pass@example.com"
+    ],
+    "rationale": "Tests URLs with and without authentication components when 'disallow_auth' is true.",
+    "obligations": [],
+    "generated_id": "GENERATED-6"
+  },
+  {
+    "title": "Validate length",
+    "validator": "isURL",
+    "args": [
+      {
+        "validate_length": true,
+        "max_allowed_length": 20
+      }
+    ],
+    "valid": [
+      "http://short.com"
+    ],
+    "invalid": [
+      "http://this-is-a-very-long-url.com"
+    ],
+    "rationale": "Tests URL length validation when 'validate_length' is true and 'max_allowed_length' is set.",
+    "obligations": [],
+    "generated_id": "GENERATED-7"
+  },
+  {
+    "title": "Custom protocol list",
+    "validator": "isURL",
+    "args": [
+      {
+        "protocols": [
+          "custom",
+          "http"
+        ]
+      }
+    ],
+    "valid": [
+      "custom://example.com",
+      "http://example.com"
+    ],
+    "invalid": [
+      "https://example.com",
+      "ftp://example.com"
+    ],
+    "rationale": "Tests URLs against a custom protocol list.",
+    "obligations": [],
+    "generated_id": "GENERATED-8"
+  }
+]

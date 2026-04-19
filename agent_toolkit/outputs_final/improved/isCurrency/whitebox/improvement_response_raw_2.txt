@@ -1,0 +1,87 @@
+{
+  "obligations": [
+    {
+      "id": "OB-23",
+      "kind": "whitebox",
+      "rule": "Cover the statement at line 24: `pattern = negative + pattern;`",
+      "why": "This statement is uncovered and corresponds to the `negative_sign_before_digits` option.",
+      "minimal_valid": "-$123.45",
+      "minimal_invalid": "$123.45"
+    },
+    {
+      "id": "OB-24",
+      "kind": "whitebox",
+      "rule": "Cover the statement at line 30: `pattern = `( (?!\\\\-))?${pattern}`;`",
+      "why": "This statement is uncovered and corresponds to the `allow_negative_sign_placeholder` option.",
+      "minimal_valid": "123.45-",
+      "minimal_invalid": "-123.45"
+    },
+    {
+      "id": "OB-25",
+      "kind": "whitebox",
+      "rule": "Cover the statement at line 34: `pattern += '( (?!$))?';`",
+      "why": "This statement is uncovered and corresponds to the `allow_space_after_digits` option.",
+      "minimal_valid": "$123.45 ",
+      "minimal_invalid": "$123.45"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Negative sign before digits",
+      "validator": "isCurrency",
+      "args": [
+        {
+          "negative_sign_before_digits": true
+        }
+      ],
+      "valid": [
+        "-$123.45"
+      ],
+      "invalid": [
+        "$123.45"
+      ],
+      "rationale": "Tests the `negative_sign_before_digits` option to cover the statement at line 24.",
+      "obligations": [
+        "OB-23"
+      ]
+    },
+    {
+      "title": "Allow negative sign placeholder",
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_negative_sign_placeholder": true
+        }
+      ],
+      "valid": [
+        "123.45-"
+      ],
+      "invalid": [
+        "-123.45"
+      ],
+      "rationale": "Tests the `allow_negative_sign_placeholder` option to cover the statement at line 30.",
+      "obligations": [
+        "OB-24"
+      ]
+    },
+    {
+      "title": "Allow space after digits",
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_space_after_digits": true
+        }
+      ],
+      "valid": [
+        "$123.45 "
+      ],
+      "invalid": [
+        "$123.45"
+      ],
+      "rationale": "Tests the `allow_space_after_digits` option to cover the statement at line 34.",
+      "obligations": [
+        "OB-25"
+      ]
+    }
+  ]
+}

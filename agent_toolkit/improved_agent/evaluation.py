@@ -43,18 +43,6 @@ def flatten_groups(groups: list[TestGroup]) -> list[EvaluationCase]:
                     obligations=group.obligations,
                 )
             )
-        for value in group.error:
-            cases.append(
-                EvaluationCase(
-                    validator=group.validator,
-                    args=group.args,
-                    input_value=value,
-                    expected_kind="throw",
-                    expected="TypeError",
-                    title=group.title,
-                    obligations=group.obligations,
-                )
-            )
     return cases
 
 
@@ -333,4 +321,14 @@ class EvaluationService:
 
 
 def load_evaluation_payload(output_json_path: Path) -> dict[str, Any]:
-    return json.loads(output_json_path.read_text(encoding="utf-8"))
+    payload = json.loads(output_json_path.read_text(encoding="utf-8"))
+    details = payload.setdefault("details", {})
+
+    coverage_details_path = output_json_path.with_name("coverage_details.json")
+    if coverage_details_path.exists():
+        coverage_details = json.loads(coverage_details_path.read_text(encoding="utf-8"))
+        details["coverage_total"] = coverage_details.get("coverage_total")
+        details["coverage_files"] = coverage_details.get("coverage_files", {})
+        details["uncovered_details"] = coverage_details.get("uncovered_details", {})
+
+    return payload

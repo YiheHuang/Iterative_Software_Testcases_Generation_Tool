@@ -1,0 +1,90 @@
+{
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "blackbox",
+      "rule": "The function must reject strings containing spaces or invalid characters like '<' or '>'.",
+      "why": "The README specifies that the input must be a valid URL, and the implementation explicitly checks for these characters.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://exa mple.com"
+    },
+    {
+      "id": "OB-2",
+      "kind": "blackbox",
+      "rule": "The function must reject strings starting with 'mailto:'.",
+      "why": "The implementation explicitly checks for and rejects URLs starting with 'mailto:'.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "mailto:example@example.com"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Reject invalid characters in URL",
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com/path?query=value"
+      ],
+      "invalid": [
+        "http://exa mple.com",
+        "http://example.com<invalid>",
+        "http://example.com>invalid"
+      ],
+      "rationale": "The function explicitly rejects URLs containing spaces or invalid characters like '<' or '>'.",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "title": "Reject URLs starting with 'mailto:'",
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com"
+      ],
+      "invalid": [
+        "mailto:example@example.com",
+        "mailto:invalid"
+      ],
+      "rationale": "The implementation explicitly checks for and rejects URLs starting with 'mailto:'.",
+      "obligations": [
+        "OB-2"
+      ]
+    }
+  ],
+  "audit": [
+    {
+      "group_title": "Reject invalid characters in URL",
+      "decision": "keep",
+      "reason": "All test cases are clearly supported by the requirement, which specifies rejection of spaces and invalid characters like '<' or '>'.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Reject URLs starting with 'mailto:'",
+      "decision": "keep",
+      "reason": "All test cases are clearly supported by the requirement, which specifies rejection of URLs starting with 'mailto:'.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Enforce maximum URL length when `validate_length` is true",
+      "decision": "drop",
+      "reason": "The README specifies a default maximum length of 2084, but the test cases do not clearly demonstrate valid or invalid URLs that align with this exact limit. Additionally, the `validate_length` option is not explicitly tested in a way that aligns with the requirement.",
+      "removed_valid": [
+        "http://example.com",
+        "http://example.com/short-url"
+      ],
+      "removed_invalid": [
+        "http://example.com/",
+        "http://example.com/very-long-url-that-exceeds-2084-characters"
+      ]
+    }
+  ]
+}

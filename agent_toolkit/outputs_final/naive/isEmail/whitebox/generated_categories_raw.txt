@@ -1,0 +1,29 @@
+{
+  "generated_categories": [
+    {
+      "name": "Basic Email Validation",
+      "description": "Tests the core functionality of email validation, including default behavior and common valid/invalid cases.",
+      "generated_group_ids": ["GENERATED-1"]
+    },
+    {
+      "name": "Display Name Handling",
+      "description": "Tests validation of emails with display names, including allowing and requiring display names.",
+      "generated_group_ids": ["GENERATED-2", "GENERATED-3"]
+    },
+    {
+      "name": "Domain Validation",
+      "description": "Tests validation of email domains, including allowing IP domains and requiring top-level domains.",
+      "generated_group_ids": ["GENERATED-4", "GENERATED-6"]
+    },
+    {
+      "name": "Character Restrictions",
+      "description": "Tests validation of emails with restrictions on characters in the local part, including blacklisted characters and disallowed UTF-8 characters.",
+      "generated_group_ids": ["GENERATED-5", "GENERATED-7"]
+    },
+    {
+      "name": "Host Restrictions",
+      "description": "Tests validation of emails with restrictions on specific host domains using a blacklist.",
+      "generated_group_ids": ["GENERATED-8"]
+    }
+  ]
+}

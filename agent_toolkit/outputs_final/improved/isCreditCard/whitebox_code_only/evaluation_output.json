@@ -1,0 +1,674 @@
+{
+  "results": [
+    {
+      "title": "Input type validation",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "\"378282246310005\"",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": false,
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "title": "Input type validation",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "1234567890123456",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "title": "Input type validation",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "null",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "title": "Input type validation",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "true",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "title": "Input type validation",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "[]",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "title": "Input type validation",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "{}",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "title": "Specific provider validation",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"amex\"}}",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": false,
+      "obligations": [
+        "OB-2"
+      ]
+    },
+    {
+      "title": "Specific provider validation",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"visa\"}}",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-2"
+      ]
+    },
+    {
+      "title": "Invalid provider error",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"invalid\"}}",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "title": "Default provider validation",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "\"378282246310005\"",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": false,
+      "obligations": [
+        "OB-4",
+        "OB-5"
+      ]
+    },
+    {
+      "title": "Default provider validation",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "\"1234567890123456\"",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-4",
+        "OB-5"
+      ]
+    },
+    {
+      "title": "Luhn algorithm validation",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "\"378282246310005\"",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": false,
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "title": "Luhn algorithm validation",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "\"378282246310006\"",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "title": "Input sanitization",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "\"3782-8224-6310-005\"",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": false,
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "title": "Input sanitization",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "\"3782 8224 6310 005\"",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": false,
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "title": "Input sanitization",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "\"1234-5678-9012-3456\"",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "title": "Input sanitization",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "\"1234 5678 9012 3456\"",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-7"
+      ]
+    }
+  ],
+  "summary": {
+    "total_cases": 17,
+    "correct_cases": 11,
+    "incorrect_cases": 6,
+    "exact_match_rate": 0.6470588235294118,
+    "by_expected_kind": {
+      "return": 17,
+      "throw": 0
+    }
+  },
+  "details": {
+    "passed_results": [
+      {
+        "title": "Input type validation",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "1234567890123456",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-1"
+        ]
+      },
+      {
+        "title": "Input type validation",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "null",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-1"
+        ]
+      },
+      {
+        "title": "Input type validation",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "true",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-1"
+        ]
+      },
+      {
+        "title": "Input type validation",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "[]",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-1"
+        ]
+      },
+      {
+        "title": "Input type validation",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "{}",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-1"
+        ]
+      },
+      {
+        "title": "Specific provider validation",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"visa\"}}",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-2"
+        ]
+      },
+      {
+        "title": "Invalid provider error",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"invalid\"}}",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-3"
+        ]
+      },
+      {
+        "title": "Default provider validation",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "\"1234567890123456\"",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-4",
+          "OB-5"
+        ]
+      },
+      {
+        "title": "Luhn algorithm validation",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "\"378282246310006\"",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-6"
+        ]
+      },
+      {
+        "title": "Input sanitization",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "\"1234-5678-9012-3456\"",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-7"
+        ]
+      },
+      {
+        "title": "Input sanitization",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "\"1234 5678 9012 3456\"",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-7"
+        ]
+      }
+    ],
+    "failed_results": [
+      {
+        "title": "Input type validation",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "\"378282246310005\"",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": [
+          "OB-1"
+        ]
+      },
+      {
+        "title": "Specific provider validation",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"amex\"}}",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": [
+          "OB-2"
+        ]
+      },
+      {
+        "title": "Default provider validation",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "\"378282246310005\"",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": [
+          "OB-4",
+          "OB-5"
+        ]
+      },
+      {
+        "title": "Luhn algorithm validation",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "\"378282246310005\"",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": [
+          "OB-6"
+        ]
+      },
+      {
+        "title": "Input sanitization",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "\"3782-8224-6310-005\"",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": [
+          "OB-7"
+        ]
+      },
+      {
+        "title": "Input sanitization",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "\"3782 8224 6310 005\"",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": [
+          "OB-7"
+        ]
+      }
+    ],
+    "by_title": {
+      "Input type validation": {
+        "total": 6,
+        "passed": 5,
+        "failed": 1
+      },
+      "Specific provider validation": {
+        "total": 2,
+        "passed": 1,
+        "failed": 1
+      },
+      "Invalid provider error": {
+        "total": 1,
+        "passed": 1,
+        "failed": 0
+      },
+      "Default provider validation": {
+        "total": 2,
+        "passed": 1,
+        "failed": 1
+      },
+      "Luhn algorithm validation": {
+        "total": 2,
+        "passed": 1,
+        "failed": 1
+      },
+      "Input sanitization": {
+        "total": 4,
+        "passed": 2,
+        "failed": 2
+      }
+    },
+    "by_obligation": {
+      "OB-1": {
+        "total": 6,
+        "passed": 5,
+        "failed": 1
+      },
+      "OB-2": {
+        "total": 2,
+        "passed": 1,
+        "failed": 1
+      },
+      "OB-3": {
+        "total": 1,
+        "passed": 1,
+        "failed": 0
+      },
+      "OB-4": {
+        "total": 2,
+        "passed": 1,
+        "failed": 1
+      },
+      "OB-5": {
+        "total": 2,
+        "passed": 1,
+        "failed": 1
+      },
+      "OB-6": {
+        "total": 2,
+        "passed": 1,
+        "failed": 1
+      },
+      "OB-7": {
+        "total": 4,
+        "passed": 2,
+        "failed": 2
+      }
+    },
+    "coverage_summary_path": null,
+    "coverage_total": null,
+    "coverage_files": {}
+  }
+}

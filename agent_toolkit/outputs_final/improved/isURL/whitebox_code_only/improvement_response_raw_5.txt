@@ -1,0 +1,81 @@
+{
+  "obligations": [
+    {
+      "id": "OB-16",
+      "kind": "whitebox",
+      "rule": "Target uncovered statement at line 125: before_slash.substring(0, at_position)",
+      "why": "This statement is part of the logic for extracting the portion before the '@' symbol in a URL, which is critical for authentication component parsing.",
+      "minimal_valid": "http://user:pass@example.com",
+      "minimal_invalid": "http://user@@example.com"
+    },
+    {
+      "id": "OB-17",
+      "kind": "whitebox",
+      "rule": "Target uncovered statement at line 126: /^[a-zA-Z0-9\\-_.%:]*$/",
+      "why": "This statement defines the regex used to validate the authentication component of a URL.",
+      "minimal_valid": "http://user:pass@example.com",
+      "minimal_invalid": "http://user:pa$$@example.com"
+    },
+    {
+      "id": "OB-18",
+      "kind": "whitebox",
+      "rule": "Target uncovered statement at line 134: if (is_valid_auth && !has_encoded_content)",
+      "why": "This conditional checks whether the authentication component is valid and does not contain encoded malicious content.",
+      "minimal_valid": "http://user:pass@example.com",
+      "minimal_invalid": "http://javascript:%61%6c%65%72%74%28%31%29@example.com"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Authentication component parsing before '@'",
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://user:pass@example.com"
+      ],
+      "invalid": [
+        "http://user@@example.com"
+      ],
+      "rationale": "Tests the extraction of the portion before the '@' symbol in a URL, targeting uncovered statement at line 125.",
+      "obligations": [
+        "OB-16"
+      ]
+    },
+    {
+      "title": "Validation of authentication component regex",
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://user:pass@example.com"
+      ],
+      "invalid": [
+        "http://user:pa$$@example.com"
+      ],
+      "rationale": "Tests the regex used to validate the authentication component, targeting uncovered statement at line 126.",
+      "obligations": [
+        "OB-17"
+      ]
+    },
+    {
+      "title": "Authentication validity and encoded content check",
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://user:pass@example.com"
+      ],
+      "invalid": [
+        "http://javascript:%61%6c%65%72%74%28%31%29@example.com"
+      ],
+      "rationale": "Tests the conditional logic for valid authentication and absence of encoded malicious content, targeting uncovered statement at line 134.",
+      "obligations": [
+        "OB-18"
+      ]
+    }
+  ]
+}

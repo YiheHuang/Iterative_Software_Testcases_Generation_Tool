@@ -1,0 +1,285 @@
+Group generated tests into generated categories for validator isFQDN.
+
+Generated groups:
+[
+  {
+    "title": "Basic Input Validation",
+    "validator": "isFQDN",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "example.com"
+    ],
+    "invalid": [
+      "123"
+    ],
+    "rationale": "Ensure the input is a string using `assertString`.",
+    "obligations": [
+      "OB-1"
+    ],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "Trailing Dot Handling",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_trailing_dot": true
+      }
+    ],
+    "valid": [
+      "example.com."
+    ],
+    "invalid": [
+      "example.com."
+    ],
+    "rationale": "Test removal of trailing dots when `allow_trailing_dot` is true.",
+    "obligations": [
+      "OB-2"
+    ],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "Wildcard Handling",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_wildcard": true
+      }
+    ],
+    "valid": [
+      "*.example.com"
+    ],
+    "invalid": [
+      "*.example.com"
+    ],
+    "rationale": "Test removal of `*.` when `allow_wildcard` is true.",
+    "obligations": [
+      "OB-3"
+    ],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "TLD Requirement",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": true
+      }
+    ],
+    "valid": [
+      "example.com"
+    ],
+    "invalid": [
+      "example"
+    ],
+    "rationale": "Ensure presence of a TLD when `require_tld` is true.",
+    "obligations": [
+      "OB-4"
+    ],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "Numeric TLD Handling",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": true
+      }
+    ],
+    "valid": [
+      "example.123"
+    ],
+    "invalid": [
+      "example.123"
+    ],
+    "rationale": "Test acceptance of numeric TLDs when `allow_numeric_tld` is true.",
+    "obligations": [
+      "OB-5"
+    ],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "Space in TLD",
+    "validator": "isFQDN",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "example.com"
+    ],
+    "invalid": [
+      "example.c om"
+    ],
+    "rationale": "Reject TLDs containing spaces.",
+    "obligations": [
+      "OB-6"
+    ],
+    "generated_id": "GENERATED-6"
+  },
+  {
+    "title": "Max Length Enforcement",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "ignore_max_length": false
+      }
+    ],
+    "valid": [
+      "a.com"
+    ],
+    "invalid": [
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"
+    ],
+    "rationale": "Reject parts exceeding 63 characters unless `ignore_max_length` is true.",
+    "obligations": [
+      "OB-7"
+    ],
+    "generated_id": "GENERATED-7"
+  },
+  {
+    "title": "Invalid Characters in Parts",
+    "validator": "isFQDN",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "example.com"
+    ],
+    "invalid": [
+      "exa$mple.com"
+    ],
+    "rationale": "Reject parts with invalid characters.",
+    "obligations": [
+      "OB-8"
+    ],
+    "generated_id": "GENERATED-8"
+  },
+  {
+    "title": "Full-Width Characters",
+    "validator": "isFQDN",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "example.com"
+    ],
+    "invalid": [
+      "\uff45\uff58\uff41\uff4d\uff50\uff4c\uff45.com"
+    ],
+    "rationale": "Reject parts containing full-width characters.",
+    "obligations": [
+      "OB-9"
+    ],
+    "generated_id": "GENERATED-9"
+  },
+  {
+    "title": "Hyphen Placement",
+    "validator": "isFQDN",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "example.com"
+    ],
+    "invalid": [
+      "-example.com"
+    ],
+    "rationale": "Reject parts starting or ending with hyphens.",
+    "obligations": [
+      "OB-10"
+    ],
+    "generated_id": "GENERATED-10"
+  },
+  {
+    "title": "Underscore Handling",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_underscores": true
+      }
+    ],
+    "valid": [
+      "example_com"
+    ],
+    "invalid": [
+      "example_com"
+    ],
+    "rationale": "Test acceptance of underscores when `allow_underscores` is true.",
+    "obligations": [
+      "OB-11"
+    ],
+    "generated_id": "GENERATED-11"
+  },
+  {
+    "title": "Require TLD Disabled",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": false
+      }
+    ],
+    "valid": [
+      "example"
+    ],
+    "invalid": [],
+    "rationale": "Ensure behavior when `require_tld` is false.",
+    "obligations": [
+      "OB-12"
+    ],
+    "generated_id": "GENERATED-12"
+  },
+  {
+    "title": "Spaces in TLD",
+    "validator": "isFQDN",
+    "args": [
+      {}
+    ],
+    "valid": [],
+    "invalid": [
+      "example.c om"
+    ],
+    "rationale": "Ensure rejection of TLDs containing spaces.",
+    "obligations": [
+      "OB-13"
+    ],
+    "generated_id": "GENERATED-13"
+  },
+  {
+    "title": "Numeric TLD Rejection",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": false
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "example.123"
+    ],
+    "rationale": "Ensure rejection of numeric TLDs when `allow_numeric_tld` is false.",
+    "obligations": [
+      "OB-14"
+    ],
+    "generated_id": "GENERATED-14"
+  },
+  {
+    "title": "Underscore Rejection",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_underscores": false
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "example_com"
+    ],
+    "rationale": "Ensure rejection of underscores when `allow_underscores` is false.",
+    "obligations": [
+      "OB-15"
+    ],
+    "generated_id": "GENERATED-15"
+  }
+]

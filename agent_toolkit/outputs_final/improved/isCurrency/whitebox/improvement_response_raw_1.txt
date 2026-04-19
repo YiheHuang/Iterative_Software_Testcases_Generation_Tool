@@ -1,0 +1,88 @@
+{
+  "obligations": [
+    {
+      "id": "OB-20",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 6: decimal_digits = `${decimal_digits}|\\\\d{${digit}}`;",
+      "why": "Ensure the `digits_after_decimal` option correctly handles multiple allowed digit counts.",
+      "minimal_valid": "$123.4",
+      "minimal_invalid": "$123.4567"
+    },
+    {
+      "id": "OB-21",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered branch at line 21: if (options.negative_sign_after_digits) { pattern += negative; }",
+      "why": "Test the `negative_sign_after_digits` option behavior.",
+      "minimal_valid": "123.45-$",
+      "minimal_invalid": "-123.45$"
+    },
+    {
+      "id": "OB-22",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered branch at line 44: if (options.parens_for_negatives) { pattern = `(\\\\(${pattern}\\\\)|${pattern})`; }",
+      "why": "Test the `parens_for_negatives` option behavior.",
+      "minimal_valid": "($123.45)",
+      "minimal_invalid": "-$123.45"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Multiple digits after decimal",
+      "validator": "isCurrency",
+      "args": [
+        {
+          "digits_after_decimal": [1, 2, 3]
+        }
+      ],
+      "valid": [
+        "$123.4",
+        "$123.45",
+        "$123.456"
+      ],
+      "invalid": [
+        "$123.4567",
+        "$123.45.6"
+      ],
+      "rationale": "Tests the handling of multiple allowed digit counts for `digits_after_decimal`.",
+      "obligations": ["OB-20"]
+    },
+    {
+      "title": "Negative sign after digits",
+      "validator": "isCurrency",
+      "args": [
+        {
+          "negative_sign_after_digits": true
+        }
+      ],
+      "valid": [
+        "123.45-$",
+        "1,234.56-$"
+      ],
+      "invalid": [
+        "-123.45$",
+        "$123.45"
+      ],
+      "rationale": "Tests the `negative_sign_after_digits` option behavior.",
+      "obligations": ["OB-21"]
+    },
+    {
+      "title": "Parentheses for negatives",
+      "validator": "isCurrency",
+      "args": [
+        {
+          "parens_for_negatives": true
+        }
+      ],
+      "valid": [
+        "($123.45)",
+        "($1,234.56)"
+      ],
+      "invalid": [
+        "-$123.45",
+        "$123.45"
+      ],
+      "rationale": "Tests the `parens_for_negatives` option behavior.",
+      "obligations": ["OB-22"]
+    }
+  ]
+}

@@ -1,0 +1,583 @@
+Group generated tests into generated categories for validator isURL.
+
+Generated groups:
+[
+  {
+    "title": "Default Options",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com",
+      "ftp://example.com"
+    ],
+    "invalid": [
+      "example",
+      "http://",
+      "mailto:example@example.com"
+    ],
+    "rationale": "Test basic URL validation with default settings.",
+    "obligations": [
+      "OB-1",
+      "OB-12",
+      "OB-13"
+    ],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "Custom Protocols",
+    "validator": "isURL",
+    "args": [
+      {
+        "protocols": [
+          "ftp",
+          "custom"
+        ]
+      }
+    ],
+    "valid": [
+      "ftp://example.com",
+      "custom://example.com"
+    ],
+    "invalid": [
+      "http://example.com",
+      "https://example.com"
+    ],
+    "rationale": "Test validation with custom protocols.",
+    "obligations": [
+      "OB-2"
+    ],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "Require Protocol",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": true
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com"
+    ],
+    "invalid": [
+      "example.com",
+      "ftp://"
+    ],
+    "rationale": "Test validation when protocol is required.",
+    "obligations": [
+      "OB-3"
+    ],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "Allow Underscores",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_underscores": true
+      }
+    ],
+    "valid": [
+      "http://example_domain.com"
+    ],
+    "invalid": [
+      "http://example_domain.com"
+    ],
+    "rationale": "Test validation when underscores are allowed in the host.",
+    "obligations": [
+      "OB-5"
+    ],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "Allow Trailing Dot",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_trailing_dot": true
+      }
+    ],
+    "valid": [
+      "http://example.com."
+    ],
+    "invalid": [
+      "http://example.com."
+    ],
+    "rationale": "Test validation when trailing dots are allowed in the host.",
+    "obligations": [
+      "OB-6"
+    ],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "Allow Protocol Relative URLs",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_protocol_relative_urls": true
+      }
+    ],
+    "valid": [
+      "//example.com"
+    ],
+    "invalid": [
+      "//example.com"
+    ],
+    "rationale": "Test validation when protocol-relative URLs are allowed.",
+    "obligations": [
+      "OB-7"
+    ],
+    "generated_id": "GENERATED-6"
+  },
+  {
+    "title": "Disallow Fragments",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_fragments": false
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://example.com#fragment"
+    ],
+    "rationale": "Test validation when fragments are disallowed.",
+    "obligations": [
+      "OB-8"
+    ],
+    "generated_id": "GENERATED-7"
+  },
+  {
+    "title": "Disallow Query Components",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_query_components": false
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://example.com?query=value"
+    ],
+    "rationale": "Test validation when query components are disallowed.",
+    "obligations": [
+      "OB-9"
+    ],
+    "generated_id": "GENERATED-8"
+  },
+  {
+    "title": "Disallow Authentication",
+    "validator": "isURL",
+    "args": [
+      {
+        "disallow_auth": true
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://user:pass@example.com"
+    ],
+    "rationale": "Test validation when authentication components are disallowed.",
+    "obligations": [
+      "OB-10"
+    ],
+    "generated_id": "GENERATED-9"
+  },
+  {
+    "title": "Validate Length",
+    "validator": "isURL",
+    "args": [
+      {
+        "validate_length": false
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://example.com"
+    ],
+    "rationale": "Test validation when length validation is disabled.",
+    "obligations": [
+      "OB-11"
+    ],
+    "generated_id": "GENERATED-10"
+  },
+  {
+    "title": "Protocol Parsing",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "javascript:alert(1)"
+    ],
+    "rationale": "Test protocol parsing logic.",
+    "obligations": [
+      "OB-14"
+    ],
+    "generated_id": "GENERATED-11"
+  },
+  {
+    "title": "Port Parsing",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_port": true
+      }
+    ],
+    "valid": [
+      "http://example.com:80"
+    ],
+    "invalid": [
+      "http://example.com:99999"
+    ],
+    "rationale": "Test port parsing logic.",
+    "obligations": [
+      "OB-15"
+    ],
+    "generated_id": "GENERATED-12"
+  },
+  {
+    "title": "IPv6 Parsing",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://[2001:db8::1]"
+    ],
+    "invalid": [
+      "http://[2001:db8::1]:99999"
+    ],
+    "rationale": "Test IPv6 parsing logic.",
+    "obligations": [
+      "OB-16"
+    ],
+    "generated_id": "GENERATED-13"
+  },
+  {
+    "title": "Host Whitelist and Blacklist",
+    "validator": "isURL",
+    "args": [
+      {
+        "host_whitelist": [
+          "allowed.com"
+        ],
+        "host_blacklist": [
+          "blocked.com"
+        ]
+      }
+    ],
+    "valid": [
+      "http://allowed.com"
+    ],
+    "invalid": [
+      "http://blocked.com"
+    ],
+    "rationale": "Test host whitelist and blacklist logic.",
+    "obligations": [
+      "OB-17"
+    ],
+    "generated_id": "GENERATED-14"
+  },
+  {
+    "title": "Authentication and Malicious Protocols",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": false
+      }
+    ],
+    "valid": [
+      "http://user:password@example.com"
+    ],
+    "invalid": [
+      "javascript:%61%6c%65%72%74%28%31%29@example.com"
+    ],
+    "rationale": "Test the condition `is_valid_auth && !has_encoded_content` to distinguish authentication from malicious protocols.",
+    "obligations": [
+      "OB-18"
+    ],
+    "generated_id": "GENERATED-15"
+  },
+  {
+    "title": "Require Protocol with Authentication",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": true
+      }
+    ],
+    "valid": [
+      "http://user:password@example.com"
+    ],
+    "invalid": [
+      "user:password@example.com"
+    ],
+    "rationale": "Test the condition `options.require_protocol` when authentication components are present.",
+    "obligations": [
+      "OB-20"
+    ],
+    "generated_id": "GENERATED-16"
+  },
+  {
+    "title": "Host Blacklist Validation",
+    "validator": "isURL",
+    "args": [
+      {
+        "host_blacklist": [
+          "blocked.com"
+        ]
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://blocked.com"
+    ],
+    "rationale": "Test the condition `options.host_blacklist && checkHost(host, options.host_blacklist)` to ensure hosts in the blacklist are rejected.",
+    "obligations": [
+      "OB-54"
+    ],
+    "generated_id": "GENERATED-17"
+  },
+  {
+    "title": "Reject URLs with Invalid Characters",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [],
+    "invalid": [
+      "http://example.com<invalid>",
+      "http://example.com invalid"
+    ],
+    "rationale": "Test rejection of URLs containing spaces or angle brackets.",
+    "obligations": [
+      "OB-101"
+    ],
+    "generated_id": "GENERATED-18"
+  },
+  {
+    "title": "Require Protocol with Looks-Like-Port URLs",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": true
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "example.com:80"
+    ],
+    "rationale": "Test rejection of URLs resembling hostname:port when `require_protocol` is enabled.",
+    "obligations": [
+      "OB-102"
+    ],
+    "generated_id": "GENERATED-19"
+  },
+  {
+    "title": "Disallow Protocol-Relative URLs",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_protocol_relative_urls": false
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "//example.com"
+    ],
+    "rationale": "Test rejection of protocol-relative URLs when the option is disabled.",
+    "obligations": [
+      "OB-103"
+    ],
+    "generated_id": "GENERATED-20"
+  },
+  {
+    "title": "Validate Length Exceeds Maximum",
+    "validator": "isURL",
+    "args": [
+      {
+        "validate_length": true,
+        "max_allowed_length": 20
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://example.com/very/long/url/that/exceeds/max/allowed/length"
+    ],
+    "rationale": "Test URL length validation when `validate_length` is enabled and the URL exceeds the maximum allowed length.",
+    "obligations": [
+      "OB-201"
+    ],
+    "generated_id": "GENERATED-21"
+  },
+  {
+    "title": "Empty URL with Require Host Disabled",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_host": false
+      }
+    ],
+    "valid": [
+      ""
+    ],
+    "invalid": [
+      "http://example.com"
+    ],
+    "rationale": "Test validation of empty URLs when `require_host` is disabled.",
+    "obligations": [
+      "OB-202"
+    ],
+    "generated_id": "GENERATED-22"
+  },
+  {
+    "title": "Invalid URL Structure with Empty Split Element",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      ":example.com"
+    ],
+    "rationale": "Test validation of URLs with an invalid structure where the split array's first element is empty.",
+    "obligations": [
+      "OB-203"
+    ],
+    "generated_id": "GENERATED-23"
+  },
+  {
+    "title": "Empty URL with Require Host Disabled",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_host": false
+      }
+    ],
+    "valid": [
+      ""
+    ],
+    "invalid": [
+      "http://example.com"
+    ],
+    "rationale": "Test validation of empty URLs when `require_host` is disabled.",
+    "obligations": [
+      "OB-204"
+    ],
+    "generated_id": "GENERATED-24"
+  },
+  {
+    "title": "Invalid URL Structure with Empty Split Element",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      ":example.com"
+    ],
+    "rationale": "Test validation of URLs with an invalid structure where the split array's first element is empty.",
+    "obligations": [
+      "OB-205"
+    ],
+    "generated_id": "GENERATED-25"
+  },
+  {
+    "title": "Invalid Authentication Format",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://user:password@example.com"
+    ],
+    "invalid": [
+      "http://user:password:extra@example.com"
+    ],
+    "rationale": "Test validation of URLs with invalid authentication format containing excessive colons.",
+    "obligations": [
+      "OB-206"
+    ],
+    "generated_id": "GENERATED-26"
+  },
+  {
+    "title": "Empty URL with Require Host Disabled",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_host": false
+      }
+    ],
+    "valid": [
+      ""
+    ],
+    "invalid": [
+      "http://example.com"
+    ],
+    "rationale": "Test validation of empty URLs when `require_host` is disabled.",
+    "obligations": [
+      "OB-301"
+    ],
+    "generated_id": "GENERATED-27"
+  },
+  {
+    "title": "Invalid URL Structure with Empty Split Element",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      ":example.com"
+    ],
+    "rationale": "Test validation of URLs with an invalid structure where the split array's first element is empty.",
+    "obligations": [
+      "OB-302"
+    ],
+    "generated_id": "GENERATED-28"
+  },
+  {
+    "title": "Invalid Authentication Format with Empty User and Password",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://user:password@example.com"
+    ],
+    "invalid": [
+      "http://:@example.com"
+    ],
+    "rationale": "Test validation of URLs with invalid authentication components where both user and password are empty.",
+    "obligations": [
+      "OB-303"
+    ],
+    "generated_id": "GENERATED-29"
+  }
+]

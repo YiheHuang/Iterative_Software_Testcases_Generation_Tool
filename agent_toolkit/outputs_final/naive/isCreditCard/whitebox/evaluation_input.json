@@ -1,0 +1,265 @@
+{
+  "cases": [
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "4111111111111111",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Valid credit card numbers without provider",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "378282246310005",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Valid credit card numbers without provider",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "6011111111111117",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Valid credit card numbers without provider",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "5555555555554444",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Valid credit card numbers without provider",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "1234567890123456",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Valid credit card numbers without provider",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "411111111111111",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Valid credit card numbers without provider",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "37828224631000",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Valid credit card numbers without provider",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "555555555555444",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Valid credit card numbers without provider",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "visa"
+        }
+      ],
+      "input_value": "4111111111111111",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Valid credit card numbers with provider",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "visa"
+        }
+      ],
+      "input_value": "4012888888881881",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Valid credit card numbers with provider",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "visa"
+        }
+      ],
+      "input_value": "378282246310005",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Valid credit card numbers with provider",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "visa"
+        }
+      ],
+      "input_value": "5555555555554444",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Valid credit card numbers with provider",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "visa"
+        }
+      ],
+      "input_value": "6011111111111117",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Valid credit card numbers with provider",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "invalidProvider"
+        }
+      ],
+      "input_value": "4111111111111111",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Invalid provider option",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "invalidProvider"
+        }
+      ],
+      "input_value": "378282246310005",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Invalid provider option",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "4111-1111-1111-1111",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Edge cases for formatting",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "4111 1111 1111 1111",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Edge cases for formatting",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "4111_1111_1111_1111",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Edge cases for formatting",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "4111.1111.1111.1111",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Edge cases for formatting",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Empty and non-numeric inputs",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "abcdefg",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Empty and non-numeric inputs",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "4111abcd1111efgh",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Empty and non-numeric inputs",
+      "obligations": []
+    }
+  ],
+  "mode": "whitebox",
+  "approach": "naive",
+  "target_source_files": [
+    "src/lib/isCreditCard.js"
+  ]
+}

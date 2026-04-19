@@ -1,0 +1,63 @@
+{
+  "obligations": [
+    {
+      "id": "OB-7",
+      "kind": "whitebox",
+      "rule": "Cover the condition at line 124: `if (at_position !== -1)` and its true/false branches.",
+      "why": "This condition checks for the presence of an '@' symbol in the URL, which is critical for distinguishing authentication components from protocols.",
+      "minimal_valid": "http://user:pass@example.com",
+      "minimal_invalid": "http://example.com"
+    },
+    {
+      "id": "OB-8",
+      "kind": "whitebox",
+      "rule": "Cover the condition at line 136: `if (options.require_protocol)` and its true/false branches.",
+      "why": "This condition enforces the presence of a protocol when the `require_protocol` option is enabled.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "example.com"
+    },
+    {
+      "id": "OB-9",
+      "kind": "whitebox",
+      "rule": "Cover the condition at line 214: `if (auth.indexOf(':') >= 0 && auth.split(':').length > 2)` and its true/false branches.",
+      "why": "This condition validates the structure of the authentication component in the URL, ensuring it does not contain malformed or excessive colons.",
+      "minimal_valid": "http://user:pass@example.com",
+      "minimal_invalid": "http://user:pass:extra@example.com"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Authentication component handling",
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://user:pass@example.com"
+      ],
+      "invalid": [
+        "http://example.com",
+        "http://user:pass:extra@example.com"
+      ],
+      "rationale": "Covers the presence of '@' in the URL and validates the structure of the authentication component.",
+      "obligations": ["OB-7", "OB-9"]
+    },
+    {
+      "title": "Protocol requirement enforcement",
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        "example.com"
+      ],
+      "rationale": "Ensures that URLs without a protocol are rejected when `require_protocol` is enabled.",
+      "obligations": ["OB-8"]
+    }
+  ]
+}

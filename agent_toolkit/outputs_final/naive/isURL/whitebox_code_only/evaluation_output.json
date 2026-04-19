@@ -1,0 +1,2858 @@
+{
+  "results": [
+    {
+      "title": "Basic URL validation",
+      "validator": "isURL",
+      "args": [
+        {
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Basic URL validation",
+      "validator": "isURL",
+      "args": [
+        {
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "https://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Basic URL validation",
+      "validator": "isURL",
+      "args": [
+        {
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "ftp://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Basic URL validation",
+      "validator": "isURL",
+      "args": [
+        {
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "http://example.com/path?query=value#fragment",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Basic URL validation",
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Basic URL validation",
+      "validator": "isURL",
+      "args": [
+        {
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": false,
+      "obligations": []
+    },
+    {
+      "title": "Basic URL validation",
+      "validator": "isURL",
+      "args": [
+        {
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "http:/example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Basic URL validation",
+      "validator": "isURL",
+      "args": [
+        {
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084
+        }
+      ],
+      "input_value": "http://",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Basic URL validation",
+      "validator": "isURL",
+      "args": [
+        {
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084
+        }
+      ],
+      "input_value": "http://example.com:99999",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Basic URL validation",
+      "validator": "isURL",
+      "args": [
+        {
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084
+        }
+      ],
+      "input_value": "http://example.com:abc",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Protocol requirement",
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Protocol requirement",
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "https://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Protocol requirement",
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "ftp://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Protocol requirement",
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084
+        }
+      ],
+      "input_value": "example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Protocol requirement",
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084
+        }
+      ],
+      "input_value": "//example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Protocol requirement",
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084
+        }
+      ],
+      "input_value": "example.com/path",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Host requirement",
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084
+        }
+      ],
+      "input_value": "http://",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": false,
+      "obligations": []
+    },
+    {
+      "title": "Host requirement",
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084
+        }
+      ],
+      "input_value": "http://:8080",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Host requirement",
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084
+        }
+      ],
+      "input_value": "//:8080",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": false,
+      "obligations": []
+    },
+    {
+      "title": "Host requirement",
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084
+        }
+      ],
+      "input_value": "ftp://",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": false,
+      "obligations": []
+    },
+    {
+      "title": "Host requirement",
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": false,
+      "obligations": []
+    },
+    {
+      "title": "Host requirement",
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "https://example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": false,
+      "obligations": []
+    },
+    {
+      "title": "Allow fragments",
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_fragments": false,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Allow fragments",
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_fragments": false,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "http://example.com/path?query=value",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Allow fragments",
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_fragments": false,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084
+        }
+      ],
+      "input_value": "http://example.com#fragment",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Allow fragments",
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_fragments": false,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084
+        }
+      ],
+      "input_value": "http://example.com/path#fragment",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Allow query components",
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_query_components": false,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "validate_length": true,
+          "max_allowed_length": 2084,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Allow query components",
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_query_components": false,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "validate_length": true,
+          "max_allowed_length": 2084,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "http://example.com/path",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Allow query components",
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_query_components": false,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "validate_length": true,
+          "max_allowed_length": 2084
+        }
+      ],
+      "input_value": "http://example.com?query=value",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Allow query components",
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_query_components": false,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "validate_length": true,
+          "max_allowed_length": 2084
+        }
+      ],
+      "input_value": "http://example.com/path?query=value&other=value",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Disallow authentication",
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Disallow authentication",
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "https://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Disallow authentication",
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084
+        }
+      ],
+      "input_value": "http://user:pass@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Disallow authentication",
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084
+        }
+      ],
+      "input_value": "http://user:@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Disallow authentication",
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084
+        }
+      ],
+      "input_value": "http://:pass@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validate length",
+      "validator": "isURL",
+      "args": [
+        {
+          "validate_length": true,
+          "max_allowed_length": 20,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "http://short.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validate length",
+      "validator": "isURL",
+      "args": [
+        {
+          "validate_length": true,
+          "max_allowed_length": 20,
+          "protocols": [
+            "http",
+            "https",
+            "ftp"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true
+        }
+      ],
+      "input_value": "http://this-is-a-very-long-url.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Custom protocol list",
+      "validator": "isURL",
+      "args": [
+        {
+          "protocols": [
+            "custom",
+            "http"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "custom://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Custom protocol list",
+      "validator": "isURL",
+      "args": [
+        {
+          "protocols": [
+            "custom",
+            "http"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Custom protocol list",
+      "validator": "isURL",
+      "args": [
+        {
+          "protocols": [
+            "custom",
+            "http"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084
+        }
+      ],
+      "input_value": "https://example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Custom protocol list",
+      "validator": "isURL",
+      "args": [
+        {
+          "protocols": [
+            "custom",
+            "http"
+          ],
+          "require_tld": true,
+          "require_protocol": false,
+          "require_host": true,
+          "require_port": false,
+          "require_valid_protocol": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_protocol_relative_urls": false,
+          "allow_fragments": true,
+          "allow_query_components": true,
+          "validate_length": true,
+          "max_allowed_length": 2084
+        }
+      ],
+      "input_value": "ftp://example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    }
+  ],
+  "summary": {
+    "total_cases": 41,
+    "correct_cases": 35,
+    "incorrect_cases": 6,
+    "exact_match_rate": 0.8536585365853658,
+    "by_expected_kind": {
+      "return": 41,
+      "throw": 0
+    }
+  },
+  "details": {
+    "passed_results": [
+      {
+        "title": "Basic URL validation",
+        "validator": "isURL",
+        "args": [
+          {
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http://example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Basic URL validation",
+        "validator": "isURL",
+        "args": [
+          {
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "https://example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Basic URL validation",
+        "validator": "isURL",
+        "args": [
+          {
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "ftp://example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Basic URL validation",
+        "validator": "isURL",
+        "args": [
+          {
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http://example.com/path?query=value#fragment",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Basic URL validation",
+        "validator": "isURL",
+        "args": [
+          {}
+        ],
+        "input_value": "",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Basic URL validation",
+        "validator": "isURL",
+        "args": [
+          {
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http:/example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Basic URL validation",
+        "validator": "isURL",
+        "args": [
+          {
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084
+          }
+        ],
+        "input_value": "http://",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Basic URL validation",
+        "validator": "isURL",
+        "args": [
+          {
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084
+          }
+        ],
+        "input_value": "http://example.com:99999",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Basic URL validation",
+        "validator": "isURL",
+        "args": [
+          {
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084
+          }
+        ],
+        "input_value": "http://example.com:abc",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Protocol requirement",
+        "validator": "isURL",
+        "args": [
+          {
+            "require_protocol": true,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http://example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Protocol requirement",
+        "validator": "isURL",
+        "args": [
+          {
+            "require_protocol": true,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "https://example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Protocol requirement",
+        "validator": "isURL",
+        "args": [
+          {
+            "require_protocol": true,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "ftp://example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Protocol requirement",
+        "validator": "isURL",
+        "args": [
+          {
+            "require_protocol": true,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084
+          }
+        ],
+        "input_value": "example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Protocol requirement",
+        "validator": "isURL",
+        "args": [
+          {
+            "require_protocol": true,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084
+          }
+        ],
+        "input_value": "//example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Protocol requirement",
+        "validator": "isURL",
+        "args": [
+          {
+            "require_protocol": true,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084
+          }
+        ],
+        "input_value": "example.com/path",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Host requirement",
+        "validator": "isURL",
+        "args": [
+          {
+            "require_host": false,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084
+          }
+        ],
+        "input_value": "http://:8080",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Allow fragments",
+        "validator": "isURL",
+        "args": [
+          {
+            "allow_fragments": false,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http://example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Allow fragments",
+        "validator": "isURL",
+        "args": [
+          {
+            "allow_fragments": false,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http://example.com/path?query=value",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Allow fragments",
+        "validator": "isURL",
+        "args": [
+          {
+            "allow_fragments": false,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084
+          }
+        ],
+        "input_value": "http://example.com#fragment",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Allow fragments",
+        "validator": "isURL",
+        "args": [
+          {
+            "allow_fragments": false,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084
+          }
+        ],
+        "input_value": "http://example.com/path#fragment",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Allow query components",
+        "validator": "isURL",
+        "args": [
+          {
+            "allow_query_components": false,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http://example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Allow query components",
+        "validator": "isURL",
+        "args": [
+          {
+            "allow_query_components": false,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http://example.com/path",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Allow query components",
+        "validator": "isURL",
+        "args": [
+          {
+            "allow_query_components": false,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "validate_length": true,
+            "max_allowed_length": 2084
+          }
+        ],
+        "input_value": "http://example.com?query=value",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Allow query components",
+        "validator": "isURL",
+        "args": [
+          {
+            "allow_query_components": false,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "validate_length": true,
+            "max_allowed_length": 2084
+          }
+        ],
+        "input_value": "http://example.com/path?query=value&other=value",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Disallow authentication",
+        "validator": "isURL",
+        "args": [
+          {
+            "disallow_auth": true,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http://example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Disallow authentication",
+        "validator": "isURL",
+        "args": [
+          {
+            "disallow_auth": true,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "https://example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Disallow authentication",
+        "validator": "isURL",
+        "args": [
+          {
+            "disallow_auth": true,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084
+          }
+        ],
+        "input_value": "http://user:pass@example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Disallow authentication",
+        "validator": "isURL",
+        "args": [
+          {
+            "disallow_auth": true,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084
+          }
+        ],
+        "input_value": "http://user:@example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Disallow authentication",
+        "validator": "isURL",
+        "args": [
+          {
+            "disallow_auth": true,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084
+          }
+        ],
+        "input_value": "http://:pass@example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validate length",
+        "validator": "isURL",
+        "args": [
+          {
+            "validate_length": true,
+            "max_allowed_length": 20,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http://short.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validate length",
+        "validator": "isURL",
+        "args": [
+          {
+            "validate_length": true,
+            "max_allowed_length": 20,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true
+          }
+        ],
+        "input_value": "http://this-is-a-very-long-url.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Custom protocol list",
+        "validator": "isURL",
+        "args": [
+          {
+            "protocols": [
+              "custom",
+              "http"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "custom://example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Custom protocol list",
+        "validator": "isURL",
+        "args": [
+          {
+            "protocols": [
+              "custom",
+              "http"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http://example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Custom protocol list",
+        "validator": "isURL",
+        "args": [
+          {
+            "protocols": [
+              "custom",
+              "http"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084
+          }
+        ],
+        "input_value": "https://example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Custom protocol list",
+        "validator": "isURL",
+        "args": [
+          {
+            "protocols": [
+              "custom",
+              "http"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084
+          }
+        ],
+        "input_value": "ftp://example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      }
+    ],
+    "failed_results": [
+      {
+        "title": "Basic URL validation",
+        "validator": "isURL",
+        "args": [
+          {
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "Host requirement",
+        "validator": "isURL",
+        "args": [
+          {
+            "require_host": false,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084
+          }
+        ],
+        "input_value": "http://",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "Host requirement",
+        "validator": "isURL",
+        "args": [
+          {
+            "require_host": false,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084
+          }
+        ],
+        "input_value": "//:8080",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "Host requirement",
+        "validator": "isURL",
+        "args": [
+          {
+            "require_host": false,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084
+          }
+        ],
+        "input_value": "ftp://",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "Host requirement",
+        "validator": "isURL",
+        "args": [
+          {
+            "require_host": false,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http://example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "Host requirement",
+        "validator": "isURL",
+        "args": [
+          {
+            "require_host": false,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "https://example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": []
+      }
+    ],
+    "by_title": {
+      "Basic URL validation": {
+        "total": 10,
+        "passed": 9,
+        "failed": 1
+      },
+      "Protocol requirement": {
+        "total": 6,
+        "passed": 6,
+        "failed": 0
+      },
+      "Host requirement": {
+        "total": 6,
+        "passed": 1,
+        "failed": 5
+      },
+      "Allow fragments": {
+        "total": 4,
+        "passed": 4,
+        "failed": 0
+      },
+      "Allow query components": {
+        "total": 4,
+        "passed": 4,
+        "failed": 0
+      },
+      "Disallow authentication": {
+        "total": 5,
+        "passed": 5,
+        "failed": 0
+      },
+      "Validate length": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      },
+      "Custom protocol list": {
+        "total": 4,
+        "passed": 4,
+        "failed": 0
+      }
+    },
+    "by_obligation": {},
+    "coverage_summary_path": null,
+    "coverage_total": null,
+    "coverage_files": {}
+  }
+}

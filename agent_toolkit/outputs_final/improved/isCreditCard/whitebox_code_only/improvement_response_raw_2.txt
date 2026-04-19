@@ -1,0 +1,79 @@
+{
+  "obligations": [
+    {
+      "id": "OB-8",
+      "kind": "whitebox",
+      "rule": "Test the `if` condition at line 31 for both true and false branches.",
+      "why": "This condition is currently uncovered, and its branches determine whether the function returns `false` based on the provider's regex test.",
+      "minimal_valid": "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"amex\"}}",
+      "minimal_invalid": "{\"card\": \"378282246310006\", \"options\": {\"provider\": \"amex\"}}"
+    },
+    {
+      "id": "OB-9",
+      "kind": "whitebox",
+      "rule": "Test the `else if` condition at line 34 for the true branch.",
+      "why": "This condition is currently uncovered, and its true branch throws an error for invalid providers.",
+      "minimal_valid": null,
+      "minimal_invalid": "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"invalid\"}}"
+    },
+    {
+      "id": "OB-10",
+      "kind": "whitebox",
+      "rule": "Test the `return isLuhnValid(card)` statement at line 41.",
+      "why": "This statement is currently uncovered and determines the final validation result based on the Luhn algorithm.",
+      "minimal_valid": "\"378282246310005\"",
+      "minimal_invalid": "\"378282246310006\""
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Provider regex validation",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"amex\"}}"
+      ],
+      "invalid": [
+        "{\"card\": \"378282246310006\", \"options\": {\"provider\": \"amex\"}}"
+      ],
+      "rationale": "Covers the `if` condition at line 31 for both true and false branches, ensuring the provider's regex test is applied correctly.",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "title": "Invalid provider error handling",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [],
+      "invalid": [
+        "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"invalid\"}}"
+      ],
+      "rationale": "Covers the `else if` condition at line 34 for the true branch, ensuring an error is thrown for invalid providers.",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "title": "Luhn algorithm final validation",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "\"378282246310005\""
+      ],
+      "invalid": [
+        "\"378282246310006\""
+      ],
+      "rationale": "Covers the `return isLuhnValid(card)` statement at line 41, ensuring the final validation result is based on the Luhn algorithm.",
+      "obligations": [
+        "OB-10"
+      ]
+    }
+  ]
+}

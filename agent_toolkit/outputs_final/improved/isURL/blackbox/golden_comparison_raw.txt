@@ -1,0 +1,109 @@
+{
+  "golden_to_generated": [
+    {
+      "golden_category_id": "GC-1",
+      "matched_generated_category_ids": ["GENC-1"],
+      "match_type": "strong",
+      "reason": "The generated category 'Default Validation' aligns with 'Basic URL Validation' as both cover general URL validation with standard protocols and formats."
+    },
+    {
+      "golden_category_id": "GC-2",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "strong",
+      "reason": "The generated category 'Protocol Requirements' matches 'Localhost and Non-TLD URLs' as both address protocol requirements and validation for non-standard URLs."
+    },
+    {
+      "golden_category_id": "GC-3",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "The generated category 'Protocol Requirements' partially overlaps with 'Protocol Handling' as it includes enforcing or validating protocols but does not cover custom protocols or protocol validation comprehensively."
+    },
+    {
+      "golden_category_id": "GC-4",
+      "matched_generated_category_ids": ["GENC-3"],
+      "match_type": "partial",
+      "reason": "The generated category 'Host Validation' partially overlaps with 'Underscore Handling' as it includes host validation but does not specifically focus on underscores in hostnames."
+    },
+    {
+      "golden_category_id": "GC-5",
+      "matched_generated_category_ids": ["GENC-3"],
+      "match_type": "partial",
+      "reason": "The generated category 'Host Validation' partially overlaps with 'TLD and Trailing Dot Handling' as it includes host validation but does not specifically address TLDs or trailing dots."
+    },
+    {
+      "golden_category_id": "GC-6",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "The generated category 'Protocol Requirements' partially overlaps with 'Protocol Relative URLs' as it includes protocol-related validation but does not specifically address protocol-relative URLs."
+    },
+    {
+      "golden_category_id": "GC-7",
+      "matched_generated_category_ids": ["GENC-5"],
+      "match_type": "strong",
+      "reason": "The generated category 'URL Components Validation' aligns with 'Fragment and Query Component Handling' as both address validation of fragments and query components in URLs."
+    },
+    {
+      "golden_category_id": "GC-8",
+      "matched_generated_category_ids": ["GENC-5"],
+      "match_type": "strong",
+      "reason": "The generated category 'URL Components Validation' aligns with 'Authentication Handling' as both address validation of authentication information in URLs."
+    },
+    {
+      "golden_category_id": "GC-9",
+      "matched_generated_category_ids": ["GENC-3"],
+      "match_type": "strong",
+      "reason": "The generated category 'Host Validation' aligns with 'Host Validation' as both address hostname validation, including whitelists and blacklists."
+    },
+    {
+      "golden_category_id": "GC-10",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "The generated category 'Protocol Requirements' partially overlaps with 'Security and Vulnerability Handling' as it includes protocol validation but does not specifically address security vulnerabilities."
+    },
+    {
+      "golden_category_id": "GC-11",
+      "matched_generated_category_ids": ["GENC-6"],
+      "match_type": "strong",
+      "reason": "The generated category 'Length Validation' aligns with 'Length Validation' as both address URL length constraints."
+    }
+  ],
+  "generated_to_golden": [
+    {
+      "generated_category_id": "GENC-1",
+      "matched_golden_category_ids": ["GC-1"],
+      "match_type": "strong",
+      "reason": "The generated category 'Default Validation' aligns with 'Basic URL Validation' as both cover general URL validation with standard protocols and formats."
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "matched_golden_category_ids": ["GC-2", "GC-3", "GC-6", "GC-10"],
+      "match_type": "partial",
+      "reason": "The generated category 'Protocol Requirements' spans multiple golden categories as it addresses protocol validation, including enforcing protocols, handling custom protocols, and security-related cases."
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "matched_golden_category_ids": ["GC-4", "GC-5", "GC-9"],
+      "match_type": "partial",
+      "reason": "The generated category 'Host Validation' spans multiple golden categories as it includes host validation, handling underscores, and TLD-related cases."
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "matched_golden_category_ids": ["GC-1"],
+      "match_type": "partial",
+      "reason": "The generated category 'Port Validation' partially overlaps with 'Basic URL Validation' as it includes port validation, which is a subset of general URL validation."
+    },
+    {
+      "generated_category_id": "GENC-5",
+      "matched_golden_category_ids": ["GC-7", "GC-8"],
+      "match_type": "strong",
+      "reason": "The generated category 'URL Components Validation' aligns with 'Fragment and Query Component Handling' and 'Authentication Handling' as it addresses validation of these specific URL components."
+    },
+    {
+      "generated_category_id": "GENC-6",
+      "matched_golden_category_ids": ["GC-11"],
+      "match_type": "strong",
+      "reason": "The generated category 'Length Validation' aligns with 'Length Validation' as both address URL length constraints."
+    }
+  ],
+  "novel_generated_categories": []
+}

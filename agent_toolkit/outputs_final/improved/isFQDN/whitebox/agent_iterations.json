@@ -1,0 +1,91 @@
+{
+  "iteration_count": 2,
+  "revert_count": 3,
+  "total_attempts": 4,
+  "max_attempts": 6,
+  "feedback_sources": [
+    "coverage"
+  ],
+  "golden_feedback_used": false,
+  "final_decision": "stop_after_reverts",
+  "coverage_score": {
+    "lines": 93.94,
+    "statements": 94.12,
+    "functions": 100.0,
+    "branches": 94.74
+  },
+  "iterations": [
+    {
+      "iteration": 1,
+      "decision": "initial",
+      "coverage_score": {
+        "lines": 87.88,
+        "statements": 88.24,
+        "functions": 100.0,
+        "branches": 86.84
+      }
+    },
+    {
+      "iteration": 2,
+      "decision": "accept_patch",
+      "candidate_group_count": 11,
+      "coverage_score": {
+        "lines": 93.94,
+        "statements": 94.12,
+        "functions": 100.0,
+        "branches": 94.74
+      }
+    },
+    {
+      "iteration": 3,
+      "decision": "revert_patch",
+      "candidate_group_count": 11,
+      "candidate_coverage_score": {
+        "lines": 90.91,
+        "statements": 91.18,
+        "functions": 100.0,
+        "branches": 92.11
+      },
+      "current_coverage_score": {
+        "lines": 93.94,
+        "statements": 94.12,
+        "functions": 100.0,
+        "branches": 94.74
+      }
+    },
+    {
+      "iteration": 4,
+      "decision": "revert_patch",
+      "candidate_group_count": 11,
+      "candidate_coverage_score": {
+        "lines": 90.91,
+        "statements": 91.18,
+        "functions": 100.0,
+        "branches": 92.11
+      },
+      "current_coverage_score": {
+        "lines": 93.94,
+        "statements": 94.12,
+        "functions": 100.0,
+        "branches": 94.74
+      }
+    },
+    {
+      "iteration": 5,
+      "decision": "revert_patch",
+      "candidate_group_count": 11,
+      "candidate_coverage_score": {
+        "lines": 90.91,
+        "statements": 91.18,
+        "functions": 100.0,
+        "branches": 92.11
+      },
+      "current_coverage_score": {
+        "lines": 93.94,
+        "statements": 94.12,
+        "functions": 100.0,
+        "branches": 94.74
+      }
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "blackbox",
+      "rule": "Default behavior: validate URLs with protocols ['http', 'https', 'ftp'], require TLD, allow fragments and query components, disallow underscores, and enforce length validation.",
+      "why": "Baseline behavior as described in the README.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "example"
+    },
+    {
+      "id": "OB-2",
+      "kind": "blackbox",
+      "rule": "Option `require_protocol`: URLs must include a protocol when set to true.",
+      "why": "Explicitly documented option affecting validation behavior.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "example.com"
+    },
+    {
+      "id": "OB-3",
+      "kind": "blackbox",
+      "rule": "Option `require_host`: URLs must include a host when set to true.",
+      "why": "Explicitly documented option affecting validation behavior.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://"
+    },
+    {
+      "id": "OB-4",
+      "kind": "blackbox",
+      "rule": "Option `require_port`: URLs must include a port when set to true.",
+      "why": "Explicitly documented option affecting validation behavior.",
+      "minimal_valid": "http://example.com:80",
+      "minimal_invalid": "http://example.com"
+    },
+    {
+      "id": "OB-5",
+      "kind": "blackbox",
+      "rule": "Option `require_valid_protocol`: Protocols must match the `protocols` list when set to true.",
+      "why": "Explicitly documented option affecting validation behavior.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "custom://example.com"
+    },
+    {
+      "id": "OB-6",
+      "kind": "blackbox",
+      "rule": "Option `allow_underscores`: URLs may include underscores in the host when set to true.",
+      "why": "Explicitly documented option affecting validation behavior.",
+      "minimal_valid": "http://example_com",
+      "minimal_invalid": "http://example.com"
+    },
+    {
+      "id": "OB-7",
+      "kind": "blackbox",
+      "rule": "Option `host_whitelist`: Only hosts matching the whitelist are valid.",
+      "why": "Explicitly documented option affecting validation behavior.",
+      "minimal_valid": "http://allowed.com",
+      "minimal_invalid": "http://blocked.com"
+    },
+    {
+      "id": "OB-8",
+      "kind": "blackbox",
+      "rule": "Option `host_blacklist`: Hosts matching the blacklist are invalid.",
+      "why": "Explicitly documented option affecting validation behavior.",
+      "minimal_valid": "http://allowed.com",
+      "minimal_invalid": "http://blocked.com"
+    },
+    {
+      "id": "OB-9",
+      "kind": "blackbox",
+      "rule": "Option `allow_trailing_dot`: URLs may end with a trailing dot when set to true.",
+      "why": "Explicitly documented option affecting validation behavior.",
+      "minimal_valid": "http://example.com.",
+      "minimal_invalid": "http://example.com"
+    },
+    {
+      "id": "OB-10",
+      "kind": "blackbox",
+      "rule": "Option `allow_protocol_relative_urls`: Protocol-relative URLs are valid when set to true.",
+      "why": "Explicitly documented option affecting validation behavior.",
+      "minimal_valid": "//example.com",
+      "minimal_invalid": "example.com"
+    },
+    {
+      "id": "OB-11",
+      "kind": "blackbox",
+      "rule": "Option `allow_fragments`: URLs may include fragments when set to true.",
+      "why": "Explicitly documented option affecting validation behavior.",
+      "minimal_valid": "http://example.com#fragment",
+      "minimal_invalid": "http://example.com"
+    },
+    {
+      "id": "OB-12",
+      "kind": "blackbox",
+      "rule": "Option `allow_query_components`: URLs may include query components when set to true.",
+      "why": "Explicitly documented option affecting validation behavior.",
+      "minimal_valid": "http://example.com?query=value",
+      "minimal_invalid": "http://example.com"
+    },
+    {
+      "id": "OB-13",
+      "kind": "blackbox",
+      "rule": "Option `disallow_auth`: URLs with authentication components are invalid when set to true.",
+      "why": "Explicitly documented option affecting validation behavior.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://user:pass@example.com"
+    },
+    {
+      "id": "OB-14",
+      "kind": "blackbox",
+      "rule": "Option `validate_length`: URLs exceeding the maximum length are invalid when set to true.",
+      "why": "Explicitly documented option affecting validation behavior.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": null
+    }
+  ],
+  "test_groups": []
+}

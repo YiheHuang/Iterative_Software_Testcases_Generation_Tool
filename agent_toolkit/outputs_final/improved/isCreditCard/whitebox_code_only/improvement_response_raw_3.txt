@@ -1,0 +1,77 @@
+{
+  "obligations": [
+    {
+      "id": "OB-8",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of `if (provider && provider.toLowerCase() in cards)` at line 29.",
+      "why": "This branch is currently uncovered and ensures that the function correctly handles cases where a valid provider is specified.",
+      "minimal_valid": "{\"card\": \"4111111111111111\", \"options\": {\"provider\": \"visa\"}}",
+      "minimal_invalid": "{\"card\": \"4111111111111111\", \"options\": {\"provider\": \"amex\"}}"
+    },
+    {
+      "id": "OB-9",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of `if (!(cards[provider.toLowerCase()].test(sanitized)))` at line 31.",
+      "why": "This branch is currently uncovered and ensures that the function correctly rejects cards that do not match the specified provider's pattern.",
+      "minimal_valid": null,
+      "minimal_invalid": "{\"card\": \"4111111111111111\", \"options\": {\"provider\": \"amex\"}}"
+    },
+    {
+      "id": "OB-10",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of `if (provider && !(provider.toLowerCase() in cards))` at line 34.",
+      "why": "This branch is currently uncovered and ensures that the function throws an error for providers not in the list.",
+      "minimal_valid": null,
+      "minimal_invalid": "{\"card\": \"4111111111111111\", \"options\": {\"provider\": \"invalid\"}}"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Valid provider match",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "{\"card\": \"4111111111111111\", \"options\": {\"provider\": \"visa\"}}"
+      ],
+      "invalid": [
+        "{\"card\": \"4111111111111111\", \"options\": {\"provider\": \"amex\"}}"
+      ],
+      "rationale": "Test the true branch of `if (provider && provider.toLowerCase() in cards)` to ensure valid providers are correctly matched.",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "title": "Provider mismatch rejection",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [],
+      "invalid": [
+        "{\"card\": \"4111111111111111\", \"options\": {\"provider\": \"amex\"}}"
+      ],
+      "rationale": "Test the true branch of `if (!(cards[provider.toLowerCase()].test(sanitized)))` to ensure cards not matching the provider's pattern are rejected.",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "title": "Invalid provider error handling",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [],
+      "invalid": [
+        "{\"card\": \"4111111111111111\", \"options\": {\"provider\": \"invalid\"}}"
+      ],
+      "rationale": "Test the true branch of `if (provider && !(provider.toLowerCase() in cards))` to ensure an error is thrown for invalid providers.",
+      "obligations": [
+        "OB-10"
+      ]
+    }
+  ]
+}

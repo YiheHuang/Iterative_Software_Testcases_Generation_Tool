@@ -1,0 +1,346 @@
+{
+  "golden_categories": [
+    {
+      "golden_category_id": "GC-1",
+      "name": "Basic URL Validation",
+      "description": "Covers general URL validation with standard protocols and formats.",
+      "golden_group_ids": [
+        "GOLDEN-1",
+        "GOLDEN-12",
+        "GOLDEN-31"
+      ]
+    },
+    {
+      "golden_category_id": "GC-2",
+      "name": "Localhost and Non-TLD URLs",
+      "description": "Tests for validating URLs without protocols or with localhost and non-TLD domains.",
+      "golden_group_ids": [
+        "GOLDEN-2",
+        "GOLDEN-18"
+      ]
+    },
+    {
+      "golden_category_id": "GC-3",
+      "name": "Protocol Handling",
+      "description": "Tests related to handling protocols, including custom protocols and protocol validation.",
+      "golden_group_ids": [
+        "GOLDEN-3",
+        "GOLDEN-4",
+        "GOLDEN-5",
+        "GOLDEN-6",
+        "GOLDEN-7",
+        "GOLDEN-8",
+        "GOLDEN-13",
+        "GOLDEN-21"
+      ]
+    },
+    {
+      "golden_category_id": "GC-4",
+      "name": "Underscore Handling",
+      "description": "Tests for validating URLs with underscores in the hostname.",
+      "golden_group_ids": [
+        "GOLDEN-9"
+      ]
+    },
+    {
+      "golden_category_id": "GC-5",
+      "name": "TLD and Trailing Dot Handling",
+      "description": "Tests for URLs without TLDs and with trailing dots.",
+      "golden_group_ids": [
+        "GOLDEN-10",
+        "GOLDEN-11"
+      ]
+    },
+    {
+      "golden_category_id": "GC-6",
+      "name": "Protocol Relative URLs",
+      "description": "Tests for handling protocol-relative URLs and related options.",
+      "golden_group_ids": [
+        "GOLDEN-14",
+        "GOLDEN-17"
+      ]
+    },
+    {
+      "golden_category_id": "GC-7",
+      "name": "Fragment and Query Component Handling",
+      "description": "Tests for handling fragments and query components in URLs.",
+      "golden_group_ids": [
+        "GOLDEN-15",
+        "GOLDEN-16"
+      ]
+    },
+    {
+      "golden_category_id": "GC-8",
+      "name": "Authentication Handling",
+      "description": "Tests for handling authentication information in URLs.",
+      "golden_group_ids": [
+        "GOLDEN-19",
+        "GOLDEN-20",
+        "GOLDEN-27",
+        "GOLDEN-28"
+      ]
+    },
+    {
+      "golden_category_id": "GC-9",
+      "name": "Host Validation",
+      "description": "Tests for validating hostnames, including whitelists, blacklists, and regular expressions.",
+      "golden_group_ids": [
+        "GOLDEN-22",
+        "GOLDEN-23",
+        "GOLDEN-24",
+        "GOLDEN-25"
+      ]
+    },
+    {
+      "golden_category_id": "GC-10",
+      "name": "Security and Vulnerability Handling",
+      "description": "Tests for handling security-related cases, such as rejecting invalid protocols and parsing differences.",
+      "golden_group_ids": [
+        "GOLDEN-26"
+      ]
+    },
+    {
+      "golden_category_id": "GC-11",
+      "name": "Length Validation",
+      "description": "Tests for validating URL length and configuring maximum allowed length.",
+      "golden_group_ids": [
+        "GOLDEN-29",
+        "GOLDEN-30"
+      ]
+    }
+  ],
+  "generated_categories": [
+    {
+      "generated_category_id": "GENC-1",
+      "name": "Basic URL Validation",
+      "description": "Tests fundamental URL validation including protocols, host presence, and port range with default options.",
+      "generated_group_ids": [
+        "GENERATED-1"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "name": "Protocol and Host Requirements",
+      "description": "Tests specific requirements for protocol presence and host presence in URLs.",
+      "generated_group_ids": [
+        "GENERATED-2",
+        "GENERATED-3"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "name": "Fragment and Query Component Handling",
+      "description": "Tests the handling of fragments and query components in URLs based on configuration options.",
+      "generated_group_ids": [
+        "GENERATED-4",
+        "GENERATED-5"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "name": "Authentication Handling",
+      "description": "Tests URLs with and without authentication components when authentication is disallowed.",
+      "generated_group_ids": [
+        "GENERATED-6"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-5",
+      "name": "Length Validation",
+      "description": "Tests URL length validation based on maximum allowed length.",
+      "generated_group_ids": [
+        "GENERATED-7"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-6",
+      "name": "Custom Protocol Validation",
+      "description": "Tests URLs against a custom list of allowed protocols.",
+      "generated_group_ids": [
+        "GENERATED-8"
+      ]
+    }
+  ],
+  "golden_to_generated": [
+    {
+      "golden_category_id": "GC-1",
+      "matched_generated_category_ids": [
+        "GENC-1"
+      ],
+      "match_type": "strong",
+      "reason": "Both categories focus on basic URL validation, including protocols, host presence, and port range."
+    },
+    {
+      "golden_category_id": "GC-2",
+      "matched_generated_category_ids": [
+        "GENC-2"
+      ],
+      "match_type": "strong",
+      "reason": "Both categories address protocol and host requirements, including localhost and non-TLD URLs."
+    },
+    {
+      "golden_category_id": "GC-3",
+      "matched_generated_category_ids": [
+        "GENC-6"
+      ],
+      "match_type": "partial",
+      "reason": "GENC-6 covers custom protocol validation, which overlaps with GC-3's protocol handling but does not fully encompass all aspects of protocol validation."
+    },
+    {
+      "golden_category_id": "GC-4",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category addresses underscore handling in URLs."
+    },
+    {
+      "golden_category_id": "GC-5",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category addresses TLD and trailing dot handling."
+    },
+    {
+      "golden_category_id": "GC-6",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category addresses protocol-relative URLs."
+    },
+    {
+      "golden_category_id": "GC-7",
+      "matched_generated_category_ids": [
+        "GENC-3"
+      ],
+      "match_type": "strong",
+      "reason": "Both categories focus on handling fragments and query components in URLs."
+    },
+    {
+      "golden_category_id": "GC-8",
+      "matched_generated_category_ids": [
+        "GENC-4"
+      ],
+      "match_type": "partial",
+      "reason": "GENC-4 addresses authentication handling but focuses on disallowing authentication, which is only part of GC-8's scope."
+    },
+    {
+      "golden_category_id": "GC-9",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category addresses host validation, including whitelists and blacklists."
+    },
+    {
+      "golden_category_id": "GC-10",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category addresses security and vulnerability handling."
+    },
+    {
+      "golden_category_id": "GC-11",
+      "matched_generated_category_ids": [
+        "GENC-5"
+      ],
+      "match_type": "strong",
+      "reason": "Both categories focus on URL length validation, including maximum allowed length."
+    }
+  ],
+  "generated_to_golden": [
+    {
+      "generated_category_id": "GENC-1",
+      "matched_golden_category_ids": [
+        "GC-1"
+      ],
+      "match_type": "strong",
+      "reason": "GENC-1 aligns with GC-1 in testing fundamental URL validation, including protocols, host presence, and port range."
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "matched_golden_category_ids": [
+        "GC-2"
+      ],
+      "match_type": "strong",
+      "reason": "GENC-2 aligns with GC-2 in addressing protocol and host requirements, including localhost and non-TLD URLs."
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "matched_golden_category_ids": [
+        "GC-7"
+      ],
+      "match_type": "strong",
+      "reason": "GENC-3 aligns with GC-7 in focusing on handling fragments and query components in URLs."
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "matched_golden_category_ids": [
+        "GC-8"
+      ],
+      "match_type": "partial",
+      "reason": "GENC-4 overlaps with GC-8 in authentication handling but focuses specifically on disallowing authentication."
+    },
+    {
+      "generated_category_id": "GENC-5",
+      "matched_golden_category_ids": [
+        "GC-11"
+      ],
+      "match_type": "strong",
+      "reason": "GENC-5 aligns with GC-11 in testing URL length validation, including maximum allowed length."
+    },
+    {
+      "generated_category_id": "GENC-6",
+      "matched_golden_category_ids": [
+        "GC-3"
+      ],
+      "match_type": "partial",
+      "reason": "GENC-6 overlaps with GC-3 in custom protocol validation but does not fully cover all aspects of protocol handling."
+    }
+  ],
+  "novel_generated_categories": [],
+  "missing_golden_categories": [
+    {
+      "golden_category_id": "GC-4",
+      "golden_category_name": "Underscore Handling",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-5",
+      "golden_category_name": "TLD and Trailing Dot Handling",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-6",
+      "golden_category_name": "Protocol Relative URLs",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-9",
+      "golden_category_name": "Host Validation",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-10",
+      "golden_category_name": "Security and Vulnerability Handling",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    }
+  ],
+  "summary": {
+    "total_golden_categories": 11,
+    "total_generated_categories": 6,
+    "overlap_golden_categories": 6,
+    "missing_golden_categories": 5,
+    "matched_generated_categories": 6,
+    "novel_generated_categories": 0,
+    "strong_golden_category_matches": 4,
+    "partial_golden_category_matches": 2,
+    "fragmented_golden_matches": 0,
+    "matched_golden_ratio": 0.5454545454545454,
+    "total_golden_groups": 11,
+    "total_generated_groups": 6,
+    "overlap_golden_groups": 6,
+    "missing_golden_groups": 5,
+    "novel_valid_groups": 0,
+    "exact_or_near_overlap_groups": 6,
+    "golden_groups_with_semantic_match": 6,
+    "generated_groups_with_semantic_match": 6,
+    "novel_valid_categories": 0
+  },
+  "golden_source_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\golden\\isURL\\isURL_golden_tests.json",
+  "golden_categories_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\golden\\isURL\\isURL_golden_categories.json",
+  "generated_categories_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\naive\\isURL\\whitebox_code_only\\generated_categories.json"
+}

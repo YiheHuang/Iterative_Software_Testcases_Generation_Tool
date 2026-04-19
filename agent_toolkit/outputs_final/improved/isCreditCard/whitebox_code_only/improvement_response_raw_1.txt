@@ -1,0 +1,69 @@
+{
+  "obligations": [
+    {
+      "id": "OB-8",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of `if (provider && provider.toLowerCase() in cards)` at line 29.",
+      "why": "This branch is uncovered and corresponds to the condition where a valid provider is specified and exists in the `cards` object.",
+      "minimal_valid": "{\"card\": \"4111111111111111\", \"options\": {\"provider\": \"visa\"}}",
+      "minimal_invalid": null
+    },
+    {
+      "id": "OB-9",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of `if (!(cards[provider.toLowerCase()].test(sanitized)))` at line 31.",
+      "why": "This branch is uncovered and corresponds to the condition where the sanitized card does not match the pattern for the specified provider.",
+      "minimal_valid": null,
+      "minimal_invalid": "{\"card\": \"4111111111111111\", \"options\": {\"provider\": \"amex\"}}"
+    },
+    {
+      "id": "OB-10",
+      "kind": "whitebox",
+      "rule": "Cover the false branch of `if (!allCards.some(cardProvider => cardProvider.test(sanitized)))` at line 37.",
+      "why": "This branch is uncovered and corresponds to the condition where the sanitized card matches at least one pattern in `allCards`.",
+      "minimal_valid": "\"4111111111111111\"",
+      "minimal_invalid": null
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Valid provider exists in cards",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "{\"card\": \"4111111111111111\", \"options\": {\"provider\": \"visa\"}}"
+      ],
+      "invalid": [],
+      "rationale": "Test the true branch of `if (provider && provider.toLowerCase() in cards)` at line 29.",
+      "obligations": ["OB-8"]
+    },
+    {
+      "title": "Sanitized card does not match provider pattern",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [],
+      "invalid": [
+        "{\"card\": \"4111111111111111\", \"options\": {\"provider\": \"amex\"}}"
+      ],
+      "rationale": "Test the true branch of `if (!(cards[provider.toLowerCase()].test(sanitized)))` at line 31.",
+      "obligations": ["OB-9"]
+    },
+    {
+      "title": "Sanitized card matches at least one pattern in allCards",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "\"4111111111111111\""
+      ],
+      "invalid": [],
+      "rationale": "Test the false branch of `if (!allCards.some(cardProvider => cardProvider.test(sanitized)))` at line 37.",
+      "obligations": ["OB-10"]
+    }
+  ]
+}

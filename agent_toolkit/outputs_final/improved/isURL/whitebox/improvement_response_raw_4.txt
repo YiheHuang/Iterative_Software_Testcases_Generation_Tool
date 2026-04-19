@@ -1,0 +1,83 @@
+{
+  "obligations": [
+    {
+      "id": "OB-204",
+      "kind": "whitebox",
+      "rule": "Cover the condition `url === '' && !options.require_host` at line 201.",
+      "why": "Uncovered condition at line 201 checks if an empty URL is valid when `require_host` is disabled.",
+      "minimal_valid": "",
+      "minimal_invalid": "http://example.com"
+    },
+    {
+      "id": "OB-205",
+      "kind": "whitebox",
+      "rule": "Cover the condition `split[0] === ''` at line 210.",
+      "why": "Uncovered condition at line 210 checks if the first element of the split array is empty.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": ":example.com"
+    },
+    {
+      "id": "OB-206",
+      "kind": "whitebox",
+      "rule": "Cover the condition `auth.indexOf(':') >= 0 && auth.split(':').length > 2` at line 214.",
+      "why": "Uncovered condition at line 214 checks for invalid authentication format with excessive colons.",
+      "minimal_valid": "http://user:password@example.com",
+      "minimal_invalid": "http://user:password:extra@example.com"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Empty URL with Require Host Disabled",
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false
+        }
+      ],
+      "valid": [
+        ""
+      ],
+      "invalid": [
+        "http://example.com"
+      ],
+      "rationale": "Test validation of empty URLs when `require_host` is disabled.",
+      "obligations": [
+        "OB-204"
+      ]
+    },
+    {
+      "title": "Invalid URL Structure with Empty Split Element",
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        ":example.com"
+      ],
+      "rationale": "Test validation of URLs with an invalid structure where the split array's first element is empty.",
+      "obligations": [
+        "OB-205"
+      ]
+    },
+    {
+      "title": "Invalid Authentication Format",
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://user:password@example.com"
+      ],
+      "invalid": [
+        "http://user:password:extra@example.com"
+      ],
+      "rationale": "Test validation of URLs with invalid authentication format containing excessive colons.",
+      "obligations": [
+        "OB-206"
+      ]
+    }
+  ]
+}

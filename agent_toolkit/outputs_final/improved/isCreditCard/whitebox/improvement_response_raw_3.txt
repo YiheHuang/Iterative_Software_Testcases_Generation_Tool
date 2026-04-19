@@ -1,0 +1,205 @@
+{
+  "obligations": [
+    {
+      "id": "OB-9",
+      "kind": "whitebox",
+      "rule": "Test the true branch of 'provider && provider.toLowerCase() in cards' at line 29.",
+      "why": "This branch is uncovered and corresponds to a valid provider being specified in the options.",
+      "minimal_valid": "4111111111111111",
+      "minimal_invalid": null
+    },
+    {
+      "id": "OB-10",
+      "kind": "whitebox",
+      "rule": "Test the false branch of 'provider && provider.toLowerCase() in cards' at line 29.",
+      "why": "This branch is uncovered and corresponds to an invalid provider being specified in the options.",
+      "minimal_valid": null,
+      "minimal_invalid": "4111111111111111"
+    },
+    {
+      "id": "OB-11",
+      "kind": "whitebox",
+      "rule": "Test the true branch of '!(cards[provider.toLowerCase()].test(sanitized))' at line 31.",
+      "why": "This branch is uncovered and corresponds to a valid provider but an invalid card number.",
+      "minimal_valid": null,
+      "minimal_invalid": "1234567890123456"
+    },
+    {
+      "id": "OB-12",
+      "kind": "whitebox",
+      "rule": "Test the false branch of '!(cards[provider.toLowerCase()].test(sanitized))' at line 31.",
+      "why": "This branch is uncovered and corresponds to a valid provider and a valid card number.",
+      "minimal_valid": "4111111111111111",
+      "minimal_invalid": null
+    },
+    {
+      "id": "OB-13",
+      "kind": "whitebox",
+      "rule": "Test the true branch of 'provider && !(provider.toLowerCase() in cards)' at line 34.",
+      "why": "This branch is uncovered and corresponds to an invalid provider being specified in the options.",
+      "minimal_valid": null,
+      "minimal_invalid": "4111111111111111"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "General validation without provider",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "card": "4111111111111111"
+        },
+        {
+          "card": "1234567890123456"
+        }
+      ],
+      "valid": [
+        "4111111111111111"
+      ],
+      "invalid": [
+        "1234567890123456"
+      ],
+      "rationale": "Tests general validation against all card providers without specifying a provider.",
+      "obligations": [
+        "OB-1",
+        "OB-6",
+        "OB-7"
+      ]
+    },
+    {
+      "title": "Provider-specific validation",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "card": "378282246310005",
+          "options": {
+            "provider": "amex"
+          }
+        },
+        {
+          "card": "4111111111111111",
+          "options": {
+            "provider": "amex"
+          }
+        }
+      ],
+      "valid": [
+        "378282246310005"
+      ],
+      "invalid": [
+        "4111111111111111"
+      ],
+      "rationale": "Tests validation restricted to a specific provider (Amex).",
+      "obligations": [
+        "OB-2",
+        "OB-5"
+      ]
+    },
+    {
+      "title": "Invalid provider key",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "card": "4111111111111111",
+          "options": {
+            "provider": "invalidProvider"
+          }
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "4111111111111111"
+      ],
+      "rationale": "Tests behavior when an invalid provider is specified in the options.",
+      "obligations": [
+        "OB-3",
+        "OB-13"
+      ]
+    },
+    {
+      "title": "Sanitization of input",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "card": "4111-1111-1111-1111"
+        },
+        {
+          "card": "1234-5678-9012-3456"
+        }
+      ],
+      "valid": [
+        "4111-1111-1111-1111"
+      ],
+      "invalid": [
+        "1234-5678-9012-3456"
+      ],
+      "rationale": "Tests input sanitization by removing spaces and dashes before validation.",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "title": "Luhn algorithm validation",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "card": "4111111111111111"
+        },
+        {
+          "card": "4111111111111121"
+        }
+      ],
+      "valid": [
+        "4111111111111111"
+      ],
+      "invalid": [
+        "4111111111111121"
+      ],
+      "rationale": "Tests the final validation step using the Luhn algorithm.",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "title": "Valid provider with valid card",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "card": "4111111111111111",
+          "options": {
+            "provider": "visa"
+          }
+        }
+      ],
+      "valid": [
+        "4111111111111111"
+      ],
+      "invalid": [],
+      "rationale": "Tests the true branch of 'provider && provider.toLowerCase() in cards' with a valid provider and card.",
+      "obligations": [
+        "OB-9",
+        "OB-12"
+      ]
+    },
+    {
+      "title": "Valid provider with invalid card",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "card": "1234567890123456",
+          "options": {
+            "provider": "visa"
+          }
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "1234567890123456"
+      ],
+      "rationale": "Tests the true branch of '!(cards[provider.toLowerCase()].test(sanitized))' with a valid provider but invalid card.",
+      "obligations": [
+        "OB-11"
+      ]
+    }
+  ]
+}

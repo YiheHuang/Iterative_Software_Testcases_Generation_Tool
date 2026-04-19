@@ -13,12 +13,9 @@ from .prompts import (
     build_group_completion_prompt,
     build_improvement_prompt,
     build_repair_prompt,
+    build_whitebox_code_only_prompt,
 )
-from .target_context import (
-    resolve_requirement_spec,
-    run_output_root,
-    validator_source_path,
-)
+from .target_context import resolve_requirement_spec, run_output_root, validator_source_path
 
 
 def stable_json(data: Any) -> str:
@@ -26,17 +23,16 @@ def stable_json(data: Any) -> str:
 
 
 def group_signature(group: TestGroup) -> str:
-    return json.dumps(
+    return stable_json(
         {
+            "title": group.title,
             "validator": group.validator,
             "args": group.args,
             "valid": group.valid,
             "invalid": group.invalid,
-            "error": group.error,
-            "title": group.title,
-        },
-        ensure_ascii=True,
-        sort_keys=True,
+            "rationale": group.rationale,
+            "obligations": group.obligations,
+        }
     )
 
 
@@ -52,6 +48,47 @@ def merge_groups(base_groups: list[TestGroup], patch_groups: list[TestGroup]) ->
     return merged
 
 
+def merge_obligations(
+    base_obligations: list[dict[str, Any]],
+    patch_obligations: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    merged: list[dict[str, Any]] = []
+    seen_ids: set[str] = set()
+    seen_signatures: set[str] = set()
+    for obligation in [*base_obligations, *patch_obligations]:
+        if not isinstance(obligation, dict):
+            continue
+        obligation_id = obligation.get("id")
+        if isinstance(obligation_id, str) and obligation_id:
+            if obligation_id in seen_ids:
+                continue
+            seen_ids.add(obligation_id)
+            merged.append(obligation)
+            continue
+
+        signature = json.dumps(obligation, ensure_ascii=True, sort_keys=True)
+        if signature in seen_signatures:
+            continue
+        seen_signatures.add(signature)
+        merged.append(obligation)
+    return merged
+
+
+def serialize_groups(groups: list[TestGroup]) -> list[dict[str, Any]]:
+    return [
+        {
+            "title": group.title,
+            "validator": group.validator,
+            "args": group.args,
+            "valid": group.valid,
+            "invalid": group.invalid,
+            "rationale": group.rationale,
+            "obligations": group.obligations,
+        }
+        for group in groups
+    ]
+
+
 def coverage_score(details: dict[str, Any]) -> tuple[float, float, float, float]:
     coverage_total = details.get("coverage_total") or {}
     lines_pct = float((coverage_total.get("lines") or {}).get("pct", 0.0))
@@ -62,7 +99,7 @@ def coverage_score(details: dict[str, Any]) -> tuple[float, float, float, float]
 
 
 def feedback_sources_for_mode(mode: str) -> list[str]:
-    if mode == "whitebox":
+    if mode in {"whitebox", "whitebox_code_only"}:
         return ["coverage"]
     return []
 
@@ -95,7 +132,6 @@ def sanitize_group(group: dict[str, Any], validator_name: str) -> TestGroup:
         args=args,
         valid=[str(v) for v in group.get("valid", [])],
         invalid=[str(v) for v in group.get("invalid", [])],
-        error=list(group.get("error", [])),
         rationale=group.get("rationale"),
         obligations=[str(v) for v in group.get("obligations", [])],
     )
@@ -166,16 +202,21 @@ class ImprovedAgentService:
         self.evaluator = EvaluationService(paths)
 
     def _generate_initial(self, mode: str, validator_name: str, approach: str) -> GenerationResult:
-        requirement_spec, requirement_source = resolve_requirement_spec(self.paths, validator_name)
-        source_code = read_text(validator_source_path(self.paths, validator_name))
         if mode == "blackbox":
             from .prompts import build_blackbox_prompt
 
+            requirement_spec, requirement_source = resolve_requirement_spec(self.paths, validator_name)
             user_prompt = build_blackbox_prompt(validator_name, requirement_spec)
         elif mode == "whitebox":
             from .prompts import build_whitebox_prompt
 
+            requirement_spec, requirement_source = resolve_requirement_spec(self.paths, validator_name)
+            source_code = read_text(validator_source_path(self.paths, validator_name))
             user_prompt = build_whitebox_prompt(validator_name, requirement_spec, source_code)
+        elif mode == "whitebox_code_only":
+            requirement_source = "not_used_code_only_mode"
+            source_code = read_text(validator_source_path(self.paths, validator_name))
+            user_prompt = build_whitebox_code_only_prompt(validator_name, source_code)
         else:
             raise ValueError(f"Unsupported mode: {mode}")
 
@@ -205,7 +246,20 @@ class ImprovedAgentService:
                 build_group_completion_prompt(validator_name, mode, obligations, user_prompt),
             )
             write_text(run_root / "response_completed.json", completion_response)
-            completed_obligations, completed_groups = parse_response(completion_response, validator_name)
+            try:
+                completed_obligations, completed_groups = parse_response(
+                    completion_response, validator_name
+                )
+            except json.JSONDecodeError:
+                repaired_completion = self.client.chat(
+                    SYSTEM_PROMPT,
+                    build_repair_prompt(completion_response),
+                )
+                write_text(run_root / "response_completed_repaired.json", repaired_completion)
+                completed_obligations, completed_groups = parse_response(
+                    repaired_completion, validator_name
+                )
+                completion_response = repaired_completion
             if completed_obligations:
                 obligations = completed_obligations
             groups = completed_groups
@@ -243,6 +297,7 @@ class ImprovedAgentService:
 
     def generate(self, mode: str, validator_name: str, approach: str = "improved") -> GenerationResult:
         baseline_result = self._generate_initial(mode, validator_name, approach=approach)
+        run_root = run_output_root(self.paths, validator_name, approach, mode)
         evaluation = self.evaluator.evaluate(baseline_result)
         evaluation_payload = {}
         if evaluation.output_json_path:
@@ -269,9 +324,9 @@ class ImprovedAgentService:
             )
             return baseline_result
 
-        requirement_spec, requirement_source = resolve_requirement_spec(self.paths, validator_name)
-        source_code = read_text(validator_source_path(self.paths, validator_name))
-        run_root = run_output_root(self.paths, validator_name, approach, mode)
+        requirement_spec: str | None = None
+        if mode == "whitebox":
+            requirement_spec, _requirement_source = resolve_requirement_spec(self.paths, validator_name)
 
         current_result = baseline_result
         current_evaluation = evaluation
@@ -297,28 +352,17 @@ class ImprovedAgentService:
         while not is_full_coverage(current_score) and revert_count < 3 and total_attempts < max_attempts:
             total_attempts += 1
             attempt_index = total_attempts
-            generated_groups = [
-                {
-                    "title": group.title,
-                    "validator": group.validator,
-                    "args": group.args,
-                    "valid": group.valid,
-                    "invalid": group.invalid,
-                    "error": group.error,
-                    "rationale": group.rationale,
-                    "obligations": group.obligations,
-                }
-                for group in current_result.test_groups
-            ]
+            generated_groups = serialize_groups(current_result.test_groups)
+            coverage_details = current_payload.get("details", {})
             compact_feedback = {
-                "summary": current_payload.get("summary", {}),
-                "uncovered_details": current_payload.get("details", {}).get("uncovered_details", {}),
+                "coverage_total": coverage_details.get("coverage_total", {}),
+                "coverage_files": coverage_details.get("coverage_files", {}),
+                "uncovered_details": coverage_details.get("uncovered_details", {}),
             }
             improvement_prompt = build_improvement_prompt(
                 validator_name,
                 mode,
                 requirement_spec,
-                source_code,
                 generated_groups,
                 compact_feedback,
             )
@@ -329,7 +373,7 @@ class ImprovedAgentService:
                 patch_raw,
             )
             try:
-                _patch_obligations, patch_groups, patch_raw = try_parse_patch_response(
+                patch_obligations, patch_groups, patch_raw = try_parse_patch_response(
                     self.client,
                     validator_name,
                     mode,
@@ -349,12 +393,17 @@ class ImprovedAgentService:
                 continue
 
             candidate_groups = merge_groups(current_result.test_groups, patch_groups)
+            candidate_obligations = merge_obligations(
+                current_result.obligations,
+                patch_obligations,
+            )
+
             candidate_result = GenerationResult(
                 validator_name=validator_name,
                 mode=mode,
                 approach=approach,
                 raw_response=patch_raw,
-                obligations=current_result.obligations,
+                obligations=candidate_obligations,
                 test_groups=candidate_groups,
                 prompt_path=run_root / "prompt.txt",
                 response_path=run_root / "response.json",
@@ -376,7 +425,7 @@ class ImprovedAgentService:
                     {
                         "iteration": attempt_index + 1,
                         "decision": "accept_patch",
-                        "patch_group_count": len(patch_groups),
+                        "candidate_group_count": len(candidate_groups),
                         "coverage_score": {
                             "lines": current_score[0],
                             "statements": current_score[1],
@@ -391,7 +440,7 @@ class ImprovedAgentService:
                     {
                         "iteration": attempt_index + 1,
                         "decision": "revert_patch",
-                        "patch_group_count": len(patch_groups),
+                        "candidate_group_count": len(candidate_groups),
                         "candidate_coverage_score": {
                             "lines": candidate_score[0],
                             "statements": candidate_score[1],

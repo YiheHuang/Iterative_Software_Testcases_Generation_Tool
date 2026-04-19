@@ -1,0 +1,364 @@
+{
+  "golden_categories": [
+    {
+      "golden_category_id": "GC-1",
+      "name": "Basic Email Validation",
+      "description": "Tests for validating standard email formats and basic rules.",
+      "golden_group_ids": [
+        "GOLDEN-1"
+      ]
+    },
+    {
+      "golden_category_id": "GC-2",
+      "name": "Domain-Specific Validation",
+      "description": "Tests for validating email addresses with domain-specific rules.",
+      "golden_group_ids": [
+        "GOLDEN-2"
+      ]
+    },
+    {
+      "golden_category_id": "GC-3",
+      "name": "Underscore in Domain",
+      "description": "Tests for validating email addresses with underscores allowed in the domain.",
+      "golden_group_ids": [
+        "GOLDEN-3"
+      ]
+    },
+    {
+      "golden_category_id": "GC-4",
+      "name": "UTF8 Local Part Restriction",
+      "description": "Tests for validating email addresses without UTF8 characters in the local part.",
+      "golden_group_ids": [
+        "GOLDEN-4"
+      ]
+    },
+    {
+      "golden_category_id": "GC-5",
+      "name": "Display Name Support",
+      "description": "Tests for validating email addresses with optional display names.",
+      "golden_group_ids": [
+        "GOLDEN-5"
+      ]
+    },
+    {
+      "golden_category_id": "GC-6",
+      "name": "Required Display Name",
+      "description": "Tests for validating email addresses with mandatory display names.",
+      "golden_group_ids": [
+        "GOLDEN-6"
+      ]
+    },
+    {
+      "golden_category_id": "GC-7",
+      "name": "IP Domain Validation",
+      "description": "Tests for validating email addresses with IPs allowed as domains.",
+      "golden_group_ids": [
+        "GOLDEN-7"
+      ]
+    },
+    {
+      "golden_category_id": "GC-8",
+      "name": "Blacklisted Characters",
+      "description": "Tests for validating email addresses with restrictions on specific characters in the name.",
+      "golden_group_ids": [
+        "GOLDEN-8"
+      ]
+    },
+    {
+      "golden_category_id": "GC-9",
+      "name": "Max Length Restriction",
+      "description": "Tests for validating email addresses with maximum length restrictions.",
+      "golden_group_ids": [
+        "GOLDEN-9"
+      ]
+    },
+    {
+      "golden_category_id": "GC-10",
+      "name": "Ignore Max Length",
+      "description": "Tests for validating email addresses with maximum length ignored.",
+      "golden_group_ids": [
+        "GOLDEN-10",
+        "GOLDEN-11"
+      ]
+    },
+    {
+      "golden_category_id": "GC-11",
+      "name": "Blacklisted Domains",
+      "description": "Tests for validating email addresses with denylisted domains.",
+      "golden_group_ids": [
+        "GOLDEN-12"
+      ]
+    },
+    {
+      "golden_category_id": "GC-12",
+      "name": "Blacklist with Regular Expressions",
+      "description": "Tests for validating email addresses with domain blacklist using regular expressions.",
+      "golden_group_ids": [
+        "GOLDEN-13"
+      ]
+    },
+    {
+      "golden_category_id": "GC-13",
+      "name": "Whitelisted Domains",
+      "description": "Tests for validating email addresses with allowed domains.",
+      "golden_group_ids": [
+        "GOLDEN-14"
+      ]
+    },
+    {
+      "golden_category_id": "GC-14",
+      "name": "Whitelist with Regular Expressions",
+      "description": "Tests for validating email addresses with domain whitelist using regular expressions.",
+      "golden_group_ids": [
+        "GOLDEN-15"
+      ]
+    }
+  ],
+  "generated_categories": [
+    {
+      "generated_category_id": "GENC-1",
+      "name": "Basic Email Validation",
+      "description": "Tests the core functionality of email validation, including default behavior and common valid/invalid cases.",
+      "generated_group_ids": [
+        "GENERATED-1"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "name": "Display Name Handling",
+      "description": "Tests validation of emails with display names, including allowing and requiring display names.",
+      "generated_group_ids": [
+        "GENERATED-2",
+        "GENERATED-3"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "name": "Domain Validation",
+      "description": "Tests validation of email domains, including allowing IP domains and requiring top-level domains.",
+      "generated_group_ids": [
+        "GENERATED-4",
+        "GENERATED-6"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "name": "Character Restrictions",
+      "description": "Tests validation of emails with restrictions on characters in the local part, including blacklisted characters and disallowed UTF-8 characters.",
+      "generated_group_ids": [
+        "GENERATED-5",
+        "GENERATED-7"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-5",
+      "name": "Host Restrictions",
+      "description": "Tests validation of emails with restrictions on specific host domains using a blacklist.",
+      "generated_group_ids": [
+        "GENERATED-8"
+      ]
+    }
+  ],
+  "golden_to_generated": [
+    {
+      "golden_category_id": "GC-1",
+      "matched_generated_category_ids": [
+        "GENC-1"
+      ],
+      "match_type": "strong",
+      "reason": "Both categories focus on basic email validation, covering standard formats and common valid/invalid cases."
+    },
+    {
+      "golden_category_id": "GC-2",
+      "matched_generated_category_ids": [
+        "GENC-3"
+      ],
+      "match_type": "partial",
+      "reason": "GENC-3 includes domain-specific validation but also covers IP domains and TLD requirements, which are outside the scope of GC-2."
+    },
+    {
+      "golden_category_id": "GC-3",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category explicitly addresses email validation with underscores in the domain."
+    },
+    {
+      "golden_category_id": "GC-4",
+      "matched_generated_category_ids": [
+        "GENC-4"
+      ],
+      "match_type": "partial",
+      "reason": "GENC-4 includes UTF-8 restrictions but also covers blacklisted characters, which are unrelated to GC-4."
+    },
+    {
+      "golden_category_id": "GC-5",
+      "matched_generated_category_ids": [
+        "GENC-2"
+      ],
+      "match_type": "strong",
+      "reason": "GENC-2 explicitly addresses emails with optional display names, aligning with GC-5."
+    },
+    {
+      "golden_category_id": "GC-6",
+      "matched_generated_category_ids": [
+        "GENC-2"
+      ],
+      "match_type": "strong",
+      "reason": "GENC-2 explicitly addresses emails with mandatory display names, aligning with GC-6."
+    },
+    {
+      "golden_category_id": "GC-7",
+      "matched_generated_category_ids": [
+        "GENC-3"
+      ],
+      "match_type": "partial",
+      "reason": "GENC-3 includes IP domain validation but also covers unrelated domain-specific rules."
+    },
+    {
+      "golden_category_id": "GC-8",
+      "matched_generated_category_ids": [
+        "GENC-4"
+      ],
+      "match_type": "partial",
+      "reason": "GENC-4 includes blacklisted character restrictions but also covers UTF-8 restrictions, which are unrelated to GC-8."
+    },
+    {
+      "golden_category_id": "GC-9",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category explicitly addresses maximum length restrictions for email validation."
+    },
+    {
+      "golden_category_id": "GC-10",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category explicitly addresses ignoring maximum length restrictions for email validation."
+    },
+    {
+      "golden_category_id": "GC-11",
+      "matched_generated_category_ids": [
+        "GENC-5"
+      ],
+      "match_type": "strong",
+      "reason": "GENC-5 explicitly addresses email validation with blacklisted domains, aligning with GC-11."
+    },
+    {
+      "golden_category_id": "GC-12",
+      "matched_generated_category_ids": [
+        "GENC-5"
+      ],
+      "match_type": "partial",
+      "reason": "GENC-5 addresses blacklisted domains but does not explicitly mention regular expressions, which are a key aspect of GC-12."
+    },
+    {
+      "golden_category_id": "GC-13",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category explicitly addresses whitelisted domains for email validation."
+    },
+    {
+      "golden_category_id": "GC-14",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category explicitly addresses whitelisted domains with regular expressions for email validation."
+    }
+  ],
+  "generated_to_golden": [
+    {
+      "generated_category_id": "GENC-1",
+      "matched_golden_category_ids": [
+        "GC-1"
+      ],
+      "match_type": "strong",
+      "reason": "GENC-1 aligns with GC-1 as both focus on basic email validation, covering standard formats and common valid/invalid cases."
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "matched_golden_category_ids": [
+        "GC-5",
+        "GC-6"
+      ],
+      "match_type": "strong",
+      "reason": "GENC-2 covers both optional and mandatory display name validation, aligning with GC-5 and GC-6."
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "matched_golden_category_ids": [
+        "GC-2",
+        "GC-7"
+      ],
+      "match_type": "partial",
+      "reason": "GENC-3 includes domain-specific validation and IP domain validation, partially aligning with GC-2 and GC-7."
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "matched_golden_category_ids": [
+        "GC-4",
+        "GC-8"
+      ],
+      "match_type": "partial",
+      "reason": "GENC-4 includes UTF-8 restrictions and blacklisted character restrictions, partially aligning with GC-4 and GC-8."
+    },
+    {
+      "generated_category_id": "GENC-5",
+      "matched_golden_category_ids": [
+        "GC-11",
+        "GC-12"
+      ],
+      "match_type": "partial",
+      "reason": "GENC-5 addresses blacklisted domains but does not explicitly mention regular expressions, which are key to GC-12."
+    }
+  ],
+  "novel_generated_categories": [],
+  "missing_golden_categories": [
+    {
+      "golden_category_id": "GC-3",
+      "golden_category_name": "Underscore in Domain",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-9",
+      "golden_category_name": "Max Length Restriction",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-10",
+      "golden_category_name": "Ignore Max Length",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-13",
+      "golden_category_name": "Whitelisted Domains",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-14",
+      "golden_category_name": "Whitelist with Regular Expressions",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    }
+  ],
+  "summary": {
+    "total_golden_categories": 14,
+    "total_generated_categories": 5,
+    "overlap_golden_categories": 9,
+    "missing_golden_categories": 5,
+    "matched_generated_categories": 5,
+    "novel_generated_categories": 0,
+    "strong_golden_category_matches": 4,
+    "partial_golden_category_matches": 5,
+    "fragmented_golden_matches": 0,
+    "matched_golden_ratio": 0.6428571428571429,
+    "total_golden_groups": 14,
+    "total_generated_groups": 5,
+    "overlap_golden_groups": 9,
+    "missing_golden_groups": 5,
+    "novel_valid_groups": 0,
+    "exact_or_near_overlap_groups": 9,
+    "golden_groups_with_semantic_match": 9,
+    "generated_groups_with_semantic_match": 5,
+    "novel_valid_categories": 0
+  },
+  "golden_source_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\golden\\isEmail\\isEmail_golden_tests.json",
+  "golden_categories_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\golden\\isEmail\\isEmail_golden_categories.json",
+  "generated_categories_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\naive\\isEmail\\whitebox\\generated_categories.json"
+}

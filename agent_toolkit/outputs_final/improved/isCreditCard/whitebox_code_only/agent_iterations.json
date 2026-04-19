@@ -1,0 +1,80 @@
+{
+  "iteration_count": 1,
+  "revert_count": 3,
+  "total_attempts": 3,
+  "max_attempts": 6,
+  "feedback_sources": [
+    "coverage"
+  ],
+  "golden_feedback_used": false,
+  "final_decision": "stop_after_reverts",
+  "coverage_score": {
+    "lines": 81.82,
+    "statements": 83.33,
+    "functions": 100.0,
+    "branches": 57.89
+  },
+  "iterations": [
+    {
+      "iteration": 1,
+      "decision": "initial",
+      "coverage_score": {
+        "lines": 81.82,
+        "statements": 83.33,
+        "functions": 100.0,
+        "branches": 57.89
+      }
+    },
+    {
+      "iteration": 2,
+      "decision": "revert_patch",
+      "candidate_group_count": 9,
+      "candidate_coverage_score": {
+        "lines": 81.82,
+        "statements": 83.33,
+        "functions": 100.0,
+        "branches": 57.89
+      },
+      "current_coverage_score": {
+        "lines": 81.82,
+        "statements": 83.33,
+        "functions": 100.0,
+        "branches": 57.89
+      }
+    },
+    {
+      "iteration": 3,
+      "decision": "revert_patch",
+      "candidate_group_count": 9,
+      "candidate_coverage_score": {
+        "lines": 81.82,
+        "statements": 83.33,
+        "functions": 100.0,
+        "branches": 57.89
+      },
+      "current_coverage_score": {
+        "lines": 81.82,
+        "statements": 83.33,
+        "functions": 100.0,
+        "branches": 57.89
+      }
+    },
+    {
+      "iteration": 4,
+      "decision": "revert_patch",
+      "candidate_group_count": 9,
+      "candidate_coverage_score": {
+        "lines": 81.82,
+        "statements": 83.33,
+        "functions": 100.0,
+        "branches": 57.89
+      },
+      "current_coverage_score": {
+        "lines": 81.82,
+        "statements": 83.33,
+        "functions": 100.0,
+        "branches": 57.89
+      }
+    }
+  ]
+}

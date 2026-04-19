@@ -1,0 +1,2398 @@
+{
+  "results": [
+    {
+      "title": "Basic email validation (default options)",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user@example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Basic email validation (default options)",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user.name+tag+sorting@example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Basic email validation (default options)",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user_name@example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Basic email validation (default options)",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user-name@example.co.uk",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Basic email validation (default options)",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user123@example.org",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Basic email validation (default options)",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "plainaddress",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Basic email validation (default options)",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "@missinglocalpart.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Basic email validation (default options)",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user@.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Basic email validation (default options)",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user@com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Basic email validation (default options)",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user@domain..com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Basic email validation (default options)",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user@domain_with_underscore.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with allow_display_name=true",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "Display Name <user@example.com>",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with allow_display_name=true",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "Display Name <user.name+tag+sorting@example.com>",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with allow_display_name=true",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "Display Name <user-name@example.co.uk>",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with allow_display_name=true",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "Display Name user@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with allow_display_name=true",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "Display Name <user@domain..com>",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with allow_display_name=true",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "<user@example.com>",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with require_display_name=true",
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_display_name": true,
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "Display Name <user@example.com>",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with require_display_name=true",
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_display_name": true,
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "Display Name <user.name+tag+sorting@example.com>",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with require_display_name=true",
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_display_name": true,
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with require_display_name=true",
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_display_name": true,
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user.name+tag+sorting@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with require_display_name=true",
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_display_name": true,
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "Display Name user@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with require_display_name=true",
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_display_name": true,
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "<user@example.com>",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with allow_utf8_local_part=false",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_utf8_local_part": false,
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user@example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with allow_utf8_local_part=false",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_utf8_local_part": false,
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user.name@example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with allow_utf8_local_part=false",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_utf8_local_part": false,
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "üser@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with allow_utf8_local_part=false",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_utf8_local_part": false,
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "用户@例子.广告",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with allow_utf8_local_part=false",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_utf8_local_part": false,
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user@例子.广告",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": false,
+      "obligations": []
+    },
+    {
+      "title": "Validation with require_tld=false",
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_tld": false,
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user@example",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with require_tld=false",
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_tld": false,
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user@localhost",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with require_tld=false",
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_tld": false,
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user@subdomain.local",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with require_tld=false",
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_tld": false,
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user@domain..com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with require_tld=false",
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_tld": false,
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user@.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with allow_ip_domain=true",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_ip_domain": true,
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user@[192.168.1.1]",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with allow_ip_domain=true",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_ip_domain": true,
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user@[255.255.255.255]",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with allow_ip_domain=true",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_ip_domain": true,
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user@192.168.1.1",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": false,
+      "obligations": []
+    },
+    {
+      "title": "Validation with allow_ip_domain=true",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_ip_domain": true,
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user@[300.300.300.300]",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with blacklisted_chars set",
+      "validator": "isEmail",
+      "args": [
+        {
+          "blacklisted_chars": "!#$%",
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user@example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with blacklisted_chars set",
+      "validator": "isEmail",
+      "args": [
+        {
+          "blacklisted_chars": "!#$%",
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user.name@example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with blacklisted_chars set",
+      "validator": "isEmail",
+      "args": [
+        {
+          "blacklisted_chars": "!#$%",
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user!name@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with blacklisted_chars set",
+      "validator": "isEmail",
+      "args": [
+        {
+          "blacklisted_chars": "!#$%",
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user#name@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with blacklisted_chars set",
+      "validator": "isEmail",
+      "args": [
+        {
+          "blacklisted_chars": "!#$%",
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "ignore_max_length": false,
+          "host_blacklist": [],
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user%name@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with host_blacklist set",
+      "validator": "isEmail",
+      "args": [
+        {
+          "host_blacklist": [
+            "example.com",
+            "blacklisted.com"
+          ],
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user@allowed.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with host_blacklist set",
+      "validator": "isEmail",
+      "args": [
+        {
+          "host_blacklist": [
+            "example.com",
+            "blacklisted.com"
+          ],
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user@safe.org",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with host_blacklist set",
+      "validator": "isEmail",
+      "args": [
+        {
+          "host_blacklist": [
+            "example.com",
+            "blacklisted.com"
+          ],
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with host_blacklist set",
+      "validator": "isEmail",
+      "args": [
+        {
+          "host_blacklist": [
+            "example.com",
+            "blacklisted.com"
+          ],
+          "allow_display_name": false,
+          "allow_underscores": false,
+          "require_display_name": false,
+          "allow_utf8_local_part": true,
+          "require_tld": true,
+          "blacklisted_chars": "",
+          "ignore_max_length": false,
+          "host_whitelist": []
+        }
+      ],
+      "input_value": "user@blacklisted.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    }
+  ],
+  "summary": {
+    "total_cases": 46,
+    "correct_cases": 44,
+    "incorrect_cases": 2,
+    "exact_match_rate": 0.9565217391304348,
+    "by_expected_kind": {
+      "return": 46,
+      "throw": 0
+    }
+  },
+  "details": {
+    "passed_results": [
+      {
+        "title": "Basic email validation (default options)",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user@example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Basic email validation (default options)",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user.name+tag+sorting@example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Basic email validation (default options)",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user_name@example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Basic email validation (default options)",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user-name@example.co.uk",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Basic email validation (default options)",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user123@example.org",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Basic email validation (default options)",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "plainaddress",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Basic email validation (default options)",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "@missinglocalpart.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Basic email validation (default options)",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user@.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Basic email validation (default options)",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user@com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Basic email validation (default options)",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user@domain..com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Basic email validation (default options)",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user@domain_with_underscore.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with allow_display_name=true",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_display_name": true,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "Display Name <user@example.com>",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with allow_display_name=true",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_display_name": true,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "Display Name <user.name+tag+sorting@example.com>",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with allow_display_name=true",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_display_name": true,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "Display Name <user-name@example.co.uk>",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with allow_display_name=true",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_display_name": true,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "Display Name user@example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with allow_display_name=true",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_display_name": true,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "Display Name <user@domain..com>",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with allow_display_name=true",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_display_name": true,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "<user@example.com>",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with require_display_name=true",
+        "validator": "isEmail",
+        "args": [
+          {
+            "require_display_name": true,
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "Display Name <user@example.com>",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with require_display_name=true",
+        "validator": "isEmail",
+        "args": [
+          {
+            "require_display_name": true,
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "Display Name <user.name+tag+sorting@example.com>",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with require_display_name=true",
+        "validator": "isEmail",
+        "args": [
+          {
+            "require_display_name": true,
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user@example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with require_display_name=true",
+        "validator": "isEmail",
+        "args": [
+          {
+            "require_display_name": true,
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user.name+tag+sorting@example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with require_display_name=true",
+        "validator": "isEmail",
+        "args": [
+          {
+            "require_display_name": true,
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "Display Name user@example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with require_display_name=true",
+        "validator": "isEmail",
+        "args": [
+          {
+            "require_display_name": true,
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "<user@example.com>",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with allow_utf8_local_part=false",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_utf8_local_part": false,
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user@example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with allow_utf8_local_part=false",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_utf8_local_part": false,
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user.name@example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with allow_utf8_local_part=false",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_utf8_local_part": false,
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "üser@example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with allow_utf8_local_part=false",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_utf8_local_part": false,
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "用户@例子.广告",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with require_tld=false",
+        "validator": "isEmail",
+        "args": [
+          {
+            "require_tld": false,
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user@example",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with require_tld=false",
+        "validator": "isEmail",
+        "args": [
+          {
+            "require_tld": false,
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user@localhost",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with require_tld=false",
+        "validator": "isEmail",
+        "args": [
+          {
+            "require_tld": false,
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user@subdomain.local",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with require_tld=false",
+        "validator": "isEmail",
+        "args": [
+          {
+            "require_tld": false,
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user@domain..com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with require_tld=false",
+        "validator": "isEmail",
+        "args": [
+          {
+            "require_tld": false,
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user@.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with allow_ip_domain=true",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_ip_domain": true,
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user@[192.168.1.1]",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with allow_ip_domain=true",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_ip_domain": true,
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user@[255.255.255.255]",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with allow_ip_domain=true",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_ip_domain": true,
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user@[300.300.300.300]",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with blacklisted_chars set",
+        "validator": "isEmail",
+        "args": [
+          {
+            "blacklisted_chars": "!#$%",
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user@example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with blacklisted_chars set",
+        "validator": "isEmail",
+        "args": [
+          {
+            "blacklisted_chars": "!#$%",
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user.name@example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with blacklisted_chars set",
+        "validator": "isEmail",
+        "args": [
+          {
+            "blacklisted_chars": "!#$%",
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user!name@example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with blacklisted_chars set",
+        "validator": "isEmail",
+        "args": [
+          {
+            "blacklisted_chars": "!#$%",
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user#name@example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with blacklisted_chars set",
+        "validator": "isEmail",
+        "args": [
+          {
+            "blacklisted_chars": "!#$%",
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user%name@example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with host_blacklist set",
+        "validator": "isEmail",
+        "args": [
+          {
+            "host_blacklist": [
+              "example.com",
+              "blacklisted.com"
+            ],
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user@allowed.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with host_blacklist set",
+        "validator": "isEmail",
+        "args": [
+          {
+            "host_blacklist": [
+              "example.com",
+              "blacklisted.com"
+            ],
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user@safe.org",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with host_blacklist set",
+        "validator": "isEmail",
+        "args": [
+          {
+            "host_blacklist": [
+              "example.com",
+              "blacklisted.com"
+            ],
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user@example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with host_blacklist set",
+        "validator": "isEmail",
+        "args": [
+          {
+            "host_blacklist": [
+              "example.com",
+              "blacklisted.com"
+            ],
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user@blacklisted.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      }
+    ],
+    "failed_results": [
+      {
+        "title": "Validation with allow_utf8_local_part=false",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_utf8_local_part": false,
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user@例子.广告",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "Validation with allow_ip_domain=true",
+        "validator": "isEmail",
+        "args": [
+          {
+            "allow_ip_domain": true,
+            "allow_display_name": false,
+            "allow_underscores": false,
+            "require_display_name": false,
+            "allow_utf8_local_part": true,
+            "require_tld": true,
+            "blacklisted_chars": "",
+            "ignore_max_length": false,
+            "host_blacklist": [],
+            "host_whitelist": []
+          }
+        ],
+        "input_value": "user@192.168.1.1",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": []
+      }
+    ],
+    "by_title": {
+      "Basic email validation (default options)": {
+        "total": 11,
+        "passed": 11,
+        "failed": 0
+      },
+      "Validation with allow_display_name=true": {
+        "total": 6,
+        "passed": 6,
+        "failed": 0
+      },
+      "Validation with require_display_name=true": {
+        "total": 6,
+        "passed": 6,
+        "failed": 0
+      },
+      "Validation with allow_utf8_local_part=false": {
+        "total": 5,
+        "passed": 4,
+        "failed": 1
+      },
+      "Validation with require_tld=false": {
+        "total": 5,
+        "passed": 5,
+        "failed": 0
+      },
+      "Validation with allow_ip_domain=true": {
+        "total": 4,
+        "passed": 3,
+        "failed": 1
+      },
+      "Validation with blacklisted_chars set": {
+        "total": 5,
+        "passed": 5,
+        "failed": 0
+      },
+      "Validation with host_blacklist set": {
+        "total": 4,
+        "passed": 4,
+        "failed": 0
+      }
+    },
+    "by_obligation": {},
+    "coverage_summary_path": null,
+    "coverage_total": null,
+    "coverage_files": {}
+  }
+}

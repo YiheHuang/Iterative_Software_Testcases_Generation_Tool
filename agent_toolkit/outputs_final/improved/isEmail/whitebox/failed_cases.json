@@ -1,0 +1,274 @@
+[
+  {
+    "title": "Validation for maximum email length",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_display_name": false,
+        "allow_underscores": false,
+        "require_display_name": false,
+        "allow_utf8_local_part": true,
+        "require_tld": true,
+        "blacklisted_chars": "",
+        "ignore_max_length": false,
+        "host_blacklist": [],
+        "host_whitelist": []
+      }
+    ],
+    "input_value": "a@b.com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-11"
+    ]
+  },
+  {
+    "title": "Domain-specific validation for Gmail and Googlemail domains",
+    "validator": "isEmail",
+    "args": [
+      {
+        "domain_specific_validation": true,
+        "allow_display_name": false,
+        "allow_underscores": false,
+        "require_display_name": false,
+        "allow_utf8_local_part": true,
+        "require_tld": true,
+        "blacklisted_chars": "",
+        "ignore_max_length": false,
+        "host_blacklist": [],
+        "host_whitelist": []
+      }
+    ],
+    "input_value": "user@gmail.com",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-13"
+    ]
+  },
+  {
+    "title": "Validation for display names identical to unquoted version",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_display_name": true,
+        "allow_underscores": false,
+        "require_display_name": false,
+        "allow_utf8_local_part": true,
+        "require_tld": true,
+        "blacklisted_chars": "",
+        "ignore_max_length": false,
+        "host_blacklist": [],
+        "host_whitelist": []
+      }
+    ],
+    "input_value": "\"John Doe\" <john.doe@example.com>",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-16"
+    ]
+  },
+  {
+    "title": "Validation for display names identical to unquoted version",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_display_name": true,
+        "allow_underscores": false,
+        "require_display_name": false,
+        "allow_utf8_local_part": true,
+        "require_tld": true,
+        "blacklisted_chars": "",
+        "ignore_max_length": false,
+        "host_blacklist": [],
+        "host_whitelist": []
+      }
+    ],
+    "input_value": "\"Jane Doe\" <jane.doe@example.com>",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-16"
+    ]
+  },
+  {
+    "title": "Validation for improperly escaped quotes in display names",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_display_name": true,
+        "allow_underscores": false,
+        "require_display_name": false,
+        "allow_utf8_local_part": true,
+        "require_tld": true,
+        "blacklisted_chars": "",
+        "ignore_max_length": false,
+        "host_blacklist": [],
+        "host_whitelist": []
+      }
+    ],
+    "input_value": "\"John \\\"Doe\" <john.doe@example.com>",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-17"
+    ]
+  },
+  {
+    "title": "Validation for improperly escaped quotes in display names",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_display_name": true,
+        "allow_underscores": false,
+        "require_display_name": false,
+        "allow_utf8_local_part": true,
+        "require_tld": true,
+        "blacklisted_chars": "",
+        "ignore_max_length": false,
+        "host_blacklist": [],
+        "host_whitelist": []
+      }
+    ],
+    "input_value": "\"Jane \\\"Doe\" <jane.doe@example.com>",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-17"
+    ]
+  },
+  {
+    "title": "Validation for improperly escaped quotes in display names",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_display_name": true,
+        "allow_underscores": false,
+        "require_display_name": false,
+        "allow_utf8_local_part": true,
+        "require_tld": true,
+        "blacklisted_chars": "",
+        "ignore_max_length": false,
+        "host_blacklist": [],
+        "host_whitelist": []
+      }
+    ],
+    "input_value": "\"John \\\"Doe\" <john.doe@example.com>",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-19"
+    ]
+  },
+  {
+    "title": "Validation for quoted local parts with and without UTF-8 support",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_utf8_local_part": true,
+        "allow_display_name": false,
+        "allow_underscores": false,
+        "require_display_name": false,
+        "require_tld": true,
+        "blacklisted_chars": "",
+        "ignore_max_length": false,
+        "host_blacklist": [],
+        "host_whitelist": []
+      }
+    ],
+    "input_value": "\"quötéd\"@example.com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-20"
+    ]
+  },
+  {
+    "title": "Validation for maximum email length with ignore_max_length=false",
+    "validator": "isEmail",
+    "args": [
+      {
+        "ignore_max_length": false,
+        "allow_display_name": false,
+        "allow_underscores": false,
+        "require_display_name": false,
+        "allow_utf8_local_part": true,
+        "require_tld": true,
+        "blacklisted_chars": "",
+        "host_blacklist": [],
+        "host_whitelist": []
+      }
+    ],
+    "input_value": "a@b.com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-21"
+    ]
+  },
+  {
+    "title": "Validation for IP domains with incorrect brackets",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_ip_domain": true,
+        "allow_display_name": false,
+        "allow_underscores": false,
+        "require_display_name": false,
+        "allow_utf8_local_part": true,
+        "require_tld": true,
+        "blacklisted_chars": "",
+        "ignore_max_length": false,
+        "host_blacklist": [],
+        "host_whitelist": []
+      }
+    ],
+    "input_value": "example@192.168.1.1",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-23"
+    ]
+  }
+]

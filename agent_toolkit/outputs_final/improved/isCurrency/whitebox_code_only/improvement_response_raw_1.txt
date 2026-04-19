@@ -1,0 +1,109 @@
+{
+  "obligations": [
+    {
+      "id": "OB-12",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 22: `pattern += negative;`",
+      "why": "This statement is part of the logic for handling `negative_sign_after_digits` and is currently uncovered.",
+      "minimal_valid": "$123.45-",
+      "minimal_invalid": "$-123.45"
+    },
+    {
+      "id": "OB-13",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 24: `pattern = negative + pattern;`",
+      "why": "This statement is part of the logic for handling `negative_sign_before_digits` and is currently uncovered.",
+      "minimal_valid": "-$123.45",
+      "minimal_invalid": "$123.45-"
+    },
+    {
+      "id": "OB-14",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered branch at line 21: `condition_true_branch` for `options.negative_sign_after_digits`.",
+      "why": "This branch determines the behavior when the negative sign is placed after digits.",
+      "minimal_valid": "$123.45-",
+      "minimal_invalid": "-$123.45"
+    },
+    {
+      "id": "OB-15",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered branch at line 23: `condition_true_branch` for `options.negative_sign_before_digits`.",
+      "why": "This branch determines the behavior when the negative sign is placed before digits.",
+      "minimal_valid": "-$123.45",
+      "minimal_invalid": "$123.45-"
+    },
+    {
+      "id": "OB-16",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered branch at line 46: `condition_false_branch` for `!(options.negative_sign_before_digits || options.negative_sign_after_digits)`.",
+      "why": "This branch handles cases where neither `negative_sign_before_digits` nor `negative_sign_after_digits` is enabled.",
+      "minimal_valid": "$123.45",
+      "minimal_invalid": "-$123.45"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Negative sign after digits",
+      "validator": "isCurrency",
+      "args": [
+        {
+          "negative_sign_after_digits": true
+        }
+      ],
+      "valid": [
+        "$123.45-"
+      ],
+      "invalid": [
+        "-$123.45",
+        "$123.45"
+      ],
+      "rationale": "Tests the placement of the negative sign after the digits.",
+      "obligations": [
+        "OB-12",
+        "OB-14"
+      ]
+    },
+    {
+      "title": "Negative sign before digits",
+      "validator": "isCurrency",
+      "args": [
+        {
+          "negative_sign_before_digits": true
+        }
+      ],
+      "valid": [
+        "-$123.45"
+      ],
+      "invalid": [
+        "$123.45-",
+        "$123.45"
+      ],
+      "rationale": "Tests the placement of the negative sign before the digits.",
+      "obligations": [
+        "OB-13",
+        "OB-15"
+      ]
+    },
+    {
+      "title": "No negative sign placement options",
+      "validator": "isCurrency",
+      "args": [
+        {
+          "negative_sign_before_digits": false,
+          "negative_sign_after_digits": false
+        }
+      ],
+      "valid": [
+        "$123.45"
+      ],
+      "invalid": [
+        "-$123.45",
+        "$123.45-"
+      ],
+      "rationale": "Ensures behavior when neither negative sign placement option is enabled.",
+      "obligations": [
+        "OB-16"
+      ]
+    }
+  ]
+}

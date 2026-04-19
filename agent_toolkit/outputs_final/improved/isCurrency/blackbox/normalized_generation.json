@@ -1,0 +1,433 @@
+{
+  "mode": "blackbox",
+  "approach": "improved",
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "blackbox",
+      "rule": "Default behavior: validate currency strings with '$' as the symbol, optional symbol, commas as thousands separator, '.' as decimal separator, and 2 digits after the decimal.",
+      "why": "Baseline behavior must be validated to ensure the function works as described by default.",
+      "minimal_valid": "$1,234.56",
+      "minimal_invalid": "1234.567"
+    },
+    {
+      "id": "OB-2",
+      "kind": "blackbox",
+      "rule": "Option `require_symbol`: when true, the currency symbol must be present.",
+      "why": "To ensure the function respects the `require_symbol` option.",
+      "minimal_valid": "$123.45",
+      "minimal_invalid": "123.45"
+    },
+    {
+      "id": "OB-3",
+      "kind": "blackbox",
+      "rule": "Option `allow_space_after_symbol`: when true, a space is allowed after the currency symbol.",
+      "why": "To validate that spaces after the symbol are handled correctly when allowed.",
+      "minimal_valid": "$ 123.45",
+      "minimal_invalid": "$123.45"
+    },
+    {
+      "id": "OB-4",
+      "kind": "blackbox",
+      "rule": "Option `symbol_after_digits`: when true, the currency symbol must appear after the digits.",
+      "why": "To confirm that the function correctly validates symbol placement when this option is enabled.",
+      "minimal_valid": "123.45$",
+      "minimal_invalid": "$123.45"
+    },
+    {
+      "id": "OB-5",
+      "kind": "blackbox",
+      "rule": "Option `allow_negatives`: when false, negative values are not allowed.",
+      "why": "To ensure negative values are rejected when `allow_negatives` is false.",
+      "minimal_valid": "123.45",
+      "minimal_invalid": "-123.45"
+    },
+    {
+      "id": "OB-6",
+      "kind": "blackbox",
+      "rule": "Option `parens_for_negatives`: when true, negative values must be enclosed in parentheses.",
+      "why": "To validate the function enforces parentheses for negatives when this option is enabled.",
+      "minimal_valid": "(123.45)",
+      "minimal_invalid": "-123.45"
+    },
+    {
+      "id": "OB-7",
+      "kind": "blackbox",
+      "rule": "Option `negative_sign_before_digits`: when true, the negative sign must appear before the digits.",
+      "why": "To confirm the function enforces the placement of the negative sign before digits when enabled.",
+      "minimal_valid": "-123.45",
+      "minimal_invalid": "123.45-"
+    },
+    {
+      "id": "OB-8",
+      "kind": "blackbox",
+      "rule": "Option `negative_sign_after_digits`: when true, the negative sign must appear after the digits.",
+      "why": "To validate the function enforces the placement of the negative sign after digits when enabled.",
+      "minimal_valid": "123.45-",
+      "minimal_invalid": "-123.45"
+    },
+    {
+      "id": "OB-9",
+      "kind": "blackbox",
+      "rule": "Option `allow_negative_sign_placeholder`: when true, a placeholder for the negative sign is allowed.",
+      "why": "To ensure the function accepts negative sign placeholders when this option is enabled.",
+      "minimal_valid": "(123.45)",
+      "minimal_invalid": "123.45"
+    },
+    {
+      "id": "OB-10",
+      "kind": "blackbox",
+      "rule": "Option `thousands_separator`: validate custom thousands separators.",
+      "why": "To confirm the function respects custom thousands separators.",
+      "minimal_valid": "1.234,56",
+      "minimal_invalid": "1,234.56"
+    },
+    {
+      "id": "OB-11",
+      "kind": "blackbox",
+      "rule": "Option `decimal_separator`: validate custom decimal separators.",
+      "why": "To ensure the function respects custom decimal separators.",
+      "minimal_valid": "123,45",
+      "minimal_invalid": "123.45"
+    },
+    {
+      "id": "OB-12",
+      "kind": "blackbox",
+      "rule": "Option `allow_decimal`: when false, decimal values are not allowed.",
+      "why": "To validate the function rejects decimal values when `allow_decimal` is false.",
+      "minimal_valid": "1234",
+      "minimal_invalid": "1234.56"
+    },
+    {
+      "id": "OB-13",
+      "kind": "blackbox",
+      "rule": "Option `require_decimal`: when true, decimal values are required.",
+      "why": "To confirm the function enforces the presence of decimal values when this option is enabled.",
+      "minimal_valid": "1234.56",
+      "minimal_invalid": "1234"
+    },
+    {
+      "id": "OB-14",
+      "kind": "blackbox",
+      "rule": "Option `digits_after_decimal`: validate specific numbers of digits after the decimal.",
+      "why": "To ensure the function enforces the exact number of digits after the decimal.",
+      "minimal_valid": "1234.5",
+      "minimal_invalid": "1234.567"
+    },
+    {
+      "id": "OB-15",
+      "kind": "blackbox",
+      "rule": "Option `allow_space_after_digits`: when true, spaces are allowed after the digits.",
+      "why": "To validate the function handles spaces after digits correctly when allowed.",
+      "minimal_valid": "123.45 ",
+      "minimal_invalid": "123.45"
+    }
+  ],
+  "test_groups": [
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "$1,234.56",
+        "$0.99",
+        "$1234",
+        "$1.23",
+        "1234.56"
+      ],
+      "invalid": [
+        "1234.567",
+        "$1234.567",
+        "1,234.567",
+        "1234,56",
+        "12.34.56"
+      ],
+      "title": "Default behavior tests",
+      "rationale": "Validate the default behavior of the function with standard currency formats.",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_symbol": true
+        }
+      ],
+      "valid": [
+        "$123.45",
+        "$1,234.56"
+      ],
+      "invalid": [
+        "123.45",
+        "1,234.56"
+      ],
+      "title": "Require symbol tests",
+      "rationale": "Ensure the function enforces the presence of a currency symbol when `require_symbol` is true.",
+      "obligations": [
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_space_after_symbol": true
+        }
+      ],
+      "valid": [
+        "$ 123.45",
+        "$ 1,234.56"
+      ],
+      "invalid": [
+        "$123.45",
+        "$1,234.56"
+      ],
+      "title": "Allow space after symbol tests",
+      "rationale": "Validate the function allows spaces after the currency symbol when `allow_space_after_symbol` is true.",
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "symbol_after_digits": true
+        }
+      ],
+      "valid": [
+        "123.45$",
+        "1,234.56$"
+      ],
+      "invalid": [
+        "$123.45",
+        "$1,234.56"
+      ],
+      "title": "Symbol after digits tests",
+      "rationale": "Ensure the function validates currency strings with the symbol after digits when `symbol_after_digits` is true.",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_negatives": false
+        }
+      ],
+      "valid": [
+        "123.45",
+        "1,234.56"
+      ],
+      "invalid": [
+        "-123.45",
+        "-1,234.56"
+      ],
+      "title": "Disallow negatives tests",
+      "rationale": "Validate the function rejects negative values when `allow_negatives` is false.",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "parens_for_negatives": true
+        }
+      ],
+      "valid": [
+        "(123.45)",
+        "(1,234.56)"
+      ],
+      "invalid": [
+        "-123.45",
+        "-1,234.56"
+      ],
+      "title": "Parens for negatives tests",
+      "rationale": "Ensure the function enforces parentheses for negative values when `parens_for_negatives` is true.",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "negative_sign_before_digits": true
+        }
+      ],
+      "valid": [
+        "-123.45",
+        "-1,234.56"
+      ],
+      "invalid": [
+        "123.45-",
+        "1,234.56-"
+      ],
+      "title": "Negative sign before digits tests",
+      "rationale": "Validate the function enforces the placement of the negative sign before digits when `negative_sign_before_digits` is true.",
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "negative_sign_after_digits": true
+        }
+      ],
+      "valid": [
+        "123.45-",
+        "1,234.56-"
+      ],
+      "invalid": [
+        "-123.45",
+        "-1,234.56"
+      ],
+      "title": "Negative sign after digits tests",
+      "rationale": "Ensure the function enforces the placement of the negative sign after digits when `negative_sign_after_digits` is true.",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "thousands_separator": "."
+        }
+      ],
+      "valid": [
+        "1.234,56",
+        "123.456,78"
+      ],
+      "invalid": [
+        "1,234.56",
+        "1234.56"
+      ],
+      "title": "Custom thousands separator tests",
+      "rationale": "Validate the function respects custom thousands separators.",
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "decimal_separator": ","
+        }
+      ],
+      "valid": [
+        "123,45",
+        "1.234,56"
+      ],
+      "invalid": [
+        "123.45",
+        "1,234.56"
+      ],
+      "title": "Custom decimal separator tests",
+      "rationale": "Ensure the function respects custom decimal separators.",
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_decimal": false
+        }
+      ],
+      "valid": [
+        "1234",
+        "1,234"
+      ],
+      "invalid": [
+        "1234.56",
+        "1,234.56"
+      ],
+      "title": "Disallow decimal tests",
+      "rationale": "Validate the function rejects decimal values when `allow_decimal` is false.",
+      "obligations": [
+        "OB-12"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_decimal": true
+        }
+      ],
+      "valid": [
+        "1234.56",
+        "1,234.56"
+      ],
+      "invalid": [
+        "1234",
+        "1,234"
+      ],
+      "title": "Require decimal tests",
+      "rationale": "Ensure the function enforces the presence of decimal values when `require_decimal` is true.",
+      "obligations": [
+        "OB-13"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "digits_after_decimal": [
+            1,
+            2
+          ]
+        }
+      ],
+      "valid": [
+        "1234.5",
+        "1234.56"
+      ],
+      "invalid": [
+        "1234.567",
+        "1234."
+      ],
+      "title": "Digits after decimal tests",
+      "rationale": "Validate the function enforces the exact number of digits after the decimal.",
+      "obligations": [
+        "OB-14"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_space_after_digits": true
+        }
+      ],
+      "valid": [
+        "123.45 ",
+        "1,234.56 "
+      ],
+      "invalid": [
+        "123.45",
+        "1,234.56"
+      ],
+      "title": "Allow space after digits tests",
+      "rationale": "Ensure the function handles spaces after digits correctly when `allow_space_after_digits` is true.",
+      "obligations": [
+        "OB-15"
+      ]
+    }
+  ],
+  "metadata": {
+    "requirement_source": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\README.md",
+    "generation_style": "improved_initial_pass"
+  }
+}

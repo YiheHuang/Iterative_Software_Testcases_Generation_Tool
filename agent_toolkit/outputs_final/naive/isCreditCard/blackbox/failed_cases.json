@@ -1,0 +1,136 @@
+[
+  {
+    "title": "General credit card validation without options",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "input_value": "1",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": []
+  },
+  {
+    "title": "Validation with unsupported provider",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "unsupported"
+      }
+    ],
+    "input_value": "4111111111111111",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "throw",
+    "actual_value": null,
+    "actual_error_name": "Error",
+    "passed": false,
+    "obligations": []
+  },
+  {
+    "title": "Validation with unsupported provider",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "unsupported"
+      }
+    ],
+    "input_value": "378282246310005",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "throw",
+    "actual_value": null,
+    "actual_error_name": "Error",
+    "passed": false,
+    "obligations": []
+  },
+  {
+    "title": "Validation with unsupported provider",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "unsupported"
+      }
+    ],
+    "input_value": "5555555555554444",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "throw",
+    "actual_value": null,
+    "actual_error_name": "Error",
+    "passed": false,
+    "obligations": []
+  },
+  {
+    "title": "Validation with unsupported provider",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "unsupported"
+      }
+    ],
+    "input_value": "6011111111111117",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "throw",
+    "actual_value": null,
+    "actual_error_name": "Error",
+    "passed": false,
+    "obligations": []
+  },
+  {
+    "title": "Validation with unsupported provider",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "unsupported"
+      }
+    ],
+    "input_value": "abcd1234efgh5678",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "throw",
+    "actual_value": null,
+    "actual_error_name": "Error",
+    "passed": false,
+    "obligations": []
+  },
+  {
+    "title": "Validation with unsupported provider",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "unsupported"
+      }
+    ],
+    "input_value": "",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "throw",
+    "actual_value": null,
+    "actual_error_name": "Error",
+    "passed": false,
+    "obligations": []
+  },
+  {
+    "title": "Validation with unsupported provider",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "unsupported"
+      }
+    ],
+    "input_value": "None",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "throw",
+    "actual_value": null,
+    "actual_error_name": "Error",
+    "passed": false,
+    "obligations": []
+  }
+]

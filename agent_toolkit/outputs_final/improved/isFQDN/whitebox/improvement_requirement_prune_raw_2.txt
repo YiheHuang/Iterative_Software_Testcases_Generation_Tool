@@ -1,0 +1,417 @@
+{
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "blackbox",
+      "rule": "The domain must include a TLD unless `require_tld` is set to false.",
+      "why": "Requirement explicitly states `require_tld` defaults to true and governs TLD validation.",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "example"
+    },
+    {
+      "id": "OB-2",
+      "kind": "blackbox",
+      "rule": "Underscores are disallowed unless `allow_underscores` is set to true.",
+      "why": "Requirement explicitly states `allow_underscores` governs underscore validation.",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "exa_mple.com"
+    },
+    {
+      "id": "OB-3",
+      "kind": "blackbox",
+      "rule": "Trailing dots are disallowed unless `allow_trailing_dot` is set to true.",
+      "why": "Requirement explicitly states `allow_trailing_dot` governs trailing dot validation.",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "example.com."
+    },
+    {
+      "id": "OB-4",
+      "kind": "blackbox",
+      "rule": "Numeric TLDs are disallowed unless `allow_numeric_tld` is set to true.",
+      "why": "Requirement explicitly states `allow_numeric_tld` governs numeric TLD validation.",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "example.123"
+    },
+    {
+      "id": "OB-5",
+      "kind": "blackbox",
+      "rule": "Wildcards are disallowed unless `allow_wildcard` is set to true.",
+      "why": "Requirement explicitly states `allow_wildcard` governs wildcard validation.",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "*.example.com"
+    },
+    {
+      "id": "OB-6",
+      "kind": "blackbox",
+      "rule": "Domain length must not exceed the standard maximum unless `ignore_max_length` is set to true.",
+      "why": "Requirement explicitly states `ignore_max_length` governs maximum length validation.",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "a"
+    },
+    {
+      "id": "OB-7",
+      "kind": "whitebox",
+      "rule": "Ensure the validator rejects TLDs containing spaces.",
+      "why": "Targets uncovered statement at line 42 and uncovered branch at line 41 where `/\\s/.test(tld)` evaluates to true.",
+      "minimal_valid": null,
+      "minimal_invalid": "example. com"
+    },
+    {
+      "id": "OB-8",
+      "kind": "whitebox",
+      "rule": "Ensure the validator rejects domain parts exceeding 63 characters when `ignore_max_length` is false.",
+      "why": "Targets uncovered statement at line 53 and uncovered branch at line 52 where `part.length > 63 && !options.ignore_max_length` evaluates to true.",
+      "minimal_valid": "a.com",
+      "minimal_invalid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"
+    },
+    {
+      "id": "OB-9",
+      "kind": "whitebox",
+      "rule": "Ensure the validator rejects domain parts containing full-width characters.",
+      "why": "Targets uncovered statement at line 62 and uncovered branch at line 61 where `/[\\uff01-\\uff5e]/.test(part)` evaluates to true.",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "\u0005\b\u0001\u0004\u0005\u0004\u0005.com"
+    },
+    {
+      "id": "OB-10",
+      "kind": "whitebox",
+      "rule": "Ensure the validator rejects domain parts starting or ending with a hyphen.",
+      "why": "Targets uncovered statement at line 67 and uncovered branch at line 66 where `/^-|-$/.test(part)` evaluates to true.",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "-example.com"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Validation with default options",
+      "validator": "isFQDN",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "example.com",
+        "sub.domain.com"
+      ],
+      "invalid": [
+        "example",
+        "exa_mple.com",
+        "example.com.",
+        "*.example.com",
+        "example.123",
+        "a"
+      ],
+      "rationale": "Tests the default behavior of the validator with no options specified, covering all obligations.",
+      "obligations": [
+        "OB-1",
+        "OB-2",
+        "OB-3",
+        "OB-4",
+        "OB-5",
+        "OB-6"
+      ]
+    },
+    {
+      "title": "Validation with `require_tld` set to false",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "require_tld": false
+        }
+      ],
+      "valid": [
+        "example",
+        "example.com"
+      ],
+      "invalid": [
+        "exa_mple.com",
+        "example.com.",
+        "*.example.com",
+        "example.123",
+        "a"
+      ],
+      "rationale": "Tests the behavior when TLD validation is disabled.",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "title": "Validation with `allow_underscores` set to true",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_underscores": true
+        }
+      ],
+      "valid": [
+        "exa_mple.com",
+        "example.com"
+      ],
+      "invalid": [
+        "example",
+        "example.com.",
+        "*.example.com",
+        "example.123",
+        "a"
+      ],
+      "rationale": "Tests the behavior when underscores are allowed in domain names.",
+      "obligations": [
+        "OB-2"
+      ]
+    },
+    {
+      "title": "Validation with `allow_trailing_dot` set to true",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_trailing_dot": true
+        }
+      ],
+      "valid": [
+        "example.com.",
+        "example.com"
+      ],
+      "invalid": [
+        "example",
+        "exa_mple.com",
+        "*.example.com",
+        "example.123",
+        "a"
+      ],
+      "rationale": "Tests the behavior when trailing dots are allowed in domain names.",
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "title": "Validation with `allow_numeric_tld` set to true",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_numeric_tld": true
+        }
+      ],
+      "valid": [
+        "example.123",
+        "example.com"
+      ],
+      "invalid": [
+        "example",
+        "exa_mple.com",
+        "example.com.",
+        "*.example.com",
+        "a"
+      ],
+      "rationale": "Tests the behavior when numeric TLDs are allowed.",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "title": "Validation with `allow_wildcard` set to true",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_wildcard": true
+        }
+      ],
+      "valid": [
+        "*.example.com",
+        "example.com"
+      ],
+      "invalid": [
+        "example",
+        "exa_mple.com",
+        "example.com.",
+        "example.123",
+        "a"
+      ],
+      "rationale": "Tests the behavior when wildcard domains are allowed.",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "title": "Validation with `ignore_max_length` set to true",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "ignore_max_length": true
+        }
+      ],
+      "valid": [
+        "a",
+        "example.com"
+      ],
+      "invalid": [
+        "example",
+        "exa_mple.com",
+        "example.com.",
+        "*.example.com",
+        "example.123"
+      ],
+      "rationale": "Tests the behavior when maximum domain length validation is disabled.",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "title": "Validation for TLDs containing spaces",
+      "validator": "isFQDN",
+      "args": [
+        {}
+      ],
+      "valid": [],
+      "invalid": [
+        "example. com",
+        "example. com.",
+        "sub.domain. com"
+      ],
+      "rationale": "Tests the rejection of TLDs containing spaces, targeting uncovered statement and branch at line 42.",
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "title": "Validation for domain parts exceeding 63 characters",
+      "validator": "isFQDN",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "a.com",
+        "sub.example.com",
+        "example.co.uk"
+      ],
+      "invalid": [
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com",
+        "sub.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com",
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.sub.com"
+      ],
+      "rationale": "Tests the rejection of domain parts exceeding 63 characters when `ignore_max_length` is false, targeting uncovered statement and branch at line 53.",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "title": "Validation for domain parts containing full-width characters",
+      "validator": "isFQDN",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "example.com",
+        "sub.domain.com",
+        "example.co.uk"
+      ],
+      "invalid": [
+        "\u0005\b\u0001\u0004\u0005\u0004\u0005.com",
+        "example.\u0005\b\u0001\u0004\u0005\u0004\u0005",
+        "sub.\u0005\b\u0001\u0004\u0005\u0004\u0005.com"
+      ],
+      "rationale": "Tests the rejection of domain parts containing full-width characters, targeting uncovered statement and branch at line 62.",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "title": "Validation for domain parts starting or ending with a hyphen",
+      "validator": "isFQDN",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "example.com",
+        "sub.domain.com",
+        "example.co.uk"
+      ],
+      "invalid": [
+        "-example.com",
+        "example-.com",
+        "sub.-domain.com"
+      ],
+      "rationale": "Tests the rejection of domain parts starting or ending with a hyphen, targeting uncovered statement and branch at line 67.",
+      "obligations": [
+        "OB-10"
+      ]
+    }
+  ],
+  "audit": [
+    {
+      "group_title": "Validation with default options",
+      "decision": "keep",
+      "reason": "All cases are supported by the default behavior as described in the requirement.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Validation with `require_tld` set to false",
+      "decision": "keep",
+      "reason": "All cases are supported by the behavior of `require_tld` set to false.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Validation with `allow_underscores` set to true",
+      "decision": "keep",
+      "reason": "All cases are supported by the behavior of `allow_underscores` set to true.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Validation with `allow_trailing_dot` set to true",
+      "decision": "keep",
+      "reason": "All cases are supported by the behavior of `allow_trailing_dot` set to true.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Validation with `allow_numeric_tld` set to true",
+      "decision": "keep",
+      "reason": "All cases are supported by the behavior of `allow_numeric_tld` set to true.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Validation with `allow_wildcard` set to true",
+      "decision": "keep",
+      "reason": "All cases are supported by the behavior of `allow_wildcard` set to true.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Validation with `ignore_max_length` set to true",
+      "decision": "keep",
+      "reason": "All cases are supported by the behavior of `ignore_max_length` set to true.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Validation for TLDs containing spaces",
+      "decision": "keep",
+      "reason": "All cases are supported by the requirement to reject TLDs containing spaces.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Validation for domain parts exceeding 63 characters",
+      "decision": "keep",
+      "reason": "All cases are supported by the requirement to reject domain parts exceeding 63 characters.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Validation for domain parts containing full-width characters",
+      "decision": "keep",
+      "reason": "All cases are supported by the requirement to reject domain parts containing full-width characters.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Validation for domain parts starting or ending with a hyphen",
+      "decision": "keep",
+      "reason": "All cases are supported by the requirement to reject domain parts starting or ending with a hyphen.",
+      "removed_valid": [],
+      "removed_invalid": []
+    }
+  ]
+}

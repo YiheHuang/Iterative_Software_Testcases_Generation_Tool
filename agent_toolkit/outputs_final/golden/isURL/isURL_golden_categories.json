@@ -1,0 +1,113 @@
+{
+  "validator_name": "isURL",
+  "golden_categories": [
+    {
+      "golden_category_id": "GC-1",
+      "name": "Basic URL Validation",
+      "description": "Covers general URL validation with standard protocols and formats.",
+      "golden_group_ids": [
+        "GOLDEN-1",
+        "GOLDEN-12",
+        "GOLDEN-31"
+      ]
+    },
+    {
+      "golden_category_id": "GC-2",
+      "name": "Localhost and Non-TLD URLs",
+      "description": "Tests for validating URLs without protocols or with localhost and non-TLD domains.",
+      "golden_group_ids": [
+        "GOLDEN-2",
+        "GOLDEN-18"
+      ]
+    },
+    {
+      "golden_category_id": "GC-3",
+      "name": "Protocol Handling",
+      "description": "Tests related to handling protocols, including custom protocols and protocol validation.",
+      "golden_group_ids": [
+        "GOLDEN-3",
+        "GOLDEN-4",
+        "GOLDEN-5",
+        "GOLDEN-6",
+        "GOLDEN-7",
+        "GOLDEN-8",
+        "GOLDEN-13",
+        "GOLDEN-21"
+      ]
+    },
+    {
+      "golden_category_id": "GC-4",
+      "name": "Underscore Handling",
+      "description": "Tests for validating URLs with underscores in the hostname.",
+      "golden_group_ids": [
+        "GOLDEN-9"
+      ]
+    },
+    {
+      "golden_category_id": "GC-5",
+      "name": "TLD and Trailing Dot Handling",
+      "description": "Tests for URLs without TLDs and with trailing dots.",
+      "golden_group_ids": [
+        "GOLDEN-10",
+        "GOLDEN-11"
+      ]
+    },
+    {
+      "golden_category_id": "GC-6",
+      "name": "Protocol Relative URLs",
+      "description": "Tests for handling protocol-relative URLs and related options.",
+      "golden_group_ids": [
+        "GOLDEN-14",
+        "GOLDEN-17"
+      ]
+    },
+    {
+      "golden_category_id": "GC-7",
+      "name": "Fragment and Query Component Handling",
+      "description": "Tests for handling fragments and query components in URLs.",
+      "golden_group_ids": [
+        "GOLDEN-15",
+        "GOLDEN-16"
+      ]
+    },
+    {
+      "golden_category_id": "GC-8",
+      "name": "Authentication Handling",
+      "description": "Tests for handling authentication information in URLs.",
+      "golden_group_ids": [
+        "GOLDEN-19",
+        "GOLDEN-20",
+        "GOLDEN-27",
+        "GOLDEN-28"
+      ]
+    },
+    {
+      "golden_category_id": "GC-9",
+      "name": "Host Validation",
+      "description": "Tests for validating hostnames, including whitelists, blacklists, and regular expressions.",
+      "golden_group_ids": [
+        "GOLDEN-22",
+        "GOLDEN-23",
+        "GOLDEN-24",
+        "GOLDEN-25"
+      ]
+    },
+    {
+      "golden_category_id": "GC-10",
+      "name": "Security and Vulnerability Handling",
+      "description": "Tests for handling security-related cases, such as rejecting invalid protocols and parsing differences.",
+      "golden_group_ids": [
+        "GOLDEN-26"
+      ]
+    },
+    {
+      "golden_category_id": "GC-11",
+      "name": "Length Validation",
+      "description": "Tests for validating URL length and configuring maximum allowed length.",
+      "golden_group_ids": [
+        "GOLDEN-29",
+        "GOLDEN-30"
+      ]
+    }
+  ]
+}

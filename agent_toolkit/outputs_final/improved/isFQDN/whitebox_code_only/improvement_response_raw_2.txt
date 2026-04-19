@@ -1,0 +1,73 @@
+{
+  "obligations": [
+    {
+      "id": "OB-16",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of the condition `/\\s/.test(tld)` at line 41.",
+      "why": "This branch is currently uncovered and ensures rejection of TLDs containing spaces.",
+      "minimal_valid": null,
+      "minimal_invalid": "example.c om"
+    },
+    {
+      "id": "OB-17",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of the condition `!options.allow_numeric_tld && /^\\d+$/.test(tld)` at line 47.",
+      "why": "This branch is currently uncovered and ensures rejection of numeric TLDs when `allow_numeric_tld` is false.",
+      "minimal_valid": null,
+      "minimal_invalid": "example.123"
+    },
+    {
+      "id": "OB-18",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of the condition `!options.allow_underscores && /_/.test(part)` at line 70.",
+      "why": "This branch is currently uncovered and ensures rejection of underscores in parts when `allow_underscores` is false.",
+      "minimal_valid": null,
+      "minimal_invalid": "example_com"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Spaces in TLD - Whitebox Coverage",
+      "validator": "isFQDN",
+      "args": [
+        {}
+      ],
+      "valid": [],
+      "invalid": [
+        "example.c om"
+      ],
+      "rationale": "Covers the true branch of the condition `/\\s/.test(tld)` at line 41 to ensure rejection of TLDs containing spaces.",
+      "obligations": ["OB-16"]
+    },
+    {
+      "title": "Numeric TLD Rejection - Whitebox Coverage",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_numeric_tld": false
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "example.123"
+      ],
+      "rationale": "Covers the true branch of the condition `!options.allow_numeric_tld && /^\\d+$/.test(tld)` at line 47 to ensure rejection of numeric TLDs when `allow_numeric_tld` is false.",
+      "obligations": ["OB-17"]
+    },
+    {
+      "title": "Underscore Rejection - Whitebox Coverage",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_underscores": false
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "example_com"
+      ],
+      "rationale": "Covers the true branch of the condition `!options.allow_underscores && /_/.test(part)` at line 70 to ensure rejection of underscores in parts when `allow_underscores` is false.",
+      "obligations": ["OB-18"]
+    }
+  ]
+}

@@ -1,0 +1,174 @@
+{
+  "mode": "whitebox",
+  "approach": "naive",
+  "obligations": [],
+  "test_groups": [
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "test@example.com",
+        "user.name+tag+sorting@example.com",
+        "user_name@example.com",
+        "user-name@example.com"
+      ],
+      "invalid": [
+        "plainaddress",
+        "@missingusername.com",
+        "username@.com",
+        "username@com",
+        "username@domain..com"
+      ],
+      "title": "Default options",
+      "rationale": "Tests basic email validation with default options, ensuring common valid and invalid cases are handled correctly.",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "valid": [
+        "John Doe <john.doe@example.com>",
+        "\"John Doe\" <john.doe@example.com>",
+        "John <john@example.com>"
+      ],
+      "invalid": [
+        "John Doe john.doe@example.com",
+        "John Doe <john.doe@>",
+        "<john.doe@example.com>"
+      ],
+      "title": "Allow display name",
+      "rationale": "Tests validation of emails with display names when `allow_display_name` is true.",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_display_name": true
+        }
+      ],
+      "valid": [
+        "John Doe <john.doe@example.com>",
+        "\"John Doe\" <john.doe@example.com>"
+      ],
+      "invalid": [
+        "john.doe@example.com",
+        "John Doe john.doe@example.com",
+        "<john.doe@example.com>"
+      ],
+      "title": "Require display name",
+      "rationale": "Tests validation when display names are required (`require_display_name` is true).",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_ip_domain": true
+        }
+      ],
+      "valid": [
+        "user@[192.168.1.1]",
+        "user@[255.255.255.255]"
+      ],
+      "invalid": [
+        "user@192.168.1.1",
+        "user@[192.168.1.256]",
+        "user@[192.168.1]"
+      ],
+      "title": "Allow IP domain",
+      "rationale": "Tests validation of emails with IP addresses as domains when `allow_ip_domain` is true.",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_utf8_local_part": false
+        }
+      ],
+      "valid": [
+        "user@example.com",
+        "user.name@example.com"
+      ],
+      "invalid": [
+        "üser@example.com",
+        "用户@example.com"
+      ],
+      "title": "Disallow UTF-8 local part",
+      "rationale": "Tests validation of emails with non-ASCII characters in the local part when `allow_utf8_local_part` is false.",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_tld": true
+        }
+      ],
+      "valid": [
+        "user@example.com",
+        "user@sub.example.com"
+      ],
+      "invalid": [
+        "user@example",
+        "user@localhost"
+      ],
+      "title": "Require TLD",
+      "rationale": "Tests validation of emails requiring a top-level domain (`require_tld` is true).",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "blacklisted_chars": "!#$%"
+        }
+      ],
+      "valid": [
+        "user@example.com",
+        "user.name@example.com"
+      ],
+      "invalid": [
+        "user!name@example.com",
+        "user#name@example.com",
+        "user%name@example.com"
+      ],
+      "title": "Blacklist specific characters",
+      "rationale": "Tests validation of emails with blacklisted characters in the local part.",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "host_blacklist": [
+            "example.com",
+            "blacklisted.com"
+          ]
+        }
+      ],
+      "valid": [
+        "user@allowed.com",
+        "user@safe.com"
+      ],
+      "invalid": [
+        "user@example.com",
+        "user@blacklisted.com"
+      ],
+      "title": "Host blacklist",
+      "rationale": "Tests validation of emails with domains in the host blacklist.",
+      "obligations": []
+    }
+  ],
+  "metadata": {
+    "requirement_source": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\README.md",
+    "generation_style": "single_pass_with_repair"
+  }
+}

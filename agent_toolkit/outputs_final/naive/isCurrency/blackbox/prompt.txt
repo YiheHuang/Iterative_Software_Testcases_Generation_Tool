@@ -1,0 +1,24 @@
+Task: generate black-box tests for isCurrency.
+
+        Read the requirement and directly produce a small first-pass grouped validator.js-style test suite.
+        Stay conservative and only cover behaviors that are explicit or strongly implied by the requirement.
+        Do not spend effort extracting formal obligations.
+        Use an empty obligations list unless there is a very obvious single high-level rule to note.
+
+        Black-box guidance:
+        - prefer common positive and negative examples
+        - use only a few clearly differentiated groups
+        - avoid speculative option interactions
+        - stop at a modest baseline instead of trying to be comprehensive
+
+        Requirement specification:
+        Function name: isCurrency
+Black-box requirement source: validator_js README function entry
+Signature summary: isCurrency(str [, options])
+README behavior summary:
+| check if the string is a valid currency amount.
+`options` is an object which defaults to `{ symbol: '$', require_symbol: false, allow_space_after_symbol: false, symbol_after_digits: false, allow_negatives: true, parens_for_negatives: false, negative_sign_before_digits: false, negative_sign_after_digits: false, allow_negative_sign_placeholder: false, thousands_separator: ',', decimal_separator: '.', allow_decimal: true, require_decimal: false, digits_after_decimal: [2], allow_space_after_digits: false }`.
+**Note:** The array `digits_after_decimal` is filled with the exact number of digits allowed not a range, for example a range 1 to 3 will be given as [1, 2, 3].
+
+Treat the README entry as the authoritative black-box behavior description.
+Infer valid inputs, invalid inputs, option-sensitive behaviors, and edge cases from this description.

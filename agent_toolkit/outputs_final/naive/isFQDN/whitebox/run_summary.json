@@ -1,0 +1,50 @@
+{
+  "validator_name": "isFQDN",
+  "mode": "whitebox",
+  "approach": "naive",
+  "obligation_count": 0,
+  "group_count": 6,
+  "prompt_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\naive\\isFQDN\\whitebox\\prompt.txt",
+  "response_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\naive\\isFQDN\\whitebox\\response.json",
+  "evaluation": {
+    "total_cases": 60,
+    "correct_cases": 59,
+    "incorrect_cases": 1,
+    "exact_match_rate": 0.9833333333333333,
+    "output_json_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\naive\\isFQDN\\whitebox\\evaluation_output.json",
+    "coverage_dir": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\naive\\isFQDN\\whitebox\\coverage"
+  },
+  "golden_analysis": {
+    "summary": {
+      "total_golden_categories": 6,
+      "total_generated_categories": 6,
+      "overlap_golden_categories": 5,
+      "missing_golden_categories": 1,
+      "matched_generated_categories": 5,
+      "novel_generated_categories": 1,
+      "strong_golden_category_matches": 4,
+      "partial_golden_category_matches": 1,
+      "fragmented_golden_matches": 0,
+      "matched_golden_ratio": 0.8333333333333334,
+      "total_golden_groups": 6,
+      "total_generated_groups": 6,
+      "overlap_golden_groups": 5,
+      "missing_golden_groups": 1,
+      "novel_valid_groups": 1,
+      "exact_or_near_overlap_groups": 5,
+      "golden_groups_with_semantic_match": 5,
+      "generated_groups_with_semantic_match": 5,
+      "novel_valid_categories": 1
+    },
+    "comparison_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\naive\\isFQDN\\whitebox\\golden_comparison.json"
+  },
+  "llm_usage": {
+    "request_count": 4,
+    "prompt_tokens": 22319,
+    "completion_tokens": 18283,
+    "total_tokens": 40602,
+    "usage_reporting_available": true,
+    "model": "gpt-4o",
+    "api_url": "https://yunwu.ai/v1/chat/completions"
+  }
+}

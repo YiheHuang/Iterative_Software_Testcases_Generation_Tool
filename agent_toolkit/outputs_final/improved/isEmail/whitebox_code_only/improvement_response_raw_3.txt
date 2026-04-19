@@ -1,0 +1,87 @@
+{
+  "obligations": [
+    {
+      "id": "OB-16",
+      "kind": "whitebox",
+      "rule": "Covers the false branch of `display_name.endsWith(' ')` at line 81.",
+      "why": "This branch is currently uncovered and ensures that display names without trailing spaces are handled correctly.",
+      "minimal_valid": "\"John\" <john.doe@example.com>",
+      "minimal_invalid": "\"John \" <john.doe@example.com>"
+    },
+    {
+      "id": "OB-17",
+      "kind": "whitebox",
+      "rule": "Covers the true branch of `!options.ignore_max_length && str.length > defaultMaxEmailLength` at line 92.",
+      "why": "This branch is currently uncovered and ensures that emails exceeding the maximum length are rejected when `ignore_max_length` is false.",
+      "minimal_valid": "a@b.com",
+      "minimal_invalid": "a_very_long_email_address_that_exceeds_the_maximum_length@example.com"
+    },
+    {
+      "id": "OB-18",
+      "kind": "whitebox",
+      "rule": "Covers the true branch of `!isByteLength(username.replace(/\\./g, ''), { min: 6, max: 30 })` at line 124.",
+      "why": "This branch is currently uncovered and ensures that usernames not meeting the byte length constraints are rejected.",
+      "minimal_valid": "validuser@gmail.com",
+      "minimal_invalid": "short@gmail.com"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Trailing space in display name (false branch)",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "valid": [
+        "\"John\" <john.doe@example.com>"
+      ],
+      "invalid": [
+        "\"John \" <john.doe@example.com>"
+      ],
+      "rationale": "Covers the false branch of `display_name.endsWith(' ')` to ensure display names without trailing spaces are handled correctly.",
+      "obligations": [
+        "OB-16"
+      ]
+    },
+    {
+      "title": "Maximum email length enforcement (true branch)",
+      "validator": "isEmail",
+      "args": [
+        {
+          "ignore_max_length": false
+        }
+      ],
+      "valid": [
+        "a@b.com"
+      ],
+      "invalid": [
+        "a_very_long_email_address_that_exceeds_the_maximum_length@example.com"
+      ],
+      "rationale": "Covers the true branch of `!options.ignore_max_length && str.length > defaultMaxEmailLength` to ensure emails exceeding the maximum length are rejected when `ignore_max_length` is false.",
+      "obligations": [
+        "OB-17"
+      ]
+    },
+    {
+      "title": "Username byte length validation",
+      "validator": "isEmail",
+      "args": [
+        {
+          "domain_specific_validation": true
+        }
+      ],
+      "valid": [
+        "validuser@gmail.com"
+      ],
+      "invalid": [
+        "short@gmail.com"
+      ],
+      "rationale": "Covers the true branch of `!isByteLength(username.replace(/\\./g, ''), { min: 6, max: 30 })` to ensure usernames not meeting the byte length constraints are rejected.",
+      "obligations": [
+        "OB-18"
+      ]
+    }
+  ]
+}

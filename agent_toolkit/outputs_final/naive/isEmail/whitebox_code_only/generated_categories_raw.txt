@@ -1,0 +1,29 @@
+{
+  "generated_categories": [
+    {
+      "name": "Basic Email Validation",
+      "description": "Covers standard email validation without any special options or configurations.",
+      "generated_group_ids": ["GENERATED-1"]
+    },
+    {
+      "name": "Display Name Handling",
+      "description": "Tests email validation with configurations related to display names, including allowing or requiring them.",
+      "generated_group_ids": ["GENERATED-2", "GENERATED-3"]
+    },
+    {
+      "name": "UTF-8 Local Part Support",
+      "description": "Tests email validation with support for UTF-8 characters in the local part of the email address.",
+      "generated_group_ids": ["GENERATED-4"]
+    },
+    {
+      "name": "Host Filtering",
+      "description": "Tests email validation with host-based filtering, including blacklists and whitelists.",
+      "generated_group_ids": ["GENERATED-5", "GENERATED-6"]
+    },
+    {
+      "name": "Max Length Handling",
+      "description": "Tests email validation with configurations to ignore maximum length restrictions.",
+      "generated_group_ids": ["GENERATED-7"]
+    }
+  ]
+}

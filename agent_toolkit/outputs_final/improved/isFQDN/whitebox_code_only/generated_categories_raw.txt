@@ -1,0 +1,39 @@
+{
+  "generated_categories": [
+    {
+      "name": "Basic Validation",
+      "description": "Tests that ensure the input adheres to fundamental FQDN rules, such as being a string and rejecting invalid characters or formats.",
+      "generated_group_ids": ["GENERATED-1", "GENERATED-6", "GENERATED-8", "GENERATED-9", "GENERATED-10", "GENERATED-13"]
+    },
+    {
+      "name": "Trailing Dot Handling",
+      "description": "Tests related to the handling of trailing dots in FQDNs, depending on the `allow_trailing_dot` option.",
+      "generated_group_ids": ["GENERATED-2"]
+    },
+    {
+      "name": "Wildcard Handling",
+      "description": "Tests that validate the behavior when wildcards are allowed in FQDNs using the `allow_wildcard` option.",
+      "generated_group_ids": ["GENERATED-3"]
+    },
+    {
+      "name": "TLD Requirements",
+      "description": "Tests that ensure proper handling of top-level domains (TLDs), including their presence and format, based on the `require_tld` option.",
+      "generated_group_ids": ["GENERATED-4", "GENERATED-12"]
+    },
+    {
+      "name": "Numeric TLD Handling",
+      "description": "Tests that validate the acceptance or rejection of numeric TLDs based on the `allow_numeric_tld` option.",
+      "generated_group_ids": ["GENERATED-5", "GENERATED-14"]
+    },
+    {
+      "name": "Length Constraints",
+      "description": "Tests that verify the enforcement of length constraints on FQDN parts, such as the maximum length of labels.",
+      "generated_group_ids": ["GENERATED-7"]
+    },
+    {
+      "name": "Underscore Handling",
+      "description": "Tests that validate the behavior when underscores are allowed or disallowed in FQDNs using the `allow_underscores` option.",
+      "generated_group_ids": ["GENERATED-11", "GENERATED-15"]
+    }
+  ]
+}

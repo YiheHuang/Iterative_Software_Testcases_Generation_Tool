@@ -1,0 +1,163 @@
+Group generated tests into generated categories for validator isFQDN.
+
+Generated groups:
+[
+  {
+    "title": "Default behavior (require_tld: true, allow_underscores: false, allow_trailing_dot: false, allow_numeric_tld: false, allow_wildcard: false, ignore_max_length: false)",
+    "validator": "isFQDN",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "example.com",
+      "sub.domain.com",
+      "a.co",
+      "valid-domain.org"
+    ],
+    "invalid": [
+      "example",
+      "example.",
+      "example..com",
+      "example_com",
+      "123.456",
+      "*.example.com",
+      "a"
+    ],
+    "rationale": "Covers basic FQDN validation with default options.",
+    "obligations": [],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "Option: require_tld = false",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": false
+      }
+    ],
+    "valid": [
+      "example",
+      "example.com",
+      "sub.domain"
+    ],
+    "invalid": [
+      "example..com",
+      "example_com",
+      "*.example.com"
+    ],
+    "rationale": "Allows domains without a TLD.",
+    "obligations": [],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "Option: allow_underscores = true",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_underscores": true
+      }
+    ],
+    "valid": [
+      "example_com",
+      "sub_domain.example.com",
+      "valid_domain.org"
+    ],
+    "invalid": [
+      "example..com",
+      "example.",
+      "*.example.com"
+    ],
+    "rationale": "Allows underscores in domain names.",
+    "obligations": [],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "Option: allow_trailing_dot = true",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_trailing_dot": true
+      }
+    ],
+    "valid": [
+      "example.com.",
+      "sub.domain.com.",
+      "a.co."
+    ],
+    "invalid": [
+      "example..com",
+      "example_com",
+      "*.example.com"
+    ],
+    "rationale": "Allows domains to end with a trailing dot.",
+    "obligations": [],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "Option: allow_numeric_tld = true",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": true
+      }
+    ],
+    "valid": [
+      "example.123",
+      "sub.domain.456",
+      "a.789"
+    ],
+    "invalid": [
+      "example..com",
+      "example_com",
+      "*.example.com"
+    ],
+    "rationale": "Allows numeric TLDs.",
+    "obligations": [],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "Option: allow_wildcard = true",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_wildcard": true
+      }
+    ],
+    "valid": [
+      "*.example.com",
+      "*.sub.domain.com",
+      "*.a.co"
+    ],
+    "invalid": [
+      "example..com",
+      "example_com",
+      "example.com."
+    ],
+    "rationale": "Allows wildcard domains starting with '*.'",
+    "obligations": [],
+    "generated_id": "GENERATED-6"
+  },
+  {
+    "title": "Option: ignore_max_length = true",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "ignore_max_length": true
+      }
+    ],
+    "valid": [
+      "a",
+      "a",
+      "a",
+      "a"
+    ],
+    "invalid": [
+      "example..com",
+      "example_com",
+      "*.example.com"
+    ],
+    "rationale": "Ignores the maximum length constraint for domains.",
+    "obligations": [],
+    "generated_id": "GENERATED-7"
+  }
+]

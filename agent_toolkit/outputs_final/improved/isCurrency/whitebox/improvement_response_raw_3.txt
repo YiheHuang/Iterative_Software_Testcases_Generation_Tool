@@ -1,0 +1,89 @@
+{
+  "obligations": [
+    {
+      "id": "OB-26",
+      "kind": "whitebox",
+      "rule": "Cover the ternary true branch for `options.require_decimal` at line 16.",
+      "why": "This branch is uncovered and corresponds to the `require_decimal` option being true.",
+      "minimal_valid": "$123.45",
+      "minimal_invalid": "$123"
+    },
+    {
+      "id": "OB-27",
+      "kind": "whitebox",
+      "rule": "Cover the ternary false branch for `options.allow_decimal || options.require_decimal` at line 17.",
+      "why": "This branch is uncovered and corresponds to both `allow_decimal` and `require_decimal` being false.",
+      "minimal_valid": "$123",
+      "minimal_invalid": "$123.45"
+    },
+    {
+      "id": "OB-28",
+      "kind": "whitebox",
+      "rule": "Cover the binary expression path for `options.require_decimal` at line 17.",
+      "why": "This path is uncovered and corresponds to `require_decimal` being true while `allow_decimal` is false.",
+      "minimal_valid": "$123.45",
+      "minimal_invalid": "$123"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Require decimal",
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_decimal": true
+        }
+      ],
+      "valid": [
+        "$123.45"
+      ],
+      "invalid": [
+        "$123"
+      ],
+      "rationale": "Tests the ternary true branch for `require_decimal` at line 16.",
+      "obligations": [
+        "OB-26"
+      ]
+    },
+    {
+      "title": "Disallow decimal",
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_decimal": false,
+          "require_decimal": false
+        }
+      ],
+      "valid": [
+        "$123"
+      ],
+      "invalid": [
+        "$123.45"
+      ],
+      "rationale": "Tests the ternary false branch for `allow_decimal || require_decimal` at line 17.",
+      "obligations": [
+        "OB-27"
+      ]
+    },
+    {
+      "title": "Require decimal without allowing decimal",
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_decimal": false,
+          "require_decimal": true
+        }
+      ],
+      "valid": [
+        "$123.45"
+      ],
+      "invalid": [
+        "$123"
+      ],
+      "rationale": "Tests the binary expression path for `require_decimal` at line 17.",
+      "obligations": [
+        "OB-28"
+      ]
+    }
+  ]
+}

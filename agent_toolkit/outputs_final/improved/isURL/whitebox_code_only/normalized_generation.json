@@ -1,0 +1,403 @@
+{
+  "mode": "whitebox_code_only",
+  "approach": "improved",
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "whitebox",
+      "rule": "Return false if the input is null, empty, or contains invalid characters like spaces or angle brackets.",
+      "why": "Ensure early return for invalid input formats.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "null"
+    },
+    {
+      "id": "OB-2",
+      "kind": "whitebox",
+      "rule": "Return false if the URL starts with 'mailto:'.",
+      "why": "Special case handling for mailto URLs.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "mailto:user@example.com"
+    },
+    {
+      "id": "OB-3",
+      "kind": "whitebox",
+      "rule": "Enforce maximum URL length if validate_length is true.",
+      "why": "Ensure URLs exceeding max_allowed_length are rejected.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://"
+    },
+    {
+      "id": "OB-4",
+      "kind": "whitebox",
+      "rule": "Cover the condition at line 66: `options.validate_length && url.length > options.max_allowed_length`.",
+      "why": "This condition checks whether the URL exceeds the maximum allowed length when `validate_length` is enabled.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://example.com/very/long/url/that/exceeds/the/maximum/allowed/length"
+    },
+    {
+      "id": "OB-5",
+      "kind": "whitebox",
+      "rule": "Cover the condition at line 70: `!options.allow_fragments && includes(url, '#')`.",
+      "why": "This condition ensures that URLs containing fragments are rejected when `allow_fragments` is disabled.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://example.com#fragment"
+    },
+    {
+      "id": "OB-6",
+      "kind": "whitebox",
+      "rule": "Cover the condition at line 74: `!options.allow_query_components && (includes(url, '?') || includes(url, '&'))`.",
+      "why": "This condition ensures that URLs containing query components are rejected when `allow_query_components` is disabled.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://example.com?query=1"
+    },
+    {
+      "id": "OB-7",
+      "kind": "whitebox",
+      "rule": "Cover the condition at line 124: `if (at_position !== -1)` and its true/false branches.",
+      "why": "This condition checks for the presence of an '@' symbol in the URL, which is critical for distinguishing authentication components from protocols.",
+      "minimal_valid": "http://user:pass@example.com",
+      "minimal_invalid": "http://example.com"
+    },
+    {
+      "id": "OB-8",
+      "kind": "whitebox",
+      "rule": "Cover the condition at line 136: `if (options.require_protocol)` and its true/false branches.",
+      "why": "This condition enforces the presence of a protocol when the `require_protocol` option is enabled.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "example.com"
+    },
+    {
+      "id": "OB-9",
+      "kind": "whitebox",
+      "rule": "Cover the condition at line 214: `if (auth.indexOf(':') >= 0 && auth.split(':').length > 2)` and its true/false branches.",
+      "why": "This condition validates the structure of the authentication component in the URL, ensuring it does not contain malformed or excessive colons.",
+      "minimal_valid": "http://user:pass@example.com",
+      "minimal_invalid": "http://user:pass:extra@example.com"
+    },
+    {
+      "id": "OB-10",
+      "kind": "whitebox",
+      "rule": "Ensure URLs with invalid authentication components are rejected.",
+      "why": "Targets uncovered statement at line 127 and related branches for validating authentication components.",
+      "minimal_valid": "http://user:pass@example.com",
+      "minimal_invalid": "http://user:pass:extra@example.com"
+    },
+    {
+      "id": "OB-11",
+      "kind": "whitebox",
+      "rule": "Ensure URLs with encoded malicious content in authentication are rejected.",
+      "why": "Targets uncovered statement at line 132 and related branches for detecting encoded malicious content.",
+      "minimal_valid": "http://user:pass@example.com",
+      "minimal_invalid": "http://javascript:%61%6c%65%72%74%28%31%29@example.com"
+    },
+    {
+      "id": "OB-12",
+      "kind": "whitebox",
+      "rule": "Ensure URLs with invalid port numbers are rejected.",
+      "why": "Targets uncovered statement at line 241 and related branches for validating port numbers.",
+      "minimal_valid": "http://example.com:80",
+      "minimal_invalid": "http://example.com:70000"
+    },
+    {
+      "id": "OB-13",
+      "kind": "whitebox",
+      "rule": "Cover uncovered statement at line 99: return false;",
+      "why": "This statement is reached when an invalid protocol is detected and `require_valid_protocol` is true.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "javascript:alert(1)"
+    },
+    {
+      "id": "OB-14",
+      "kind": "whitebox",
+      "rule": "Cover uncovered statement at line 118: after_colon.indexOf('/');",
+      "why": "This statement is reached when parsing the portion of the URL after the colon to identify the first slash.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://example"
+    },
+    {
+      "id": "OB-15",
+      "kind": "whitebox",
+      "rule": "Cover uncovered branch at line 124: if (at_position !== -1).",
+      "why": "This branch is taken when the portion of the URL before the first slash contains an '@' symbol, indicating potential authentication information.",
+      "minimal_valid": "http://user:pass@example.com",
+      "minimal_invalid": "http://example.com"
+    }
+  ],
+  "test_groups": [
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com",
+        "ftp://example.com"
+      ],
+      "invalid": [
+        "",
+        " ",
+        "None",
+        "http://<invalid>.com",
+        "http://example .com"
+      ],
+      "title": "Basic input validation",
+      "rationale": "Covers early returns for null, empty, or invalid characters in input.",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com"
+      ],
+      "invalid": [
+        "mailto:user@example.com",
+        "mailto:example@domain.com"
+      ],
+      "title": "Special case: mailto URLs",
+      "rationale": "Ensures URLs starting with 'mailto:' are rejected.",
+      "obligations": [
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com",
+        "http://a.com/"
+      ],
+      "invalid": [
+        "http://"
+      ],
+      "title": "Maximum URL length enforcement",
+      "rationale": "Tests enforcement of maximum URL length when validate_length is true.",
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "validate_length": true,
+          "max_allowed_length": 20
+        }
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        "http://example.com/very/long/url/that/exceeds/the/maximum/allowed/length"
+      ],
+      "title": "Maximum URL length with validate_length option",
+      "rationale": "Tests the enforcement of maximum URL length when `validate_length` is enabled.",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_fragments": false
+        }
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        "http://example.com#fragment"
+      ],
+      "title": "Fragment handling with allow_fragments option",
+      "rationale": "Ensures URLs with fragments are rejected when `allow_fragments` is disabled.",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_query_components": false
+        }
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        "http://example.com?query=1",
+        "http://example.com&param=value"
+      ],
+      "title": "Query components handling with allow_query_components option",
+      "rationale": "Ensures URLs with query components are rejected when `allow_query_components` is disabled.",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://user:pass@example.com"
+      ],
+      "invalid": [
+        "http://example.com",
+        "http://user:pass:extra@example.com"
+      ],
+      "title": "Authentication component handling",
+      "rationale": "Covers the presence of '@' in the URL and validates the structure of the authentication component.",
+      "obligations": [
+        "OB-7",
+        "OB-9"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        "example.com"
+      ],
+      "title": "Protocol requirement enforcement",
+      "rationale": "Ensures that URLs without a protocol are rejected when `require_protocol` is enabled.",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://user:pass@example.com"
+      ],
+      "invalid": [
+        "http://user:pass:extra@example.com"
+      ],
+      "title": "Authentication component validation",
+      "rationale": "Tests validation of authentication components, targeting uncovered statement at line 127.",
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://user:pass@example.com"
+      ],
+      "invalid": [
+        "http://javascript:%61%6c%65%72%74%28%31%29@example.com"
+      ],
+      "title": "Encoded malicious content in authentication",
+      "rationale": "Tests detection of encoded malicious content in authentication, targeting uncovered statement at line 132.",
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com:80"
+      ],
+      "invalid": [
+        "http://example.com:70000"
+      ],
+      "title": "Port number validation",
+      "rationale": "Tests validation of port numbers, targeting uncovered statement at line 241.",
+      "obligations": [
+        "OB-12"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_valid_protocol": true,
+          "protocols": [
+            "http",
+            "https"
+          ]
+        }
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        "javascript:alert(1)"
+      ],
+      "title": "Invalid protocol with require_valid_protocol option",
+      "rationale": "Tests rejection of invalid protocols when `require_valid_protocol` is enabled, targeting uncovered statement at line 99.",
+      "obligations": [
+        "OB-13"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        "http://example"
+      ],
+      "title": "Parsing after colon for first slash",
+      "rationale": "Tests parsing of the portion after the colon to identify the first slash, targeting uncovered statement at line 118.",
+      "obligations": [
+        "OB-14"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://user:pass@example.com"
+      ],
+      "invalid": [
+        "http://example.com"
+      ],
+      "title": "Authentication component detection",
+      "rationale": "Tests detection of authentication components in the URL, targeting uncovered branch at line 124.",
+      "obligations": [
+        "OB-15"
+      ]
+    }
+  ],
+  "metadata": {
+    "requirement_source": "not_used_code_only_mode",
+    "generation_style": "improved_initial_pass",
+    "iteration_count": 5,
+    "improvement_applied": true,
+    "feedback_sources": [
+      "coverage"
+    ],
+    "decision": "stop_after_reverts"
+  }
+}

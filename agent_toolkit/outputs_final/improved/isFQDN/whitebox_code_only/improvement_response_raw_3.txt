@@ -1,0 +1,79 @@
+{
+  "obligations": [
+    {
+      "id": "OB-16",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 42: `return false;`.",
+      "why": "This statement is reached when the TLD contains spaces, which is currently uncovered.",
+      "minimal_valid": null,
+      "minimal_invalid": "example.c om"
+    },
+    {
+      "id": "OB-17",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 48: `return false;`.",
+      "why": "This statement is reached when `allow_numeric_tld` is false and the TLD is numeric, which is currently uncovered.",
+      "minimal_valid": null,
+      "minimal_invalid": "example.123"
+    },
+    {
+      "id": "OB-18",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 71: `return false;`.",
+      "why": "This statement is reached when `allow_underscores` is false and the domain part contains underscores, which is currently uncovered.",
+      "minimal_valid": null,
+      "minimal_invalid": "example_com"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Spaces in TLD Handling",
+      "validator": "isFQDN",
+      "args": [
+        {}
+      ],
+      "valid": [],
+      "invalid": [
+        "example.c om"
+      ],
+      "rationale": "Ensure rejection of TLDs containing spaces to cover the uncovered statement at line 42.",
+      "obligations": [
+        "OB-16"
+      ]
+    },
+    {
+      "title": "Numeric TLD Rejection with Disabled Allowance",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_numeric_tld": false
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "example.123"
+      ],
+      "rationale": "Ensure rejection of numeric TLDs when `allow_numeric_tld` is false to cover the uncovered statement at line 48.",
+      "obligations": [
+        "OB-17"
+      ]
+    },
+    {
+      "title": "Underscore Rejection with Disabled Allowance",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_underscores": false
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "example_com"
+      ],
+      "rationale": "Ensure rejection of underscores in domain parts when `allow_underscores` is false to cover the uncovered statement at line 71.",
+      "obligations": [
+        "OB-18"
+      ]
+    }
+  ]
+}

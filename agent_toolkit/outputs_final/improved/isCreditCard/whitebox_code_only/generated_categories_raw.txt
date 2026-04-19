@@ -1,0 +1,24 @@
+{
+  "generated_categories": [
+    {
+      "name": "Input Type and Format Validation",
+      "description": "Tests that ensure the input is a valid string and properly formatted for credit card validation.",
+      "generated_group_ids": ["GENERATED-1", "GENERATED-6"]
+    },
+    {
+      "name": "Provider-Specific Validation",
+      "description": "Tests that validate credit card numbers against specific providers or handle invalid provider inputs.",
+      "generated_group_ids": ["GENERATED-2", "GENERATED-3"]
+    },
+    {
+      "name": "Default and General Validation",
+      "description": "Tests that validate credit card numbers without specifying a provider or using default behavior.",
+      "generated_group_ids": ["GENERATED-4"]
+    },
+    {
+      "name": "Luhn Algorithm Validation",
+      "description": "Tests that ensure the credit card number passes the Luhn algorithm check.",
+      "generated_group_ids": ["GENERATED-5"]
+    }
+  ]
+}

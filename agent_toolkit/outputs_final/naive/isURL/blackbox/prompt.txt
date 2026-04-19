@@ -1,0 +1,39 @@
+Task: generate black-box tests for isURL.
+
+        Read the requirement and directly produce a small first-pass grouped validator.js-style test suite.
+        Stay conservative and only cover behaviors that are explicit or strongly implied by the requirement.
+        Do not spend effort extracting formal obligations.
+        Use an empty obligations list unless there is a very obvious single high-level rule to note.
+
+        Black-box guidance:
+        - prefer common positive and negative examples
+        - use only a few clearly differentiated groups
+        - avoid speculative option interactions
+        - stop at a modest baseline instead of trying to be comprehensive
+
+        Requirement specification:
+        Function name: isURL
+Black-box requirement source: validator_js README function entry
+Signature summary: isURL(str [, options])
+README behavior summary:
+| check if the string is a URL.
+`options` is an object which defaults to `{ protocols: ['http','https','ftp'], require_tld: true, require_protocol: false, require_host: true, require_port: false, require_valid_protocol: true, allow_underscores: false, host_whitelist: false, host_blacklist: false, allow_trailing_dot: false, allow_protocol_relative_urls: false, allow_fragments: true, allow_query_components: true, disallow_auth: false, validate_length: true }`.
+`protocols` - valid protocols can be modified with this option.
+`require_tld` - If set to false isURL will not check if the URL's host includes a top-level domain.
+`require_protocol` - **RECOMMENDED** if set to true isURL will return false if protocol is not present in the URL. Without this setting, some malicious URLs cannot be distinguishable from a valid URL with authentication information.
+`require_host` - if set to false isURL will not check if host is present in the URL.
+`require_port` - if set to true isURL will check if port is present in the URL.
+`require_valid_protocol` - isURL will check if the URL's protocol is present in the protocols option.
+`allow_underscores` - if set to true, the validator will allow underscores in the URL.
+`host_whitelist` - if set to an array of strings or regexp, and the domain matches none of the strings defined in it, the validation fails.
+`host_blacklist` - if set to an array of strings or regexp, and the domain matches any of the strings defined in it, the validation fails.
+`allow_trailing_dot` - if set to true, the validator will allow the domain to end with a `.` character.
+`allow_protocol_relative_urls` - if set to true protocol relative URLs will be allowed.
+`allow_fragments` - if set to false isURL will return false if fragments are present.
+`allow_query_components` - if set to false isURL will return false if query components are present.
+`disallow_auth` - if set to true, the validator will fail if the URL contains an authentication component, e.g. `http://username:password@example.com`.
+`validate_length` - if set to false isURL will skip string length validation. `max_allowed_length` will be ignored if this is set as `false`.
+`max_allowed_length` - if set, isURL will not allow URLs longer than the specified value (default is 2084 that IE maximum URL length).
+
+Treat the README entry as the authoritative black-box behavior description.
+Infer valid inputs, invalid inputs, option-sensitive behaviors, and edge cases from this description.

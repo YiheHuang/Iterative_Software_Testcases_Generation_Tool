@@ -8,7 +8,14 @@ def normalize_mode(mode: str) -> str:
     normalized = mode.strip().lower()
     if normalized == "hybrid":
         return "whitebox"
-    if normalized in {"blackbox", "whitebox"}:
+    if normalized in {
+        "whitebox-code-only",
+        "whitebox_code_only",
+        "code-only-whitebox",
+        "codebox",
+    }:
+        return "whitebox_code_only"
+    if normalized in {"blackbox", "whitebox", "whitebox_code_only"}:
         return normalized
     raise ValueError(f"Unsupported mode: {mode}")
 
@@ -20,7 +27,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--mode",
         required=True,
-        help="Generation mode: blackbox or whitebox. Legacy alias: hybrid",
+        help=(
+            "Generation mode: blackbox, whitebox, or whitebox_code_only. "
+            "Legacy alias: hybrid. Also accepts whitebox-code-only and codebox."
+        ),
     )
     parser.add_argument(
         "--workspace-root",
@@ -153,6 +163,8 @@ def main() -> None:
                 / "golden_comparison.json"
             ),
         }
+
+    summary["llm_usage"] = client.usage_summary()
 
     final_summary_path = (
         run_output_root(paths, result.validator_name, result.approach, result.mode)

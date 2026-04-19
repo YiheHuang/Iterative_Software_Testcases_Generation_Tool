@@ -1,0 +1,74 @@
+{
+  "obligations": [
+    {
+      "id": "OB-101",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 59: `return false;` triggered by invalid URLs containing spaces or angle brackets.",
+      "why": "This statement is part of the validation logic for rejecting URLs with invalid characters.",
+      "minimal_valid": null,
+      "minimal_invalid": "http://example.com<invalid>"
+    },
+    {
+      "id": "OB-102",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 158: `if (options.require_protocol) { return false; }` triggered when `looks_like_port` is true and `require_protocol` is enabled.",
+      "why": "This statement ensures URLs resembling hostname:port are rejected when `require_protocol` is required.",
+      "minimal_valid": null,
+      "minimal_invalid": "example.com:80"
+    },
+    {
+      "id": "OB-103",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 188: `return false;` triggered when `had_explicit_protocol` is false and `allow_protocol_relative_urls` is disabled.",
+      "why": "This statement ensures protocol-relative URLs are rejected when the option is disabled.",
+      "minimal_valid": null,
+      "minimal_invalid": "//example.com"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Reject URLs with Invalid Characters",
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [],
+      "invalid": [
+        "http://example.com<invalid>",
+        "http://example.com invalid"
+      ],
+      "rationale": "Test rejection of URLs containing spaces or angle brackets.",
+      "obligations": ["OB-101"]
+    },
+    {
+      "title": "Require Protocol with Looks-Like-Port URLs",
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "example.com:80"
+      ],
+      "rationale": "Test rejection of URLs resembling hostname:port when `require_protocol` is enabled.",
+      "obligations": ["OB-102"]
+    },
+    {
+      "title": "Disallow Protocol-Relative URLs",
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_protocol_relative_urls": false
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "//example.com"
+      ],
+      "rationale": "Test rejection of protocol-relative URLs when the option is disabled.",
+      "obligations": ["OB-103"]
+    }
+  ]
+}

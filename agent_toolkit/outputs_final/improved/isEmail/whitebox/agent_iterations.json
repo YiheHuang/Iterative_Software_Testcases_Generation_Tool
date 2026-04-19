@@ -1,0 +1,107 @@
+{
+  "iteration_count": 5,
+  "revert_count": 2,
+  "total_attempts": 6,
+  "max_attempts": 6,
+  "feedback_sources": [
+    "coverage"
+  ],
+  "golden_feedback_used": false,
+  "final_decision": "stop_after_attempt_limit",
+  "coverage_score": {
+    "lines": 93.75,
+    "statements": 94.05,
+    "functions": 100.0,
+    "branches": 90.79
+  },
+  "iterations": [
+    {
+      "iteration": 1,
+      "decision": "initial",
+      "coverage_score": {
+        "lines": 75.0,
+        "statements": 75.0,
+        "functions": 100.0,
+        "branches": 69.74
+      }
+    },
+    {
+      "iteration": 2,
+      "decision": "accept_patch",
+      "candidate_group_count": 13,
+      "coverage_score": {
+        "lines": 83.75,
+        "statements": 84.52,
+        "functions": 100.0,
+        "branches": 77.63
+      }
+    },
+    {
+      "iteration": 3,
+      "decision": "accept_patch",
+      "candidate_group_count": 16,
+      "coverage_score": {
+        "lines": 90.0,
+        "statements": 90.48,
+        "functions": 100.0,
+        "branches": 84.21
+      }
+    },
+    {
+      "iteration": 4,
+      "decision": "revert_patch",
+      "candidate_group_count": 16,
+      "candidate_coverage_score": {
+        "lines": 90.0,
+        "statements": 90.48,
+        "functions": 100.0,
+        "branches": 84.21
+      },
+      "current_coverage_score": {
+        "lines": 90.0,
+        "statements": 90.48,
+        "functions": 100.0,
+        "branches": 84.21
+      }
+    },
+    {
+      "iteration": 5,
+      "decision": "accept_patch",
+      "candidate_group_count": 19,
+      "coverage_score": {
+        "lines": 92.5,
+        "statements": 92.86,
+        "functions": 100.0,
+        "branches": 88.16
+      }
+    },
+    {
+      "iteration": 6,
+      "decision": "accept_patch",
+      "candidate_group_count": 22,
+      "coverage_score": {
+        "lines": 93.75,
+        "statements": 94.05,
+        "functions": 100.0,
+        "branches": 90.79
+      }
+    },
+    {
+      "iteration": 7,
+      "decision": "revert_patch",
+      "candidate_group_count": 25,
+      "candidate_coverage_score": {
+        "lines": 93.75,
+        "statements": 94.05,
+        "functions": 100.0,
+        "branches": 90.79
+      },
+      "current_coverage_score": {
+        "lines": 93.75,
+        "statements": 94.05,
+        "functions": 100.0,
+        "branches": 90.79
+      }
+    }
+  ]
+}

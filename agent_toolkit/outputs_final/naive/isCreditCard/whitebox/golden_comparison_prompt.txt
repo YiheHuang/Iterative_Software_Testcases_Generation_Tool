@@ -1,0 +1,645 @@
+Perform bidirectional category matching for isCreditCard.
+
+Fixed golden categories:
+[
+  {
+    "golden_category_id": "GC-1",
+    "name": "General Credit Card Validation",
+    "description": "Tests for general credit card validation without specifying a provider.",
+    "golden_group_ids": [
+      "GOLDEN-1"
+    ]
+  },
+  {
+    "golden_category_id": "GC-2",
+    "name": "Invalid Provider Handling",
+    "description": "Tests for handling invalid or unsupported credit card providers.",
+    "golden_group_ids": [
+      "GOLDEN-2"
+    ]
+  },
+  {
+    "golden_category_id": "GC-3",
+    "name": "AmEx Credit Card Validation",
+    "description": "Tests for validating American Express (AmEx) credit cards.",
+    "golden_group_ids": [
+      "GOLDEN-3"
+    ]
+  },
+  {
+    "golden_category_id": "GC-4",
+    "name": "Diners Club Credit Card Validation",
+    "description": "Tests for validating Diners Club credit cards.",
+    "golden_group_ids": [
+      "GOLDEN-4"
+    ]
+  },
+  {
+    "golden_category_id": "GC-5",
+    "name": "Discover Credit Card Validation",
+    "description": "Tests for validating Discover credit cards.",
+    "golden_group_ids": [
+      "GOLDEN-5"
+    ]
+  },
+  {
+    "golden_category_id": "GC-6",
+    "name": "JCB Credit Card Validation",
+    "description": "Tests for validating JCB credit cards.",
+    "golden_group_ids": [
+      "GOLDEN-6"
+    ]
+  },
+  {
+    "golden_category_id": "GC-7",
+    "name": "Mastercard Credit Card Validation",
+    "description": "Tests for validating Mastercard credit cards.",
+    "golden_group_ids": [
+      "GOLDEN-7"
+    ]
+  },
+  {
+    "golden_category_id": "GC-8",
+    "name": "UnionPay Credit Card Validation",
+    "description": "Tests for validating UnionPay credit cards.",
+    "golden_group_ids": [
+      "GOLDEN-8"
+    ]
+  },
+  {
+    "golden_category_id": "GC-9",
+    "name": "Visa Credit Card Validation",
+    "description": "Tests for validating Visa credit cards.",
+    "golden_group_ids": [
+      "GOLDEN-9"
+    ]
+  }
+]
+
+Indexed golden groups:
+[
+  {
+    "title": "should validate credit cards",
+    "validator": "isCreditCard",
+    "args": [],
+    "valid": [
+      "375556917985515",
+      "36050234196908",
+      "4716461583322103",
+      "4716-2210-5188-5662",
+      "4929 7226 5379 7141",
+      "5398228707871527",
+      "6283875070985593",
+      "6263892624162870",
+      "6234917882863855",
+      "6234698580215388",
+      "6226050967750613",
+      "6246281879460688",
+      "2222155765072228",
+      "2225855203075256",
+      "2720428011723762",
+      "2718760626256570",
+      "6765780016990268",
+      "4716989580001715211",
+      "8171999927660000",
+      "8171999900000000021"
+    ],
+    "invalid": [
+      "foo",
+      "foo",
+      "5398228707871528",
+      "2718760626256571",
+      "2721465526338453",
+      "2220175103860763",
+      "375556917985515999999993",
+      "899999996234917882863855",
+      "prefix6234917882863855",
+      "623491788middle2863855",
+      "6234917882863855suffix",
+      "4716989580001715213"
+    ],
+    "golden_id": "GOLDEN-1"
+  },
+  {
+    "title": "should validate credit cards without a proper provider",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "Plorf"
+      }
+    ],
+    "valid": [],
+    "invalid": [],
+    "golden_id": "GOLDEN-2"
+  },
+  {
+    "title": "should validate AmEx provided credit cards",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "AmEx"
+      }
+    ],
+    "valid": [
+      "375556917985515"
+    ],
+    "invalid": [
+      "foo",
+      "2222155765072228",
+      "2225855203075256",
+      "2720428011723762",
+      "2718760626256570",
+      "36050234196908",
+      "375556917985515999999993",
+      "4716461583322103",
+      "4716-2210-5188-5662",
+      "4716989580001715211",
+      "4929 7226 5379 7141",
+      "5398228707871527",
+      "6234917882863855suffix",
+      "6283875070985593",
+      "6263892624162870",
+      "6234917882863855",
+      "6234698580215388",
+      "6226050967750613",
+      "6246281879460688",
+      "6283875070985593",
+      "6765780016990268",
+      "8171999927660000",
+      "8171999900000000021"
+    ],
+    "golden_id": "GOLDEN-3"
+  },
+  {
+    "title": "should validate Diners Club provided credit cards",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "DinersClub"
+      }
+    ],
+    "valid": [
+      "36050234196908"
+    ],
+    "invalid": [
+      "foo",
+      "2222155765072228",
+      "2225855203075256",
+      "2720428011723762",
+      "2718760626256570",
+      "375556917985515",
+      "375556917985515999999993",
+      "4716461583322103",
+      "4716-2210-5188-5662",
+      "4716989580001715211",
+      "4929 7226 5379 7141",
+      "5398228707871527",
+      "6234917882863855suffix",
+      "6283875070985593",
+      "6263892624162870",
+      "6234917882863855",
+      "6234698580215388",
+      "6226050967750613",
+      "6246281879460688",
+      "6283875070985593",
+      "6765780016990268",
+      "8171999927660000",
+      "8171999900000000021"
+    ],
+    "golden_id": "GOLDEN-4"
+  },
+  {
+    "title": "should validate Discover provided credit cards",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "Discover"
+      }
+    ],
+    "valid": [
+      "6011111111111117",
+      "6011000990139424"
+    ],
+    "invalid": [
+      "foo",
+      "2222155765072228",
+      "2225855203075256",
+      "2720428011723762",
+      "2718760626256570",
+      "36050234196908",
+      "375556917985515",
+      "375556917985515999999993",
+      "4716461583322103",
+      "4716-2210-5188-5662",
+      "4716989580001715211",
+      "4929 7226 5379 7141",
+      "5398228707871527",
+      "6234917882863855suffix",
+      "6283875070985593",
+      "6263892624162870",
+      "6234917882863855",
+      "6234698580215388",
+      "6226050967750613",
+      "6246281879460688",
+      "6283875070985593",
+      "6765780016990268",
+      "8171999927660000",
+      "8171999900000000021"
+    ],
+    "golden_id": "GOLDEN-5"
+  },
+  {
+    "title": "should validate JCB provided credit cards",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "JCB"
+      }
+    ],
+    "valid": [
+      "3530111333300000",
+      "3566002020360505"
+    ],
+    "invalid": [
+      "foo",
+      "2222155765072228",
+      "2225855203075256",
+      "2720428011723762",
+      "2718760626256570",
+      "36050234196908",
+      "375556917985515",
+      "375556917985515999999993",
+      "4716461583322103",
+      "4716-2210-5188-5662",
+      "4716989580001715211",
+      "4929 7226 5379 7141",
+      "5398228707871527",
+      "6234917882863855suffix",
+      "6283875070985593",
+      "6263892624162870",
+      "6234917882863855",
+      "6234698580215388",
+      "6226050967750613",
+      "6246281879460688",
+      "6283875070985593",
+      "6765780016990268",
+      "8171999927660000",
+      "8171999900000000021"
+    ],
+    "golden_id": "GOLDEN-6"
+  },
+  {
+    "title": "should validate Mastercard provided credit cards",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "Mastercard"
+      }
+    ],
+    "valid": [
+      "2222155765072228",
+      "2225855203075256",
+      "2718760626256570",
+      "2720428011723762",
+      "5398228707871527"
+    ],
+    "invalid": [
+      "foo",
+      "36050234196908",
+      "375556917985515",
+      "375556917985515999999993",
+      "4716461583322103",
+      "4716-2210-5188-5662",
+      "4716989580001715211",
+      "4929 7226 5379 7141",
+      "6234917882863855suffix",
+      "6283875070985593",
+      "6263892624162870",
+      "6234917882863855",
+      "6234698580215388",
+      "6226050967750613",
+      "6246281879460688",
+      "6283875070985593",
+      "6765780016990268",
+      "8171999927660000",
+      "8171999900000000021"
+    ],
+    "golden_id": "GOLDEN-7"
+  },
+  {
+    "title": "should validate Union Pay provided credit cards",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "UnionPay"
+      }
+    ],
+    "valid": [
+      "6226050967750613",
+      "6234917882863855",
+      "6234698580215388",
+      "6246281879460688",
+      "6263892624162870",
+      "6283875070985593",
+      "6765780016990268",
+      "8171999927660000",
+      "8171999900000000021"
+    ],
+    "invalid": [
+      "foo",
+      "2222155765072228",
+      "2225855203075256",
+      "2720428011723762",
+      "2718760626256570",
+      "36050234196908",
+      "375556917985515",
+      "375556917985515999999993",
+      "4716461583322103",
+      "4716-2210-5188-5662",
+      "4716989580001715211",
+      "4929 7226 5379 7141",
+      "5398228707871527",
+      "6234917882863855suffix"
+    ],
+    "golden_id": "GOLDEN-8"
+  },
+  {
+    "title": "should validate Visa provided credit cards",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "Visa"
+      }
+    ],
+    "valid": [
+      "4716-2210-5188-5662",
+      "4716461583322103",
+      "4716989580001715211",
+      "4929 7226 5379 7141"
+    ],
+    "invalid": [
+      "foo",
+      "2222155765072228",
+      "2225855203075256",
+      "2720428011723762",
+      "2718760626256570",
+      "36050234196908",
+      "375556917985515",
+      "375556917985515999999993",
+      "5398228707871527",
+      "6234917882863855suffix",
+      "6283875070985593",
+      "6263892624162870",
+      "6234917882863855",
+      "6234698580215388",
+      "6226050967750613",
+      "6246281879460688",
+      "6283875070985593",
+      "6765780016990268",
+      "8171999927660000",
+      "8171999900000000021"
+    ],
+    "golden_id": "GOLDEN-9"
+  }
+]
+
+Generated categories:
+[
+  {
+    "generated_category_id": "GENC-1",
+    "name": "Generic Credit Card Validation",
+    "description": "Tests generic credit card validation without specifying a provider, including valid and invalid numbers based on length and format.",
+    "generated_group_ids": [
+      "GENERATED-1"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-2",
+    "name": "Provider-Specific Validation",
+    "description": "Tests credit card validation for specific providers, including valid numbers for the provider and invalid numbers from other providers or invalid provider options.",
+    "generated_group_ids": [
+      "GENERATED-2",
+      "GENERATED-3"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-3",
+    "name": "Formatting Edge Cases",
+    "description": "Tests handling of formatted credit card numbers with valid and invalid separators.",
+    "generated_group_ids": [
+      "GENERATED-4"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-4",
+    "name": "Invalid Input Handling",
+    "description": "Tests behavior with empty strings, non-numeric inputs, and mixed alphanumeric inputs.",
+    "generated_group_ids": [
+      "GENERATED-5"
+    ]
+  }
+]
+
+Indexed generated groups:
+[
+  {
+    "title": "Valid credit card numbers without provider",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "4111111111111111",
+      "378282246310005",
+      "6011111111111117",
+      "5555555555554444"
+    ],
+    "invalid": [
+      "1234567890123456",
+      "411111111111111",
+      "37828224631000",
+      "555555555555444"
+    ],
+    "rationale": "Tests generic credit card validation without specifying a provider. Includes valid and invalid numbers based on length and format.",
+    "obligations": [],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "Valid credit card numbers with provider",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "visa"
+      }
+    ],
+    "valid": [
+      "4111111111111111",
+      "4012888888881881"
+    ],
+    "invalid": [
+      "378282246310005",
+      "5555555555554444",
+      "6011111111111117"
+    ],
+    "rationale": "Tests credit card validation for Visa provider. Includes valid Visa numbers and invalid numbers from other providers.",
+    "obligations": [],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "Invalid provider option",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "invalidProvider"
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "4111111111111111",
+      "378282246310005"
+    ],
+    "rationale": "Tests behavior when an invalid provider is specified. Should throw an error or fail validation.",
+    "obligations": [],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "Edge cases for formatting",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "4111-1111-1111-1111",
+      "4111 1111 1111 1111"
+    ],
+    "invalid": [
+      "4111_1111_1111_1111",
+      "4111.1111.1111.1111"
+    ],
+    "rationale": "Tests handling of formatted credit card numbers with valid separators (spaces and dashes) and invalid separators.",
+    "obligations": [],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "Empty and non-numeric inputs",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [],
+    "invalid": [
+      "",
+      "abcdefg",
+      "4111abcd1111efgh"
+    ],
+    "rationale": "Tests behavior with empty strings, non-numeric inputs, and mixed alphanumeric inputs.",
+    "obligations": [],
+    "generated_id": "GENERATED-5"
+  }
+]
+
+Runtime evaluation details:
+{
+  "summary": {
+    "total_cases": 22,
+    "correct_cases": 20,
+    "incorrect_cases": 2,
+    "exact_match_rate": 0.9090909090909091,
+    "by_expected_kind": {
+      "return": 22,
+      "throw": 0
+    }
+  },
+  "details": {
+    "failed_results": [
+      {
+        "title": "Invalid provider option",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "invalidProvider"
+          }
+        ],
+        "input_value": "4111111111111111",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "throw",
+        "actual_value": null,
+        "actual_error_name": "Error",
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "Invalid provider option",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "invalidProvider"
+          }
+        ],
+        "input_value": "378282246310005",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "throw",
+        "actual_value": null,
+        "actual_error_name": "Error",
+        "passed": false,
+        "obligations": []
+      }
+    ],
+    "coverage_total": {
+      "lines": {
+        "total": 22,
+        "covered": 22,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 24,
+        "covered": 24,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 4,
+        "covered": 4,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 19,
+        "covered": 18,
+        "skipped": 0,
+        "pct": 94.74
+      }
+    },
+    "coverage_files": {
+      "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isCreditCard.js": {
+        "lines": {
+          "total": 22,
+          "covered": 22,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 4,
+          "covered": 4,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 24,
+          "covered": 24,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 19,
+          "covered": 18,
+          "skipped": 0,
+          "pct": 94.74
+        }
+      }
+    }
+  }
+}

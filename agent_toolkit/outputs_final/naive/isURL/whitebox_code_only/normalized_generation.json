@@ -1,0 +1,174 @@
+{
+  "mode": "whitebox_code_only",
+  "approach": "naive",
+  "obligations": [],
+  "test_groups": [
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com",
+        "ftp://example.com",
+        "http://example.com/path?query=value#fragment"
+      ],
+      "invalid": [
+        "",
+        "example.com",
+        "http:/example.com",
+        "http://",
+        "http://example.com:99999",
+        "http://example.com:abc"
+      ],
+      "title": "Basic URL validation",
+      "rationale": "Tests basic URL validation with default options, including valid protocols, host presence, and port range.",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com",
+        "ftp://example.com"
+      ],
+      "invalid": [
+        "example.com",
+        "//example.com",
+        "example.com/path"
+      ],
+      "title": "Protocol requirement",
+      "rationale": "Tests URLs with and without explicit protocols when 'require_protocol' is true.",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false
+        }
+      ],
+      "valid": [
+        "http://",
+        "http://:8080",
+        "//:8080",
+        "ftp://"
+      ],
+      "invalid": [
+        "http://example.com",
+        "https://example.com"
+      ],
+      "title": "Host requirement",
+      "rationale": "Tests URLs with and without host presence when 'require_host' is false.",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_fragments": false
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "http://example.com/path?query=value"
+      ],
+      "invalid": [
+        "http://example.com#fragment",
+        "http://example.com/path#fragment"
+      ],
+      "title": "Allow fragments",
+      "rationale": "Tests URLs with and without fragments when 'allow_fragments' is false.",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_query_components": false
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "http://example.com/path"
+      ],
+      "invalid": [
+        "http://example.com?query=value",
+        "http://example.com/path?query=value&other=value"
+      ],
+      "title": "Allow query components",
+      "rationale": "Tests URLs with and without query components when 'allow_query_components' is false.",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com"
+      ],
+      "invalid": [
+        "http://user:pass@example.com",
+        "http://user:@example.com",
+        "http://:pass@example.com"
+      ],
+      "title": "Disallow authentication",
+      "rationale": "Tests URLs with and without authentication components when 'disallow_auth' is true.",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "validate_length": true,
+          "max_allowed_length": 20
+        }
+      ],
+      "valid": [
+        "http://short.com"
+      ],
+      "invalid": [
+        "http://this-is-a-very-long-url.com"
+      ],
+      "title": "Validate length",
+      "rationale": "Tests URL length validation when 'validate_length' is true and 'max_allowed_length' is set.",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "protocols": [
+            "custom",
+            "http"
+          ]
+        }
+      ],
+      "valid": [
+        "custom://example.com",
+        "http://example.com"
+      ],
+      "invalid": [
+        "https://example.com",
+        "ftp://example.com"
+      ],
+      "title": "Custom protocol list",
+      "rationale": "Tests URLs against a custom protocol list.",
+      "obligations": []
+    }
+  ],
+  "metadata": {
+    "requirement_source": "not_used_code_only_mode",
+    "generation_style": "single_pass_with_repair"
+  }
+}

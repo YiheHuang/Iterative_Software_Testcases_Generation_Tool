@@ -1,0 +1,29 @@
+{
+  "obligations": [
+    {
+      "id": "OB-13",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of `if (!all_start_with_back_slash)` at line 56.",
+      "why": "This branch checks if all quotes in the display name start with a backslash, which is a specific validation rule for quoted display names.",
+      "minimal_valid": "\"\\\"quoted\\\"\" <user@example.com>",
+      "minimal_invalid": "\"quoted\" <user@example.com>"
+    },
+    {
+      "id": "OB-14",
+      "kind": "whitebox",
+      "rule": "Cover the false branch of `if (display_name.endsWith(' '))` at line 81.",
+      "why": "This branch ensures that display names without trailing spaces are handled correctly.",
+      "minimal_valid": "John <user@example.com>",
+      "minimal_invalid": "John  <user@example.com>"
+    },
+    {
+      "id": "OB-15",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of `if (!options.ignore_max_length && str.length > defaultMaxEmailLength)` at line 92.",
+      "why": "This branch enforces the maximum email length when `ignore_max_length` is false.",
+      "minimal_valid": "a@b.com",
+      "minimal_invalid": "a@b.com"
+    }
+  ],
+  "test_groups": []
+}

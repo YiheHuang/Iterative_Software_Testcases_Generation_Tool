@@ -1,0 +1,133 @@
+{
+  "golden_to_generated": [
+    {
+      "golden_category_id": "GC-1",
+      "matched_generated_category_ids": ["GENC-1"],
+      "match_type": "strong",
+      "reason": "The generated category 'Default Behavior Validation' aligns strongly with the golden category 'Default Currency Validation' as both focus on validating general currency formats without specific constraints."
+    },
+    {
+      "golden_category_id": "GC-2",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses the 'No Decimal Allowed' constraint."
+    },
+    {
+      "golden_category_id": "GC-3",
+      "matched_generated_category_ids": ["GENC-4"],
+      "match_type": "strong",
+      "reason": "The generated category 'Decimal Requirement' strongly matches the golden category 'Require Decimal' as both enforce the presence of a decimal point in currency validation."
+    },
+    {
+      "golden_category_id": "GC-4",
+      "matched_generated_category_ids": ["GENC-5"],
+      "match_type": "strong",
+      "reason": "The generated category 'Decimal Precision' aligns strongly with the golden category 'Specific Decimal Precision' as both validate specific digits allowed after the decimal."
+    },
+    {
+      "golden_category_id": "GC-5",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "strong",
+      "reason": "The generated category 'Symbol Requirement' strongly matches the golden category 'Require Symbol' as both enforce the presence of a currency symbol."
+    },
+    {
+      "golden_category_id": "GC-6",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses the combination of a custom symbol and negative sign before digits."
+    },
+    {
+      "golden_category_id": "GC-7",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses the placement of the negative sign after digits."
+    },
+    {
+      "golden_category_id": "GC-8",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses the combination of a custom symbol and disallowing negatives."
+    },
+    {
+      "golden_category_id": "GC-9",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses the combination of a custom symbol, space after the symbol, and specific separators."
+    },
+    {
+      "golden_category_id": "GC-10",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses the combination of a custom symbol, space after the symbol, and specific separators."
+    },
+    {
+      "golden_category_id": "GC-11",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses the placement of a custom symbol after digits."
+    },
+    {
+      "golden_category_id": "GC-12",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses the combination of a custom symbol, negative sign before digits, and space after the symbol."
+    },
+    {
+      "golden_category_id": "GC-13",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses the combination of a custom symbol, disallowing negatives, and allowing space after the symbol."
+    },
+    {
+      "golden_category_id": "GC-14",
+      "matched_generated_category_ids": ["GENC-3"],
+      "match_type": "partial",
+      "reason": "The generated category 'Negative Value Handling' partially matches the golden category 'Parentheses for Negatives' as it includes parentheses handling but also covers other negative value configurations."
+    },
+    {
+      "golden_category_id": "GC-15",
+      "matched_generated_category_ids": ["GENC-3"],
+      "match_type": "partial",
+      "reason": "The generated category 'Negative Value Handling' partially matches the golden category 'Disallow Negatives' as it includes disallowing negatives but also covers other negative value configurations."
+    },
+    {
+      "golden_category_id": "GC-16",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses the custom Brazilian Real format."
+    }
+  ],
+  "generated_to_golden": [
+    {
+      "generated_category_id": "GENC-1",
+      "matched_golden_category_ids": ["GC-1"],
+      "match_type": "strong",
+      "reason": "The generated category 'Default Behavior Validation' aligns strongly with the golden category 'Default Currency Validation' as both focus on validating general currency formats without specific constraints."
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "matched_golden_category_ids": ["GC-5"],
+      "match_type": "strong",
+      "reason": "The generated category 'Symbol Requirement' strongly matches the golden category 'Require Symbol' as both enforce the presence of a currency symbol."
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "matched_golden_category_ids": ["GC-14", "GC-15"],
+      "match_type": "partial",
+      "reason": "The generated category 'Negative Value Handling' partially matches the golden categories 'Parentheses for Negatives' and 'Disallow Negatives' as it includes parentheses handling and disallowing negatives but also covers other negative value configurations."
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "matched_golden_category_ids": ["GC-3"],
+      "match_type": "strong",
+      "reason": "The generated category 'Decimal Requirement' strongly matches the golden category 'Require Decimal' as both enforce the presence of a decimal point in currency validation."
+    },
+    {
+      "generated_category_id": "GENC-5",
+      "matched_golden_category_ids": ["GC-4"],
+      "match_type": "strong",
+      "reason": "The generated category 'Decimal Precision' aligns strongly with the golden category 'Specific Decimal Precision' as both validate specific digits allowed after the decimal."
+    }
+  ],
+  "novel_generated_categories": []
+}

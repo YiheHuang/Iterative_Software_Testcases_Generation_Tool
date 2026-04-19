@@ -1,0 +1,167 @@
+{
+  "mode": "whitebox_code_only",
+  "approach": "naive",
+  "obligations": [],
+  "test_groups": [
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "test@example.com",
+        "user.name+tag+sorting@example.com",
+        "user_name@example.com",
+        "user-name@example.com",
+        "user@subdomain.example.com"
+      ],
+      "invalid": [
+        "plainaddress",
+        "@missingusername.com",
+        "username@.com",
+        "username@com",
+        "username@.com.",
+        "username@-example.com",
+        "username@example..com"
+      ],
+      "title": "Basic email validation",
+      "rationale": "Covers basic email validation without any special options.",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "valid": [
+        "John Doe <john.doe@example.com>",
+        "\"John Doe\" <john.doe@example.com>",
+        "John <john@example.com>"
+      ],
+      "invalid": [
+        "John Doe john.doe@example.com",
+        "John Doe <john.doe@>",
+        "<john.doe@example.com>",
+        "John Doe <john.doe@example.com> extra"
+      ],
+      "title": "Validation with display name allowed",
+      "rationale": "Tests email validation with display names allowed.",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_display_name": true
+        }
+      ],
+      "valid": [
+        "John Doe <john.doe@example.com>",
+        "\"John Doe\" <john.doe@example.com>"
+      ],
+      "invalid": [
+        "john.doe@example.com",
+        "John Doe john.doe@example.com",
+        "<john.doe@example.com>"
+      ],
+      "title": "Validation with display name required",
+      "rationale": "Tests email validation when display names are required.",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_utf8_local_part": true
+        }
+      ],
+      "valid": [
+        "用户@例子.广告",
+        "उपयोगकर्ता@उदाहरण.कॉम",
+        "θσερ@εχαμπλε.ψομ",
+        "Dörte@Sörensen.example.com"
+      ],
+      "invalid": [
+        "plainaddress",
+        "user@.com",
+        "user@com"
+      ],
+      "title": "Validation with UTF-8 local part allowed",
+      "rationale": "Tests email validation with UTF-8 characters allowed in the local part.",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "host_blacklist": [
+            "example.com",
+            "banned.com"
+          ]
+        }
+      ],
+      "valid": [
+        "user@allowed.com",
+        "user@anotherdomain.com"
+      ],
+      "invalid": [
+        "user@example.com",
+        "user@banned.com"
+      ],
+      "title": "Validation with host blacklist",
+      "rationale": "Tests email validation with a blacklist of disallowed hosts.",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "host_whitelist": [
+            "example.com",
+            "allowed.com"
+          ]
+        }
+      ],
+      "valid": [
+        "user@example.com",
+        "user@allowed.com"
+      ],
+      "invalid": [
+        "user@banned.com",
+        "user@anotherdomain.com"
+      ],
+      "title": "Validation with host whitelist",
+      "rationale": "Tests email validation with a whitelist of allowed hosts.",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "ignore_max_length": true
+        }
+      ],
+      "valid": [
+        "a@b.com",
+        "a@b",
+        "a@b.com",
+        "a@b.com"
+      ],
+      "invalid": [
+        "a@b.com",
+        "a@b",
+        "a@b.com",
+        "a@b.com"
+      ],
+      "title": "Validation with max length ignored",
+      "rationale": "Tests email validation with max length ignored.",
+      "obligations": []
+    }
+  ],
+  "metadata": {
+    "requirement_source": "not_used_code_only_mode",
+    "generation_style": "single_pass_with_repair"
+  }
+}

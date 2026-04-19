@@ -1,0 +1,121 @@
+{
+  "golden_to_generated": [
+    {
+      "golden_category_id": "GC-1",
+      "matched_generated_category_ids": ["GENC-1"],
+      "match_type": "strong",
+      "reason": "Both categories focus on basic email validation, covering standard formats and common valid/invalid cases."
+    },
+    {
+      "golden_category_id": "GC-2",
+      "matched_generated_category_ids": ["GENC-3"],
+      "match_type": "partial",
+      "reason": "GENC-3 includes domain-specific validation but also covers IP domains and TLD requirements, which are outside the scope of GC-2."
+    },
+    {
+      "golden_category_id": "GC-3",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category explicitly addresses email validation with underscores in the domain."
+    },
+    {
+      "golden_category_id": "GC-4",
+      "matched_generated_category_ids": ["GENC-4"],
+      "match_type": "partial",
+      "reason": "GENC-4 includes UTF-8 restrictions but also covers blacklisted characters, which are unrelated to GC-4."
+    },
+    {
+      "golden_category_id": "GC-5",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "strong",
+      "reason": "GENC-2 explicitly addresses emails with optional display names, aligning with GC-5."
+    },
+    {
+      "golden_category_id": "GC-6",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "strong",
+      "reason": "GENC-2 explicitly addresses emails with mandatory display names, aligning with GC-6."
+    },
+    {
+      "golden_category_id": "GC-7",
+      "matched_generated_category_ids": ["GENC-3"],
+      "match_type": "partial",
+      "reason": "GENC-3 includes IP domain validation but also covers unrelated domain-specific rules."
+    },
+    {
+      "golden_category_id": "GC-8",
+      "matched_generated_category_ids": ["GENC-4"],
+      "match_type": "partial",
+      "reason": "GENC-4 includes blacklisted character restrictions but also covers UTF-8 restrictions, which are unrelated to GC-8."
+    },
+    {
+      "golden_category_id": "GC-9",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category explicitly addresses maximum length restrictions for email validation."
+    },
+    {
+      "golden_category_id": "GC-10",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category explicitly addresses ignoring maximum length restrictions for email validation."
+    },
+    {
+      "golden_category_id": "GC-11",
+      "matched_generated_category_ids": ["GENC-5"],
+      "match_type": "strong",
+      "reason": "GENC-5 explicitly addresses email validation with blacklisted domains, aligning with GC-11."
+    },
+    {
+      "golden_category_id": "GC-12",
+      "matched_generated_category_ids": ["GENC-5"],
+      "match_type": "partial",
+      "reason": "GENC-5 addresses blacklisted domains but does not explicitly mention regular expressions, which are a key aspect of GC-12."
+    },
+    {
+      "golden_category_id": "GC-13",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category explicitly addresses whitelisted domains for email validation."
+    },
+    {
+      "golden_category_id": "GC-14",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category explicitly addresses whitelisted domains with regular expressions for email validation."
+    }
+  ],
+  "generated_to_golden": [
+    {
+      "generated_category_id": "GENC-1",
+      "matched_golden_category_ids": ["GC-1"],
+      "match_type": "strong",
+      "reason": "GENC-1 aligns with GC-1 as both focus on basic email validation, covering standard formats and common valid/invalid cases."
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "matched_golden_category_ids": ["GC-5", "GC-6"],
+      "match_type": "strong",
+      "reason": "GENC-2 covers both optional and mandatory display name validation, aligning with GC-5 and GC-6."
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "matched_golden_category_ids": ["GC-2", "GC-7"],
+      "match_type": "partial",
+      "reason": "GENC-3 includes domain-specific validation and IP domain validation, partially aligning with GC-2 and GC-7."
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "matched_golden_category_ids": ["GC-4", "GC-8"],
+      "match_type": "partial",
+      "reason": "GENC-4 includes UTF-8 restrictions and blacklisted character restrictions, partially aligning with GC-4 and GC-8."
+    },
+    {
+      "generated_category_id": "GENC-5",
+      "matched_golden_category_ids": ["GC-11", "GC-12"],
+      "match_type": "partial",
+      "reason": "GENC-5 addresses blacklisted domains but does not explicitly mention regular expressions, which are key to GC-12."
+    }
+  ],
+  "novel_generated_categories": []
+}

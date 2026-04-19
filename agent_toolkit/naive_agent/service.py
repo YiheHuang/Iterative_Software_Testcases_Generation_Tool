@@ -9,6 +9,7 @@ from .models import GenerationResult, ProjectPaths, TestGroup
 from .prompts import (
     SYSTEM_PROMPT,
     build_blackbox_prompt,
+    build_whitebox_code_only_prompt,
     build_whitebox_prompt,
 )
 from .target_context import (
@@ -28,7 +29,6 @@ def sanitize_group(group: dict[str, Any], validator_name: str) -> TestGroup:
         args=args,
         valid=[str(v) for v in group.get("valid", [])],
         invalid=[str(v) for v in group.get("invalid", [])],
-        error=list(group.get("error", [])),
         rationale=group.get("rationale"),
         obligations=[],
     )
@@ -70,7 +70,7 @@ def build_group_completion_prompt(
         "Return strict JSON with top-level keys obligations and test_groups.\n"
         "Use an empty obligations list unless a single obvious rule is unavoidable.\n"
         "test_groups must be non-empty.\n"
-        "Each group must contain validator, args, valid, invalid, error, title, rationale, obligations.\n"
+        "Each group must contain validator, args, valid, invalid, title, rationale, obligations.\n"
         "Group obligations should usually be empty.\n\n"
         f"Original task:\n{original_prompt}\n\n"
         "Return a concise baseline answer."
@@ -83,16 +83,20 @@ class NaiveAgentService:
         self.client = client
 
     def generate(self, mode: str, validator_name: str, approach: str = "naive") -> GenerationResult:
-        if mode not in {"blackbox", "whitebox"}:
+        if mode not in {"blackbox", "whitebox", "whitebox_code_only"}:
             raise ValueError(f"Unsupported mode: {mode}")
 
-        requirement_spec, requirement_source = resolve_requirement_spec(self.paths, validator_name)
-        source_code = read_text(validator_source_path(self.paths, validator_name))
-
         if mode == "blackbox":
+            requirement_spec, requirement_source = resolve_requirement_spec(self.paths, validator_name)
             user_prompt = build_blackbox_prompt(validator_name, requirement_spec)
-        else:
+        elif mode == "whitebox":
+            requirement_spec, requirement_source = resolve_requirement_spec(self.paths, validator_name)
+            source_code = read_text(validator_source_path(self.paths, validator_name))
             user_prompt = build_whitebox_prompt(validator_name, requirement_spec, source_code)
+        else:
+            source_code = read_text(validator_source_path(self.paths, validator_name))
+            requirement_source = "not_used_code_only_mode"
+            user_prompt = build_whitebox_code_only_prompt(validator_name, source_code)
 
         run_root = run_output_root(self.paths, validator_name, approach, mode)
         prompt_path = run_root / "prompt.txt"

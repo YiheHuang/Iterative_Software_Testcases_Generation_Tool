@@ -1,0 +1,29 @@
+{
+  "obligations": [
+    {
+      "id": "OB-8",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered ternary false branch at line 25 in the `isCreditCard` function.",
+      "why": "The uncovered branch corresponds to the default behavior when the `options` parameter is not provided or is an empty object.",
+      "minimal_valid": "4111111111111111",
+      "minimal_invalid": "1234567890123456"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Default options behavior (uncovered ternary false branch)",
+      "validator": "isCreditCard",
+      "args": [],
+      "valid": [
+        "4111111111111111"
+      ],
+      "invalid": [
+        "1234567890123456"
+      ],
+      "rationale": "Targets the uncovered ternary false branch at line 25 by testing the default behavior when no `options` parameter is provided.",
+      "obligations": [
+        "OB-8"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "whitebox",
+      "rule": "Ensure `assertString` is called and handles non-string inputs correctly.",
+      "why": "The function relies on `assertString` to validate the input type.",
+      "minimal_valid": "\"1234567890123456\"",
+      "minimal_invalid": "1234567890123456"
+    },
+    {
+      "id": "OB-2",
+      "kind": "whitebox",
+      "rule": "Test the `provider` option when it matches a valid provider in the `cards` object.",
+      "why": "The function has a branch for validating against a specific provider.",
+      "minimal_valid": "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"amex\"}}",
+      "minimal_invalid": "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"visa\"}}"
+    },
+    {
+      "id": "OB-3",
+      "kind": "whitebox",
+      "rule": "Test the `provider` option when it does not match any provider in the `cards` object.",
+      "why": "The function throws an error for invalid providers.",
+      "minimal_valid": null,
+      "minimal_invalid": "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"invalid\"}}"
+    },
+    {
+      "id": "OB-4",
+      "kind": "whitebox",
+      "rule": "Test the case where no `provider` is specified and the card matches one of the `allCards` patterns.",
+      "why": "The function defaults to checking all card patterns when no provider is specified.",
+      "minimal_valid": "\"378282246310005\"",
+      "minimal_invalid": "\"1234567890123456\""
+    },
+    {
+      "id": "OB-5",
+      "kind": "whitebox",
+      "rule": "Test the case where no `provider` is specified and the card does not match any `allCards` patterns.",
+      "why": "The function must return false if no patterns match.",
+      "minimal_valid": null,
+      "minimal_invalid": "\"1234567890123456\""
+    },
+    {
+      "id": "OB-6",
+      "kind": "whitebox",
+      "rule": "Ensure the `isLuhnValid` helper is called and its result is respected.",
+      "why": "The function relies on `isLuhnValid` for the final validation step.",
+      "minimal_valid": "\"378282246310005\"",
+      "minimal_invalid": "\"378282246310006\""
+    },
+    {
+      "id": "OB-7",
+      "kind": "whitebox",
+      "rule": "Test the sanitization of input by removing spaces and dashes.",
+      "why": "The function explicitly sanitizes input before validation.",
+      "minimal_valid": "\"3782-8224-6310-005\"",
+      "minimal_invalid": "\"1234-5678-9012-3456\""
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Input type validation",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "\"378282246310005\""
+      ],
+      "invalid": [
+        "1234567890123456",
+        "null",
+        "true",
+        "[]",
+        "{}"
+      ],
+      "rationale": "Ensure `assertString` correctly validates the input type.",
+      "obligations": ["OB-1"]
+    },
+    {
+      "title": "Specific provider validation",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"amex\"}}"
+      ],
+      "invalid": [
+        "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"visa\"}}"
+      ],
+      "rationale": "Test behavior when a valid provider is specified in the options.",
+      "obligations": ["OB-2"]
+    },
+    {
+      "title": "Invalid provider error",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [],
+      "invalid": [
+        "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"invalid\"}}"
+      ],
+      "rationale": "Ensure the function throws an error for invalid providers.",
+      "obligations": ["OB-3"]
+    },
+    {
+      "title": "Default provider validation",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "\"378282246310005\""
+      ],
+      "invalid": [
+        "\"1234567890123456\""
+      ],
+      "rationale": "Test behavior when no provider is specified and the card matches or does not match any patterns.",
+      "obligations": ["OB-4", "OB-5"]
+    },
+    {
+      "title": "Luhn algorithm validation",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "\"378282246310005\""
+      ],
+      "invalid": [
+        "\"378282246310006\""
+      ],
+      "rationale": "Ensure the `isLuhnValid` helper is called and its result is respected.",
+      "obligations": ["OB-6"]
+    },
+    {
+      "title": "Input sanitization",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "\"3782-8224-6310-005\"",
+        "\"3782 8224 6310 005\""
+      ],
+      "invalid": [
+        "\"1234-5678-9012-3456\"",
+        "\"1234 5678 9012 3456\""
+      ],
+      "rationale": "Test the sanitization of input by removing spaces and dashes.",
+      "obligations": ["OB-7"]
+    }
+  ]
+}

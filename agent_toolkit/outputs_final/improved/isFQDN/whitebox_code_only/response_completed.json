@@ -1,0 +1,132 @@
+{
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "whitebox",
+      "rule": "Ensure `assertString` is called to validate input type.",
+      "why": "The function requires the input to be a string. This is enforced by `assertString`.",
+      "minimal_valid": "\"example.com\"",
+      "minimal_invalid": "123"
+    },
+    {
+      "id": "OB-2",
+      "kind": "whitebox",
+      "rule": "Handle `allow_trailing_dot` option correctly by removing trailing dots.",
+      "why": "The code explicitly removes trailing dots if `allow_trailing_dot` is true.",
+      "minimal_valid": "\"example.com.\"",
+      "minimal_invalid": "\"example.com.\""
+    },
+    {
+      "id": "OB-3",
+      "kind": "whitebox",
+      "rule": "Handle `allow_wildcard` option correctly by removing wildcard prefix.",
+      "why": "The code removes `*.` prefix if `allow_wildcard` is true.",
+      "minimal_valid": "\"*.example.com\"",
+      "minimal_invalid": "\"*.example.com\""
+    },
+    {
+      "id": "OB-4",
+      "kind": "whitebox",
+      "rule": "Ensure TLD presence when `require_tld` is true.",
+      "why": "The code checks for at least two parts when `require_tld` is true.",
+      "minimal_valid": "\"example.com\"",
+      "minimal_invalid": "\"example\""
+    },
+    {
+      "id": "OB-5",
+      "kind": "whitebox",
+      "rule": "Reject numeric TLDs when `allow_numeric_tld` is false.",
+      "why": "The code explicitly rejects numeric TLDs unless `allow_numeric_tld` is true.",
+      "minimal_valid": "\"example.com\"",
+      "minimal_invalid": "\"example.123\""
+    },
+    {
+      "id": "OB-6",
+      "kind": "whitebox",
+      "rule": "Reject TLDs with spaces when `require_tld` is true.",
+      "why": "The code disallows spaces in TLDs when `require_tld` is true.",
+      "minimal_valid": "\"example.com\"",
+      "minimal_invalid": "\"example.co m\""
+    },
+    {
+      "id": "OB-7",
+      "kind": "whitebox",
+      "rule": "Reject parts longer than 63 characters unless `ignore_max_length` is true.",
+      "why": "The code enforces a maximum length of 63 characters for each part unless `ignore_max_length` is true.",
+      "minimal_valid": "\"a.b\"",
+      "minimal_invalid": "\"a\""
+    },
+    {
+      "id": "OB-8",
+      "kind": "whitebox",
+      "rule": "Reject parts containing invalid characters.",
+      "why": "The code checks that each part matches the regex `/^[a-z_\u001a1-\u001a1`",
+      "minimal_valid": "\"a.b\"",
+      "minimal_invalid": "\"a.b\""
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Input type validation",
+      "validator": "isFQDN",
+      "args": [{}],
+      "valid": ["example.com"],
+      "invalid": [123, null, {}, []],
+      "rationale": "Ensure `assertString` is called to validate input type.",
+      "obligations": ["OB-1"]
+    },
+    {
+      "title": "Trailing dot handling",
+      "validator": "isFQDN",
+      "args": [{"allow_trailing_dot": true}],
+      "valid": ["example.com.", "example.com"],
+      "invalid": ["example..com"],
+      "rationale": "Handle `allow_trailing_dot` option correctly by removing trailing dots.",
+      "obligations": ["OB-2"]
+    },
+    {
+      "title": "Wildcard prefix handling",
+      "validator": "isFQDN",
+      "args": [{"allow_wildcard": true}],
+      "valid": ["*.example.com", "example.com"],
+      "invalid": ["*example.com"],
+      "rationale": "Handle `allow_wildcard` option correctly by removing wildcard prefix.",
+      "obligations": ["OB-3"]
+    },
+    {
+      "title": "TLD presence enforcement",
+      "validator": "isFQDN",
+      "args": [{"require_tld": true}],
+      "valid": ["example.com"],
+      "invalid": ["example", "localhost"],
+      "rationale": "Ensure TLD presence when `require_tld` is true.",
+      "obligations": ["OB-4"]
+    },
+    {
+      "title": "Numeric TLD rejection",
+      "validator": "isFQDN",
+      "args": [{"allow_numeric_tld": false}],
+      "valid": ["example.com"],
+      "invalid": ["example.123"],
+      "rationale": "Reject numeric TLDs when `allow_numeric_tld` is false.",
+      "obligations": ["OB-5"]
+    },
+    {
+      "title": "Space in TLD rejection",
+      "validator": "isFQDN",
+      "args": [{"require_tld": true}],
+      "valid": ["example.com"],
+      "invalid": ["example.co m"],
+      "rationale": "Reject TLDs with spaces when `require_tld` is true.",
+      "obligations": ["OB-6"]
+    },
+    {
+      "title": "Part length enforcement",
+      "validator": "isFQDN",
+      "args": [{"ignore_max_length": false}],
+      "valid": ["a.b"],
+      "invalid": ["a"  ],
+      "rationale": "Reject parts longer than 63 characters unless `ignore_max_length` is true.",
+      "obligations": ["OB-7"]},
+    {
+    }]}

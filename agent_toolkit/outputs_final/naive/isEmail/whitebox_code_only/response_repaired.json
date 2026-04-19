@@ -1,0 +1,161 @@
+{
+  "obligations": [],
+  "test_groups": [
+    {
+      "title": "Basic email validation",
+      "validator": "isEmail",
+      "args": [{}],
+      "valid": [
+        "test@example.com",
+        "user.name+tag+sorting@example.com",
+        "user_name@example.com",
+        "user-name@example.com",
+        "user@sub.example.com",
+        "user@123.123.123.123",
+        "user@[123.123.123.123]"
+      ],
+      "invalid": [
+        "plainaddress",
+        "@missingusername.com",
+        "username@.com",
+        "username@com",
+        "username@.com.",
+        "username@-example.com",
+        "username@example..com",
+        "username@example.com.",
+        "username@.example.com",
+        "username@example.com..",
+        "username@.com.com",
+        "username@com..com",
+        "username@.com..com"
+      ],
+      "rationale": "Tests basic email validation with common valid and invalid email formats.",
+      "obligations": []
+    },
+    {
+      "title": "Validation with display name",
+      "validator": "isEmail",
+      "args": [{ "allow_display_name": true }],
+      "valid": [
+        "John Doe <john.doe@example.com>",
+        "\"John Doe\" <john.doe@example.com>",
+        "John <john@example.com>"
+      ],
+      "invalid": [
+        "John Doe john.doe@example.com",
+        "John Doe <john.doe@>",
+        "John Doe <@example.com>",
+        "John Doe <john.doe@example>",
+        "John Doe <john.doe@example..com>"
+      ],
+      "rationale": "Tests email validation with display names, including valid and invalid formats.",
+      "obligations": []
+    },
+    {
+      "title": "Validation with UTF-8 local part",
+      "validator": "isEmail",
+      "args": [{ "allow_utf8_local_part": true }],
+      "valid": [
+        "用户@例子.广告",
+        "अजय@डाटा.भारत",
+        "квіточка@пошта.укр",
+        "θσερ@εχαμπλε.ψομ",
+        "Dörte@Sörensen.example.com",
+        "коля@пример.рф"
+      ],
+      "invalid": [
+        "用户@例子.广告..com",
+        "अजय@डाटा.भारत.",
+        "квіточка@пошта.укр.",
+        "θσερ@εχαμπλε.ψομ.",
+        "Dörte@Sörensen.example..com",
+        "коля@пример.рф."
+      ],
+      "rationale": "Tests email validation with UTF-8 characters allowed in the local part.",
+      "obligations": []
+    },
+    {
+      "title": "Validation with domain-specific rules for Gmail",
+      "validator": "isEmail",
+      "args": [{ "domain_specific_validation": true }],
+      "valid": [
+        "user@gmail.com",
+        "user@googlemail.com",
+        "user.name@gmail.com",
+        "user.name+tag@gmail.com"
+      ],
+      "invalid": [
+        "user..name@gmail.com",
+        "user.@gmail.com",
+        ".user@gmail.com",
+        "user@gmail..com",
+        "user+toolongusername@gmail.com",
+        "user+toolongusernamewithdots..@gmail.com"
+      ],
+      "rationale": "Tests Gmail-specific validation rules, including username length and dot handling.",
+      "obligations": []
+    },
+    {
+      "title": "Validation with blacklisted characters",
+      "validator": "isEmail",
+      "args": [{ "blacklisted_chars": "!#$%" }],
+      "valid": [
+        "user@example.com",
+        "user.name@example.com",
+        "user_name@example.com"
+      ],
+      "invalid": [
+        "user!name@example.com",
+        "user#name@example.com",
+        "user%name@example.com"
+      ],
+      "rationale": "Tests email validation with blacklisted characters in the local part.",
+      "obligations": []
+    },
+    {
+      "title": "Validation with host blacklist",
+      "validator": "isEmail",
+      "args": [{ "host_blacklist": ["baddomain.com", "spam.com"] }],
+      "valid": [
+        "user@gooddomain.com",
+        "user@anothergooddomain.com"
+      ],
+      "invalid": [
+        "user@baddomain.com",
+        "user@spam.com"
+      ],
+      "rationale": "Tests email validation with blacklisted domains.",
+      "obligations": []
+    },
+    {
+      "title": "Validation with host whitelist",
+      "validator": "isEmail",
+      "args": [{ "host_whitelist": ["gooddomain.com", "anothergooddomain.com"] }],
+      "valid": [
+        "user@gooddomain.com",
+        "user@anothergooddomain.com"
+      ],
+      "invalid": [
+        "user@baddomain.com",
+        "user@spam.com"
+      ],
+      "rationale": "Tests email validation with whitelisted domains.",
+      "obligations": []
+    },
+    {
+      "title": "Validation with max length",
+      "validator": "isEmail",
+      "args": [{ "ignore_max_length": false }],
+      "valid": [
+        "a@b.com",
+        "short.email@example.com"
+      ],
+      "invalid": [
+        "a@b.com",
+        "verylongemailaddress@example.com"
+      ],
+      "rationale": "Tests email validation with maximum length restrictions.",
+      "obligations": []
+    }
+  ]
+}

@@ -1,0 +1,454 @@
+Group generated tests into generated categories for validator isEmail.
+
+Generated groups:
+[
+  {
+    "title": "Default email validation",
+    "validator": "isEmail",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "example@example.com",
+      "user.name+tag+sorting@example.com",
+      "user_name@example.com"
+    ],
+    "invalid": [
+      "plainaddress",
+      "@missingusername.com",
+      "username@.com"
+    ],
+    "rationale": "Covers baseline email validation with default options.",
+    "obligations": [
+      "OB-1"
+    ],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "Validation with allow_display_name=true",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_display_name": true
+      }
+    ],
+    "valid": [
+      "John Doe <john.doe@example.com>",
+      "\"Jane, Doe\" <jane.doe@example.com>"
+    ],
+    "invalid": [
+      "John Doe john.doe@example.com",
+      "John Doe <john.doe@example>"
+    ],
+    "rationale": "Tests the behavior when display names are allowed.",
+    "obligations": [
+      "OB-2"
+    ],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "Validation with require_display_name=true",
+    "validator": "isEmail",
+    "args": [
+      {
+        "require_display_name": true
+      }
+    ],
+    "valid": [
+      "John Doe <john.doe@example.com>"
+    ],
+    "invalid": [
+      "john.doe@example.com",
+      "<john.doe@example.com>"
+    ],
+    "rationale": "Ensures emails without display names are rejected when required.",
+    "obligations": [
+      "OB-3",
+      "OB-10"
+    ],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "Validation with allow_utf8_local_part=false",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_utf8_local_part": false
+      }
+    ],
+    "valid": [
+      "example@example.com"
+    ],
+    "invalid": [
+      "ex\u00e4mple@example.com",
+      "\u00fcser@example.com"
+    ],
+    "rationale": "Ensures non-English UTF8 characters in the local part are rejected.",
+    "obligations": [
+      "OB-4"
+    ],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "Validation with require_tld=false",
+    "validator": "isEmail",
+    "args": [
+      {
+        "require_tld": false
+      }
+    ],
+    "valid": [
+      "example@localhost",
+      "user@domain"
+    ],
+    "invalid": [
+      "user@.com",
+      "user@localhost."
+    ],
+    "rationale": "Tests behavior when TLD is not required.",
+    "obligations": [
+      "OB-5"
+    ],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "Validation with allow_ip_domain=true",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_ip_domain": true
+      }
+    ],
+    "valid": [
+      "example@[192.168.1.1]",
+      "user@[255.255.255.255]"
+    ],
+    "invalid": [
+      "example@[192.168.1.256]",
+      "example@[192.168.1]"
+    ],
+    "rationale": "Ensures IP addresses in the domain part are accepted when allowed.",
+    "obligations": [
+      "OB-6"
+    ],
+    "generated_id": "GENERATED-6"
+  },
+  {
+    "title": "Validation with blacklisted_chars set",
+    "validator": "isEmail",
+    "args": [
+      {
+        "blacklisted_chars": "@"
+      }
+    ],
+    "valid": [
+      "example@example.com"
+    ],
+    "invalid": [
+      "ex@mple@example.com",
+      "user@name@example.com"
+    ],
+    "rationale": "Tests rejection of emails containing blacklisted characters in the local part.",
+    "obligations": [
+      "OB-7"
+    ],
+    "generated_id": "GENERATED-7"
+  },
+  {
+    "title": "Validation with host_blacklist set",
+    "validator": "isEmail",
+    "args": [
+      {
+        "host_blacklist": [
+          "blacklisted.com"
+        ]
+      }
+    ],
+    "valid": [
+      "example@example.com"
+    ],
+    "invalid": [
+      "example@blacklisted.com",
+      "user@blacklisted.com"
+    ],
+    "rationale": "Ensures domains in the blacklist are rejected.",
+    "obligations": [
+      "OB-8"
+    ],
+    "generated_id": "GENERATED-8"
+  },
+  {
+    "title": "Validation with host_whitelist set",
+    "validator": "isEmail",
+    "args": [
+      {
+        "host_whitelist": [
+          "whitelisted.com"
+        ]
+      }
+    ],
+    "valid": [
+      "example@whitelisted.com"
+    ],
+    "invalid": [
+      "example@nonwhitelisted.com",
+      "user@anotherdomain.com"
+    ],
+    "rationale": "Ensures only whitelisted domains are accepted.",
+    "obligations": [
+      "OB-9"
+    ],
+    "generated_id": "GENERATED-9"
+  },
+  {
+    "title": "Validation for maximum email length",
+    "validator": "isEmail",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "a@b.com"
+    ],
+    "invalid": [
+      "a@b.com"
+    ],
+    "rationale": "Tests rejection of emails exceeding the maximum length.",
+    "obligations": [
+      "OB-11"
+    ],
+    "generated_id": "GENERATED-10"
+  },
+  {
+    "title": "Validation for display names identical to unquoted version",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_display_name": true
+      }
+    ],
+    "valid": [
+      "John Doe <john.doe@example.com>"
+    ],
+    "invalid": [
+      "John Doe john.doe@example.com"
+    ],
+    "rationale": "Tests rejection of display names that are identical to their unquoted version.",
+    "obligations": [
+      "OB-12"
+    ],
+    "generated_id": "GENERATED-11"
+  },
+  {
+    "title": "Domain-specific validation for Gmail and Googlemail domains",
+    "validator": "isEmail",
+    "args": [
+      {
+        "domain_specific_validation": true
+      }
+    ],
+    "valid": [
+      "user@gmail.com"
+    ],
+    "invalid": [
+      "user@googlemail.com"
+    ],
+    "rationale": "Tests domain-specific validation for Gmail and Googlemail domains.",
+    "obligations": [
+      "OB-13"
+    ],
+    "generated_id": "GENERATED-12"
+  },
+  {
+    "title": "Validation for Gmail username length constraints",
+    "validator": "isEmail",
+    "args": [
+      {
+        "domain_specific_validation": true
+      }
+    ],
+    "valid": [
+      "valid.username@gmail.com"
+    ],
+    "invalid": [
+      "short@gmail.com"
+    ],
+    "rationale": "Tests rejection of Gmail usernames that do not meet length constraints after removing dots.",
+    "obligations": [
+      "OB-14"
+    ],
+    "generated_id": "GENERATED-13"
+  },
+  {
+    "title": "Validation for empty or whitespace-only display names",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_display_name": true
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      " <example@example.com>",
+      "   <example@example.com>"
+    ],
+    "rationale": "Tests rejection of empty or whitespace-only display names.",
+    "obligations": [
+      "OB-15"
+    ],
+    "generated_id": "GENERATED-14"
+  },
+  {
+    "title": "Validation for display names identical to unquoted version",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_display_name": true
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "\"John Doe\" <john.doe@example.com>",
+      "\"Jane Doe\" <jane.doe@example.com>"
+    ],
+    "rationale": "Tests rejection of display names that are identical to their unquoted version.",
+    "obligations": [
+      "OB-16"
+    ],
+    "generated_id": "GENERATED-15"
+  },
+  {
+    "title": "Validation for improperly escaped quotes in display names",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_display_name": true
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "\"John \\\"Doe\" <john.doe@example.com>",
+      "\"Jane \\\"Doe\" <jane.doe@example.com>"
+    ],
+    "rationale": "Tests rejection of display names with improperly escaped quotes.",
+    "obligations": [
+      "OB-17"
+    ],
+    "generated_id": "GENERATED-16"
+  },
+  {
+    "title": "Validation for display names identical to unquoted version",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_display_name": true
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "John Doe john.doe@example.com"
+    ],
+    "rationale": "Targets uncovered statement at line 50 by testing rejection of display names identical to their unquoted version.",
+    "obligations": [
+      "OB-18"
+    ],
+    "generated_id": "GENERATED-17"
+  },
+  {
+    "title": "Validation for improperly escaped quotes in display names",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_display_name": true
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "\"John \\\"Doe\" <john.doe@example.com>"
+    ],
+    "rationale": "Targets uncovered statement at line 57 by testing rejection of improperly escaped quotes in display names.",
+    "obligations": [
+      "OB-19"
+    ],
+    "generated_id": "GENERATED-18"
+  },
+  {
+    "title": "Validation for quoted local parts with and without UTF-8 support",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_utf8_local_part": true
+      }
+    ],
+    "valid": [
+      "\"quoted\"@example.com"
+    ],
+    "invalid": [
+      "\"qu\u00f6t\u00e9d\"@example.com"
+    ],
+    "rationale": "Targets uncovered ternary paths at lines 172-173 by testing validation of quoted local parts with and without UTF-8 support.",
+    "obligations": [
+      "OB-20"
+    ],
+    "generated_id": "GENERATED-19"
+  },
+  {
+    "title": "Validation for maximum email length with ignore_max_length=false",
+    "validator": "isEmail",
+    "args": [
+      {
+        "ignore_max_length": false
+      }
+    ],
+    "valid": [
+      "example@example.com"
+    ],
+    "invalid": [
+      "a@b.com"
+    ],
+    "rationale": "Tests rejection of emails exceeding the maximum length when ignore_max_length is false.",
+    "obligations": [
+      "OB-21"
+    ],
+    "generated_id": "GENERATED-20"
+  },
+  {
+    "title": "Validation for Gmail username with domain-specific rules",
+    "validator": "isEmail",
+    "args": [
+      {
+        "domain_specific_validation": true
+      }
+    ],
+    "valid": [
+      "valid.username@gmail.com"
+    ],
+    "invalid": [
+      "invalid..username@gmail.com"
+    ],
+    "rationale": "Tests Gmail username validation with domain-specific rules.",
+    "obligations": [
+      "OB-22"
+    ],
+    "generated_id": "GENERATED-21"
+  },
+  {
+    "title": "Validation for IP domains with incorrect brackets",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_ip_domain": true
+      }
+    ],
+    "valid": [
+      "example@[192.168.1.1]"
+    ],
+    "invalid": [
+      "example@192.168.1.1"
+    ],
+    "rationale": "Tests validation of IP domains with incorrect brackets.",
+    "obligations": [
+      "OB-23"
+    ],
+    "generated_id": "GENERATED-22"
+  }
+]

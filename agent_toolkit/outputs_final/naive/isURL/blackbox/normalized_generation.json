@@ -1,0 +1,194 @@
+{
+  "mode": "blackbox",
+  "approach": "naive",
+  "obligations": [],
+  "test_groups": [
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com",
+        "ftp://example.com",
+        "http://www.example.com",
+        "https://subdomain.example.com/path?query=1#fragment"
+      ],
+      "invalid": [
+        "example.com",
+        "http:/example.com",
+        "http://",
+        "http://example",
+        "http://example..com"
+      ],
+      "title": "Default behavior - common valid URLs",
+      "rationale": "Covers common valid and invalid URLs under default settings.",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com",
+        "ftp://example.com"
+      ],
+      "invalid": [
+        "example.com",
+        "www.example.com",
+        "//example.com"
+      ],
+      "title": "require_protocol: true",
+      "rationale": "Ensures URLs must include a protocol when require_protocol is true.",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_tld": false
+        }
+      ],
+      "valid": [
+        "http://localhost",
+        "http://example",
+        "http://example.com",
+        "http://example."
+      ],
+      "invalid": [
+        "http://",
+        "http://.com",
+        "http://example..com"
+      ],
+      "title": "require_tld: false",
+      "rationale": "Allows URLs without a top-level domain when require_tld is false.",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_underscores": true
+        }
+      ],
+      "valid": [
+        "http://example_com",
+        "http://sub_domain.example.com",
+        "http://example.com"
+      ],
+      "invalid": [
+        "http://example..com",
+        "http://example_.com"
+      ],
+      "title": "allow_underscores: true",
+      "rationale": "Allows underscores in hostnames when allow_underscores is true.",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_trailing_dot": true
+        }
+      ],
+      "valid": [
+        "http://example.com.",
+        "http://example.",
+        "http://subdomain.example.com."
+      ],
+      "invalid": [
+        "http://example..com",
+        "http://example.."
+      ],
+      "title": "allow_trailing_dot: true",
+      "rationale": "Allows trailing dots in hostnames when allow_trailing_dot is true.",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_protocol_relative_urls": true
+        }
+      ],
+      "valid": [
+        "//example.com",
+        "//subdomain.example.com/path?query=1#fragment"
+      ],
+      "invalid": [
+        "example.com",
+        "/example.com",
+        "http://"
+      ],
+      "title": "allow_protocol_relative_urls: true",
+      "rationale": "Allows protocol-relative URLs when allow_protocol_relative_urls is true.",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com"
+      ],
+      "invalid": [
+        "http://user:pass@example.com",
+        "http://user@example.com"
+      ],
+      "title": "disallow_auth: true",
+      "rationale": "Disallows URLs with authentication components when disallow_auth is true.",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_fragments": false
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "http://example.com/path?query=1"
+      ],
+      "invalid": [
+        "http://example.com#fragment",
+        "http://example.com/path#fragment"
+      ],
+      "title": "allow_fragments: false",
+      "rationale": "Disallows fragments in URLs when allow_fragments is false.",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_query_components": false
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "http://example.com/path"
+      ],
+      "invalid": [
+        "http://example.com?query=1",
+        "http://example.com/path?query=1"
+      ],
+      "title": "allow_query_components: false",
+      "rationale": "Disallows query components in URLs when allow_query_components is false.",
+      "obligations": []
+    }
+  ],
+  "metadata": {
+    "requirement_source": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\README.md",
+    "generation_style": "single_pass_with_repair"
+  }
+}

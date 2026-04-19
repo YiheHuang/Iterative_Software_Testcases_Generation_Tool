@@ -1,0 +1,75 @@
+{
+  "obligations": [
+    {
+      "id": "OB-10",
+      "kind": "whitebox",
+      "rule": "Ensure URLs with invalid authentication components are rejected.",
+      "why": "Targets uncovered statement at line 127 and related branches for validating authentication components.",
+      "minimal_valid": "http://user:pass@example.com",
+      "minimal_invalid": "http://user:pass:extra@example.com"
+    },
+    {
+      "id": "OB-11",
+      "kind": "whitebox",
+      "rule": "Ensure URLs with encoded malicious content in authentication are rejected.",
+      "why": "Targets uncovered statement at line 132 and related branches for detecting encoded malicious content.",
+      "minimal_valid": "http://user:pass@example.com",
+      "minimal_invalid": "http://javascript:%61%6c%65%72%74%28%31%29@example.com"
+    },
+    {
+      "id": "OB-12",
+      "kind": "whitebox",
+      "rule": "Ensure URLs with invalid port numbers are rejected.",
+      "why": "Targets uncovered statement at line 241 and related branches for validating port numbers.",
+      "minimal_valid": "http://example.com:80",
+      "minimal_invalid": "http://example.com:70000"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Authentication component validation",
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://user:pass@example.com"
+      ],
+      "invalid": [
+        "http://user:pass:extra@example.com"
+      ],
+      "rationale": "Tests validation of authentication components, targeting uncovered statement at line 127.",
+      "obligations": ["OB-10"]
+    },
+    {
+      "title": "Encoded malicious content in authentication",
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://user:pass@example.com"
+      ],
+      "invalid": [
+        "http://javascript:%61%6c%65%72%74%28%31%29@example.com"
+      ],
+      "rationale": "Tests detection of encoded malicious content in authentication, targeting uncovered statement at line 132.",
+      "obligations": ["OB-11"]
+    },
+    {
+      "title": "Port number validation",
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com:80"
+      ],
+      "invalid": [
+        "http://example.com:70000"
+      ],
+      "rationale": "Tests validation of port numbers, targeting uncovered statement at line 241.",
+      "obligations": ["OB-12"]
+    }
+  ]
+}

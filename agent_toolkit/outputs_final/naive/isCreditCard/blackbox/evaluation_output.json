@@ -1,0 +1,1136 @@
+{
+  "results": [
+    {
+      "title": "General credit card validation without options",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "4111111111111111",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "General credit card validation without options",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "1",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": false,
+      "obligations": []
+    },
+    {
+      "title": "General credit card validation without options",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "1234567890123456",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "General credit card validation without options",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "411111111111111",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "General credit card validation without options",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "41111111111111111",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "General credit card validation without options",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "abcd1234efgh5678",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "General credit card validation without options",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "General credit card validation without options",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "None",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with provider 'visa'",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "visa"
+        }
+      ],
+      "input_value": "4111111111111111",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with provider 'visa'",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "visa"
+        }
+      ],
+      "input_value": "4012888888881881",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with provider 'visa'",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "visa"
+        }
+      ],
+      "input_value": "378282246310005",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with provider 'visa'",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "visa"
+        }
+      ],
+      "input_value": "6011111111111117",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with provider 'visa'",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "visa"
+        }
+      ],
+      "input_value": "5555555555554444",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with provider 'visa'",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "visa"
+        }
+      ],
+      "input_value": "411111111111111",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with provider 'visa'",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "visa"
+        }
+      ],
+      "input_value": "abcd1234efgh5678",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with provider 'visa'",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "visa"
+        }
+      ],
+      "input_value": "",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with provider 'visa'",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "visa"
+        }
+      ],
+      "input_value": "None",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with provider 'amex'",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "amex"
+        }
+      ],
+      "input_value": "378282246310005",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with provider 'amex'",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "amex"
+        }
+      ],
+      "input_value": "371449635398431",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with provider 'amex'",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "amex"
+        }
+      ],
+      "input_value": "4111111111111111",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with provider 'amex'",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "amex"
+        }
+      ],
+      "input_value": "5555555555554444",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with provider 'amex'",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "amex"
+        }
+      ],
+      "input_value": "6011111111111117",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with provider 'amex'",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "amex"
+        }
+      ],
+      "input_value": "37828224631000",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with provider 'amex'",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "amex"
+        }
+      ],
+      "input_value": "abcd1234efgh5678",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with provider 'amex'",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "amex"
+        }
+      ],
+      "input_value": "",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with provider 'amex'",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "amex"
+        }
+      ],
+      "input_value": "None",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Validation with unsupported provider",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "unsupported"
+        }
+      ],
+      "input_value": "4111111111111111",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "throw",
+      "actual_value": null,
+      "actual_error_name": "Error",
+      "passed": false,
+      "obligations": []
+    },
+    {
+      "title": "Validation with unsupported provider",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "unsupported"
+        }
+      ],
+      "input_value": "378282246310005",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "throw",
+      "actual_value": null,
+      "actual_error_name": "Error",
+      "passed": false,
+      "obligations": []
+    },
+    {
+      "title": "Validation with unsupported provider",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "unsupported"
+        }
+      ],
+      "input_value": "5555555555554444",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "throw",
+      "actual_value": null,
+      "actual_error_name": "Error",
+      "passed": false,
+      "obligations": []
+    },
+    {
+      "title": "Validation with unsupported provider",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "unsupported"
+        }
+      ],
+      "input_value": "6011111111111117",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "throw",
+      "actual_value": null,
+      "actual_error_name": "Error",
+      "passed": false,
+      "obligations": []
+    },
+    {
+      "title": "Validation with unsupported provider",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "unsupported"
+        }
+      ],
+      "input_value": "abcd1234efgh5678",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "throw",
+      "actual_value": null,
+      "actual_error_name": "Error",
+      "passed": false,
+      "obligations": []
+    },
+    {
+      "title": "Validation with unsupported provider",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "unsupported"
+        }
+      ],
+      "input_value": "",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "throw",
+      "actual_value": null,
+      "actual_error_name": "Error",
+      "passed": false,
+      "obligations": []
+    },
+    {
+      "title": "Validation with unsupported provider",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "unsupported"
+        }
+      ],
+      "input_value": "None",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "throw",
+      "actual_value": null,
+      "actual_error_name": "Error",
+      "passed": false,
+      "obligations": []
+    }
+  ],
+  "summary": {
+    "total_cases": 33,
+    "correct_cases": 25,
+    "incorrect_cases": 8,
+    "exact_match_rate": 0.7575757575757576,
+    "by_expected_kind": {
+      "return": 33,
+      "throw": 0
+    }
+  },
+  "details": {
+    "passed_results": [
+      {
+        "title": "General credit card validation without options",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "4111111111111111",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "General credit card validation without options",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "1234567890123456",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "General credit card validation without options",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "411111111111111",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "General credit card validation without options",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "41111111111111111",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "General credit card validation without options",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "abcd1234efgh5678",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "General credit card validation without options",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "General credit card validation without options",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "None",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with provider 'visa'",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "visa"
+          }
+        ],
+        "input_value": "4111111111111111",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with provider 'visa'",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "visa"
+          }
+        ],
+        "input_value": "4012888888881881",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with provider 'visa'",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "visa"
+          }
+        ],
+        "input_value": "378282246310005",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with provider 'visa'",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "visa"
+          }
+        ],
+        "input_value": "6011111111111117",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with provider 'visa'",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "visa"
+          }
+        ],
+        "input_value": "5555555555554444",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with provider 'visa'",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "visa"
+          }
+        ],
+        "input_value": "411111111111111",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with provider 'visa'",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "visa"
+          }
+        ],
+        "input_value": "abcd1234efgh5678",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with provider 'visa'",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "visa"
+          }
+        ],
+        "input_value": "",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with provider 'visa'",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "visa"
+          }
+        ],
+        "input_value": "None",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with provider 'amex'",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "amex"
+          }
+        ],
+        "input_value": "378282246310005",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with provider 'amex'",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "amex"
+          }
+        ],
+        "input_value": "371449635398431",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with provider 'amex'",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "amex"
+          }
+        ],
+        "input_value": "4111111111111111",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with provider 'amex'",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "amex"
+          }
+        ],
+        "input_value": "5555555555554444",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with provider 'amex'",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "amex"
+          }
+        ],
+        "input_value": "6011111111111117",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with provider 'amex'",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "amex"
+          }
+        ],
+        "input_value": "37828224631000",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with provider 'amex'",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "amex"
+          }
+        ],
+        "input_value": "abcd1234efgh5678",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with provider 'amex'",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "amex"
+          }
+        ],
+        "input_value": "",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Validation with provider 'amex'",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "amex"
+          }
+        ],
+        "input_value": "None",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      }
+    ],
+    "failed_results": [
+      {
+        "title": "General credit card validation without options",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "1",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "Validation with unsupported provider",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "unsupported"
+          }
+        ],
+        "input_value": "4111111111111111",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "throw",
+        "actual_value": null,
+        "actual_error_name": "Error",
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "Validation with unsupported provider",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "unsupported"
+          }
+        ],
+        "input_value": "378282246310005",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "throw",
+        "actual_value": null,
+        "actual_error_name": "Error",
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "Validation with unsupported provider",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "unsupported"
+          }
+        ],
+        "input_value": "5555555555554444",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "throw",
+        "actual_value": null,
+        "actual_error_name": "Error",
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "Validation with unsupported provider",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "unsupported"
+          }
+        ],
+        "input_value": "6011111111111117",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "throw",
+        "actual_value": null,
+        "actual_error_name": "Error",
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "Validation with unsupported provider",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "unsupported"
+          }
+        ],
+        "input_value": "abcd1234efgh5678",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "throw",
+        "actual_value": null,
+        "actual_error_name": "Error",
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "Validation with unsupported provider",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "unsupported"
+          }
+        ],
+        "input_value": "",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "throw",
+        "actual_value": null,
+        "actual_error_name": "Error",
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "Validation with unsupported provider",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "unsupported"
+          }
+        ],
+        "input_value": "None",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "throw",
+        "actual_value": null,
+        "actual_error_name": "Error",
+        "passed": false,
+        "obligations": []
+      }
+    ],
+    "by_title": {
+      "General credit card validation without options": {
+        "total": 8,
+        "passed": 7,
+        "failed": 1
+      },
+      "Validation with provider 'visa'": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0
+      },
+      "Validation with provider 'amex'": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0
+      },
+      "Validation with unsupported provider": {
+        "total": 7,
+        "passed": 0,
+        "failed": 7
+      }
+    },
+    "by_obligation": {},
+    "coverage_summary_path": null,
+    "coverage_total": null,
+    "coverage_files": {}
+  }
+}

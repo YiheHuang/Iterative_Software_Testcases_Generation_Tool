@@ -1,0 +1,405 @@
+{
+  "golden_categories": [
+    {
+      "golden_category_id": "GC-1",
+      "name": "Default Currency Validation",
+      "description": "Validates general currency formats without specific constraints.",
+      "golden_group_ids": [
+        "GOLDEN-1"
+      ]
+    },
+    {
+      "golden_category_id": "GC-2",
+      "name": "No Decimal Allowed",
+      "description": "Validates currency formats where decimals are not allowed.",
+      "golden_group_ids": [
+        "GOLDEN-2"
+      ]
+    },
+    {
+      "golden_category_id": "GC-3",
+      "name": "Require Decimal",
+      "description": "Validates currency formats where decimals are mandatory.",
+      "golden_group_ids": [
+        "GOLDEN-3"
+      ]
+    },
+    {
+      "golden_category_id": "GC-4",
+      "name": "Specific Decimal Precision",
+      "description": "Validates currency formats with specific digits allowed after the decimal.",
+      "golden_group_ids": [
+        "GOLDEN-4"
+      ]
+    },
+    {
+      "golden_category_id": "GC-5",
+      "name": "Require Symbol",
+      "description": "Validates currency formats where a currency symbol is mandatory.",
+      "golden_group_ids": [
+        "GOLDEN-5"
+      ]
+    },
+    {
+      "golden_category_id": "GC-6",
+      "name": "Custom Symbol with Negative Sign Before Digits",
+      "description": "Validates currency formats with a custom symbol and negative sign before digits.",
+      "golden_group_ids": [
+        "GOLDEN-6"
+      ]
+    },
+    {
+      "golden_category_id": "GC-7",
+      "name": "Negative Sign After Digits",
+      "description": "Validates currency formats where the negative sign appears after the digits.",
+      "golden_group_ids": [
+        "GOLDEN-7"
+      ]
+    },
+    {
+      "golden_category_id": "GC-8",
+      "name": "Custom Symbol Without Negatives",
+      "description": "Validates currency formats with a custom symbol and disallows negative values.",
+      "golden_group_ids": [
+        "GOLDEN-8"
+      ]
+    },
+    {
+      "golden_category_id": "GC-9",
+      "name": "Custom Symbol with Space and Specific Separators",
+      "description": "Validates currency formats with a custom symbol, space after the symbol, and specific thousands and decimal separators.",
+      "golden_group_ids": [
+        "GOLDEN-9"
+      ]
+    },
+    {
+      "golden_category_id": "GC-10",
+      "name": "Custom Symbol with Space After Symbol",
+      "description": "Validates currency formats with a custom symbol, space after the symbol, and specific separators.",
+      "golden_group_ids": [
+        "GOLDEN-10"
+      ]
+    },
+    {
+      "golden_category_id": "GC-11",
+      "name": "Custom Symbol After Digits",
+      "description": "Validates currency formats with a custom symbol placed after the digits.",
+      "golden_group_ids": [
+        "GOLDEN-11"
+      ]
+    },
+    {
+      "golden_category_id": "GC-12",
+      "name": "Custom Symbol with Negative Sign Before Digits and Space",
+      "description": "Validates currency formats with a custom symbol, negative sign before digits, and space after the symbol.",
+      "golden_group_ids": [
+        "GOLDEN-12"
+      ]
+    },
+    {
+      "golden_category_id": "GC-13",
+      "name": "Custom Symbol Without Negatives and Space",
+      "description": "Validates currency formats with a custom symbol, disallows negatives, and allows space after the symbol.",
+      "golden_group_ids": [
+        "GOLDEN-13"
+      ]
+    },
+    {
+      "golden_category_id": "GC-14",
+      "name": "Parentheses for Negatives",
+      "description": "Validates currency formats where negative values are enclosed in parentheses.",
+      "golden_group_ids": [
+        "GOLDEN-14"
+      ]
+    },
+    {
+      "golden_category_id": "GC-15",
+      "name": "Disallow Negatives",
+      "description": "Validates currency formats where negative values are not allowed.",
+      "golden_group_ids": [
+        "GOLDEN-15"
+      ]
+    },
+    {
+      "golden_category_id": "GC-16",
+      "name": "Custom Brazilian Real Format",
+      "description": "Validates currency formats specific to Brazilian Real with custom symbol and separators.",
+      "golden_group_ids": [
+        "GOLDEN-16"
+      ]
+    }
+  ],
+  "generated_categories": [
+    {
+      "generated_category_id": "GENC-1",
+      "name": "Default Behavior Validation",
+      "description": "Tests the default behavior of the isCurrency validator, ensuring proper handling of valid and invalid currency strings with standard formatting.",
+      "generated_group_ids": [
+        "GENERATED-1"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "name": "Symbol Requirement",
+      "description": "Validates the behavior when the `require_symbol` option is set to true, ensuring that currency strings must include a symbol.",
+      "generated_group_ids": [
+        "GENERATED-2"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "name": "Negative Value Handling",
+      "description": "Tests the handling of negative values with different configurations, including disallowing negatives and allowing parentheses for negatives.",
+      "generated_group_ids": [
+        "GENERATED-3",
+        "GENERATED-4"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "name": "Decimal Requirement",
+      "description": "Ensures proper validation of currency strings when the `require_decimal` option is set to true, requiring the presence of a decimal point.",
+      "generated_group_ids": [
+        "GENERATED-5"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-5",
+      "name": "Decimal Precision",
+      "description": "Validates the behavior of the `digits_after_decimal` option, ensuring that only specific numbers of digits are allowed after the decimal point.",
+      "generated_group_ids": [
+        "GENERATED-6"
+      ]
+    }
+  ],
+  "golden_to_generated": [
+    {
+      "golden_category_id": "GC-1",
+      "matched_generated_category_ids": [
+        "GENC-1"
+      ],
+      "match_type": "strong",
+      "reason": "The generated category 'Default Behavior Validation' aligns strongly with the golden category 'Default Currency Validation' as both focus on validating general currency formats without specific constraints."
+    },
+    {
+      "golden_category_id": "GC-2",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses the 'No Decimal Allowed' constraint."
+    },
+    {
+      "golden_category_id": "GC-3",
+      "matched_generated_category_ids": [
+        "GENC-4"
+      ],
+      "match_type": "strong",
+      "reason": "The generated category 'Decimal Requirement' strongly matches the golden category 'Require Decimal' as both enforce the presence of a decimal point in currency validation."
+    },
+    {
+      "golden_category_id": "GC-4",
+      "matched_generated_category_ids": [
+        "GENC-5"
+      ],
+      "match_type": "strong",
+      "reason": "The generated category 'Decimal Precision' aligns strongly with the golden category 'Specific Decimal Precision' as both validate specific digits allowed after the decimal."
+    },
+    {
+      "golden_category_id": "GC-5",
+      "matched_generated_category_ids": [
+        "GENC-2"
+      ],
+      "match_type": "strong",
+      "reason": "The generated category 'Symbol Requirement' strongly matches the golden category 'Require Symbol' as both enforce the presence of a currency symbol."
+    },
+    {
+      "golden_category_id": "GC-6",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses the combination of a custom symbol and negative sign before digits."
+    },
+    {
+      "golden_category_id": "GC-7",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses the placement of the negative sign after digits."
+    },
+    {
+      "golden_category_id": "GC-8",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses the combination of a custom symbol and disallowing negatives."
+    },
+    {
+      "golden_category_id": "GC-9",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses the combination of a custom symbol, space after the symbol, and specific separators."
+    },
+    {
+      "golden_category_id": "GC-10",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses the combination of a custom symbol, space after the symbol, and specific separators."
+    },
+    {
+      "golden_category_id": "GC-11",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses the placement of a custom symbol after digits."
+    },
+    {
+      "golden_category_id": "GC-12",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses the combination of a custom symbol, negative sign before digits, and space after the symbol."
+    },
+    {
+      "golden_category_id": "GC-13",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses the combination of a custom symbol, disallowing negatives, and allowing space after the symbol."
+    },
+    {
+      "golden_category_id": "GC-14",
+      "matched_generated_category_ids": [
+        "GENC-3"
+      ],
+      "match_type": "partial",
+      "reason": "The generated category 'Negative Value Handling' partially matches the golden category 'Parentheses for Negatives' as it includes parentheses handling but also covers other negative value configurations."
+    },
+    {
+      "golden_category_id": "GC-15",
+      "matched_generated_category_ids": [
+        "GENC-3"
+      ],
+      "match_type": "partial",
+      "reason": "The generated category 'Negative Value Handling' partially matches the golden category 'Disallow Negatives' as it includes disallowing negatives but also covers other negative value configurations."
+    },
+    {
+      "golden_category_id": "GC-16",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses the custom Brazilian Real format."
+    }
+  ],
+  "generated_to_golden": [
+    {
+      "generated_category_id": "GENC-1",
+      "matched_golden_category_ids": [
+        "GC-1"
+      ],
+      "match_type": "strong",
+      "reason": "The generated category 'Default Behavior Validation' aligns strongly with the golden category 'Default Currency Validation' as both focus on validating general currency formats without specific constraints."
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "matched_golden_category_ids": [
+        "GC-5"
+      ],
+      "match_type": "strong",
+      "reason": "The generated category 'Symbol Requirement' strongly matches the golden category 'Require Symbol' as both enforce the presence of a currency symbol."
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "matched_golden_category_ids": [
+        "GC-14",
+        "GC-15"
+      ],
+      "match_type": "partial",
+      "reason": "The generated category 'Negative Value Handling' partially matches the golden categories 'Parentheses for Negatives' and 'Disallow Negatives' as it includes parentheses handling and disallowing negatives but also covers other negative value configurations."
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "matched_golden_category_ids": [
+        "GC-3"
+      ],
+      "match_type": "strong",
+      "reason": "The generated category 'Decimal Requirement' strongly matches the golden category 'Require Decimal' as both enforce the presence of a decimal point in currency validation."
+    },
+    {
+      "generated_category_id": "GENC-5",
+      "matched_golden_category_ids": [
+        "GC-4"
+      ],
+      "match_type": "strong",
+      "reason": "The generated category 'Decimal Precision' aligns strongly with the golden category 'Specific Decimal Precision' as both validate specific digits allowed after the decimal."
+    }
+  ],
+  "novel_generated_categories": [],
+  "missing_golden_categories": [
+    {
+      "golden_category_id": "GC-2",
+      "golden_category_name": "No Decimal Allowed",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-6",
+      "golden_category_name": "Custom Symbol with Negative Sign Before Digits",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-7",
+      "golden_category_name": "Negative Sign After Digits",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-8",
+      "golden_category_name": "Custom Symbol Without Negatives",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-9",
+      "golden_category_name": "Custom Symbol with Space and Specific Separators",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-10",
+      "golden_category_name": "Custom Symbol with Space After Symbol",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-11",
+      "golden_category_name": "Custom Symbol After Digits",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-12",
+      "golden_category_name": "Custom Symbol with Negative Sign Before Digits and Space",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-13",
+      "golden_category_name": "Custom Symbol Without Negatives and Space",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-16",
+      "golden_category_name": "Custom Brazilian Real Format",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    }
+  ],
+  "summary": {
+    "total_golden_categories": 16,
+    "total_generated_categories": 5,
+    "overlap_golden_categories": 6,
+    "missing_golden_categories": 10,
+    "matched_generated_categories": 5,
+    "novel_generated_categories": 0,
+    "strong_golden_category_matches": 4,
+    "partial_golden_category_matches": 2,
+    "fragmented_golden_matches": 0,
+    "matched_golden_ratio": 0.375,
+    "total_golden_groups": 16,
+    "total_generated_groups": 5,
+    "overlap_golden_groups": 6,
+    "missing_golden_groups": 10,
+    "novel_valid_groups": 0,
+    "exact_or_near_overlap_groups": 6,
+    "golden_groups_with_semantic_match": 6,
+    "generated_groups_with_semantic_match": 5,
+    "novel_valid_categories": 0
+  },
+  "golden_source_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\golden\\isCurrency\\isCurrency_golden_tests.json",
+  "golden_categories_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\golden\\isCurrency\\isCurrency_golden_categories.json",
+  "generated_categories_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\naive\\isCurrency\\blackbox\\generated_categories.json"
+}

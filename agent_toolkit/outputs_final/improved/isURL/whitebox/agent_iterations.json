@@ -1,0 +1,101 @@
+{
+  "iteration_count": 6,
+  "revert_count": 1,
+  "total_attempts": 6,
+  "max_attempts": 6,
+  "feedback_sources": [
+    "coverage"
+  ],
+  "golden_feedback_used": false,
+  "final_decision": "stop_after_attempt_limit",
+  "coverage_score": {
+    "lines": 96.49,
+    "statements": 96.61,
+    "functions": 100.0,
+    "branches": 86.55
+  },
+  "iterations": [
+    {
+      "iteration": 1,
+      "decision": "initial",
+      "coverage_score": {
+        "lines": 76.32,
+        "statements": 74.58,
+        "functions": 100.0,
+        "branches": 65.55
+      }
+    },
+    {
+      "iteration": 2,
+      "decision": "accept_patch",
+      "candidate_group_count": 17,
+      "coverage_score": {
+        "lines": 90.35,
+        "statements": 90.68,
+        "functions": 100.0,
+        "branches": 79.83
+      }
+    },
+    {
+      "iteration": 3,
+      "decision": "accept_patch",
+      "candidate_group_count": 20,
+      "coverage_score": {
+        "lines": 93.86,
+        "statements": 94.07,
+        "functions": 100.0,
+        "branches": 83.19
+      }
+    },
+    {
+      "iteration": 4,
+      "decision": "accept_patch",
+      "candidate_group_count": 23,
+      "coverage_score": {
+        "lines": 94.74,
+        "statements": 94.92,
+        "functions": 100.0,
+        "branches": 84.03
+      }
+    },
+    {
+      "iteration": 5,
+      "decision": "accept_patch",
+      "candidate_group_count": 26,
+      "coverage_score": {
+        "lines": 95.61,
+        "statements": 95.76,
+        "functions": 100.0,
+        "branches": 84.87
+      }
+    },
+    {
+      "iteration": 6,
+      "decision": "accept_patch",
+      "candidate_group_count": 29,
+      "coverage_score": {
+        "lines": 96.49,
+        "statements": 96.61,
+        "functions": 100.0,
+        "branches": 86.55
+      }
+    },
+    {
+      "iteration": 7,
+      "decision": "revert_patch",
+      "candidate_group_count": 32,
+      "candidate_coverage_score": {
+        "lines": 96.49,
+        "statements": 96.61,
+        "functions": 100.0,
+        "branches": 86.55
+      },
+      "current_coverage_score": {
+        "lines": 96.49,
+        "statements": 96.61,
+        "functions": 100.0,
+        "branches": 86.55
+      }
+    }
+  ]
+}

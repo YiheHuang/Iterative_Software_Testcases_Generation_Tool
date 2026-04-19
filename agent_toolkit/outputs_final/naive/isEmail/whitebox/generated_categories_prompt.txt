@@ -1,0 +1,176 @@
+Group generated tests into generated categories for validator isEmail.
+
+Generated groups:
+[
+  {
+    "title": "Default options",
+    "validator": "isEmail",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "test@example.com",
+      "user.name+tag+sorting@example.com",
+      "user_name@example.com",
+      "user-name@example.com"
+    ],
+    "invalid": [
+      "plainaddress",
+      "@missingusername.com",
+      "username@.com",
+      "username@com",
+      "username@domain..com"
+    ],
+    "rationale": "Tests basic email validation with default options, ensuring common valid and invalid cases are handled correctly.",
+    "obligations": [],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "Allow display name",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_display_name": true
+      }
+    ],
+    "valid": [
+      "John Doe <john.doe@example.com>",
+      "\"John Doe\" <john.doe@example.com>",
+      "John <john@example.com>"
+    ],
+    "invalid": [
+      "John Doe john.doe@example.com",
+      "John Doe <john.doe@>",
+      "<john.doe@example.com>"
+    ],
+    "rationale": "Tests validation of emails with display names when `allow_display_name` is true.",
+    "obligations": [],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "Require display name",
+    "validator": "isEmail",
+    "args": [
+      {
+        "require_display_name": true
+      }
+    ],
+    "valid": [
+      "John Doe <john.doe@example.com>",
+      "\"John Doe\" <john.doe@example.com>"
+    ],
+    "invalid": [
+      "john.doe@example.com",
+      "John Doe john.doe@example.com",
+      "<john.doe@example.com>"
+    ],
+    "rationale": "Tests validation when display names are required (`require_display_name` is true).",
+    "obligations": [],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "Allow IP domain",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_ip_domain": true
+      }
+    ],
+    "valid": [
+      "user@[192.168.1.1]",
+      "user@[255.255.255.255]"
+    ],
+    "invalid": [
+      "user@192.168.1.1",
+      "user@[192.168.1.256]",
+      "user@[192.168.1]"
+    ],
+    "rationale": "Tests validation of emails with IP addresses as domains when `allow_ip_domain` is true.",
+    "obligations": [],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "Disallow UTF-8 local part",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_utf8_local_part": false
+      }
+    ],
+    "valid": [
+      "user@example.com",
+      "user.name@example.com"
+    ],
+    "invalid": [
+      "\u00fcser@example.com",
+      "\u7528\u6237@example.com"
+    ],
+    "rationale": "Tests validation of emails with non-ASCII characters in the local part when `allow_utf8_local_part` is false.",
+    "obligations": [],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "Require TLD",
+    "validator": "isEmail",
+    "args": [
+      {
+        "require_tld": true
+      }
+    ],
+    "valid": [
+      "user@example.com",
+      "user@sub.example.com"
+    ],
+    "invalid": [
+      "user@example",
+      "user@localhost"
+    ],
+    "rationale": "Tests validation of emails requiring a top-level domain (`require_tld` is true).",
+    "obligations": [],
+    "generated_id": "GENERATED-6"
+  },
+  {
+    "title": "Blacklist specific characters",
+    "validator": "isEmail",
+    "args": [
+      {
+        "blacklisted_chars": "!#$%"
+      }
+    ],
+    "valid": [
+      "user@example.com",
+      "user.name@example.com"
+    ],
+    "invalid": [
+      "user!name@example.com",
+      "user#name@example.com",
+      "user%name@example.com"
+    ],
+    "rationale": "Tests validation of emails with blacklisted characters in the local part.",
+    "obligations": [],
+    "generated_id": "GENERATED-7"
+  },
+  {
+    "title": "Host blacklist",
+    "validator": "isEmail",
+    "args": [
+      {
+        "host_blacklist": [
+          "example.com",
+          "blacklisted.com"
+        ]
+      }
+    ],
+    "valid": [
+      "user@allowed.com",
+      "user@safe.com"
+    ],
+    "invalid": [
+      "user@example.com",
+      "user@blacklisted.com"
+    ],
+    "rationale": "Tests validation of emails with domains in the host blacklist.",
+    "obligations": [],
+    "generated_id": "GENERATED-8"
+  }
+]

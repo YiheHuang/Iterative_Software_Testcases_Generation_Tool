@@ -1,0 +1,1425 @@
+{
+  "results": [
+    {
+      "title": "Basic Input Validation",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "require_tld": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "title": "Basic Input Validation",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "require_tld": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "123",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "title": "Trailing Dot Handling",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_trailing_dot": true,
+          "require_tld": true,
+          "allow_underscores": false,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "example.com.",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-2"
+      ]
+    },
+    {
+      "title": "Trailing Dot Handling",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_trailing_dot": true,
+          "require_tld": true,
+          "allow_underscores": false,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "example.com.",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": false,
+      "obligations": [
+        "OB-2"
+      ]
+    },
+    {
+      "title": "Wildcard Handling",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_wildcard": true,
+          "require_tld": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_numeric_tld": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "*.example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "title": "Wildcard Handling",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_wildcard": true,
+          "require_tld": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_numeric_tld": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "*.example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": false,
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "title": "TLD Requirement",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "require_tld": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "title": "TLD Requirement",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "require_tld": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "example",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "title": "Numeric TLD Handling",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_numeric_tld": true,
+          "require_tld": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "example.123",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "title": "Numeric TLD Handling",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_numeric_tld": true,
+          "require_tld": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "example.123",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": false,
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "title": "Space in TLD",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "require_tld": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "title": "Space in TLD",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "require_tld": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "example.c om",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "title": "Max Length Enforcement",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "ignore_max_length": false,
+          "require_tld": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false
+        }
+      ],
+      "input_value": "a.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "title": "Max Length Enforcement",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "ignore_max_length": false,
+          "require_tld": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false
+        }
+      ],
+      "input_value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "title": "Invalid Characters in Parts",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "require_tld": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "title": "Invalid Characters in Parts",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "require_tld": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "exa$mple.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "title": "Full-Width Characters",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "require_tld": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "title": "Full-Width Characters",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "require_tld": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "ｅｘａｍｐｌｅ.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "title": "Hyphen Placement",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "require_tld": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "title": "Hyphen Placement",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "require_tld": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "-example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "title": "Underscore Handling",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_underscores": true,
+          "require_tld": true,
+          "allow_trailing_dot": false,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "example_com",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": false,
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "title": "Underscore Handling",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_underscores": true,
+          "require_tld": true,
+          "allow_trailing_dot": false,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "example_com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "title": "Require TLD Disabled",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "require_tld": false,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "example",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-12"
+      ]
+    },
+    {
+      "title": "Spaces in TLD",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "require_tld": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "example.c om",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-13"
+      ]
+    },
+    {
+      "title": "Numeric TLD Rejection",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_numeric_tld": false,
+          "require_tld": true,
+          "allow_underscores": false,
+          "allow_trailing_dot": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "example.123",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-14"
+      ]
+    },
+    {
+      "title": "Underscore Rejection",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_underscores": false,
+          "require_tld": true,
+          "allow_trailing_dot": false,
+          "allow_numeric_tld": false,
+          "allow_wildcard": false,
+          "ignore_max_length": false
+        }
+      ],
+      "input_value": "example_com",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": [
+        "OB-15"
+      ]
+    }
+  ],
+  "summary": {
+    "total_cases": 26,
+    "correct_cases": 22,
+    "incorrect_cases": 4,
+    "exact_match_rate": 0.8461538461538461,
+    "by_expected_kind": {
+      "return": 26,
+      "throw": 0
+    }
+  },
+  "details": {
+    "passed_results": [
+      {
+        "title": "Basic Input Validation",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "require_tld": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-1"
+        ]
+      },
+      {
+        "title": "Basic Input Validation",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "require_tld": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "123",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-1"
+        ]
+      },
+      {
+        "title": "Trailing Dot Handling",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "allow_trailing_dot": true,
+            "require_tld": true,
+            "allow_underscores": false,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "example.com.",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-2"
+        ]
+      },
+      {
+        "title": "Wildcard Handling",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "allow_wildcard": true,
+            "require_tld": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_numeric_tld": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "*.example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-3"
+        ]
+      },
+      {
+        "title": "TLD Requirement",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "require_tld": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-4"
+        ]
+      },
+      {
+        "title": "TLD Requirement",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "require_tld": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "example",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-4"
+        ]
+      },
+      {
+        "title": "Numeric TLD Handling",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "allow_numeric_tld": true,
+            "require_tld": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "example.123",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-5"
+        ]
+      },
+      {
+        "title": "Space in TLD",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "require_tld": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-6"
+        ]
+      },
+      {
+        "title": "Space in TLD",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "require_tld": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "example.c om",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-6"
+        ]
+      },
+      {
+        "title": "Max Length Enforcement",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "ignore_max_length": false,
+            "require_tld": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false
+          }
+        ],
+        "input_value": "a.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-7"
+        ]
+      },
+      {
+        "title": "Max Length Enforcement",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "ignore_max_length": false,
+            "require_tld": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false
+          }
+        ],
+        "input_value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-7"
+        ]
+      },
+      {
+        "title": "Invalid Characters in Parts",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "require_tld": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-8"
+        ]
+      },
+      {
+        "title": "Invalid Characters in Parts",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "require_tld": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "exa$mple.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-8"
+        ]
+      },
+      {
+        "title": "Full-Width Characters",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "require_tld": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-9"
+        ]
+      },
+      {
+        "title": "Full-Width Characters",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "require_tld": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "ｅｘａｍｐｌｅ.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-9"
+        ]
+      },
+      {
+        "title": "Hyphen Placement",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "require_tld": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "example.com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-10"
+        ]
+      },
+      {
+        "title": "Hyphen Placement",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "require_tld": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "-example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-10"
+        ]
+      },
+      {
+        "title": "Underscore Handling",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "allow_underscores": true,
+            "require_tld": true,
+            "allow_trailing_dot": false,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "example_com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-11"
+        ]
+      },
+      {
+        "title": "Require TLD Disabled",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "require_tld": false,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "example",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-12"
+        ]
+      },
+      {
+        "title": "Spaces in TLD",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "require_tld": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "example.c om",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-13"
+        ]
+      },
+      {
+        "title": "Numeric TLD Rejection",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "allow_numeric_tld": false,
+            "require_tld": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "example.123",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-14"
+        ]
+      },
+      {
+        "title": "Underscore Rejection",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "allow_underscores": false,
+            "require_tld": true,
+            "allow_trailing_dot": false,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "example_com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": [
+          "OB-15"
+        ]
+      }
+    ],
+    "failed_results": [
+      {
+        "title": "Trailing Dot Handling",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "allow_trailing_dot": true,
+            "require_tld": true,
+            "allow_underscores": false,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "example.com.",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": [
+          "OB-2"
+        ]
+      },
+      {
+        "title": "Wildcard Handling",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "allow_wildcard": true,
+            "require_tld": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_numeric_tld": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "*.example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": [
+          "OB-3"
+        ]
+      },
+      {
+        "title": "Numeric TLD Handling",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "allow_numeric_tld": true,
+            "require_tld": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "example.123",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": [
+          "OB-5"
+        ]
+      },
+      {
+        "title": "Underscore Handling",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "allow_underscores": true,
+            "require_tld": true,
+            "allow_trailing_dot": false,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "example_com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": [
+          "OB-11"
+        ]
+      }
+    ],
+    "by_title": {
+      "Basic Input Validation": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      },
+      "Trailing Dot Handling": {
+        "total": 2,
+        "passed": 1,
+        "failed": 1
+      },
+      "Wildcard Handling": {
+        "total": 2,
+        "passed": 1,
+        "failed": 1
+      },
+      "TLD Requirement": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      },
+      "Numeric TLD Handling": {
+        "total": 2,
+        "passed": 1,
+        "failed": 1
+      },
+      "Space in TLD": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      },
+      "Max Length Enforcement": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      },
+      "Invalid Characters in Parts": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      },
+      "Full-Width Characters": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      },
+      "Hyphen Placement": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      },
+      "Underscore Handling": {
+        "total": 2,
+        "passed": 1,
+        "failed": 1
+      },
+      "Require TLD Disabled": {
+        "total": 1,
+        "passed": 1,
+        "failed": 0
+      },
+      "Spaces in TLD": {
+        "total": 1,
+        "passed": 1,
+        "failed": 0
+      },
+      "Numeric TLD Rejection": {
+        "total": 1,
+        "passed": 1,
+        "failed": 0
+      },
+      "Underscore Rejection": {
+        "total": 1,
+        "passed": 1,
+        "failed": 0
+      }
+    },
+    "by_obligation": {
+      "OB-1": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      },
+      "OB-2": {
+        "total": 2,
+        "passed": 1,
+        "failed": 1
+      },
+      "OB-3": {
+        "total": 2,
+        "passed": 1,
+        "failed": 1
+      },
+      "OB-4": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      },
+      "OB-5": {
+        "total": 2,
+        "passed": 1,
+        "failed": 1
+      },
+      "OB-6": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      },
+      "OB-7": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      },
+      "OB-8": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      },
+      "OB-9": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      },
+      "OB-10": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      },
+      "OB-11": {
+        "total": 2,
+        "passed": 1,
+        "failed": 1
+      },
+      "OB-12": {
+        "total": 1,
+        "passed": 1,
+        "failed": 0
+      },
+      "OB-13": {
+        "total": 1,
+        "passed": 1,
+        "failed": 0
+      },
+      "OB-14": {
+        "total": 1,
+        "passed": 1,
+        "failed": 0
+      },
+      "OB-15": {
+        "total": 1,
+        "passed": 1,
+        "failed": 0
+      }
+    },
+    "coverage_summary_path": null,
+    "coverage_total": null,
+    "coverage_files": {}
+  }
+}

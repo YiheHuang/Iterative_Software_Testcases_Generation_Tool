@@ -1,0 +1,89 @@
+{
+  "obligations": [
+    {
+      "id": "OB-8",
+      "kind": "whitebox",
+      "rule": "Cover the false branch of the condition `options.require_tld` at line 30.",
+      "why": "This branch is currently uncovered and ensures the validator behaves correctly when `require_tld` is false.",
+      "minimal_valid": "example",
+      "minimal_invalid": null
+    },
+    {
+      "id": "OB-9",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of the condition `/\\s/.test(tld)` at line 41.",
+      "why": "This branch is currently uncovered and ensures the validator rejects TLDs containing spaces.",
+      "minimal_valid": null,
+      "minimal_invalid": "example. com"
+    },
+    {
+      "id": "OB-10",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of the condition `!options.allow_numeric_tld && /^\\d+$/.test(tld)` at line 47.",
+      "why": "This branch is currently uncovered and ensures the validator rejects numeric TLDs when `allow_numeric_tld` is false.",
+      "minimal_valid": null,
+      "minimal_invalid": "example.123"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Validation with require_tld disabled",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "require_tld": false
+        }
+      ],
+      "valid": [
+        "example",
+        "subdomain"
+      ],
+      "invalid": [
+        "example..com",
+        "-example",
+        "example-.com"
+      ],
+      "rationale": "Tests the behavior when `require_tld` is disabled, covering the false branch of the condition `options.require_tld`.",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "title": "Validation with TLD containing spaces",
+      "validator": "isFQDN",
+      "args": [
+        {}
+      ],
+      "valid": [],
+      "invalid": [
+        "example. com",
+        "example. co m"
+      ],
+      "rationale": "Tests rejection of TLDs containing spaces, covering the true branch of the condition `/\\s/.test(tld)`.",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "title": "Validation with numeric TLDs disallowed",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_numeric_tld": false
+        }
+      ],
+      "valid": [
+        "example.com",
+        "sub.domain.org"
+      ],
+      "invalid": [
+        "example.123",
+        "subdomain.456"
+      ],
+      "rationale": "Tests rejection of numeric TLDs when `allow_numeric_tld` is false, covering the true branch of the condition `!options.allow_numeric_tld && /^\\d+$/.test(tld)`.",
+      "obligations": [
+        "OB-10"
+      ]
+    }
+  ]
+}

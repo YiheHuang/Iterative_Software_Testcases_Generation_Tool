@@ -1,0 +1,325 @@
+[
+  {
+    "title": "Allow Underscores",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_underscores": true,
+        "protocols": [
+          "http",
+          "https",
+          "ftp"
+        ],
+        "require_tld": true,
+        "require_protocol": false,
+        "require_host": true,
+        "require_port": false,
+        "require_valid_protocol": true,
+        "allow_trailing_dot": false,
+        "allow_protocol_relative_urls": false,
+        "allow_fragments": true,
+        "allow_query_components": true,
+        "validate_length": true,
+        "max_allowed_length": 2084,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "http://example_domain.com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-5"
+    ]
+  },
+  {
+    "title": "Allow Trailing Dot",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_trailing_dot": true,
+        "protocols": [
+          "http",
+          "https",
+          "ftp"
+        ],
+        "require_tld": true,
+        "require_protocol": false,
+        "require_host": true,
+        "require_port": false,
+        "require_valid_protocol": true,
+        "allow_underscores": false,
+        "allow_protocol_relative_urls": false,
+        "allow_fragments": true,
+        "allow_query_components": true,
+        "validate_length": true,
+        "max_allowed_length": 2084,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "http://example.com.",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-6"
+    ]
+  },
+  {
+    "title": "Allow Protocol Relative URLs",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_protocol_relative_urls": true,
+        "protocols": [
+          "http",
+          "https",
+          "ftp"
+        ],
+        "require_tld": true,
+        "require_protocol": false,
+        "require_host": true,
+        "require_port": false,
+        "require_valid_protocol": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_fragments": true,
+        "allow_query_components": true,
+        "validate_length": true,
+        "max_allowed_length": 2084,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "//example.com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-7"
+    ]
+  },
+  {
+    "title": "Validate Length",
+    "validator": "isURL",
+    "args": [
+      {
+        "validate_length": false,
+        "protocols": [
+          "http",
+          "https",
+          "ftp"
+        ],
+        "require_tld": true,
+        "require_protocol": false,
+        "require_host": true,
+        "require_port": false,
+        "require_valid_protocol": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_protocol_relative_urls": false,
+        "allow_fragments": true,
+        "allow_query_components": true,
+        "max_allowed_length": 2084,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "http://example.com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-11"
+    ]
+  },
+  {
+    "title": "Empty URL with Require Host Disabled",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_host": false
+      }
+    ],
+    "input_value": "",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-202"
+    ]
+  },
+  {
+    "title": "Empty URL with Require Host Disabled",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_host": false,
+        "protocols": [
+          "http",
+          "https",
+          "ftp"
+        ],
+        "require_tld": true,
+        "require_protocol": false,
+        "require_port": false,
+        "require_valid_protocol": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_protocol_relative_urls": false,
+        "allow_fragments": true,
+        "allow_query_components": true,
+        "validate_length": true,
+        "max_allowed_length": 2084,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "http://example.com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-202"
+    ]
+  },
+  {
+    "title": "Empty URL with Require Host Disabled",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_host": false
+      }
+    ],
+    "input_value": "",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-204"
+    ]
+  },
+  {
+    "title": "Empty URL with Require Host Disabled",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_host": false,
+        "protocols": [
+          "http",
+          "https",
+          "ftp"
+        ],
+        "require_tld": true,
+        "require_protocol": false,
+        "require_port": false,
+        "require_valid_protocol": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_protocol_relative_urls": false,
+        "allow_fragments": true,
+        "allow_query_components": true,
+        "validate_length": true,
+        "max_allowed_length": 2084,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "http://example.com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-204"
+    ]
+  },
+  {
+    "title": "Empty URL with Require Host Disabled",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_host": false
+      }
+    ],
+    "input_value": "",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-301"
+    ]
+  },
+  {
+    "title": "Empty URL with Require Host Disabled",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_host": false,
+        "protocols": [
+          "http",
+          "https",
+          "ftp"
+        ],
+        "require_tld": true,
+        "require_protocol": false,
+        "require_port": false,
+        "require_valid_protocol": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_protocol_relative_urls": false,
+        "allow_fragments": true,
+        "allow_query_components": true,
+        "validate_length": true,
+        "max_allowed_length": 2084,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "http://example.com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-301"
+    ]
+  }
+]

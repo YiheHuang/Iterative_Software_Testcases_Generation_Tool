@@ -1,0 +1,154 @@
+{
+  "mode": "blackbox",
+  "approach": "naive",
+  "obligations": [],
+  "test_groups": [
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "$10.00",
+        "$1,000.00",
+        "$0.99",
+        "10.00",
+        "0.99",
+        "$0",
+        "$1,000",
+        "1000.00"
+      ],
+      "invalid": [
+        "10",
+        "$10.000",
+        "$10.0",
+        "$10,00",
+        "$10.00.00",
+        "10.00$",
+        "$-10.00",
+        "$ (10.00)",
+        "abc",
+        "",
+        "10.00$"
+      ],
+      "title": "Default options: Basic valid and invalid currency strings",
+      "rationale": "Covers basic valid and invalid cases with default options, including proper formatting with symbol, decimal, and thousands separator.",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_symbol": true
+        }
+      ],
+      "valid": [
+        "$10.00",
+        "$1,000.00",
+        "$0.99"
+      ],
+      "invalid": [
+        "10.00",
+        "1,000.00",
+        "0.99"
+      ],
+      "title": "Option: require_symbol = true",
+      "rationale": "Ensures that the currency symbol is required when `require_symbol` is true.",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_negatives": false
+        }
+      ],
+      "valid": [
+        "$10.00",
+        "$1,000.00",
+        "$0.99"
+      ],
+      "invalid": [
+        "$-10.00",
+        "-10.00",
+        "$ (10.00)"
+      ],
+      "title": "Option: allow_negatives = false",
+      "rationale": "Ensures that negative values are not allowed when `allow_negatives` is false.",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "parens_for_negatives": true
+        }
+      ],
+      "valid": [
+        "$(10.00)",
+        "$10.00",
+        "10.00"
+      ],
+      "invalid": [
+        "$-10.00",
+        "-10.00",
+        "$ (10.00)"
+      ],
+      "title": "Option: parens_for_negatives = true",
+      "rationale": "Allows parentheses for negative values when `parens_for_negatives` is true.",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_decimal": true
+        }
+      ],
+      "valid": [
+        "$10.00",
+        "10.00",
+        "$0.99"
+      ],
+      "invalid": [
+        "$10",
+        "10",
+        "$1,000",
+        "1000"
+      ],
+      "title": "Option: require_decimal = true",
+      "rationale": "Ensures that a decimal is required when `require_decimal` is true.",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "digits_after_decimal": [
+            1,
+            2
+          ]
+        }
+      ],
+      "valid": [
+        "$10.0",
+        "$10.00",
+        "10.0",
+        "10.00"
+      ],
+      "invalid": [
+        "$10",
+        "$10.000",
+        "10.000",
+        "10"
+      ],
+      "title": "Option: digits_after_decimal = [1, 2]",
+      "rationale": "Ensures that only 1 or 2 digits are allowed after the decimal point.",
+      "obligations": []
+    }
+  ],
+  "metadata": {
+    "requirement_source": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\README.md",
+    "generation_style": "single_pass_with_repair"
+  }
+}

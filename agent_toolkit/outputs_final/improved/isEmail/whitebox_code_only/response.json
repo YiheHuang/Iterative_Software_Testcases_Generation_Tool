@@ -1,0 +1,223 @@
+{
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "whitebox",
+      "rule": "Validate display name when `allow_display_name` or `require_display_name` is true.",
+      "why": "The code explicitly checks for display name validity when these options are enabled.",
+      "minimal_valid": "\"John Doe <john.doe@example.com>\"",
+      "minimal_invalid": "\"Invalid<>Name <john.doe@example.com>\""
+    },
+    {
+      "id": "OB-2",
+      "kind": "whitebox",
+      "rule": "Reject emails exceeding the default maximum length unless `ignore_max_length` is true.",
+      "why": "The code enforces a maximum email length of 254 characters unless overridden.",
+      "minimal_valid": "\"a@b.com\"",
+      "minimal_invalid": "\"a\" + \"a\".repeat(253) + \"@b.com\""
+    },
+    {
+      "id": "OB-3",
+      "kind": "whitebox",
+      "rule": "Reject emails with domains in the `host_blacklist`.",
+      "why": "The code explicitly checks if the domain is blacklisted using `checkHost`.",
+      "minimal_valid": "\"user@allowed.com\"",
+      "minimal_invalid": "\"user@blacklisted.com\""
+    },
+    {
+      "id": "OB-4",
+      "kind": "whitebox",
+      "rule": "Reject emails not in the `host_whitelist` when it is non-empty.",
+      "why": "The code explicitly checks if the domain is whitelisted using `checkHost`.",
+      "minimal_valid": "\"user@whitelisted.com\"",
+      "minimal_invalid": "\"user@notwhitelisted.com\""
+    },
+    {
+      "id": "OB-5",
+      "kind": "whitebox",
+      "rule": "Validate Gmail-specific rules when `domain_specific_validation` is true and the domain is Gmail.",
+      "why": "The code applies Gmail-specific username length and character rules.",
+      "minimal_valid": "\"validuser@gmail.com\"",
+      "minimal_invalid": "\"invalid..user@gmail.com\""
+    },
+    {
+      "id": "OB-6",
+      "kind": "whitebox",
+      "rule": "Reject emails with invalid FQDNs unless `allow_ip_domain` is true and the domain is a valid IP.",
+      "why": "The code validates the domain as an FQDN or IP based on these options.",
+      "minimal_valid": "\"user@valid-domain.com\"",
+      "minimal_invalid": "\"user@invalid_domain\""
+    },
+    {
+      "id": "OB-7",
+      "kind": "whitebox",
+      "rule": "Reject emails with blacklisted characters in the local part.",
+      "why": "The code explicitly checks for blacklisted characters in the local part.",
+      "minimal_valid": "\"user@domain.com\"",
+      "minimal_invalid": "\"us#er@domain.com\""
+    },
+    {
+      "id": "OB-8",
+      "kind": "whitebox",
+      "rule": "Validate quoted local parts based on `allow_utf8_local_part`.",
+      "why": "The code applies different regex patterns for quoted local parts depending on this option.",
+      "minimal_valid": "\"\\\"quoted\\\"@domain.com\"",
+      "minimal_invalid": "\"\\\"invalid\\\"@domain.com\""
+    },
+    {
+      "id": "OB-9",
+      "kind": "whitebox",
+      "rule": "Validate unquoted local parts based on `allow_utf8_local_part`.",
+      "why": "The code applies different regex patterns for unquoted local parts depending on this option.",
+      "minimal_valid": "\"user@domain.com\"",
+      "minimal_invalid": "\"usér@domain.com\""
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Display name validation",
+      "validator": "isEmail",
+      "args": [
+        { "allow_display_name": true }
+      ],
+      "valid": [
+        "John Doe <john.doe@example.com>",
+        "\"John Doe\" <john.doe@example.com>"
+      ],
+      "invalid": [
+        "Invalid<>Name <john.doe@example.com>",
+        "John Doe john.doe@example.com"
+      ],
+      "rationale": "Covers cases where display name is allowed or required.",
+      "obligations": ["OB-1"]
+    },
+    {
+      "title": "Maximum length validation",
+      "validator": "isEmail",
+      "args": [
+        { "ignore_max_length": false }
+      ],
+      "valid": [
+        "a@b.com",
+        "a" 	],
+      "invalid": [
+        "a" 	]
+      ,
+      "rationale": "Ensures emails exceeding the maximum length are rejected unless `ignore_max_length` is true.",
+      "obligations": ["OB-2"]
+    },
+    {
+      "title": "Host blacklist validation",
+      "validator": "isEmail",
+      "args": [
+        { "host_blacklist": ["blacklisted.com"] }
+      ],
+      "valid": [
+        "user@allowed.com"
+      ],
+      "invalid": [
+        "user@blacklisted.com"
+      ],
+      "rationale": "Ensures emails with blacklisted domains are rejected.",
+      "obligations": ["OB-3"]
+    },
+    {
+      "title": "Host whitelist validation",
+      "validator": "isEmail",
+      "args": [
+        { "host_whitelist": ["whitelisted.com"] }
+      ],
+      "valid": [
+        "user@whitelisted.com"
+      ],
+      "invalid": [
+        "user@notwhitelisted.com"
+      ],
+      "rationale": "Ensures emails not in the whitelist are rejected when a whitelist is provided.",
+      "obligations": ["OB-4"]
+    },
+    {
+      "title": "Gmail-specific validation",
+      "validator": "isEmail",
+      "args": [
+        { "domain_specific_validation": true }
+      ],
+      "valid": [
+        "validuser@gmail.com",
+        "validuser@googlemail.com"
+      ],
+      "invalid": [
+        "invalid..user@gmail.com",
+        "toolongusername@gmail.com"
+      ],
+      "rationale": "Covers Gmail-specific username rules when `domain_specific_validation` is enabled.",
+      "obligations": ["OB-5"]
+    },
+    {
+      "title": "FQDN and IP domain validation",
+      "validator": "isEmail",
+      "args": [
+        { "allow_ip_domain": true }
+      ],
+      "valid": [
+        "user@valid-domain.com",
+        "user@[127.0.0.1]"
+      ],
+      "invalid": [
+        "user@invalid_domain",
+        "user@[999.999.999.999]"
+      ],
+      "rationale": "Ensures domains are valid FQDNs or IPs based on options.",
+      "obligations": ["OB-6"]
+    },
+    {
+      "title": "Blacklisted character validation",
+      "validator": "isEmail",
+      "args": [
+        { "blacklisted_chars": "#" }
+      ],
+      "valid": [
+        "user@domain.com"
+      ],
+      "invalid": [
+        "us#er@domain.com"
+      ],
+      "rationale": "Ensures emails with blacklisted characters in the local part are rejected.",
+      "obligations": ["OB-7"]
+    },
+    {
+      "title": "Quoted local part validation",
+      "validator": "isEmail",
+      "args": [
+        { "allow_utf8_local_part": true }
+      ],
+      "valid": [
+        "\"quoted\"@domain.com",
+        "\"utf8ñ\"@domain.com"
+      ],
+      "invalid": [
+        "\"invalid\"@domain.com",
+        "\"utf8ñ\"@domain.com"
+      ],
+      "rationale": "Covers quoted local part validation with and without UTF-8 support.",
+      "obligations": ["OB-8"]
+    },
+    {
+      "title": "Unquoted local part validation",
+      "validator": "isEmail",
+      "args": [
+        { "allow_utf8_local_part": true }
+      ],
+      "valid": [
+        "user@domain.com",
+        "usér@domain.com"
+      ],
+      "invalid": [
+        "user@domain.com",
+        "usér@domain.com"
+      ],
+      "rationale": "Covers unquoted local part validation with and without UTF-8 support.",
+      "obligations": ["OB-9"]
+    }
+  ]
+}

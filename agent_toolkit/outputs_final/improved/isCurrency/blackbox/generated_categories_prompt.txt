@@ -1,0 +1,320 @@
+Group generated tests into generated categories for validator isCurrency.
+
+Generated groups:
+[
+  {
+    "title": "Default behavior tests",
+    "validator": "isCurrency",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "$1,234.56",
+      "$0.99",
+      "$1234",
+      "$1.23",
+      "1234.56"
+    ],
+    "invalid": [
+      "1234.567",
+      "$1234.567",
+      "1,234.567",
+      "1234,56",
+      "12.34.56"
+    ],
+    "rationale": "Validate the default behavior of the function with standard currency formats.",
+    "obligations": [
+      "OB-1"
+    ],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "Require symbol tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "require_symbol": true
+      }
+    ],
+    "valid": [
+      "$123.45",
+      "$1,234.56"
+    ],
+    "invalid": [
+      "123.45",
+      "1,234.56"
+    ],
+    "rationale": "Ensure the function enforces the presence of a currency symbol when `require_symbol` is true.",
+    "obligations": [
+      "OB-2"
+    ],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "Allow space after symbol tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_space_after_symbol": true
+      }
+    ],
+    "valid": [
+      "$ 123.45",
+      "$ 1,234.56"
+    ],
+    "invalid": [
+      "$123.45",
+      "$1,234.56"
+    ],
+    "rationale": "Validate the function allows spaces after the currency symbol when `allow_space_after_symbol` is true.",
+    "obligations": [
+      "OB-3"
+    ],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "Symbol after digits tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "symbol_after_digits": true
+      }
+    ],
+    "valid": [
+      "123.45$",
+      "1,234.56$"
+    ],
+    "invalid": [
+      "$123.45",
+      "$1,234.56"
+    ],
+    "rationale": "Ensure the function validates currency strings with the symbol after digits when `symbol_after_digits` is true.",
+    "obligations": [
+      "OB-4"
+    ],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "Disallow negatives tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_negatives": false
+      }
+    ],
+    "valid": [
+      "123.45",
+      "1,234.56"
+    ],
+    "invalid": [
+      "-123.45",
+      "-1,234.56"
+    ],
+    "rationale": "Validate the function rejects negative values when `allow_negatives` is false.",
+    "obligations": [
+      "OB-5"
+    ],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "Parens for negatives tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "parens_for_negatives": true
+      }
+    ],
+    "valid": [
+      "(123.45)",
+      "(1,234.56)"
+    ],
+    "invalid": [
+      "-123.45",
+      "-1,234.56"
+    ],
+    "rationale": "Ensure the function enforces parentheses for negative values when `parens_for_negatives` is true.",
+    "obligations": [
+      "OB-6"
+    ],
+    "generated_id": "GENERATED-6"
+  },
+  {
+    "title": "Negative sign before digits tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "negative_sign_before_digits": true
+      }
+    ],
+    "valid": [
+      "-123.45",
+      "-1,234.56"
+    ],
+    "invalid": [
+      "123.45-",
+      "1,234.56-"
+    ],
+    "rationale": "Validate the function enforces the placement of the negative sign before digits when `negative_sign_before_digits` is true.",
+    "obligations": [
+      "OB-7"
+    ],
+    "generated_id": "GENERATED-7"
+  },
+  {
+    "title": "Negative sign after digits tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "negative_sign_after_digits": true
+      }
+    ],
+    "valid": [
+      "123.45-",
+      "1,234.56-"
+    ],
+    "invalid": [
+      "-123.45",
+      "-1,234.56"
+    ],
+    "rationale": "Ensure the function enforces the placement of the negative sign after digits when `negative_sign_after_digits` is true.",
+    "obligations": [
+      "OB-8"
+    ],
+    "generated_id": "GENERATED-8"
+  },
+  {
+    "title": "Custom thousands separator tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "thousands_separator": "."
+      }
+    ],
+    "valid": [
+      "1.234,56",
+      "123.456,78"
+    ],
+    "invalid": [
+      "1,234.56",
+      "1234.56"
+    ],
+    "rationale": "Validate the function respects custom thousands separators.",
+    "obligations": [
+      "OB-10"
+    ],
+    "generated_id": "GENERATED-9"
+  },
+  {
+    "title": "Custom decimal separator tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "decimal_separator": ","
+      }
+    ],
+    "valid": [
+      "123,45",
+      "1.234,56"
+    ],
+    "invalid": [
+      "123.45",
+      "1,234.56"
+    ],
+    "rationale": "Ensure the function respects custom decimal separators.",
+    "obligations": [
+      "OB-11"
+    ],
+    "generated_id": "GENERATED-10"
+  },
+  {
+    "title": "Disallow decimal tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_decimal": false
+      }
+    ],
+    "valid": [
+      "1234",
+      "1,234"
+    ],
+    "invalid": [
+      "1234.56",
+      "1,234.56"
+    ],
+    "rationale": "Validate the function rejects decimal values when `allow_decimal` is false.",
+    "obligations": [
+      "OB-12"
+    ],
+    "generated_id": "GENERATED-11"
+  },
+  {
+    "title": "Require decimal tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "require_decimal": true
+      }
+    ],
+    "valid": [
+      "1234.56",
+      "1,234.56"
+    ],
+    "invalid": [
+      "1234",
+      "1,234"
+    ],
+    "rationale": "Ensure the function enforces the presence of decimal values when `require_decimal` is true.",
+    "obligations": [
+      "OB-13"
+    ],
+    "generated_id": "GENERATED-12"
+  },
+  {
+    "title": "Digits after decimal tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "digits_after_decimal": [
+          1,
+          2
+        ]
+      }
+    ],
+    "valid": [
+      "1234.5",
+      "1234.56"
+    ],
+    "invalid": [
+      "1234.567",
+      "1234."
+    ],
+    "rationale": "Validate the function enforces the exact number of digits after the decimal.",
+    "obligations": [
+      "OB-14"
+    ],
+    "generated_id": "GENERATED-13"
+  },
+  {
+    "title": "Allow space after digits tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_space_after_digits": true
+      }
+    ],
+    "valid": [
+      "123.45 ",
+      "1,234.56 "
+    ],
+    "invalid": [
+      "123.45",
+      "1,234.56"
+    ],
+    "rationale": "Ensure the function handles spaces after digits correctly when `allow_space_after_digits` is true.",
+    "obligations": [
+      "OB-15"
+    ],
+    "generated_id": "GENERATED-14"
+  }
+]

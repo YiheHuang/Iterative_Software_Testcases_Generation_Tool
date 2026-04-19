@@ -1,0 +1,39 @@
+{
+  "generated_categories": [
+    {
+      "name": "Basic Email Validation",
+      "description": "Covers standard email validation with default options, ensuring compliance with common formats and rejection of invalid cases.",
+      "generated_group_ids": ["GENERATED-1"]
+    },
+    {
+      "name": "Display Name Handling",
+      "description": "Tests email validation behavior when display names are allowed or required, ensuring proper parsing and rejection of invalid formats.",
+      "generated_group_ids": ["GENERATED-2", "GENERATED-3"]
+    },
+    {
+      "name": "UTF-8 Local Part Handling",
+      "description": "Validates behavior when UTF-8 characters are disallowed in the local part of the email address.",
+      "generated_group_ids": ["GENERATED-4"]
+    },
+    {
+      "name": "TLD Requirement Handling",
+      "description": "Tests email validation when top-level domains (TLDs) are not required, allowing domains like 'localhost' or 'example'.",
+      "generated_group_ids": ["GENERATED-5"]
+    },
+    {
+      "name": "IP Address Domains",
+      "description": "Covers validation when IP addresses are allowed in the domain part of the email.",
+      "generated_group_ids": ["GENERATED-6"]
+    },
+    {
+      "name": "Blacklisted Characters in Local Part",
+      "description": "Tests validation when specific characters are blacklisted in the local part of the email address.",
+      "generated_group_ids": ["GENERATED-7"]
+    },
+    {
+      "name": "Blacklisted Domains",
+      "description": "Validates behavior when specific domains are blacklisted, ensuring emails from these domains are rejected.",
+      "generated_group_ids": ["GENERATED-8"]
+    }
+  ]
+}

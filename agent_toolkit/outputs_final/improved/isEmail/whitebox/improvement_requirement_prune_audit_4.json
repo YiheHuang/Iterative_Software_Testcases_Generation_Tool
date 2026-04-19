@@ -1,0 +1,137 @@
+{
+  "audit": [
+    {
+      "group_title": "Basic email structure validation",
+      "decision": "keep",
+      "reason": "All cases are clearly supported by the requirement.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Display name validation",
+      "decision": "trim",
+      "reason": "Invalid case 'John Doe <john.doe@example.com' is not requirement-supported due to missing closing angle bracket.",
+      "removed_valid": [],
+      "removed_invalid": [
+        "John Doe <john.doe@example.com"
+      ]
+    },
+    {
+      "group_title": "Require display name",
+      "decision": "keep",
+      "reason": "All cases are clearly supported by the requirement.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Max length validation",
+      "decision": "drop",
+      "reason": "The requirement does not specify behavior for maximum length validation without specific option-sensitive context.",
+      "removed_valid": [
+        "a@b.co"
+      ],
+      "removed_invalid": [
+        "a@b."
+      ]
+    },
+    {
+      "group_title": "Blacklisted characters",
+      "decision": "keep",
+      "reason": "All cases are clearly supported by the requirement.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Host blacklist",
+      "decision": "keep",
+      "reason": "All cases are clearly supported by the requirement.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Host whitelist",
+      "decision": "keep",
+      "reason": "All cases are clearly supported by the requirement.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Gmail-specific validation",
+      "decision": "keep",
+      "reason": "All cases are clearly supported by the requirement.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Invalid display name with only spaces",
+      "decision": "drop",
+      "reason": "The requirement does not explicitly support rejecting display names with only spaces.",
+      "removed_valid": [],
+      "removed_invalid": [
+        "   <email@example.com>"
+      ]
+    },
+    {
+      "group_title": "Empty or invalid IP domain inside brackets",
+      "decision": "keep",
+      "reason": "All cases are clearly supported by the requirement.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Improperly escaped quotes in display name",
+      "decision": "drop",
+      "reason": "The requirement does not explicitly support validation of improperly escaped quotes in display names.",
+      "removed_valid": [
+        "\"John \\\"Doe\\\"\" <email@example.com>"
+      ],
+      "removed_invalid": [
+        "\"John \"Doe\"\" <email@example.com>"
+      ]
+    },
+    {
+      "group_title": "Quoted local part validation",
+      "decision": "drop",
+      "reason": "The requirement does not explicitly support quoted local parts in email addresses.",
+      "removed_valid": [
+        "\"quoted.local.part\"@example.com"
+      ],
+      "removed_invalid": [
+        "\"invalid.local.part@\"example.com"
+      ]
+    },
+    {
+      "group_title": "Illegal characters in display name without quotes",
+      "decision": "drop",
+      "reason": "The requirement does not explicitly support rejecting display names with illegal characters without quotes.",
+      "removed_valid": [
+        "\"John \\\"Doe\\\"\" <email@example.com>"
+      ],
+      "removed_invalid": [
+        "John Doe <email@example.com>"
+      ]
+    },
+    {
+      "group_title": "Emails exceeding maximum length",
+      "decision": "drop",
+      "reason": "The requirement does not specify behavior for maximum length validation without specific option-sensitive context.",
+      "removed_valid": [
+        "a@b.co"
+      ],
+      "removed_invalid": [
+        "a@b."
+      ]
+    },
+    {
+      "group_title": "User or domain exceeding maximum length",
+      "decision": "drop",
+      "reason": "The requirement does not specify behavior for user or domain parts exceeding maximum length.",
+      "removed_valid": [
+        "test@example.com"
+      ],
+      "removed_invalid": [
+        "a@b.co"
+      ]
+    }
+  ]
+}

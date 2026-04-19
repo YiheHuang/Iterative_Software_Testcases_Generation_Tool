@@ -27,7 +27,6 @@ class TestGroup:
     args: list[dict[str, Any]] = field(default_factory=list)
     valid: list[str] = field(default_factory=list)
     invalid: list[str] = field(default_factory=list)
-    error: list[Any] = field(default_factory=list)
     title: str | None = None
     rationale: str | None = None
     obligations: list[str] = field(default_factory=list)

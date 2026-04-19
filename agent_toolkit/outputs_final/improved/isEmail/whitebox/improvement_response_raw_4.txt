@@ -1,0 +1,83 @@
+{
+  "obligations": [
+    {
+      "id": "OB-18",
+      "kind": "whitebox",
+      "rule": "Cover uncovered statement at line 50: return false;",
+      "why": "Tests rejection of display names identical to their unquoted version.",
+      "minimal_valid": null,
+      "minimal_invalid": "John Doe john.doe@example.com"
+    },
+    {
+      "id": "OB-19",
+      "kind": "whitebox",
+      "rule": "Cover uncovered statement at line 57: return false;",
+      "why": "Tests rejection of improperly escaped quotes in display names.",
+      "minimal_valid": null,
+      "minimal_invalid": "\"John \\\"Doe\" <john.doe@example.com>"
+    },
+    {
+      "id": "OB-20",
+      "kind": "whitebox",
+      "rule": "Cover uncovered ternary paths at lines 172-173: quotedEmailUserUtf8.test(user) and quotedEmailUser.test(user).",
+      "why": "Tests validation of quoted local parts with and without UTF-8 support.",
+      "minimal_valid": "\"quoted\"@example.com",
+      "minimal_invalid": "\"quötéd\"@example.com"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Validation for display names identical to unquoted version",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "John Doe john.doe@example.com"
+      ],
+      "rationale": "Targets uncovered statement at line 50 by testing rejection of display names identical to their unquoted version.",
+      "obligations": [
+        "OB-18"
+      ]
+    },
+    {
+      "title": "Validation for improperly escaped quotes in display names",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "\"John \\\"Doe\" <john.doe@example.com>"
+      ],
+      "rationale": "Targets uncovered statement at line 57 by testing rejection of improperly escaped quotes in display names.",
+      "obligations": [
+        "OB-19"
+      ]
+    },
+    {
+      "title": "Validation for quoted local parts with and without UTF-8 support",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_utf8_local_part": true
+        }
+      ],
+      "valid": [
+        "\"quoted\"@example.com"
+      ],
+      "invalid": [
+        "\"quötéd\"@example.com"
+      ],
+      "rationale": "Targets uncovered ternary paths at lines 172-173 by testing validation of quoted local parts with and without UTF-8 support.",
+      "obligations": [
+        "OB-20"
+      ]
+    }
+  ]
+}

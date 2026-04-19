@@ -1,0 +1,24 @@
+{
+  "generated_categories": [
+    {
+      "name": "Default and Basic Validation",
+      "description": "Covers the default behavior of the validator and basic validation rules, such as rejecting invalid FQDNs and ensuring compliance with standard domain name rules.",
+      "generated_group_ids": ["GENERATED-1", "GENERATED-8", "GENERATED-11"]
+    },
+    {
+      "name": "TLD Validation Options",
+      "description": "Focuses on tests related to TLD validation, including allowing or disallowing TLDs, numeric TLDs, and whitespace in TLDs.",
+      "generated_group_ids": ["GENERATED-2", "GENERATED-5", "GENERATED-9"]
+    },
+    {
+      "name": "Domain Part Validation Options",
+      "description": "Covers tests for domain part-specific options, such as allowing underscores, trailing dots, and wildcards, as well as rejecting overly long domain parts.",
+      "generated_group_ids": ["GENERATED-3", "GENERATED-4", "GENERATED-6", "GENERATED-10"]
+    },
+    {
+      "name": "Length Constraints",
+      "description": "Tests the behavior of the validator when max length constraints are enforced or ignored.",
+      "generated_group_ids": ["GENERATED-7"]
+    }
+  ]
+}

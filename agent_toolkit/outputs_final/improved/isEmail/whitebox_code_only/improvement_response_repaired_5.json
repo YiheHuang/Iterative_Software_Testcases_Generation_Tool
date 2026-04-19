@@ -1,0 +1,21 @@
+{
+  "obligations": [
+    {
+      "id": "OB-16",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 57: `return false;` when `!all_start_with_back_slash` is true.",
+      "why": "This statement is part of the validation logic for quoted display names with illegal characters.",
+      "minimal_valid": "\"\\\"Valid\\\"\" <user@example.com>",
+      "minimal_invalid": "\"Invalid\" <user@example.com>"
+    },
+    {
+      "id": "OB-17",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 93: `return false;` when `!options.ignore_max_length && str.length > defaultMaxEmailLength` is true.",
+      "why": "This statement ensures that emails exceeding the maximum allowed length are rejected.",
+      "minimal_valid": "a@b.com",
+      "minimal_invalid": "a@b.com"
+    }
+  ],
+  "test_groups": []
+}

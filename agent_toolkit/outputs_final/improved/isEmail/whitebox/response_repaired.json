@@ -1,0 +1,60 @@
+{
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "blackbox",
+      "rule": "Email must conform to RFC2822 syntax.",
+      "why": "Requirement specifies that the function validates email format.",
+      "minimal_valid": "test@example.com",
+      "minimal_invalid": "invalid-email"
+    },
+    {
+      "id": "OB-2",
+      "kind": "blackbox",
+      "rule": "Allow display name format if `allow_display_name` is true.",
+      "why": "Requirement specifies that display names are allowed when this option is enabled.",
+      "minimal_valid": "John Doe <test@example.com>",
+      "minimal_invalid": "John Doe test@example.com"
+    },
+    {
+      "id": "OB-3",
+      "kind": "blackbox",
+      "rule": "Reject missing display name if `require_display_name` is true.",
+      "why": "Requirement specifies that display names are mandatory when this option is enabled.",
+      "minimal_valid": "John Doe <test@example.com>",
+      "minimal_invalid": "test@example.com"
+    },
+    {
+      "id": "OB-4",
+      "kind": "blackbox",
+      "rule": "Reject non-UTF8 characters in local part if `allow_utf8_local_part` is false.",
+      "why": "Requirement specifies that non-UTF8 characters are disallowed when this option is disabled.",
+      "minimal_valid": "test@example.com",
+      "minimal_invalid": "tést@example.com"
+    },
+    {
+      "id": "OB-5",
+      "kind": "blackbox",
+      "rule": "Reject emails without TLD if `require_tld` is true.",
+      "why": "Requirement specifies that TLDs are mandatory when this option is enabled.",
+      "minimal_valid": "test@example.com",
+      "minimal_invalid": "test@localhost"
+    },
+    {
+      "id": "OB-6",
+      "kind": "blackbox",
+      "rule": "Allow IP domains if `allow_ip_domain` is true.",
+      "why": "Requirement specifies that IP domains are valid when this option is enabled.",
+      "minimal_valid": "test@[192.168.1.1]",
+      "minimal_invalid": "test@[300.300.300.300]"
+    },
+    {
+      "id": "OB-7",
+      "kind": "blackbox",
+      "rule": "Reject emails exceeding max length unless `ignore_max_length` is true.",
+      "why": "Requirement specifies that max length validation is bypassed when this option is enabled.",
+      "minimal_valid": "a@b.com",
+      "minimal_invalid": "a"  }
+  ],
+  "test_groups": []
+}

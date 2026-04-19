@@ -1,0 +1,87 @@
+{
+  "obligations": [
+    {
+      "id": "OB-21",
+      "kind": "whitebox",
+      "rule": "Uncovered statement at line 93: return false.",
+      "why": "Targets uncovered statement at line 93 by testing rejection of emails exceeding the maximum length when ignore_max_length is false.",
+      "minimal_valid": "example@example.com",
+      "minimal_invalid": "a@b.com"
+    },
+    {
+      "id": "OB-22",
+      "kind": "whitebox",
+      "rule": "Uncovered if path `condition_true_branch` at line 130; condition: !gmailUserPart.test(user_parts[i]).",
+      "why": "Targets uncovered branch at line 130 by testing Gmail username validation with domain-specific rules.",
+      "minimal_valid": "valid.username@gmail.com",
+      "minimal_invalid": "invalid..username@gmail.com"
+    },
+    {
+      "id": "OB-23",
+      "kind": "whitebox",
+      "rule": "Uncovered if path `condition_true_branch` at line 153; condition: !domain.startsWith('[') || !domain.endsWith(']').",
+      "why": "Targets uncovered branch at line 153 by testing validation of IP domains with incorrect brackets.",
+      "minimal_valid": "example@[192.168.1.1]",
+      "minimal_invalid": "example@192.168.1.1"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Validation for maximum email length with ignore_max_length=false",
+      "validator": "isEmail",
+      "args": [
+        {
+          "ignore_max_length": false
+        }
+      ],
+      "valid": [
+        "example@example.com"
+      ],
+      "invalid": [
+        "a@b.com"
+      ],
+      "rationale": "Tests rejection of emails exceeding the maximum length when ignore_max_length is false.",
+      "obligations": [
+        "OB-21"
+      ]
+    },
+    {
+      "title": "Validation for Gmail username with domain-specific rules",
+      "validator": "isEmail",
+      "args": [
+        {
+          "domain_specific_validation": true
+        }
+      ],
+      "valid": [
+        "valid.username@gmail.com"
+      ],
+      "invalid": [
+        "invalid..username@gmail.com"
+      ],
+      "rationale": "Tests Gmail username validation with domain-specific rules.",
+      "obligations": [
+        "OB-22"
+      ]
+    },
+    {
+      "title": "Validation for IP domains with incorrect brackets",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_ip_domain": true
+        }
+      ],
+      "valid": [
+        "example@[192.168.1.1]"
+      ],
+      "invalid": [
+        "example@192.168.1.1"
+      ],
+      "rationale": "Tests validation of IP domains with incorrect brackets.",
+      "obligations": [
+        "OB-23"
+      ]
+    }
+  ]
+}

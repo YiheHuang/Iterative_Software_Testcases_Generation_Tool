@@ -1,0 +1,34 @@
+{
+  "generated_categories": [
+    {
+      "name": "Basic URL Validation",
+      "description": "Tests fundamental URL validation including protocols, host presence, and port range with default options.",
+      "generated_group_ids": ["GENERATED-1"]
+    },
+    {
+      "name": "Protocol and Host Requirements",
+      "description": "Tests specific requirements for protocol presence and host presence in URLs.",
+      "generated_group_ids": ["GENERATED-2", "GENERATED-3"]
+    },
+    {
+      "name": "Fragment and Query Component Handling",
+      "description": "Tests the handling of fragments and query components in URLs based on configuration options.",
+      "generated_group_ids": ["GENERATED-4", "GENERATED-5"]
+    },
+    {
+      "name": "Authentication Handling",
+      "description": "Tests URLs with and without authentication components when authentication is disallowed.",
+      "generated_group_ids": ["GENERATED-6"]
+    },
+    {
+      "name": "Length Validation",
+      "description": "Tests URL length validation based on maximum allowed length.",
+      "generated_group_ids": ["GENERATED-7"]
+    },
+    {
+      "name": "Custom Protocol Validation",
+      "description": "Tests URLs against a custom list of allowed protocols.",
+      "generated_group_ids": ["GENERATED-8"]
+    }
+  ]
+}

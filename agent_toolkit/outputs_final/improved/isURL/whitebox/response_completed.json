@@ -1,0 +1,193 @@
+{
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "blackbox",
+      "rule": "The input must be a valid URL according to default options.",
+      "why": "Baseline validation for URLs without custom options.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "example"
+    },
+    {
+      "id": "OB-2",
+      "kind": "blackbox",
+      "rule": "The input must include a protocol if `require_protocol` is true.",
+      "why": "Ensures URLs without protocols are rejected when required.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "example.com"
+    },
+    {
+      "id": "OB-3",
+      "kind": "blackbox",
+      "rule": "The input must include a host if `require_host` is true.",
+      "why": "Ensures URLs without hosts are rejected when required.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://"
+    },
+    {
+      "id": "OB-4",
+      "kind": "blackbox",
+      "rule": "The input must include a port if `require_port` is true.",
+      "why": "Ensures URLs without ports are rejected when required.",
+      "minimal_valid": "http://example.com:80",
+      "minimal_invalid": "http://example.com"
+    },
+    {
+      "id": "OB-5",
+      "kind": "blackbox",
+      "rule": "The input must use a valid protocol from the `protocols` list if `require_valid_protocol` is true.",
+      "why": "Ensures invalid or unsupported protocols are rejected.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "ftp://example.com"
+    },
+    {
+      "id": "OB-6",
+      "kind": "blackbox",
+      "rule": "The input must not contain underscores in the host unless `allow_underscores` is true.",
+      "why": "Underscores are not valid in domain names unless explicitly allowed.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://example_com"
+    },
+    {
+      "id": "OB-7",
+      "kind": "blackbox",
+      "rule": "The input must not end with a trailing dot unless `allow_trailing_dot` is true.",
+      "why": "Trailing dots are not valid in domain names unless explicitly allowed.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://example.com."
+    },
+    {
+      "id": "OB-8",
+      "kind": "blackbox",
+      "rule": "The input must not contain fragments if `allow_fragments` is false.",
+      "why": "Fragments are disallowed when `allow_fragments` is false.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://example.com#fragment"
+    },
+    {
+      "id": "OB-9",
+      "kind": "blackbox",
+      "rule": "The input must not contain query components if `allow_query_components` is false.",
+      "why": "Query components are disallowed when `allow_query_components` is false.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://example.com?query=value"
+    },
+    {
+      "id": "OB-10",
+      "kind": "blackbox",
+      "rule": "The input must not contain authentication information if `disallow_auth` is true.",
+      "why": "Authentication components are disallowed when `disallow_auth` is true.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://user:pass@example.com"
+    },
+    {
+      "id": "OB-11",
+      "kind": "blackbox",
+      "rule": "The input must not exceed the maximum allowed length if `validate_length` is true.",
+      "why": "Excessively long URLs are disallowed when `validate_length` is true.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Default URL validation",
+      "validator": "isURL",
+      "args": [{}],
+      "valid": ["http://example.com", "https://example.com", "ftp://example.com"],
+      "invalid": ["example", "http:/example.com", "http://"],
+      "rationale": "Covers baseline URL validation with default options.",
+      "obligations": ["OB-1"]
+    },
+    {
+      "title": "Require protocol",
+      "validator": "isURL",
+      "args": [{ "require_protocol": true }],
+      "valid": ["http://example.com", "https://example.com"],
+      "invalid": ["example.com", "example"],
+      "rationale": "Ensures URLs without protocols are rejected when `require_protocol` is true.",
+      "obligations": ["OB-2"]
+    },
+    {
+      "title": "Require host",
+      "validator": "isURL",
+      "args": [{ "require_host": true }],
+      "valid": ["http://example.com"],
+      "invalid": ["http://", "http:///path"],
+      "rationale": "Ensures URLs without hosts are rejected when `require_host` is true.",
+      "obligations": ["OB-3"]
+    },
+    {
+      "title": "Require port",
+      "validator": "isURL",
+      "args": [{ "require_port": true }],
+      "valid": ["http://example.com:80"],
+      "invalid": ["http://example.com", "http://example.com:"],
+      "rationale": "Ensures URLs without ports are rejected when `require_port` is true.",
+      "obligations": ["OB-4"]
+    },
+    {
+      "title": "Valid protocols only",
+      "validator": "isURL",
+      "args": [{ "require_valid_protocol": true, "protocols": ["http", "https"] }],
+      "valid": ["http://example.com", "https://example.com"],
+      "invalid": ["ftp://example.com", "custom://example.com"],
+      "rationale": "Ensures only valid protocols from the `protocols` list are accepted.",
+      "obligations": ["OB-5"]
+    },
+    {
+      "title": "Allow underscores in host",
+      "validator": "isURL",
+      "args": [{ "allow_underscores": true }],
+      "valid": ["http://example_com"],
+      "invalid": ["http://example.com", "http://example_com_invalid"],
+      "rationale": "Tests allowing underscores in hostnames when `allow_underscores` is true.",
+      "obligations": ["OB-6"]
+    },
+    {
+      "title": "Allow trailing dot",
+      "validator": "isURL",
+      "args": [{ "allow_trailing_dot": true }],
+      "valid": ["http://example.com."],
+      "invalid": ["http://example.com", "http://example.com.."],
+      "rationale": "Tests allowing trailing dots in domain names when `allow_trailing_dot` is true.",
+      "obligations": ["OB-7"]
+    },
+    {
+      "title": "Disallow fragments",
+      "validator": "isURL",
+      "args": [{ "allow_fragments": false }],
+      "valid": ["http://example.com"],
+      "invalid": ["http://example.com#fragment", "http://example.com#"],
+      "rationale": "Ensures fragments are disallowed when `allow_fragments` is false.",
+      "obligations": ["OB-8"]
+    },
+    {
+      "title": "Disallow query components",
+      "validator": "isURL",
+      "args": [{ "allow_query_components": false }],
+      "valid": ["http://example.com"],
+      "invalid": ["http://example.com?query=value", "http://example.com?"],
+      "rationale": "Ensures query components are disallowed when `allow_query_components` is false.",
+      "obligations": ["OB-9"]
+    },
+    {
+      "title": "Disallow authentication",
+      "validator": "isURL",
+      "args": [{ "disallow_auth": true }],
+      "valid": ["http://example.com"],
+      "invalid": ["http://user:pass@example.com", "http://user:@example.com"],
+      "rationale": "Ensures authentication components are disallowed when `disallow_auth` is true.",
+      "obligations": ["OB-10"]
+    },
+    {
+      "title": "Validate maximum length",
+      "validator": "isURL",
+      "args": [{ "validate_length": true, "max_allowed_length": 20 }],
+      "valid": ["http://short.com"],
+      "invalid": ["http://averylongdomainname.com"],
+      "rationale": "Ensures excessively long URLs are disallowed when `validate_length` is true.",
+      "obligations": ["OB-11"]
+    }
+  ]
+}

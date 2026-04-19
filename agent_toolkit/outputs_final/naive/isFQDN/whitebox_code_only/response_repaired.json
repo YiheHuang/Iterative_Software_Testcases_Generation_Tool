@@ -1,0 +1,29 @@
+{
+  "obligations": [],
+  "test_groups": [
+    {
+      "title": "Default options (require_tld=true, allow_underscores=false, allow_trailing_dot=false, allow_numeric_tld=false, allow_wildcard=false, ignore_max_length=false)",
+      "validator": "isFQDN",
+      "args": [{}],
+      "valid": [
+        "example.com",
+        "sub.example.com",
+        "xn--example.com"
+      ],
+      "invalid": [
+        "example",
+        "example.",
+        "example..com",
+        "example_com",
+        "123",
+        "-example.com",
+        "example-.com",
+        "example.com.",
+        "example.123",
+        "example. "
+      ],
+      "rationale": "Tests common valid and invalid cases for fully qualified domain names with default options.",
+      "obligations": []
+    }
+  ]
+}

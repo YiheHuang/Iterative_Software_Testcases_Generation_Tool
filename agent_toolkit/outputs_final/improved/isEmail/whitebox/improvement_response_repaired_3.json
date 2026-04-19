@@ -1,0 +1,29 @@
+{
+  "obligations": [
+    {
+      "id": "OB-18",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 50: `return false;` when `display_name_without_quotes === display_name`.",
+      "why": "This statement is not covered in the current suite and corresponds to a specific condition in the code.",
+      "minimal_valid": null,
+      "minimal_invalid": "John Doe <John Doe@example.com>"
+    },
+    {
+      "id": "OB-19",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 57: `return false;` when `!all_start_with_back_slash`.",
+      "why": "This statement is not covered in the current suite and corresponds to a specific condition in the code.",
+      "minimal_valid": null,
+      "minimal_invalid": "\"John \\Doe\" <john.doe@example.com>"
+    },
+    {
+      "id": "OB-20",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 93: `return false;` when `!options.ignore_max_length && str.length > defaultMaxEmailLength`.",
+      "why": "This statement is not covered in the current suite and corresponds to a specific condition in the code.",
+      "minimal_valid": null,
+      "minimal_invalid": "a@b.com"
+    }
+  ],
+  "test_groups": []
+}

@@ -1,0 +1,60 @@
+{
+  "audit": [
+    {
+      "group_title": "Basic Luhn validation",
+      "decision": "keep",
+      "reason": "The Luhn algorithm is explicitly required by the specification.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Provider-specific validation",
+      "decision": "keep",
+      "reason": "The `provider` option and its behavior are explicitly supported by the specification.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Invalid provider error handling",
+      "decision": "keep",
+      "reason": "The specification explicitly states that invalid providers should result in an error.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Input sanitization",
+      "decision": "keep",
+      "reason": "Sanitization of spaces and dashes is a documented implementation behavior.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Global pattern matching",
+      "decision": "trim",
+      "reason": "The specification supports global pattern matching, but OB-6 is redundant with OB-5.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Provider-specific early return",
+      "decision": "keep",
+      "reason": "The specification supports provider-specific validation and early return behavior.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Global early return",
+      "decision": "drop",
+      "reason": "The group duplicates global pattern matching behavior already covered by OB-5.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Invalid provider ternary false branch",
+      "decision": "drop",
+      "reason": "The ternary false branch is an implementation detail not explicitly supported by the specification.",
+      "removed_valid": [],
+      "removed_invalid": []
+    }
+  ]
+}

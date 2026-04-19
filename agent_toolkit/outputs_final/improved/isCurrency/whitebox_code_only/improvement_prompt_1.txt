@@ -1,0 +1,382 @@
+You are improving an existing whitebox_code_only test suite for isCurrency.
+You are given only coverage details and fine-grained uncovered white-box locations.
+You must use those uncovered positions as exact white-box targets when updating the suite.
+You must NOT use any golden tests, repository test overlap analysis, or external oracle hints.
+
+Goal:
+- propose a small patch that helps the current suite target more uncovered code locations
+- preserve the current suite unless a new patch is clearly justified by uncovered locations
+- keep the patch conservative and additive whenever possible
+- keep the suite conservative and low-redundancy
+
+Return strict JSON with top-level keys obligations and test_groups.
+The returned test_groups must be patch groups only, not a full rewritten suite.
+
+Requirement source:
+None. This is code-only white-box mode.
+
+Current full test suite from the previous iteration:
+[
+  {
+    "title": "Default options",
+    "validator": "isCurrency",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "$123.45",
+      "$0.99",
+      "$1,234.56"
+    ],
+    "invalid": [
+      "123.45",
+      "-$123.45",
+      "$123.456",
+      "$123",
+      "$ 123.45"
+    ],
+    "rationale": "Covers the default behavior of the function.",
+    "obligations": [
+      "OB-1"
+    ]
+  },
+  {
+    "title": "Require symbol",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "require_symbol": true
+      }
+    ],
+    "valid": [
+      "$123.45"
+    ],
+    "invalid": [
+      "123.45",
+      "123"
+    ],
+    "rationale": "Tests the enforcement of the currency symbol.",
+    "obligations": [
+      "OB-2"
+    ]
+  },
+  {
+    "title": "Disallow negatives",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_negatives": false
+      }
+    ],
+    "valid": [
+      "$123.45"
+    ],
+    "invalid": [
+      "-$123.45",
+      "($123.45)"
+    ],
+    "rationale": "Ensures negative amounts are rejected when disallowed.",
+    "obligations": [
+      "OB-3"
+    ]
+  },
+  {
+    "title": "Parens for negatives",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "parens_for_negatives": true
+      }
+    ],
+    "valid": [
+      "($123.45)"
+    ],
+    "invalid": [
+      "-$123.45",
+      "$123.45"
+    ],
+    "rationale": "Tests the use of parentheses for negative amounts.",
+    "obligations": [
+      "OB-4"
+    ]
+  },
+  {
+    "title": "Symbol after digits",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "symbol_after_digits": true
+      }
+    ],
+    "valid": [
+      "123.45$"
+    ],
+    "invalid": [
+      "$123.45",
+      "123.45"
+    ],
+    "rationale": "Ensures the currency symbol appears after the digits.",
+    "obligations": [
+      "OB-5"
+    ]
+  },
+  {
+    "title": "Disallow decimals",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_decimal": false
+      }
+    ],
+    "valid": [
+      "$123",
+      "$1,234"
+    ],
+    "invalid": [
+      "$123.45",
+      "$123.4"
+    ],
+    "rationale": "Tests rejection of decimal amounts when disallowed.",
+    "obligations": [
+      "OB-6"
+    ]
+  },
+  {
+    "title": "Require decimals",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "require_decimal": true
+      }
+    ],
+    "valid": [
+      "$123.45"
+    ],
+    "invalid": [
+      "$123",
+      "$1,234"
+    ],
+    "rationale": "Ensures decimal amounts are required when specified.",
+    "obligations": [
+      "OB-7"
+    ]
+  },
+  {
+    "title": "Multiple digits after decimal",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "digits_after_decimal": [
+          1,
+          2
+        ]
+      }
+    ],
+    "valid": [
+      "$123.4",
+      "$123.45"
+    ],
+    "invalid": [
+      "$123.456",
+      "$123."
+    ],
+    "rationale": "Tests support for varying numbers of digits after the decimal.",
+    "obligations": [
+      "OB-8"
+    ]
+  },
+  {
+    "title": "Allow space after symbol",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_space_after_symbol": true
+      }
+    ],
+    "valid": [
+      "$ 123.45"
+    ],
+    "invalid": [
+      "$123.45",
+      "$ 123"
+    ],
+    "rationale": "Tests allowance of a space after the currency symbol.",
+    "obligations": [
+      "OB-9"
+    ]
+  },
+  {
+    "title": "Allow space after digits",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_space_after_digits": true
+      }
+    ],
+    "valid": [
+      "$123.45 "
+    ],
+    "invalid": [
+      "$123.45",
+      "$123.45  "
+    ],
+    "rationale": "Ensures a space is allowed after the digits.",
+    "obligations": [
+      "OB-10"
+    ]
+  },
+  {
+    "title": "Allow negative sign placeholder",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_negative_sign_placeholder": true
+      }
+    ],
+    "valid": [
+      "$ 123.45"
+    ],
+    "invalid": [
+      "$-123.45",
+      "$123.45"
+    ],
+    "rationale": "Tests the use of a placeholder space for the negative sign.",
+    "obligations": [
+      "OB-11"
+    ]
+  }
+]
+
+Coverage details allowed for improvement:
+{
+  "coverage_total": {
+    "lines": {
+      "total": 38,
+      "covered": 36,
+      "skipped": 0,
+      "pct": 94.74
+    },
+    "statements": {
+      "total": 41,
+      "covered": 39,
+      "skipped": 0,
+      "pct": 95.12
+    },
+    "functions": {
+      "total": 5,
+      "covered": 5,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 36,
+      "covered": 33,
+      "skipped": 0,
+      "pct": 91.67
+    }
+  },
+  "coverage_files": {
+    "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isCurrency.js": {
+      "lines": {
+        "total": 38,
+        "covered": 36,
+        "skipped": 0,
+        "pct": 94.74
+      },
+      "functions": {
+        "total": 5,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 41,
+        "covered": 39,
+        "skipped": 0,
+        "pct": 95.12
+      },
+      "branches": {
+        "total": 36,
+        "covered": 33,
+        "skipped": 0,
+        "pct": 91.67
+      }
+    }
+  },
+  "uncovered_details": {
+    "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isCurrency.js": {
+      "uncovered_statements": [
+        {
+          "statement_id": "18",
+          "line": 22,
+          "column": 6,
+          "line_text": "      pattern += negative;",
+          "source_excerpt": "pattern += negative;",
+          "summary": "Uncovered statement at line 22: pattern += negative;"
+        },
+        {
+          "statement_id": "20",
+          "line": 24,
+          "column": 6,
+          "line_text": "      pattern = negative + pattern;",
+          "source_excerpt": "pattern = negative + pattern;",
+          "summary": "Uncovered statement at line 24: pattern = negative + pattern;"
+        }
+      ],
+      "uncovered_branches": [
+        {
+          "branch_id": "8",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 21,
+          "column": 4,
+          "line_text": "    if (options.negative_sign_after_digits) {",
+          "source_excerpt": "if (options.negative_sign_after_digits) {\n      pattern += negative;\n    } else if (options.negative_sign_before_digits) {\n      pattern = negative + pattern;\n    }",
+          "condition_excerpt": "options.negative_sign_after_digits",
+          "summary": "Uncovered if path `condition_true_branch` at line 21; condition: options.negative_sign_after_digits"
+        },
+        {
+          "branch_id": "9",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 23,
+          "column": 11,
+          "line_text": "    } else if (options.negative_sign_before_digits) {",
+          "source_excerpt": "} else if (options.negative_sign_before_digits) {\n      pattern = negative + pattern;\n    }",
+          "condition_excerpt": null,
+          "summary": "Uncovered if path `condition_true_branch` at line 23; snippet: } else if (options.negative_sign_before_digits) {\n      pattern = negative + pattern;\n    }"
+        },
+        {
+          "branch_id": "16",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 46,
+          "column": 11,
+          "line_text": "    } else if (!(options.negative_sign_before_digits || options.negative_sign_after_digits)) {",
+          "source_excerpt": "} else if (!(options.negative_sign_before_digits || options.negative_sign_after_digits)) {\n      pattern = negative + pattern;\n    }",
+          "condition_excerpt": null,
+          "summary": "Uncovered if path `condition_false_branch` at line 46; snippet: } else if (!(options.negative_sign_before_digits || options.negative_sign_after_digits)) {\n      pattern = negative + pattern;\n    }"
+        }
+      ],
+      "uncovered_functions": []
+    }
+  }
+}
+
+Instructions:
+- You must use only the requirement (if provided), the current suite, coverage details, and uncovered details.
+- Do not infer or use any correctness signal, pass/fail summary, failed cases, or hidden oracle information.
+- Treat uncovered_details as exact white-box targets, not as vague hints.
+- Use the previous full suite as the baseline and return only the incremental patch groups.
+- Do not rewrite, delete, or duplicate the existing groups already shown in the current suite.
+- Add only groups that cover meaningfully new targets beyond the current suite.
+- Prefer at most 3 patch groups, each focused on one concrete uncovered condition or path family.
+- If an uncovered branch or statement cannot be operationalized from the provided coverage details, do not guess.
+- If uncovered_details are provided, use them only as white-box targets.
+- If uncovered_details are not provided, do not infer any hidden coverage gap.
+- Prefer minimal option-profile-specific groups.
+- Avoid broad extrapolation; every meaningful update should correspond to a concrete uncovered position or condition.
+- Do not mention or infer any golden test information.

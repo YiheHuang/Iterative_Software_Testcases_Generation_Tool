@@ -1,0 +1,87 @@
+{
+  "obligations": [
+    {
+      "id": "OB-12",
+      "kind": "whitebox",
+      "rule": "Cover uncovered statement at line 49: if (display_name_without_quotes === display_name) { return false; }",
+      "why": "Ensure validation rejects display names that are identical to their unquoted version.",
+      "minimal_valid": "John Doe <john.doe@example.com>",
+      "minimal_invalid": "John Doe john.doe@example.com"
+    },
+    {
+      "id": "OB-13",
+      "kind": "whitebox",
+      "rule": "Cover uncovered branch at line 110: options.domain_specific_validation && (lower_domain === 'gmail.com' || lower_domain === 'googlemail.com')",
+      "why": "Ensure domain-specific validation correctly handles Gmail and Googlemail domains.",
+      "minimal_valid": "user@gmail.com",
+      "minimal_invalid": "user@googlemail.com"
+    },
+    {
+      "id": "OB-14",
+      "kind": "whitebox",
+      "rule": "Cover uncovered statement at line 124: if (!isByteLength(username.replace(/\\./g, ''), { min: 6, max: 30 })) { return false; }",
+      "why": "Ensure validation rejects Gmail usernames that do not meet length constraints after removing dots.",
+      "minimal_valid": "valid.username@gmail.com",
+      "minimal_invalid": "short@gmail.com"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Validation for display names identical to unquoted version",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "valid": [
+        "John Doe <john.doe@example.com>"
+      ],
+      "invalid": [
+        "John Doe john.doe@example.com"
+      ],
+      "rationale": "Tests rejection of display names that are identical to their unquoted version.",
+      "obligations": [
+        "OB-12"
+      ]
+    },
+    {
+      "title": "Domain-specific validation for Gmail and Googlemail domains",
+      "validator": "isEmail",
+      "args": [
+        {
+          "domain_specific_validation": true
+        }
+      ],
+      "valid": [
+        "user@gmail.com"
+      ],
+      "invalid": [
+        "user@googlemail.com"
+      ],
+      "rationale": "Tests domain-specific validation for Gmail and Googlemail domains.",
+      "obligations": [
+        "OB-13"
+      ]
+    },
+    {
+      "title": "Validation for Gmail username length constraints",
+      "validator": "isEmail",
+      "args": [
+        {
+          "domain_specific_validation": true
+        }
+      ],
+      "valid": [
+        "valid.username@gmail.com"
+      ],
+      "invalid": [
+        "short@gmail.com"
+      ],
+      "rationale": "Tests rejection of Gmail usernames that do not meet length constraints after removing dots.",
+      "obligations": [
+        "OB-14"
+      ]
+    }
+  ]
+}

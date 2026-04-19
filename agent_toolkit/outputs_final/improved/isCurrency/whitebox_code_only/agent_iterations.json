@@ -1,0 +1,40 @@
+{
+  "iteration_count": 2,
+  "revert_count": 0,
+  "total_attempts": 1,
+  "max_attempts": 6,
+  "feedback_sources": [
+    "coverage"
+  ],
+  "golden_feedback_used": false,
+  "final_decision": "stop_full_coverage",
+  "coverage_score": {
+    "lines": 100.0,
+    "statements": 100.0,
+    "functions": 100.0,
+    "branches": 100.0
+  },
+  "iterations": [
+    {
+      "iteration": 1,
+      "decision": "initial",
+      "coverage_score": {
+        "lines": 94.74,
+        "statements": 95.12,
+        "functions": 100.0,
+        "branches": 91.67
+      }
+    },
+    {
+      "iteration": 2,
+      "decision": "accept_patch",
+      "candidate_group_count": 14,
+      "coverage_score": {
+        "lines": 100.0,
+        "statements": 100.0,
+        "functions": 100.0,
+        "branches": 100.0
+      }
+    }
+  ]
+}

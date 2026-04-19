@@ -1,0 +1,94 @@
+{
+  "golden_to_generated": [
+    {
+      "golden_category_id": "GC-1",
+      "matched_generated_category_ids": ["GENC-1"],
+      "match_type": "strong",
+      "reason": "Both categories focus on generic credit card validation without specifying a provider, including valid and invalid cases."
+    },
+    {
+      "golden_category_id": "GC-2",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "GENC-2 includes tests for invalid provider handling, but also covers provider-specific validation, which is outside the scope of GC-2."
+    },
+    {
+      "golden_category_id": "GC-3",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "GENC-2 includes provider-specific validation, which partially overlaps with AmEx validation in GC-3, but it is not exclusively focused on AmEx."
+    },
+    {
+      "golden_category_id": "GC-4",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "GENC-2 includes provider-specific validation, which partially overlaps with Diners Club validation in GC-4, but it is not exclusively focused on Diners Club."
+    },
+    {
+      "golden_category_id": "GC-5",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "GENC-2 includes provider-specific validation, which partially overlaps with Discover validation in GC-5, but it is not exclusively focused on Discover."
+    },
+    {
+      "golden_category_id": "GC-6",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "GENC-2 includes provider-specific validation, which partially overlaps with JCB validation in GC-6, but it is not exclusively focused on JCB."
+    },
+    {
+      "golden_category_id": "GC-7",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "GENC-2 includes provider-specific validation, which partially overlaps with Mastercard validation in GC-7, but it is not exclusively focused on Mastercard."
+    },
+    {
+      "golden_category_id": "GC-8",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "GENC-2 includes provider-specific validation, which partially overlaps with UnionPay validation in GC-8, but it is not exclusively focused on UnionPay."
+    },
+    {
+      "golden_category_id": "GC-9",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "GENC-2 includes provider-specific validation, which partially overlaps with Visa validation in GC-9, but it is not exclusively focused on Visa."
+    }
+  ],
+  "generated_to_golden": [
+    {
+      "generated_category_id": "GENC-1",
+      "matched_golden_category_ids": ["GC-1"],
+      "match_type": "strong",
+      "reason": "GENC-1 aligns directly with GC-1 in testing generic credit card validation without specifying a provider."
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "matched_golden_category_ids": ["GC-2", "GC-3", "GC-4", "GC-5", "GC-6", "GC-7", "GC-8", "GC-9"],
+      "match_type": "partial",
+      "reason": "GENC-2 spans multiple golden categories by covering provider-specific validation, but it does not exclusively focus on any single provider."
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "matched_golden_category_ids": [],
+      "match_type": "none",
+      "reason": "GENC-3 focuses on formatting edge cases, which is not explicitly covered by any golden category."
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "matched_golden_category_ids": [],
+      "match_type": "none",
+      "reason": "GENC-4 addresses invalid input handling (e.g., empty strings, non-numeric inputs), which is not explicitly covered by any golden category."
+    }
+  ],
+  "novel_generated_categories": [
+    {
+      "generated_category_id": "GENC-3",
+      "reason": "GENC-3 introduces tests for formatting edge cases, which are not explicitly covered by any golden category."
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "reason": "GENC-4 introduces tests for invalid input handling, which are not explicitly covered by any golden category."
+    }
+  ]
+}

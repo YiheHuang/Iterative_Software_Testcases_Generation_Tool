@@ -1,0 +1,291 @@
+{
+  "coverage_total": {
+    "lines": {
+      "total": 114,
+      "covered": 110,
+      "skipped": 0,
+      "pct": 96.49
+    },
+    "statements": {
+      "total": 118,
+      "covered": 114,
+      "skipped": 0,
+      "pct": 96.61
+    },
+    "functions": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 119,
+      "covered": 103,
+      "skipped": 0,
+      "pct": 86.55
+    }
+  },
+  "coverage_files": {
+    "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isURL.js": {
+      "lines": {
+        "total": 114,
+        "covered": 110,
+        "skipped": 0,
+        "pct": 96.49
+      },
+      "functions": {
+        "total": 3,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 118,
+        "covered": 114,
+        "skipped": 0,
+        "pct": 96.61
+      },
+      "branches": {
+        "total": 119,
+        "covered": 103,
+        "skipped": 0,
+        "pct": 86.55
+      }
+    }
+  },
+  "uncovered_details": {
+    "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isURL.js": {
+      "uncovered_statements": [
+        {
+          "statement_id": "73",
+          "line": 202,
+          "column": 4,
+          "line_text": "    return true;",
+          "source_excerpt": "return true;",
+          "summary": "Uncovered statement at line 202: return true;"
+        },
+        {
+          "statement_id": "79",
+          "line": 211,
+          "column": 6,
+          "line_text": "      return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 211: return false;"
+        },
+        {
+          "statement_id": "106",
+          "line": 245,
+          "column": 4,
+          "line_text": "    return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 245: return false;"
+        },
+        {
+          "statement_id": "110",
+          "line": 253,
+          "column": 4,
+          "line_text": "    return true;",
+          "source_excerpt": "return true;",
+          "summary": "Uncovered statement at line 253: return true;"
+        }
+      ],
+      "uncovered_branches": [
+        {
+          "branch_id": "1",
+          "branch_type": "binary-expr",
+          "path_index": 1,
+          "branch_side": "path_1",
+          "line": 7,
+          "column": 33,
+          "line_text": "import merge from './util/merge';",
+          "source_excerpt": "import merge from './util/merge';",
+          "condition_excerpt": null,
+          "summary": "Uncovered binary-expr path `path_1` at line 7; snippet: import merge from './util/merge';"
+        },
+        {
+          "branch_id": "1",
+          "branch_type": "binary-expr",
+          "path_index": 2,
+          "branch_side": "path_2",
+          "line": 7,
+          "column": 33,
+          "line_text": "import merge from './util/merge';",
+          "source_excerpt": "import merge from './util/merge';",
+          "condition_excerpt": null,
+          "summary": "Uncovered binary-expr path `path_2` at line 7; snippet: import merge from './util/merge';"
+        },
+        {
+          "branch_id": "1",
+          "branch_type": "binary-expr",
+          "path_index": 3,
+          "branch_side": "path_3",
+          "line": 7,
+          "column": 33,
+          "line_text": "import merge from './util/merge';",
+          "source_excerpt": "import merge from './util/merge';",
+          "condition_excerpt": null,
+          "summary": "Uncovered binary-expr path `path_3` at line 7; snippet: import merge from './util/merge';"
+        },
+        {
+          "branch_id": "2",
+          "branch_type": "binary-expr",
+          "path_index": 0,
+          "branch_side": "path_0",
+          "line": 7,
+          "column": 33,
+          "line_text": "import merge from './util/merge';",
+          "source_excerpt": "import merge from './util/merge';",
+          "condition_excerpt": null,
+          "summary": "Uncovered binary-expr path `path_0` at line 7; snippet: import merge from './util/merge';"
+        },
+        {
+          "branch_id": "2",
+          "branch_type": "binary-expr",
+          "path_index": 1,
+          "branch_side": "path_1",
+          "line": 7,
+          "column": 33,
+          "line_text": "import merge from './util/merge';",
+          "source_excerpt": "import merge from './util/merge';",
+          "condition_excerpt": null,
+          "summary": "Uncovered binary-expr path `path_1` at line 7; snippet: import merge from './util/merge';"
+        },
+        {
+          "branch_id": "2",
+          "branch_type": "binary-expr",
+          "path_index": 2,
+          "branch_side": "path_2",
+          "line": 7,
+          "column": 33,
+          "line_text": "import merge from './util/merge';",
+          "source_excerpt": "import merge from './util/merge';",
+          "condition_excerpt": null,
+          "summary": "Uncovered binary-expr path `path_2` at line 7; snippet: import merge from './util/merge';"
+        },
+        {
+          "branch_id": "16",
+          "branch_type": "cond-expr",
+          "path_index": 1,
+          "branch_side": "ternary_false_branch",
+          "line": 121,
+          "column": 10,
+          "line_text": "        : after_colon.substring(0, first_slash_position);",
+          "source_excerpt": "after_colon.substring(0, first_slash_position)",
+          "condition_excerpt": null,
+          "summary": "Uncovered cond-expr path `ternary_false_branch` at line 121; snippet: after_colon.substring(0, first_slash_position)"
+        },
+        {
+          "branch_id": "20",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 136,
+          "column": 10,
+          "line_text": "          if (options.require_protocol) {",
+          "source_excerpt": "if (options.require_protocol) {\n            return false;\n          }",
+          "condition_excerpt": "options.require_protocol",
+          "summary": "Uncovered if path `condition_false_branch` at line 136; condition: options.require_protocol"
+        },
+        {
+          "branch_id": "21",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 146,
+          "column": 10,
+          "line_text": "          if (url === false) {",
+          "source_excerpt": "if (url === false) {\n            return false;\n          }",
+          "condition_excerpt": "url === false",
+          "summary": "Uncovered if path `condition_false_branch` at line 146; condition: url === false"
+        },
+        {
+          "branch_id": "23",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 158,
+          "column": 10,
+          "line_text": "          if (options.require_protocol) {",
+          "source_excerpt": "if (options.require_protocol) {\n            return false;\n          }",
+          "condition_excerpt": "options.require_protocol",
+          "summary": "Uncovered if path `condition_false_branch` at line 158; condition: options.require_protocol"
+        },
+        {
+          "branch_id": "24",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 166,
+          "column": 10,
+          "line_text": "          if (url === false) {",
+          "source_excerpt": "if (url === false) {\n            return false;\n          }",
+          "condition_excerpt": "url === false",
+          "summary": "Uncovered if path `condition_false_branch` at line 166; condition: url === false"
+        },
+        {
+          "branch_id": "31",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 201,
+          "column": 2,
+          "line_text": "  if (url === '' && !options.require_host) {",
+          "source_excerpt": "if (url === '' && !options.require_host) {\n    return true;\n  }",
+          "condition_excerpt": "url === '' && !options.require_host",
+          "summary": "Uncovered if path `condition_true_branch` at line 201; condition: url === '' && !options.require_host"
+        },
+        {
+          "branch_id": "32",
+          "branch_type": "binary-expr",
+          "path_index": 1,
+          "branch_side": "path_1",
+          "line": 201,
+          "column": 20,
+          "line_text": "  if (url === '' && !options.require_host) {",
+          "source_excerpt": "!options.require_host",
+          "condition_excerpt": "url === '' && !options.require_host",
+          "summary": "Uncovered binary-expr path `path_1` at line 201; condition: url === '' && !options.require_host"
+        },
+        {
+          "branch_id": "35",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 210,
+          "column": 4,
+          "line_text": "    if (split[0] === '') {",
+          "source_excerpt": "if (split[0] === '') {\n      return false;\n    }",
+          "condition_excerpt": "split[0] === ''",
+          "summary": "Uncovered if path `condition_true_branch` at line 210; condition: split[0] === ''"
+        },
+        {
+          "branch_id": "47",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 244,
+          "column": 9,
+          "line_text": "  } else if (options.require_port) {",
+          "source_excerpt": "} else if (options.require_port) {\n    return false;\n  }",
+          "condition_excerpt": null,
+          "summary": "Uncovered if path `condition_true_branch` at line 244; snippet: } else if (options.require_port) {\n    return false;\n  }"
+        },
+        {
+          "branch_id": "49",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 252,
+          "column": 2,
+          "line_text": "  if (host === '' && !options.require_host) {",
+          "source_excerpt": "if (host === '' && !options.require_host) {\n    return true;\n  }",
+          "condition_excerpt": "host === '' && !options.require_host",
+          "summary": "Uncovered if path `condition_true_branch` at line 252; condition: host === '' && !options.require_host"
+        }
+      ],
+      "uncovered_functions": []
+    }
+  },
+  "coverage_summary_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\improved\\isURL\\whitebox\\coverage\\coverage-summary.json",
+  "coverage_final_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\improved\\isURL\\whitebox\\coverage\\coverage-final.json"
+}

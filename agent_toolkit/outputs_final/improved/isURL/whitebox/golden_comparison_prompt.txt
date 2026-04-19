@@ -1,0 +1,1910 @@
+Perform bidirectional category matching for isURL.
+
+Fixed golden categories:
+[
+  {
+    "golden_category_id": "GC-1",
+    "name": "Basic URL Validation",
+    "description": "Covers general URL validation with standard protocols and formats.",
+    "golden_group_ids": [
+      "GOLDEN-1",
+      "GOLDEN-12",
+      "GOLDEN-31"
+    ]
+  },
+  {
+    "golden_category_id": "GC-2",
+    "name": "Localhost and Non-TLD URLs",
+    "description": "Tests for validating URLs without protocols or with localhost and non-TLD domains.",
+    "golden_group_ids": [
+      "GOLDEN-2",
+      "GOLDEN-18"
+    ]
+  },
+  {
+    "golden_category_id": "GC-3",
+    "name": "Protocol Handling",
+    "description": "Tests related to handling protocols, including custom protocols and protocol validation.",
+    "golden_group_ids": [
+      "GOLDEN-3",
+      "GOLDEN-4",
+      "GOLDEN-5",
+      "GOLDEN-6",
+      "GOLDEN-7",
+      "GOLDEN-8",
+      "GOLDEN-13",
+      "GOLDEN-21"
+    ]
+  },
+  {
+    "golden_category_id": "GC-4",
+    "name": "Underscore Handling",
+    "description": "Tests for validating URLs with underscores in the hostname.",
+    "golden_group_ids": [
+      "GOLDEN-9"
+    ]
+  },
+  {
+    "golden_category_id": "GC-5",
+    "name": "TLD and Trailing Dot Handling",
+    "description": "Tests for URLs without TLDs and with trailing dots.",
+    "golden_group_ids": [
+      "GOLDEN-10",
+      "GOLDEN-11"
+    ]
+  },
+  {
+    "golden_category_id": "GC-6",
+    "name": "Protocol Relative URLs",
+    "description": "Tests for handling protocol-relative URLs and related options.",
+    "golden_group_ids": [
+      "GOLDEN-14",
+      "GOLDEN-17"
+    ]
+  },
+  {
+    "golden_category_id": "GC-7",
+    "name": "Fragment and Query Component Handling",
+    "description": "Tests for handling fragments and query components in URLs.",
+    "golden_group_ids": [
+      "GOLDEN-15",
+      "GOLDEN-16"
+    ]
+  },
+  {
+    "golden_category_id": "GC-8",
+    "name": "Authentication Handling",
+    "description": "Tests for handling authentication information in URLs.",
+    "golden_group_ids": [
+      "GOLDEN-19",
+      "GOLDEN-20",
+      "GOLDEN-27",
+      "GOLDEN-28"
+    ]
+  },
+  {
+    "golden_category_id": "GC-9",
+    "name": "Host Validation",
+    "description": "Tests for validating hostnames, including whitelists, blacklists, and regular expressions.",
+    "golden_group_ids": [
+      "GOLDEN-22",
+      "GOLDEN-23",
+      "GOLDEN-24",
+      "GOLDEN-25"
+    ]
+  },
+  {
+    "golden_category_id": "GC-10",
+    "name": "Security and Vulnerability Handling",
+    "description": "Tests for handling security-related cases, such as rejecting invalid protocols and parsing differences.",
+    "golden_group_ids": [
+      "GOLDEN-26"
+    ]
+  },
+  {
+    "golden_category_id": "GC-11",
+    "name": "Length Validation",
+    "description": "Tests for validating URL length and configuring maximum allowed length.",
+    "golden_group_ids": [
+      "GOLDEN-29",
+      "GOLDEN-30"
+    ]
+  }
+]
+
+Indexed golden groups:
+[
+  {
+    "title": "should validate URLs",
+    "validator": "isURL",
+    "args": [],
+    "valid": [
+      "foobar.com",
+      "www.foobar.com",
+      "foobar.com/",
+      "valid.au",
+      "http://www.foobar.com/",
+      "HTTP://WWW.FOOBAR.COM/",
+      "https://www.foobar.com/",
+      "HTTPS://WWW.FOOBAR.COM/",
+      "http://www.foobar.com:23/",
+      "http://www.foobar.com:65535/",
+      "http://www.foobar.com:5/",
+      "https://www.foobar.com/",
+      "ftp://www.foobar.com/",
+      "http://www.foobar.com/~foobar",
+      "http://user:pass@www.foobar.com/",
+      "http://user:@www.foobar.com/",
+      "http://:pass@www.foobar.com/",
+      "http://user@www.foobar.com",
+      "http://127.0.0.1/",
+      "http://10.0.0.0/",
+      "http://189.123.14.13/",
+      "http://duckduckgo.com/?q=%2F",
+      "http://foobar.com/t$-_.+!*'(),",
+      "http://foobar.com/?foo=bar#baz=qux",
+      "http://foobar.com?foo=bar",
+      "http://foobar.com#baz=qux",
+      "http://www.xn--froschgrn-x9a.net/",
+      "http://xn--froschgrn-x9a.com/",
+      "http://foo--bar.com",
+      "http://h\u00f8yfjellet.no",
+      "http://xn--j1aac5a4g.xn--j1amh",
+      "http://xn------eddceddeftq7bvv7c4ke4c.xn--p1ai",
+      "http://\u043a\u0443\u043b\u0456\u043a.\u0443\u043a\u0440",
+      "test.com?ref=http://test2.com",
+      "http://[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]:80/index.html",
+      "http://[1080:0:0:0:8:800:200C:417A]/index.html",
+      "http://[3ffe:2a00:100:7031::1]",
+      "http://[1080::8:800:200C:417A]/foo",
+      "http://[::192.9.5.5]/ipng",
+      "http://[::FFFF:129.144.52.38]:80/index.html",
+      "http://[2010:836B:4179::836B:4179]",
+      "http://example.com/example.json#/foo/bar",
+      "http://1337.com",
+      "http://evil-site.com@example.com/",
+      "\uff4a\uff41\uff56\uff41\uff53\uff43\uff52\uff49\uff50\uff54:alert(1)@example.com"
+    ],
+    "invalid": [
+      "http://localhost:3000/",
+      "//foobar.com",
+      "xyz://foobar.com",
+      "invalid/",
+      "invalid.x",
+      "invalid.",
+      ".com",
+      "http://com/",
+      "http://300.0.0.1/",
+      "mailto:foo@bar.com",
+      "rtmp://foobar.com",
+      "http://www.xn--.com/",
+      "http://xn--.com/",
+      "http://www.foobar.com:0/",
+      "http://www.foobar.com:70000/",
+      "http://www.foobar.com:99999/",
+      "http://www.-foobar.com/",
+      "http://www.foobar-.com/",
+      "http://foobar/# lol",
+      "http://foobar/? lol",
+      "http://foobar/ lol/",
+      "http://lol @foobar.com/",
+      "http://lol:lol @foobar.com/",
+      "http://lol:lol:lol@foobar.com/",
+      "http://lol: @foobar.com/",
+      "http://www.foo_bar.com/",
+      "http://www.foobar.com/\t",
+      "http://@foobar.com",
+      "http://:@foobar.com",
+      "http://\n@www.foobar.com/",
+      "",
+      "http://foobar.com/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "http://*.foo.com",
+      "*.foo.com",
+      "!.foo.com",
+      "http://example.com.",
+      "http://localhost:61500this is an invalid url!!!!",
+      "////foobar.com",
+      "http:////foobar.com",
+      "https://example.com/foo/<script>alert('XSS')</script>/",
+      "javascript:alert(1);a=';@example.com/alert(1)'",
+      "JaVaScRiPt:alert(1)@example.com",
+      "javascript:/* comment */alert(1)@example.com",
+      "javascript:var a=1; alert(a);@example.com",
+      "javascript:alert(1)@user@example.com",
+      "javascript:alert(1)@example.com?q=safe",
+      "javascript:%61%6c%65%72%74%28%31%29@example.com",
+      "javascript:%22@a.com#\";alert(origin)//",
+      "data:text/html,<script>alert(1)</script>@example.com",
+      "vbscript:msgbox(\"XSS\")@example.com",
+      "//evil-site.com/path@example.com"
+    ],
+    "golden_id": "GOLDEN-1"
+  },
+  {
+    "title": "should validate URLs without protocol",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_tld": false,
+        "require_valid_protocol": false
+      }
+    ],
+    "valid": [
+      "localhost",
+      "localhost:3000",
+      "service-name:8080",
+      "https://localhost",
+      "http://localhost:3000",
+      "http://service-name:8080",
+      "user:password@localhost",
+      "user:pass@service-name:8080"
+    ],
+    "invalid": [],
+    "golden_id": "GOLDEN-2"
+  },
+  {
+    "title": "should validate URLs without protocol",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_tld": false,
+        "require_protocol": true,
+        "require_valid_protocol": false
+      }
+    ],
+    "valid": [
+      "http://localhost:3000",
+      "https://service-name:8080",
+      "custom://localhost"
+    ],
+    "invalid": [
+      "localhost:3000",
+      "service-name:8080",
+      "user:password@localhost"
+    ],
+    "golden_id": "GOLDEN-3"
+  },
+  {
+    "title": "should validate URLs without protocol",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_tld": false,
+        "require_valid_protocol": false,
+        "protocols": [
+          "custom",
+          "myscheme"
+        ]
+      }
+    ],
+    "valid": [
+      "custom:something",
+      "myscheme:data"
+    ],
+    "invalid": [],
+    "golden_id": "GOLDEN-4"
+  },
+  {
+    "title": "should validate URLs with custom protocols",
+    "validator": "isURL",
+    "args": [
+      {
+        "protocols": [
+          "rtmp"
+        ]
+      }
+    ],
+    "valid": [
+      "rtmp://foobar.com",
+      "rtmp:foobar.com"
+    ],
+    "invalid": [
+      "http://foobar.com",
+      "tel:+15551234567"
+    ],
+    "golden_id": "GOLDEN-5"
+  },
+  {
+    "title": "should validate file URLs without a host",
+    "validator": "isURL",
+    "args": [
+      {
+        "protocols": [
+          "file"
+        ],
+        "require_host": false,
+        "require_tld": false
+      }
+    ],
+    "valid": [
+      "file://localhost/foo.txt",
+      "file:///foo.txt",
+      "file:///"
+    ],
+    "invalid": [
+      "http://foobar.com",
+      "file://"
+    ],
+    "golden_id": "GOLDEN-6"
+  },
+  {
+    "title": "should validate postgres URLs without a host",
+    "validator": "isURL",
+    "args": [
+      {
+        "protocols": [
+          "postgres"
+        ],
+        "require_host": false
+      }
+    ],
+    "valid": [
+      "postgres://user:pw@/test"
+    ],
+    "invalid": [
+      "http://foobar.com",
+      "postgres://"
+    ],
+    "golden_id": "GOLDEN-7"
+  },
+  {
+    "title": "should validate URLs with any protocol",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_valid_protocol": false
+      }
+    ],
+    "valid": [
+      "rtmp://foobar.com",
+      "http://foobar.com",
+      "test://foobar.com",
+      "javascript:alert(1);@example.com"
+    ],
+    "invalid": [
+      "mailto:test@example.com"
+    ],
+    "golden_id": "GOLDEN-8"
+  },
+  {
+    "title": "should validate URLs with underscores",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_underscores": true
+      }
+    ],
+    "valid": [
+      "http://foo_bar.com",
+      "http://pr.example_com.294.example.com/",
+      "http://foo__bar.com",
+      "http://_.example.com"
+    ],
+    "invalid": [],
+    "golden_id": "GOLDEN-9"
+  },
+  {
+    "title": "should validate URLs that do not have a TLD",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_tld": false
+      }
+    ],
+    "valid": [
+      "http://foobar.com/",
+      "http://foobar/",
+      "http://localhost/",
+      "foobar/",
+      "foobar"
+    ],
+    "invalid": [],
+    "golden_id": "GOLDEN-10"
+  },
+  {
+    "title": "should validate URLs with a trailing dot option",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_trailing_dot": true,
+        "require_tld": false
+      }
+    ],
+    "valid": [
+      "http://example.com.",
+      "foobar."
+    ],
+    "invalid": [],
+    "golden_id": "GOLDEN-11"
+  },
+  {
+    "title": "should validate URLs with column and no port",
+    "validator": "isURL",
+    "args": [],
+    "valid": [
+      "http://example.com:",
+      "ftp://example.com:"
+    ],
+    "invalid": [
+      "https://example.com:abc"
+    ],
+    "golden_id": "GOLDEN-12"
+  },
+  {
+    "title": "should validate sftp protocol URL containing column and no port",
+    "validator": "isURL",
+    "args": [
+      {
+        "protocols": [
+          "sftp"
+        ]
+      }
+    ],
+    "valid": [
+      "sftp://user:pass@terminal.aws.test.nl:/incoming/things.csv"
+    ],
+    "invalid": [],
+    "golden_id": "GOLDEN-13"
+  },
+  {
+    "title": "should validate protocol relative URLs",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_protocol_relative_urls": true
+      }
+    ],
+    "valid": [
+      "//foobar.com",
+      "http://foobar.com",
+      "foobar.com"
+    ],
+    "invalid": [
+      "://foobar.com",
+      "/foobar.com",
+      "////foobar.com",
+      "http:////foobar.com"
+    ],
+    "golden_id": "GOLDEN-14"
+  },
+  {
+    "title": "should not validate URLs with fragments when allow fragments is false",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_fragments": false
+      }
+    ],
+    "valid": [
+      "http://foobar.com",
+      "foobar.com"
+    ],
+    "invalid": [
+      "http://foobar.com#part",
+      "foobar.com#part"
+    ],
+    "golden_id": "GOLDEN-15"
+  },
+  {
+    "title": "should not validate URLs with query components when allow query components is false",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_query_components": false
+      }
+    ],
+    "valid": [
+      "http://foobar.com",
+      "foobar.com"
+    ],
+    "invalid": [
+      "http://foobar.com?foo=bar",
+      "http://foobar.com?foo=bar&bar=foo",
+      "foobar.com?foo=bar",
+      "foobar.com?foo=bar&bar=foo"
+    ],
+    "golden_id": "GOLDEN-16"
+  },
+  {
+    "title": "should not validate protocol relative URLs when require protocol is true",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_protocol_relative_urls": true,
+        "require_protocol": true
+      }
+    ],
+    "valid": [
+      "http://foobar.com"
+    ],
+    "invalid": [
+      "//foobar.com",
+      "://foobar.com",
+      "/foobar.com",
+      "foobar.com"
+    ],
+    "golden_id": "GOLDEN-17"
+  },
+  {
+    "title": "should let users specify whether URLs require a protocol",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": true
+      }
+    ],
+    "valid": [
+      "http://foobar.com/"
+    ],
+    "invalid": [
+      "http://localhost/",
+      "foobar.com",
+      "foobar"
+    ],
+    "golden_id": "GOLDEN-18"
+  },
+  {
+    "title": "should validate authentication strings if a protocol is not required",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": false
+      }
+    ],
+    "valid": [
+      "user:pw@foobar.com/"
+    ],
+    "invalid": [
+      "user:pw,@foobar.com/"
+    ],
+    "golden_id": "GOLDEN-19"
+  },
+  {
+    "title": "should reject authentication strings if a protocol is required",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": true
+      }
+    ],
+    "valid": [
+      "http://user:pw@foobar.com/",
+      "https://user:password@example.com",
+      "ftp://admin:pass@ftp.example.com/"
+    ],
+    "invalid": [
+      "user:pw@foobar.com/",
+      "user:password@example.com",
+      "admin:pass@ftp.example.com/"
+    ],
+    "golden_id": "GOLDEN-20"
+  },
+  {
+    "title": "should reject invalid protocols when require_valid_protocol is enabled",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_valid_protocol": true,
+        "protocols": [
+          "http",
+          "https",
+          "ftp"
+        ]
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com",
+      "ftp://example.com"
+    ],
+    "invalid": [
+      "javascript:alert(1);@example.com",
+      "data:text/html,<script>alert(1)</script>@example.com",
+      "file:///etc/passwd@example.com"
+    ],
+    "golden_id": "GOLDEN-21"
+  },
+  {
+    "title": "should let users specify a host whitelist",
+    "validator": "isURL",
+    "args": [
+      {
+        "host_whitelist": [
+          "foo.com",
+          "bar.com"
+        ]
+      }
+    ],
+    "valid": [
+      "http://bar.com/",
+      "http://foo.com/"
+    ],
+    "invalid": [
+      "http://foobar.com",
+      "http://foo.bar.com/",
+      "http://qux.com"
+    ],
+    "golden_id": "GOLDEN-22"
+  },
+  {
+    "title": "should allow regular expressions in the host whitelist",
+    "validator": "isURL",
+    "args": [
+      {
+        "host_whitelist": [
+          "bar.com",
+          "foo.com",
+          {
+            "__type__": "RegExp",
+            "source": "\\.foo\\.com$",
+            "flags": "",
+            "literal": "/\\.foo\\.com$/"
+          }
+        ]
+      }
+    ],
+    "valid": [
+      "http://bar.com/",
+      "http://foo.com/",
+      "http://images.foo.com/",
+      "http://cdn.foo.com/",
+      "http://a.b.c.foo.com/"
+    ],
+    "invalid": [
+      "http://foobar.com",
+      "http://foo.bar.com/",
+      "http://qux.com"
+    ],
+    "golden_id": "GOLDEN-23"
+  },
+  {
+    "title": "should let users specify a host blacklist",
+    "validator": "isURL",
+    "args": [
+      {
+        "host_blacklist": [
+          "foo.com",
+          "bar.com"
+        ]
+      }
+    ],
+    "valid": [
+      "http://foobar.com",
+      "http://foo.bar.com/",
+      "http://qux.com"
+    ],
+    "invalid": [
+      "http://bar.com/",
+      "http://foo.com/"
+    ],
+    "golden_id": "GOLDEN-24"
+  },
+  {
+    "title": "should allow regular expressions in the host blacklist",
+    "validator": "isURL",
+    "args": [
+      {
+        "host_blacklist": [
+          "bar.com",
+          "foo.com",
+          {
+            "__type__": "RegExp",
+            "source": "\\.foo\\.com$",
+            "flags": "",
+            "literal": "/\\.foo\\.com$/"
+          }
+        ]
+      }
+    ],
+    "valid": [
+      "http://foobar.com",
+      "http://foo.bar.com/",
+      "http://qux.com"
+    ],
+    "invalid": [
+      "http://bar.com/",
+      "http://foo.com/",
+      "http://images.foo.com/",
+      "http://cdn.foo.com/",
+      "http://a.b.c.foo.com/"
+    ],
+    "golden_id": "GOLDEN-25"
+  },
+  {
+    "title": "GHSA-9965-vmph-33xx vulnerability - protocol delimiter parsing difference",
+    "validator": "isURL",
+    "args": [
+      {
+        "protocols": [
+          "https"
+        ],
+        "host_whitelist": [
+          "example.com"
+        ],
+        "require_host": false
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "javascript:alert(1);a=';@example.com/alert(1)"
+    ],
+    "golden_id": "GOLDEN-26"
+  },
+  {
+    "title": "should allow rejecting urls containing authentication information",
+    "validator": "isURL",
+    "args": [
+      {
+        "disallow_auth": true
+      }
+    ],
+    "valid": [
+      "doe.com"
+    ],
+    "invalid": [
+      "john@doe.com",
+      "john:john@doe.com"
+    ],
+    "golden_id": "GOLDEN-27"
+  },
+  {
+    "title": "should accept urls containing authentication information",
+    "validator": "isURL",
+    "args": [
+      {
+        "disallow_auth": false
+      }
+    ],
+    "valid": [
+      "user@example.com",
+      "user:@example.com",
+      "user:password@example.com"
+    ],
+    "invalid": [
+      "user:user:password@example.com",
+      "@example.com",
+      ":@example.com",
+      ":example.com"
+    ],
+    "golden_id": "GOLDEN-28"
+  },
+  {
+    "title": "should allow user to skip URL length validation",
+    "validator": "isURL",
+    "args": [
+      {
+        "validate_length": false
+      }
+    ],
+    "valid": [
+      "http://foobar.com/f",
+      "http://foobar.com/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    ],
+    "invalid": [],
+    "golden_id": "GOLDEN-29"
+  },
+  {
+    "title": "should allow user to configure the maximum URL length",
+    "validator": "isURL",
+    "args": [
+      {
+        "max_allowed_length": 20
+      }
+    ],
+    "valid": [
+      "http://foobar.com/12",
+      "http://foobar.com/"
+    ],
+    "invalid": [
+      "http://foobar.com/123",
+      "http://foobar.com/1234567890"
+    ],
+    "golden_id": "GOLDEN-30"
+  },
+  {
+    "title": "should validate URLs with port present",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_port": true
+      }
+    ],
+    "valid": [
+      "http://user:pass@www.foobar.com:1",
+      "http://user:@www.foobar.com:65535",
+      "http://127.0.0.1:23",
+      "http://10.0.0.0:256",
+      "http://189.123.14.13:256",
+      "http://duckduckgo.com:65535?q=%2F"
+    ],
+    "invalid": [
+      "http://user:pass@www.foobar.com/",
+      "http://user:@www.foobar.com/",
+      "http://127.0.0.1/",
+      "http://10.0.0.0/",
+      "http://189.123.14.13/",
+      "http://duckduckgo.com/?q=%2F"
+    ],
+    "golden_id": "GOLDEN-31"
+  }
+]
+
+Generated categories:
+[
+  {
+    "generated_category_id": "GENC-1",
+    "name": "Basic URL Validation",
+    "description": "Tests covering default behavior and basic URL validation logic.",
+    "generated_group_ids": [
+      "GENERATED-1",
+      "GENERATED-11",
+      "GENERATED-13",
+      "GENERATED-18"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-2",
+    "name": "Protocol Handling",
+    "description": "Tests related to protocol requirements, custom protocols, and protocol-relative URLs.",
+    "generated_group_ids": [
+      "GENERATED-2",
+      "GENERATED-3",
+      "GENERATED-6",
+      "GENERATED-19",
+      "GENERATED-20"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-3",
+    "name": "Allow Underscores",
+    "description": "fallback_singleton_category",
+    "generated_group_ids": [
+      "GENERATED-4"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-4",
+    "name": "Host and Domain Validation",
+    "description": "Tests focusing on host-related options such as whitelists, blacklists, and trailing dots.",
+    "generated_group_ids": [
+      "GENERATED-5",
+      "GENERATED-14",
+      "GENERATED-17"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-5",
+    "name": "Fragment and Query Handling",
+    "description": "Tests focusing on the handling of fragments and query components in URLs.",
+    "generated_group_ids": [
+      "GENERATED-7",
+      "GENERATED-8"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-6",
+    "name": "Authentication Handling",
+    "description": "Tests targeting authentication components and their validation logic.",
+    "generated_group_ids": [
+      "GENERATED-9",
+      "GENERATED-15",
+      "GENERATED-16",
+      "GENERATED-26",
+      "GENERATED-29"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-7",
+    "name": "Length Validation",
+    "description": "Tests related to URL length validation and its configuration.",
+    "generated_group_ids": [
+      "GENERATED-10",
+      "GENERATED-21"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-8",
+    "name": "Port Parsing",
+    "description": "fallback_singleton_category",
+    "generated_group_ids": [
+      "GENERATED-12"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-9",
+    "name": "Empty URL Validation",
+    "description": "Tests targeting validation of empty URLs under specific configurations.",
+    "generated_group_ids": [
+      "GENERATED-22",
+      "GENERATED-24",
+      "GENERATED-27"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-10",
+    "name": "URL Structure and Parsing",
+    "description": "Tests validating URL structure, including invalid split elements and malformed authentication formats.",
+    "generated_group_ids": [
+      "GENERATED-23",
+      "GENERATED-25",
+      "GENERATED-28"
+    ]
+  }
+]
+
+Indexed generated groups:
+[
+  {
+    "title": "Default Options",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com",
+      "ftp://example.com"
+    ],
+    "invalid": [
+      "example",
+      "http://",
+      "mailto:example@example.com"
+    ],
+    "rationale": "Test basic URL validation with default settings.",
+    "obligations": [
+      "OB-1",
+      "OB-12",
+      "OB-13"
+    ],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "Custom Protocols",
+    "validator": "isURL",
+    "args": [
+      {
+        "protocols": [
+          "ftp",
+          "custom"
+        ]
+      }
+    ],
+    "valid": [
+      "ftp://example.com",
+      "custom://example.com"
+    ],
+    "invalid": [
+      "http://example.com",
+      "https://example.com"
+    ],
+    "rationale": "Test validation with custom protocols.",
+    "obligations": [
+      "OB-2"
+    ],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "Require Protocol",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": true
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com"
+    ],
+    "invalid": [
+      "example.com",
+      "ftp://"
+    ],
+    "rationale": "Test validation when protocol is required.",
+    "obligations": [
+      "OB-3"
+    ],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "Allow Underscores",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_underscores": true
+      }
+    ],
+    "valid": [
+      "http://example_domain.com"
+    ],
+    "invalid": [
+      "http://example_domain.com"
+    ],
+    "rationale": "Test validation when underscores are allowed in the host.",
+    "obligations": [
+      "OB-5"
+    ],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "Allow Trailing Dot",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_trailing_dot": true
+      }
+    ],
+    "valid": [
+      "http://example.com."
+    ],
+    "invalid": [
+      "http://example.com."
+    ],
+    "rationale": "Test validation when trailing dots are allowed in the host.",
+    "obligations": [
+      "OB-6"
+    ],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "Allow Protocol Relative URLs",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_protocol_relative_urls": true
+      }
+    ],
+    "valid": [
+      "//example.com"
+    ],
+    "invalid": [
+      "//example.com"
+    ],
+    "rationale": "Test validation when protocol-relative URLs are allowed.",
+    "obligations": [
+      "OB-7"
+    ],
+    "generated_id": "GENERATED-6"
+  },
+  {
+    "title": "Disallow Fragments",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_fragments": false
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://example.com#fragment"
+    ],
+    "rationale": "Test validation when fragments are disallowed.",
+    "obligations": [
+      "OB-8"
+    ],
+    "generated_id": "GENERATED-7"
+  },
+  {
+    "title": "Disallow Query Components",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_query_components": false
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://example.com?query=value"
+    ],
+    "rationale": "Test validation when query components are disallowed.",
+    "obligations": [
+      "OB-9"
+    ],
+    "generated_id": "GENERATED-8"
+  },
+  {
+    "title": "Disallow Authentication",
+    "validator": "isURL",
+    "args": [
+      {
+        "disallow_auth": true
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://user:pass@example.com"
+    ],
+    "rationale": "Test validation when authentication components are disallowed.",
+    "obligations": [
+      "OB-10"
+    ],
+    "generated_id": "GENERATED-9"
+  },
+  {
+    "title": "Validate Length",
+    "validator": "isURL",
+    "args": [
+      {
+        "validate_length": false
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://example.com"
+    ],
+    "rationale": "Test validation when length validation is disabled.",
+    "obligations": [
+      "OB-11"
+    ],
+    "generated_id": "GENERATED-10"
+  },
+  {
+    "title": "Protocol Parsing",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "javascript:alert(1)"
+    ],
+    "rationale": "Test protocol parsing logic.",
+    "obligations": [
+      "OB-14"
+    ],
+    "generated_id": "GENERATED-11"
+  },
+  {
+    "title": "Port Parsing",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_port": true
+      }
+    ],
+    "valid": [
+      "http://example.com:80"
+    ],
+    "invalid": [
+      "http://example.com:99999"
+    ],
+    "rationale": "Test port parsing logic.",
+    "obligations": [
+      "OB-15"
+    ],
+    "generated_id": "GENERATED-12"
+  },
+  {
+    "title": "IPv6 Parsing",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://[2001:db8::1]"
+    ],
+    "invalid": [
+      "http://[2001:db8::1]:99999"
+    ],
+    "rationale": "Test IPv6 parsing logic.",
+    "obligations": [
+      "OB-16"
+    ],
+    "generated_id": "GENERATED-13"
+  },
+  {
+    "title": "Host Whitelist and Blacklist",
+    "validator": "isURL",
+    "args": [
+      {
+        "host_whitelist": [
+          "allowed.com"
+        ],
+        "host_blacklist": [
+          "blocked.com"
+        ]
+      }
+    ],
+    "valid": [
+      "http://allowed.com"
+    ],
+    "invalid": [
+      "http://blocked.com"
+    ],
+    "rationale": "Test host whitelist and blacklist logic.",
+    "obligations": [
+      "OB-17"
+    ],
+    "generated_id": "GENERATED-14"
+  },
+  {
+    "title": "Authentication and Malicious Protocols",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": false
+      }
+    ],
+    "valid": [
+      "http://user:password@example.com"
+    ],
+    "invalid": [
+      "javascript:%61%6c%65%72%74%28%31%29@example.com"
+    ],
+    "rationale": "Test the condition `is_valid_auth && !has_encoded_content` to distinguish authentication from malicious protocols.",
+    "obligations": [
+      "OB-18"
+    ],
+    "generated_id": "GENERATED-15"
+  },
+  {
+    "title": "Require Protocol with Authentication",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": true
+      }
+    ],
+    "valid": [
+      "http://user:password@example.com"
+    ],
+    "invalid": [
+      "user:password@example.com"
+    ],
+    "rationale": "Test the condition `options.require_protocol` when authentication components are present.",
+    "obligations": [
+      "OB-20"
+    ],
+    "generated_id": "GENERATED-16"
+  },
+  {
+    "title": "Host Blacklist Validation",
+    "validator": "isURL",
+    "args": [
+      {
+        "host_blacklist": [
+          "blocked.com"
+        ]
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://blocked.com"
+    ],
+    "rationale": "Test the condition `options.host_blacklist && checkHost(host, options.host_blacklist)` to ensure hosts in the blacklist are rejected.",
+    "obligations": [
+      "OB-54"
+    ],
+    "generated_id": "GENERATED-17"
+  },
+  {
+    "title": "Reject URLs with Invalid Characters",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [],
+    "invalid": [
+      "http://example.com<invalid>",
+      "http://example.com invalid"
+    ],
+    "rationale": "Test rejection of URLs containing spaces or angle brackets.",
+    "obligations": [
+      "OB-101"
+    ],
+    "generated_id": "GENERATED-18"
+  },
+  {
+    "title": "Require Protocol with Looks-Like-Port URLs",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": true
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "example.com:80"
+    ],
+    "rationale": "Test rejection of URLs resembling hostname:port when `require_protocol` is enabled.",
+    "obligations": [
+      "OB-102"
+    ],
+    "generated_id": "GENERATED-19"
+  },
+  {
+    "title": "Disallow Protocol-Relative URLs",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_protocol_relative_urls": false
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "//example.com"
+    ],
+    "rationale": "Test rejection of protocol-relative URLs when the option is disabled.",
+    "obligations": [
+      "OB-103"
+    ],
+    "generated_id": "GENERATED-20"
+  },
+  {
+    "title": "Validate Length Exceeds Maximum",
+    "validator": "isURL",
+    "args": [
+      {
+        "validate_length": true,
+        "max_allowed_length": 20
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://example.com/very/long/url/that/exceeds/max/allowed/length"
+    ],
+    "rationale": "Test URL length validation when `validate_length` is enabled and the URL exceeds the maximum allowed length.",
+    "obligations": [
+      "OB-201"
+    ],
+    "generated_id": "GENERATED-21"
+  },
+  {
+    "title": "Empty URL with Require Host Disabled",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_host": false
+      }
+    ],
+    "valid": [
+      ""
+    ],
+    "invalid": [
+      "http://example.com"
+    ],
+    "rationale": "Test validation of empty URLs when `require_host` is disabled.",
+    "obligations": [
+      "OB-202"
+    ],
+    "generated_id": "GENERATED-22"
+  },
+  {
+    "title": "Invalid URL Structure with Empty Split Element",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      ":example.com"
+    ],
+    "rationale": "Test validation of URLs with an invalid structure where the split array's first element is empty.",
+    "obligations": [
+      "OB-203"
+    ],
+    "generated_id": "GENERATED-23"
+  },
+  {
+    "title": "Empty URL with Require Host Disabled",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_host": false
+      }
+    ],
+    "valid": [
+      ""
+    ],
+    "invalid": [
+      "http://example.com"
+    ],
+    "rationale": "Test validation of empty URLs when `require_host` is disabled.",
+    "obligations": [
+      "OB-204"
+    ],
+    "generated_id": "GENERATED-24"
+  },
+  {
+    "title": "Invalid URL Structure with Empty Split Element",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      ":example.com"
+    ],
+    "rationale": "Test validation of URLs with an invalid structure where the split array's first element is empty.",
+    "obligations": [
+      "OB-205"
+    ],
+    "generated_id": "GENERATED-25"
+  },
+  {
+    "title": "Invalid Authentication Format",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://user:password@example.com"
+    ],
+    "invalid": [
+      "http://user:password:extra@example.com"
+    ],
+    "rationale": "Test validation of URLs with invalid authentication format containing excessive colons.",
+    "obligations": [
+      "OB-206"
+    ],
+    "generated_id": "GENERATED-26"
+  },
+  {
+    "title": "Empty URL with Require Host Disabled",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_host": false
+      }
+    ],
+    "valid": [
+      ""
+    ],
+    "invalid": [
+      "http://example.com"
+    ],
+    "rationale": "Test validation of empty URLs when `require_host` is disabled.",
+    "obligations": [
+      "OB-301"
+    ],
+    "generated_id": "GENERATED-27"
+  },
+  {
+    "title": "Invalid URL Structure with Empty Split Element",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      ":example.com"
+    ],
+    "rationale": "Test validation of URLs with an invalid structure where the split array's first element is empty.",
+    "obligations": [
+      "OB-302"
+    ],
+    "generated_id": "GENERATED-28"
+  },
+  {
+    "title": "Invalid Authentication Format with Empty User and Password",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://user:password@example.com"
+    ],
+    "invalid": [
+      "http://:@example.com"
+    ],
+    "rationale": "Test validation of URLs with invalid authentication components where both user and password are empty.",
+    "obligations": [
+      "OB-303"
+    ],
+    "generated_id": "GENERATED-29"
+  }
+]
+
+Runtime evaluation details:
+{
+  "summary": {
+    "total_cases": 64,
+    "correct_cases": 54,
+    "incorrect_cases": 10,
+    "exact_match_rate": 0.84375,
+    "by_expected_kind": {
+      "return": 64,
+      "throw": 0
+    }
+  },
+  "details": {
+    "failed_results": [
+      {
+        "title": "Allow Underscores",
+        "validator": "isURL",
+        "args": [
+          {
+            "allow_underscores": true,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http://example_domain.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": [
+          "OB-5"
+        ]
+      },
+      {
+        "title": "Allow Trailing Dot",
+        "validator": "isURL",
+        "args": [
+          {
+            "allow_trailing_dot": true,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http://example.com.",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": [
+          "OB-6"
+        ]
+      },
+      {
+        "title": "Allow Protocol Relative URLs",
+        "validator": "isURL",
+        "args": [
+          {
+            "allow_protocol_relative_urls": true,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "//example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": [
+          "OB-7"
+        ]
+      },
+      {
+        "title": "Validate Length",
+        "validator": "isURL",
+        "args": [
+          {
+            "validate_length": false,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_host": true,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http://example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": [
+          "OB-11"
+        ]
+      },
+      {
+        "title": "Empty URL with Require Host Disabled",
+        "validator": "isURL",
+        "args": [
+          {
+            "require_host": false
+          }
+        ],
+        "input_value": "",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": [
+          "OB-202"
+        ]
+      },
+      {
+        "title": "Empty URL with Require Host Disabled",
+        "validator": "isURL",
+        "args": [
+          {
+            "require_host": false,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http://example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": [
+          "OB-202"
+        ]
+      },
+      {
+        "title": "Empty URL with Require Host Disabled",
+        "validator": "isURL",
+        "args": [
+          {
+            "require_host": false
+          }
+        ],
+        "input_value": "",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": [
+          "OB-204"
+        ]
+      },
+      {
+        "title": "Empty URL with Require Host Disabled",
+        "validator": "isURL",
+        "args": [
+          {
+            "require_host": false,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http://example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": [
+          "OB-204"
+        ]
+      },
+      {
+        "title": "Empty URL with Require Host Disabled",
+        "validator": "isURL",
+        "args": [
+          {
+            "require_host": false
+          }
+        ],
+        "input_value": "",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": [
+          "OB-301"
+        ]
+      },
+      {
+        "title": "Empty URL with Require Host Disabled",
+        "validator": "isURL",
+        "args": [
+          {
+            "require_host": false,
+            "protocols": [
+              "http",
+              "https",
+              "ftp"
+            ],
+            "require_tld": true,
+            "require_protocol": false,
+            "require_port": false,
+            "require_valid_protocol": true,
+            "allow_underscores": false,
+            "allow_trailing_dot": false,
+            "allow_protocol_relative_urls": false,
+            "allow_fragments": true,
+            "allow_query_components": true,
+            "validate_length": true,
+            "max_allowed_length": 2084,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "http://example.com",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": [
+          "OB-301"
+        ]
+      }
+    ],
+    "coverage_total": {
+      "lines": {
+        "total": 114,
+        "covered": 110,
+        "skipped": 0,
+        "pct": 96.49
+      },
+      "statements": {
+        "total": 118,
+        "covered": 114,
+        "skipped": 0,
+        "pct": 96.61
+      },
+      "functions": {
+        "total": 3,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 119,
+        "covered": 103,
+        "skipped": 0,
+        "pct": 86.55
+      }
+    },
+    "coverage_files": {
+      "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isURL.js": {
+        "lines": {
+          "total": 114,
+          "covered": 110,
+          "skipped": 0,
+          "pct": 96.49
+        },
+        "functions": {
+          "total": 3,
+          "covered": 3,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 118,
+          "covered": 114,
+          "skipped": 0,
+          "pct": 96.61
+        },
+        "branches": {
+          "total": 119,
+          "covered": 103,
+          "skipped": 0,
+          "pct": 86.55
+        }
+      }
+    }
+  }
+}

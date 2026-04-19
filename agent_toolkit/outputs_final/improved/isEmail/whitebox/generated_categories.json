@@ -1,0 +1,68 @@
+{
+  "generated_categories": [
+    {
+      "generated_category_id": "GENC-1",
+      "name": "Default Validation",
+      "description": "Covers baseline email validation with default options and maximum length constraints.",
+      "generated_group_ids": [
+        "GENERATED-1",
+        "GENERATED-10",
+        "GENERATED-20"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "name": "Display Name Validation",
+      "description": "Tests behavior related to display names, including allowing, requiring, and rejecting specific formats or characters.",
+      "generated_group_ids": [
+        "GENERATED-2",
+        "GENERATED-3",
+        "GENERATED-11",
+        "GENERATED-14",
+        "GENERATED-15",
+        "GENERATED-16",
+        "GENERATED-17",
+        "GENERATED-18"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "name": "UTF-8 and Local Part Validation",
+      "description": "Ensures proper handling of UTF-8 characters and quoted local parts in email addresses.",
+      "generated_group_ids": [
+        "GENERATED-4",
+        "GENERATED-19"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "name": "TLD and Domain Validation",
+      "description": "Tests behavior when TLDs are optional, and domain-specific rules such as blacklists, whitelists, and IP domains.",
+      "generated_group_ids": [
+        "GENERATED-5",
+        "GENERATED-6",
+        "GENERATED-8",
+        "GENERATED-9",
+        "GENERATED-22"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-5",
+      "name": "Blacklist and Whitelist Validation",
+      "description": "Validates emails against blacklisted characters or domains and ensures only whitelisted domains are accepted.",
+      "generated_group_ids": [
+        "GENERATED-7"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-6",
+      "name": "Domain-Specific Validation",
+      "description": "Tests validation rules specific to certain domains, such as Gmail and Googlemail.",
+      "generated_group_ids": [
+        "GENERATED-12",
+        "GENERATED-13",
+        "GENERATED-21"
+      ]
+    }
+  ]
+}

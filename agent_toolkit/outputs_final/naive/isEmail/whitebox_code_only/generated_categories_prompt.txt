@@ -1,0 +1,168 @@
+Group generated tests into generated categories for validator isEmail.
+
+Generated groups:
+[
+  {
+    "title": "Basic email validation",
+    "validator": "isEmail",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "test@example.com",
+      "user.name+tag+sorting@example.com",
+      "user_name@example.com",
+      "user-name@example.com",
+      "user@subdomain.example.com"
+    ],
+    "invalid": [
+      "plainaddress",
+      "@missingusername.com",
+      "username@.com",
+      "username@com",
+      "username@.com.",
+      "username@-example.com",
+      "username@example..com"
+    ],
+    "rationale": "Covers basic email validation without any special options.",
+    "obligations": [],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "Validation with display name allowed",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_display_name": true
+      }
+    ],
+    "valid": [
+      "John Doe <john.doe@example.com>",
+      "\"John Doe\" <john.doe@example.com>",
+      "John <john@example.com>"
+    ],
+    "invalid": [
+      "John Doe john.doe@example.com",
+      "John Doe <john.doe@>",
+      "<john.doe@example.com>",
+      "John Doe <john.doe@example.com> extra"
+    ],
+    "rationale": "Tests email validation with display names allowed.",
+    "obligations": [],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "Validation with display name required",
+    "validator": "isEmail",
+    "args": [
+      {
+        "require_display_name": true
+      }
+    ],
+    "valid": [
+      "John Doe <john.doe@example.com>",
+      "\"John Doe\" <john.doe@example.com>"
+    ],
+    "invalid": [
+      "john.doe@example.com",
+      "John Doe john.doe@example.com",
+      "<john.doe@example.com>"
+    ],
+    "rationale": "Tests email validation when display names are required.",
+    "obligations": [],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "Validation with UTF-8 local part allowed",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_utf8_local_part": true
+      }
+    ],
+    "valid": [
+      "\u7528\u6237@\u4f8b\u5b50.\u5e7f\u544a",
+      "\u0909\u092a\u092f\u094b\u0917\u0915\u0930\u094d\u0924\u093e@\u0909\u0926\u093e\u0939\u0930\u0923.\u0915\u0949\u092e",
+      "\u03b8\u03c3\u03b5\u03c1@\u03b5\u03c7\u03b1\u03bc\u03c0\u03bb\u03b5.\u03c8\u03bf\u03bc",
+      "D\u00f6rte@S\u00f6rensen.example.com"
+    ],
+    "invalid": [
+      "plainaddress",
+      "user@.com",
+      "user@com"
+    ],
+    "rationale": "Tests email validation with UTF-8 characters allowed in the local part.",
+    "obligations": [],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "Validation with host blacklist",
+    "validator": "isEmail",
+    "args": [
+      {
+        "host_blacklist": [
+          "example.com",
+          "banned.com"
+        ]
+      }
+    ],
+    "valid": [
+      "user@allowed.com",
+      "user@anotherdomain.com"
+    ],
+    "invalid": [
+      "user@example.com",
+      "user@banned.com"
+    ],
+    "rationale": "Tests email validation with a blacklist of disallowed hosts.",
+    "obligations": [],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "Validation with host whitelist",
+    "validator": "isEmail",
+    "args": [
+      {
+        "host_whitelist": [
+          "example.com",
+          "allowed.com"
+        ]
+      }
+    ],
+    "valid": [
+      "user@example.com",
+      "user@allowed.com"
+    ],
+    "invalid": [
+      "user@banned.com",
+      "user@anotherdomain.com"
+    ],
+    "rationale": "Tests email validation with a whitelist of allowed hosts.",
+    "obligations": [],
+    "generated_id": "GENERATED-6"
+  },
+  {
+    "title": "Validation with max length ignored",
+    "validator": "isEmail",
+    "args": [
+      {
+        "ignore_max_length": true
+      }
+    ],
+    "valid": [
+      "a@b.com",
+      "a@b",
+      "a@b.com",
+      "a@b.com"
+    ],
+    "invalid": [
+      "a@b.com",
+      "a@b",
+      "a@b.com",
+      "a@b.com"
+    ],
+    "rationale": "Tests email validation with max length ignored.",
+    "obligations": [],
+    "generated_id": "GENERATED-7"
+  }
+]

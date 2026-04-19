@@ -1,0 +1,749 @@
+{
+  "cases": [
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "$123.45",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Default options",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "$0.99",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Default options",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "$1,234.56",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Default options",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "123.45",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Default options",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "-$123.45",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Default options",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "$123.456",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Default options",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "$123",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Default options",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "$ 123.45",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Default options",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_symbol": true
+        }
+      ],
+      "input_value": "$123.45",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Require symbol",
+      "obligations": [
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_symbol": true
+        }
+      ],
+      "input_value": "123.45",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Require symbol",
+      "obligations": [
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_symbol": true
+        }
+      ],
+      "input_value": "123",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Require symbol",
+      "obligations": [
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_negatives": false
+        }
+      ],
+      "input_value": "$123.45",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Disallow negatives",
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_negatives": false
+        }
+      ],
+      "input_value": "-$123.45",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Disallow negatives",
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_negatives": false
+        }
+      ],
+      "input_value": "($123.45)",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Disallow negatives",
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "parens_for_negatives": true
+        }
+      ],
+      "input_value": "($123.45)",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Parens for negatives",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "parens_for_negatives": true
+        }
+      ],
+      "input_value": "-$123.45",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Parens for negatives",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "parens_for_negatives": true
+        }
+      ],
+      "input_value": "$123.45",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Parens for negatives",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "symbol_after_digits": true
+        }
+      ],
+      "input_value": "123.45$",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Symbol after digits",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "symbol_after_digits": true
+        }
+      ],
+      "input_value": "$123.45",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Symbol after digits",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "symbol_after_digits": true
+        }
+      ],
+      "input_value": "123.45",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Symbol after digits",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_decimal": false
+        }
+      ],
+      "input_value": "$123",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Disallow decimals",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_decimal": false
+        }
+      ],
+      "input_value": "$1,234",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Disallow decimals",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_decimal": false
+        }
+      ],
+      "input_value": "$123.45",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Disallow decimals",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_decimal": false
+        }
+      ],
+      "input_value": "$123.4",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Disallow decimals",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_decimal": true
+        }
+      ],
+      "input_value": "$123.45",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Require decimals",
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_decimal": true
+        }
+      ],
+      "input_value": "$123",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Require decimals",
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_decimal": true
+        }
+      ],
+      "input_value": "$1,234",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Require decimals",
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "digits_after_decimal": [
+            1,
+            2
+          ]
+        }
+      ],
+      "input_value": "$123.4",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Multiple digits after decimal",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "digits_after_decimal": [
+            1,
+            2
+          ]
+        }
+      ],
+      "input_value": "$123.45",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Multiple digits after decimal",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "digits_after_decimal": [
+            1,
+            2
+          ]
+        }
+      ],
+      "input_value": "$123.456",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Multiple digits after decimal",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "digits_after_decimal": [
+            1,
+            2
+          ]
+        }
+      ],
+      "input_value": "$123.",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Multiple digits after decimal",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_space_after_symbol": true
+        }
+      ],
+      "input_value": "$ 123.45",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Allow space after symbol",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_space_after_symbol": true
+        }
+      ],
+      "input_value": "$123.45",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Allow space after symbol",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_space_after_symbol": true
+        }
+      ],
+      "input_value": "$ 123",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Allow space after symbol",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_space_after_digits": true
+        }
+      ],
+      "input_value": "$123.45 ",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Allow space after digits",
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_space_after_digits": true
+        }
+      ],
+      "input_value": "$123.45",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Allow space after digits",
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_space_after_digits": true
+        }
+      ],
+      "input_value": "$123.45  ",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Allow space after digits",
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_negative_sign_placeholder": true
+        }
+      ],
+      "input_value": "$ 123.45",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Allow negative sign placeholder",
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_negative_sign_placeholder": true
+        }
+      ],
+      "input_value": "$-123.45",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Allow negative sign placeholder",
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_negative_sign_placeholder": true
+        }
+      ],
+      "input_value": "$123.45",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Allow negative sign placeholder",
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "negative_sign_after_digits": true
+        }
+      ],
+      "input_value": "$123.45-",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Negative sign after digits",
+      "obligations": [
+        "OB-12",
+        "OB-14"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "negative_sign_after_digits": true
+        }
+      ],
+      "input_value": "-$123.45",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Negative sign after digits",
+      "obligations": [
+        "OB-12",
+        "OB-14"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "negative_sign_after_digits": true
+        }
+      ],
+      "input_value": "$123.45",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Negative sign after digits",
+      "obligations": [
+        "OB-12",
+        "OB-14"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "negative_sign_before_digits": true
+        }
+      ],
+      "input_value": "-$123.45",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Negative sign before digits",
+      "obligations": [
+        "OB-13",
+        "OB-15"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "negative_sign_before_digits": true
+        }
+      ],
+      "input_value": "$123.45-",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Negative sign before digits",
+      "obligations": [
+        "OB-13",
+        "OB-15"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "negative_sign_before_digits": true
+        }
+      ],
+      "input_value": "$123.45",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Negative sign before digits",
+      "obligations": [
+        "OB-13",
+        "OB-15"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "negative_sign_before_digits": false,
+          "negative_sign_after_digits": false
+        }
+      ],
+      "input_value": "$123.45",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "No negative sign placement options",
+      "obligations": [
+        "OB-16"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "negative_sign_before_digits": false,
+          "negative_sign_after_digits": false
+        }
+      ],
+      "input_value": "-$123.45",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "No negative sign placement options",
+      "obligations": [
+        "OB-16"
+      ]
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "negative_sign_before_digits": false,
+          "negative_sign_after_digits": false
+        }
+      ],
+      "input_value": "$123.45-",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "No negative sign placement options",
+      "obligations": [
+        "OB-16"
+      ]
+    }
+  ],
+  "mode": "whitebox_code_only",
+  "approach": "improved",
+  "target_source_files": [
+    "src/lib/isCurrency.js"
+  ]
+}

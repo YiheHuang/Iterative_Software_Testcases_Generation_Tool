@@ -1,0 +1,176 @@
+{
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "blackbox",
+      "rule": "Default behavior: validate standard email formats.",
+      "why": "Baseline functionality as described in the README.",
+      "minimal_valid": "example@example.com",
+      "minimal_invalid": "plainaddress"
+    },
+    {
+      "id": "OB-2",
+      "kind": "blackbox",
+      "rule": "Allow display name format when `allow_display_name` is true.",
+      "why": "Requirement explicitly mentions this option.",
+      "minimal_valid": "John Doe <john.doe@example.com>",
+      "minimal_invalid": "John Doe john.doe@example.com"
+    },
+    {
+      "id": "OB-3",
+      "kind": "blackbox",
+      "rule": "Require display name format when `require_display_name` is true.",
+      "why": "Requirement explicitly mentions this option.",
+      "minimal_valid": "John Doe <john.doe@example.com>",
+      "minimal_invalid": "john.doe@example.com"
+    },
+    {
+      "id": "OB-4",
+      "kind": "blackbox",
+      "rule": "Reject non-English UTF8 characters in local part when `allow_utf8_local_part` is false.",
+      "why": "Requirement explicitly mentions this option.",
+      "minimal_valid": "example@example.com",
+      "minimal_invalid": "exämple@example.com"
+    },
+    {
+      "id": "OB-5",
+      "kind": "blackbox",
+      "rule": "Allow email addresses without TLD when `require_tld` is false.",
+      "why": "Requirement explicitly mentions this option.",
+      "minimal_valid": "example@localhost",
+      "minimal_invalid": "example@localhost"
+    },
+    {
+      "id": "OB-6",
+      "kind": "blackbox",
+      "rule": "Allow IP addresses in the domain part when `allow_ip_domain` is true.",
+      "why": "Requirement explicitly mentions this option.",
+      "minimal_valid": "example@[192.168.1.1]",
+      "minimal_invalid": "example@[192.168.1.1]"
+    },
+    {
+      "id": "OB-7",
+      "kind": "blackbox",
+      "rule": "Reject emails exceeding standard max length unless `ignore_max_length` is true.",
+      "why": "Requirement explicitly mentions this option.",
+      "minimal_valid": "a@b.com",
+      "minimal_invalid": null
+    },
+    {
+      "id": "OB-8",
+      "kind": "blackbox",
+      "rule": "Reject emails containing blacklisted characters in the local part.",
+      "why": "Requirement explicitly mentions this option.",
+      "minimal_valid": "example@example.com",
+      "minimal_invalid": "ex@ample@example.com"
+    },
+    {
+      "id": "OB-9",
+      "kind": "blackbox",
+      "rule": "Reject emails with domains matching host_blacklist.",
+      "why": "Requirement explicitly mentions this option.",
+      "minimal_valid": "example@example.com",
+      "minimal_invalid": "example@blacklisted.com"
+    },
+    {
+      "id": "OB-10",
+      "kind": "blackbox",
+      "rule": "Reject emails with domains not matching host_whitelist.",
+      "why": "Requirement explicitly mentions this option.",
+      "minimal_valid": "example@whitelisted.com",
+      "minimal_invalid": "example@nonwhitelisted.com"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Default email validation",
+      "validator": "isEmail",
+      "args": [{}],
+      "valid": ["example@example.com", "user.name+tag+sorting@example.com", "x@x.au"],
+      "invalid": ["plainaddress", "@missingusername.com", "username@.com"],
+      "rationale": "Covers baseline functionality for validating standard email formats.",
+      "obligations": ["OB-1"]
+    },
+    {
+      "title": "Allow display name format",
+      "validator": "isEmail",
+      "args": [{ "allow_display_name": true }],
+      "valid": ["John Doe <john.doe@example.com>", "Jane Smith <jane.smith@domain.org>"],
+      "invalid": ["John Doe john.doe@example.com", "Jane Smith jane.smith@domain.org"],
+      "rationale": "Tests the `allow_display_name` option to validate emails with display names.",
+      "obligations": ["OB-2"]
+    },
+    {
+      "title": "Require display name format",
+      "validator": "isEmail",
+      "args": [{ "require_display_name": true }],
+      "valid": ["John Doe <john.doe@example.com>"],
+      "invalid": ["john.doe@example.com", "example@example.com"],
+      "rationale": "Tests the `require_display_name` option to enforce display name format.",
+      "obligations": ["OB-3"]
+    },
+    {
+      "title": "Reject UTF8 in local part",
+      "validator": "isEmail",
+      "args": [{ "allow_utf8_local_part": false }],
+      "valid": ["example@example.com"],
+      "invalid": ["exämple@example.com", "üser@domain.com"],
+      "rationale": "Tests the `allow_utf8_local_part` option to reject non-English UTF8 characters in the local part.",
+      "obligations": ["OB-4"]
+    },
+    {
+      "title": "Allow emails without TLD",
+      "validator": "isEmail",
+      "args": [{ "require_tld": false }],
+      "valid": ["example@localhost", "user@machine"],
+      "invalid": ["example@.com", "user@.localhost"],
+      "rationale": "Tests the `require_tld` option to allow emails without a top-level domain.",
+      "obligations": ["OB-5"]
+    },
+    {
+      "title": "Allow IP addresses in domain",
+      "validator": "isEmail",
+      "args": [{ "allow_ip_domain": true }],
+      "valid": ["example@[192.168.1.1]", "user@[255.255.255.255]"],
+      "invalid": ["example@[192.168.1.1.1]", "user@[300.300.300.300]"],
+      "rationale": "Tests the `allow_ip_domain` option to validate emails with IP addresses in the domain part.",
+      "obligations": ["OB-6"]
+    },
+    {
+      "title": "Ignore max length restriction",
+      "validator": "isEmail",
+      "args": [{ "ignore_max_length": true }],
+      "valid": ["a@b.com", "a"  ],
+      "invalid": [],
+      "rationale": "Tests the `ignore_max_length` option to allow emails exceeding standard max length.",
+      "obligations": ["OB-7"]
+    },
+    {
+      "title": "Reject blacklisted characters",
+      "validator": "isEmail",
+      "args": [{ "blacklisted_chars": "@" }],
+      "valid": ["example@example.com"],
+      "invalid": ["ex@ample@example.com"],
+      "rationale": "Tests the `blacklisted_chars` option to reject emails containing blacklisted characters in the local part.",
+      "obligations": ["OB-8"]
+    },
+    {
+      "title": "Reject blacklisted domains",
+      "validator": "isEmail",
+      "args": [{ "host_blacklist": ["blacklisted.com"] }],
+      "valid": ["example@example.com"],
+      "invalid": ["example@blacklisted.com"],
+      "rationale": "Tests the `host_blacklist` option to reject emails with domains matching the blacklist.",
+      "obligations": ["OB-9"]
+    },
+    {
+      "title": "Allow only whitelisted domains",
+      "validator": "isEmail",
+      "args": [{ "host_whitelist": ["whitelisted.com"] }],
+      "valid": ["example@whitelisted.com"],
+      "invalid": ["example@nonwhitelisted.com"],
+      "rationale": "Tests the `host_whitelist` option to reject emails with domains not matching the whitelist.",
+      "obligations": ["OB-10"]
+    }
+  ]
+}

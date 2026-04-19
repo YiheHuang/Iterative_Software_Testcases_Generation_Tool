@@ -1,0 +1,66 @@
+{
+  "audit": [
+    {
+      "group_title": "Basic Luhn validation",
+      "decision": "keep",
+      "reason": "The Luhn algorithm is explicitly required by the README.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Provider-specific validation",
+      "decision": "keep",
+      "reason": "Provider-specific validation is explicitly supported by the README.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Invalid provider error handling",
+      "decision": "keep",
+      "reason": "The README specifies that invalid providers should result in an error.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Input sanitization",
+      "decision": "keep",
+      "reason": "Input sanitization is consistent with the requirement to validate credit card numbers.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Global pattern matching",
+      "decision": "keep",
+      "reason": "Validation against all card provider patterns when no provider is specified is supported by the README.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Provider-specific early return",
+      "decision": "keep",
+      "reason": "Early return behavior for invalid provider-specific patterns is consistent with the README.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Global early return",
+      "decision": "drop",
+      "reason": "The group duplicates the behavior already covered by 'Global pattern matching' and does not add new requirement-supported cases.",
+      "removed_valid": [],
+      "removed_invalid": [
+        "1234567812345678"
+      ]
+    },
+    {
+      "group_title": "Default options behavior",
+      "decision": "drop",
+      "reason": "The README does not explicitly specify behavior for the ternary operator's false branch or default options handling.",
+      "removed_valid": [
+        "4111111111111111"
+      ],
+      "removed_invalid": [
+        "1234567812345678"
+      ]
+    }
+  ]
+}

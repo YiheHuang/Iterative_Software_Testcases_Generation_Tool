@@ -1,0 +1,53 @@
+{
+  "validator_name": "isFQDN",
+  "golden_categories": [
+    {
+      "golden_category_id": "GC-1",
+      "name": "Standard FQDN Validation",
+      "description": "Validates fully qualified domain names (FQDN) with default options.",
+      "golden_group_ids": [
+        "GOLDEN-1"
+      ]
+    },
+    {
+      "golden_category_id": "GC-2",
+      "name": "Trailing Dot Option",
+      "description": "Validates FQDNs with the option to allow a trailing dot.",
+      "golden_group_ids": [
+        "GOLDEN-2"
+      ]
+    },
+    {
+      "golden_category_id": "GC-3",
+      "name": "No TLD Requirement",
+      "description": "Validates FQDNs without requiring a top-level domain (TLD).",
+      "golden_group_ids": [
+        "GOLDEN-3"
+      ]
+    },
+    {
+      "golden_category_id": "GC-4",
+      "name": "Numeric TLDs Without Requirement",
+      "description": "Validates FQDNs with numeric TLDs when TLD requirement is disabled.",
+      "golden_group_ids": [
+        "GOLDEN-4"
+      ]
+    },
+    {
+      "golden_category_id": "GC-5",
+      "name": "Wildcard Option",
+      "description": "Validates FQDNs with the option to allow wildcard domains.",
+      "golden_group_ids": [
+        "GOLDEN-5"
+      ]
+    },
+    {
+      "golden_category_id": "GC-6",
+      "name": "Combined Options",
+      "description": "Validates FQDNs with multiple options enabled: trailing dot, underscores, and numeric TLDs.",
+      "golden_group_ids": [
+        "GOLDEN-6"
+      ]
+    }
+  ]
+}

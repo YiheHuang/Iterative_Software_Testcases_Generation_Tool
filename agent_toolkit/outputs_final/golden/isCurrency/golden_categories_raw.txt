@@ -1,0 +1,84 @@
+{
+  "golden_categories": [
+    {
+      "name": "Default Currency Validation",
+      "description": "Validates general currency formats without specific constraints.",
+      "golden_group_ids": ["GOLDEN-1"]
+    },
+    {
+      "name": "No Decimal Allowed",
+      "description": "Validates currency formats where decimals are not allowed.",
+      "golden_group_ids": ["GOLDEN-2"]
+    },
+    {
+      "name": "Require Decimal",
+      "description": "Validates currency formats where decimals are mandatory.",
+      "golden_group_ids": ["GOLDEN-3"]
+    },
+    {
+      "name": "Specific Decimal Precision",
+      "description": "Validates currency formats with specific digits allowed after the decimal.",
+      "golden_group_ids": ["GOLDEN-4"]
+    },
+    {
+      "name": "Require Symbol",
+      "description": "Validates currency formats where a currency symbol is mandatory.",
+      "golden_group_ids": ["GOLDEN-5"]
+    },
+    {
+      "name": "Custom Symbol with Negative Sign Before Digits",
+      "description": "Validates currency formats with a custom symbol and negative sign before digits.",
+      "golden_group_ids": ["GOLDEN-6"]
+    },
+    {
+      "name": "Negative Sign After Digits",
+      "description": "Validates currency formats where the negative sign appears after the digits.",
+      "golden_group_ids": ["GOLDEN-7"]
+    },
+    {
+      "name": "Custom Symbol Without Negatives",
+      "description": "Validates currency formats with a custom symbol and disallows negative values.",
+      "golden_group_ids": ["GOLDEN-8"]
+    },
+    {
+      "name": "Custom Symbol with Space and Specific Separators",
+      "description": "Validates currency formats with a custom symbol, space after the symbol, and specific thousands and decimal separators.",
+      "golden_group_ids": ["GOLDEN-9"]
+    },
+    {
+      "name": "Custom Symbol with Space After Symbol",
+      "description": "Validates currency formats with a custom symbol, space after the symbol, and specific separators.",
+      "golden_group_ids": ["GOLDEN-10"]
+    },
+    {
+      "name": "Custom Symbol After Digits",
+      "description": "Validates currency formats with a custom symbol placed after the digits.",
+      "golden_group_ids": ["GOLDEN-11"]
+    },
+    {
+      "name": "Custom Symbol with Negative Sign Before Digits and Space",
+      "description": "Validates currency formats with a custom symbol, negative sign before digits, and space after the symbol.",
+      "golden_group_ids": ["GOLDEN-12"]
+    },
+    {
+      "name": "Custom Symbol Without Negatives and Space",
+      "description": "Validates currency formats with a custom symbol, disallows negatives, and allows space after the symbol.",
+      "golden_group_ids": ["GOLDEN-13"]
+    },
+    {
+      "name": "Parentheses for Negatives",
+      "description": "Validates currency formats where negative values are enclosed in parentheses.",
+      "golden_group_ids": ["GOLDEN-14"]
+    },
+    {
+      "name": "Disallow Negatives",
+      "description": "Validates currency formats where negative values are not allowed.",
+      "golden_group_ids": ["GOLDEN-15"]
+    },
+    {
+      "name": "Custom Brazilian Real Format",
+      "description": "Validates currency formats specific to Brazilian Real with custom symbol and separators.",
+      "golden_group_ids": ["GOLDEN-16"]
+    }
+  ]
+}

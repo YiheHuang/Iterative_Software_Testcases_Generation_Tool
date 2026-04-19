@@ -1,0 +1,177 @@
+{
+  "obligations": [
+    {
+      "id": "OB-13",
+      "kind": "whitebox",
+      "rule": "Test the condition where `provider && provider.toLowerCase() in cards` evaluates to `true` and the card does not match the provider's regex.",
+      "why": "Targets uncovered branch `condition_true_branch` at line 31 and statement at line 32.",
+      "minimal_valid": null,
+      "minimal_invalid": "{\"card\": \"4111111111111111\", \"options\": {\"provider\": \"amex\"}}"
+    },
+    {
+      "id": "OB-14",
+      "kind": "whitebox",
+      "rule": "Test the condition where `provider && !(provider.toLowerCase() in cards)` evaluates to `true`.",
+      "why": "Targets uncovered branch `condition_true_branch` at line 34 and statement at line 36.",
+      "minimal_valid": null,
+      "minimal_invalid": "{\"card\": \"4111111111111111\", \"options\": {\"provider\": \"invalid\"}}"
+    },
+    {
+      "id": "OB-15",
+      "kind": "whitebox",
+      "rule": "Test the ternary false branch for `options = {}`.",
+      "why": "Targets uncovered cond-expr path `ternary_false_branch` at line 25.",
+      "minimal_valid": null,
+      "minimal_invalid": "{\"card\": \"4111111111111111\"}"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Input validation with assertString",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "\"4111111111111111\""
+      ],
+      "invalid": [
+        "1234567890123456"
+      ],
+      "rationale": "Ensure the input is validated as a string using `assertString`.",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "title": "Invalid provider throws error",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [],
+      "invalid": [
+        "{\"card\": \"4111111111111111\", \"options\": {\"provider\": \"invalid\"}}"
+      ],
+      "rationale": "Test that an invalid provider throws an error.",
+      "obligations": [
+        "OB-2",
+        "OB-10",
+        "OB-14"
+      ]
+    },
+    {
+      "title": "Provider-specific validation",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"amex\"}}"
+      ],
+      "invalid": [
+        "{\"card\": \"4111111111111111\", \"options\": {\"provider\": \"amex\"}}"
+      ],
+      "rationale": "Ensure the card matches the regex for the specified provider.",
+      "obligations": [
+        "OB-3",
+        "OB-9",
+        "OB-13"
+      ]
+    },
+    {
+      "title": "Validation without provider - no match",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [],
+      "invalid": [
+        "\"0000000000000000\""
+      ],
+      "rationale": "Test that the function returns `false` when no provider is specified and the card does not match any regex.",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "title": "Validation without provider - match",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "\"4111111111111111\""
+      ],
+      "invalid": [],
+      "rationale": "Test that the function returns `true` when no provider is specified and the card matches a regex.",
+      "obligations": [
+        "OB-5",
+        "OB-11"
+      ]
+    },
+    {
+      "title": "Luhn algorithm validation",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "\"4111111111111111\""
+      ],
+      "invalid": [
+        "\"4111111111111121\""
+      ],
+      "rationale": "Ensure the card passes the Luhn algorithm check using `isLuhnValid`.",
+      "obligations": [
+        "OB-6",
+        "OB-12"
+      ]
+    },
+    {
+      "title": "Sanitization of card number",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "\"4111-1111-1111-1111\""
+      ],
+      "invalid": [
+        "\"4111-1111-1111-1121\""
+      ],
+      "rationale": "Test that the card number is sanitized by removing spaces and dashes before validation.",
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "title": "Provider exists in cards",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "{\"card\": \"4111111111111111\", \"options\": {\"provider\": \"visa\"}}"
+      ],
+      "invalid": [],
+      "rationale": "Test the condition where `provider && provider.toLowerCase() in cards` evaluates to `true`.",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "title": "Default options handling",
+      "validator": "isCreditCard",
+      "args": [],
+      "valid": [],
+      "invalid": [
+        "{\"card\": \"4111111111111111\"}"
+      ],
+      "rationale": "Test the ternary false branch for `options = {}`.",
+      "obligations": [
+        "OB-15"
+      ]
+    }
+  ]
+}

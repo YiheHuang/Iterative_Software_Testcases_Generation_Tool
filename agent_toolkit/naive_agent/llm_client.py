@@ -10,6 +10,42 @@ from .models import LLMConfig
 class LLMClient:
     def __init__(self, config: LLMConfig) -> None:
         self.config = config
+        self._usage = {
+            "request_count": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "usage_reporting_available": False,
+        }
+
+    def _record_usage(self, body: dict[str, object]) -> None:
+        self._usage["request_count"] += 1
+        usage = body.get("usage")
+        if not isinstance(usage, dict):
+            return
+        prompt_tokens = usage.get("prompt_tokens")
+        completion_tokens = usage.get("completion_tokens")
+        total_tokens = usage.get("total_tokens")
+
+        if isinstance(prompt_tokens, int):
+            self._usage["prompt_tokens"] += prompt_tokens
+        if isinstance(completion_tokens, int):
+            self._usage["completion_tokens"] += completion_tokens
+        if isinstance(total_tokens, int):
+            self._usage["total_tokens"] += total_tokens
+
+        self._usage["usage_reporting_available"] = True
+
+    def usage_summary(self) -> dict[str, int | bool | str]:
+        return {
+            "request_count": int(self._usage["request_count"]),
+            "prompt_tokens": int(self._usage["prompt_tokens"]),
+            "completion_tokens": int(self._usage["completion_tokens"]),
+            "total_tokens": int(self._usage["total_tokens"]),
+            "usage_reporting_available": bool(self._usage["usage_reporting_available"]),
+            "model": self.config.model,
+            "api_url": self.config.api_url,
+        }
 
     def chat(self, system_prompt: str, user_prompt: str) -> str:
         payload = {
@@ -35,6 +71,7 @@ class LLMClient:
             try:
                 with request.urlopen(req, timeout=self.config.timeout_seconds) as response:
                     body = json.loads(response.read().decode("utf-8"))
+                self._record_usage(body)
                 break
             except error.HTTPError as exc:
                 detail = exc.read().decode("utf-8", errors="replace")

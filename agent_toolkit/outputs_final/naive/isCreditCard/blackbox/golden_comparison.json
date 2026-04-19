@@ -1,0 +1,246 @@
+{
+  "golden_categories": [
+    {
+      "golden_category_id": "GC-1",
+      "name": "General Credit Card Validation",
+      "description": "Tests for general credit card validation without specifying a provider.",
+      "golden_group_ids": [
+        "GOLDEN-1"
+      ]
+    },
+    {
+      "golden_category_id": "GC-2",
+      "name": "Invalid Provider Handling",
+      "description": "Tests for handling invalid or unsupported credit card providers.",
+      "golden_group_ids": [
+        "GOLDEN-2"
+      ]
+    },
+    {
+      "golden_category_id": "GC-3",
+      "name": "AmEx Credit Card Validation",
+      "description": "Tests for validating American Express (AmEx) credit cards.",
+      "golden_group_ids": [
+        "GOLDEN-3"
+      ]
+    },
+    {
+      "golden_category_id": "GC-4",
+      "name": "Diners Club Credit Card Validation",
+      "description": "Tests for validating Diners Club credit cards.",
+      "golden_group_ids": [
+        "GOLDEN-4"
+      ]
+    },
+    {
+      "golden_category_id": "GC-5",
+      "name": "Discover Credit Card Validation",
+      "description": "Tests for validating Discover credit cards.",
+      "golden_group_ids": [
+        "GOLDEN-5"
+      ]
+    },
+    {
+      "golden_category_id": "GC-6",
+      "name": "JCB Credit Card Validation",
+      "description": "Tests for validating JCB credit cards.",
+      "golden_group_ids": [
+        "GOLDEN-6"
+      ]
+    },
+    {
+      "golden_category_id": "GC-7",
+      "name": "Mastercard Credit Card Validation",
+      "description": "Tests for validating Mastercard credit cards.",
+      "golden_group_ids": [
+        "GOLDEN-7"
+      ]
+    },
+    {
+      "golden_category_id": "GC-8",
+      "name": "UnionPay Credit Card Validation",
+      "description": "Tests for validating UnionPay credit cards.",
+      "golden_group_ids": [
+        "GOLDEN-8"
+      ]
+    },
+    {
+      "golden_category_id": "GC-9",
+      "name": "Visa Credit Card Validation",
+      "description": "Tests for validating Visa credit cards.",
+      "golden_group_ids": [
+        "GOLDEN-9"
+      ]
+    }
+  ],
+  "generated_categories": [
+    {
+      "generated_category_id": "GENC-1",
+      "name": "General Credit Card Validation",
+      "description": "Tests common valid and invalid credit card numbers without specifying a provider.",
+      "generated_group_ids": [
+        "GENERATED-1"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "name": "Provider-Specific Validation",
+      "description": "Tests credit card validation for specific providers like Visa and American Express.",
+      "generated_group_ids": [
+        "GENERATED-2",
+        "GENERATED-3"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "name": "Unsupported Provider Validation",
+      "description": "Tests behavior when an unsupported provider is specified, ensuring no valid numbers are accepted.",
+      "generated_group_ids": [
+        "GENERATED-4"
+      ]
+    }
+  ],
+  "golden_to_generated": [
+    {
+      "golden_category_id": "GC-1",
+      "matched_generated_category_ids": [
+        "GENC-1"
+      ],
+      "match_type": "strong",
+      "reason": "Both categories focus on general credit card validation without specifying a provider, and their descriptions align closely."
+    },
+    {
+      "golden_category_id": "GC-2",
+      "matched_generated_category_ids": [
+        "GENC-3"
+      ],
+      "match_type": "strong",
+      "reason": "Both categories address handling unsupported or invalid providers, and their descriptions and test cases align well."
+    },
+    {
+      "golden_category_id": "GC-3",
+      "matched_generated_category_ids": [
+        "GENC-2"
+      ],
+      "match_type": "partial",
+      "reason": "GENC-2 includes tests for AmEx validation, but also spans other providers like Visa, making the match partial."
+    },
+    {
+      "golden_category_id": "GC-4",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses Diners Club credit card validation."
+    },
+    {
+      "golden_category_id": "GC-5",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses Discover credit card validation."
+    },
+    {
+      "golden_category_id": "GC-6",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses JCB credit card validation."
+    },
+    {
+      "golden_category_id": "GC-7",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses Mastercard credit card validation."
+    },
+    {
+      "golden_category_id": "GC-8",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses UnionPay credit card validation."
+    },
+    {
+      "golden_category_id": "GC-9",
+      "matched_generated_category_ids": [
+        "GENC-2"
+      ],
+      "match_type": "partial",
+      "reason": "GENC-2 includes tests for Visa validation, but also spans other providers like AmEx, making the match partial."
+    }
+  ],
+  "generated_to_golden": [
+    {
+      "generated_category_id": "GENC-1",
+      "matched_golden_category_ids": [
+        "GC-1"
+      ],
+      "match_type": "strong",
+      "reason": "GENC-1 aligns directly with GC-1 in scope and description, focusing on general credit card validation without provider specificity."
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "matched_golden_category_ids": [
+        "GC-3",
+        "GC-9"
+      ],
+      "match_type": "partial",
+      "reason": "GENC-2 spans multiple providers, including AmEx and Visa, partially aligning with GC-3 and GC-9."
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "matched_golden_category_ids": [
+        "GC-2"
+      ],
+      "match_type": "strong",
+      "reason": "GENC-3 directly matches GC-2 in addressing unsupported provider validation, with similar test cases and descriptions."
+    }
+  ],
+  "novel_generated_categories": [],
+  "missing_golden_categories": [
+    {
+      "golden_category_id": "GC-4",
+      "golden_category_name": "Diners Club Credit Card Validation",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-5",
+      "golden_category_name": "Discover Credit Card Validation",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-6",
+      "golden_category_name": "JCB Credit Card Validation",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-7",
+      "golden_category_name": "Mastercard Credit Card Validation",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-8",
+      "golden_category_name": "UnionPay Credit Card Validation",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    }
+  ],
+  "summary": {
+    "total_golden_categories": 9,
+    "total_generated_categories": 3,
+    "overlap_golden_categories": 4,
+    "missing_golden_categories": 5,
+    "matched_generated_categories": 3,
+    "novel_generated_categories": 0,
+    "strong_golden_category_matches": 2,
+    "partial_golden_category_matches": 2,
+    "fragmented_golden_matches": 0,
+    "matched_golden_ratio": 0.4444444444444444,
+    "total_golden_groups": 9,
+    "total_generated_groups": 3,
+    "overlap_golden_groups": 4,
+    "missing_golden_groups": 5,
+    "novel_valid_groups": 0,
+    "exact_or_near_overlap_groups": 4,
+    "golden_groups_with_semantic_match": 4,
+    "generated_groups_with_semantic_match": 3,
+    "novel_valid_categories": 0
+  },
+  "golden_source_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\golden\\isCreditCard\\isCreditCard_golden_tests.json",
+  "golden_categories_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\golden\\isCreditCard\\isCreditCard_golden_categories.json",
+  "generated_categories_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\naive\\isCreditCard\\blackbox\\generated_categories.json"
+}

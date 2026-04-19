@@ -1,0 +1,55 @@
+[
+  {
+    "title": "Default behavior: validate general credit card numbers",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "input_value": "4111-1111-1111-1111",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-1",
+      "OB-3",
+      "OB-4"
+    ]
+  },
+  {
+    "title": "Invalid character rejection",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "input_value": "4111-1111-1111-1111",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-3"
+    ]
+  },
+  {
+    "title": "Invalid character rejection",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "input_value": "4111 1111 1111 1111",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-3"
+    ]
+  }
+]

@@ -1,0 +1,186 @@
+You are performing a strict requirement audit for a candidate white-box test suite for isURL.
+Your job is to remove test cases that are not clearly supported by the requirement.
+Be conservative: when a case is uncertain, implementation-only, or weakly justified, delete it.
+
+Return strict JSON only with this schema:
+{
+  "obligations": [...],
+  "test_groups": [...],
+  "audit": [
+    {
+      "group_title": "string",
+      "decision": "keep|trim|drop",
+      "reason": "string",
+      "removed_valid": ["..."],
+      "removed_invalid": ["..."]
+    }
+  ]
+}
+
+Hard constraints:
+- Preserve the same overall suite schema for obligations and test_groups.
+- Do NOT add new groups, new args, new valid values, or new invalid values.
+- Do NOT rewrite existing test strings into different strings.
+- You may only delete values, delete whole groups, and delete unused obligations.
+- Every input value must be a real executable input string, not a presentation wrapper, not a description, and not a pseudo-code expression.
+- If a group keeps zero valid and zero invalid values after audit, drop the whole group.
+- Remove obligations that no remaining group uses.
+
+Requirement specification:
+Function name: isURL
+Black-box requirement source: validator_js README function entry
+Signature summary: isURL(str [, options])
+README behavior summary:
+| check if the string is a URL.
+`options` is an object which defaults to `{ protocols: ['http','https','ftp'], require_tld: true, require_protocol: false, require_host: true, require_port: false, require_valid_protocol: true, allow_underscores: false, host_whitelist: false, host_blacklist: false, allow_trailing_dot: false, allow_protocol_relative_urls: false, allow_fragments: true, allow_query_components: true, disallow_auth: false, validate_length: true }`.
+`protocols` - valid protocols can be modified with this option.
+`require_tld` - If set to false isURL will not check if the URL's host includes a top-level domain.
+`require_protocol` - **RECOMMENDED** if set to true isURL will return false if protocol is not present in the URL. Without this setting, some malicious URLs cannot be distinguishable from a valid URL with authentication information.
+`require_host` - if set to false isURL will not check if host is present in the URL.
+`require_port` - if set to true isURL will check if port is present in the URL.
+`require_valid_protocol` - isURL will check if the URL's protocol is present in the protocols option.
+`allow_underscores` - if set to true, the validator will allow underscores in the URL.
+`host_whitelist` - if set to an array of strings or regexp, and the domain matches none of the strings defined in it, the validation fails.
+`host_blacklist` - if set to an array of strings or regexp, and the domain matches any of the strings defined in it, the validation fails.
+`allow_trailing_dot` - if set to true, the validator will allow the domain to end with a `.` character.
+`allow_protocol_relative_urls` - if set to true protocol relative URLs will be allowed.
+`allow_fragments` - if set to false isURL will return false if fragments are present.
+`allow_query_components` - if set to false isURL will return false if query components are present.
+`disallow_auth` - if set to true, the validator will fail if the URL contains an authentication component, e.g. `http://username:password@example.com`.
+`validate_length` - if set to false isURL will skip string length validation. `max_allowed_length` will be ignored if this is set as `false`.
+`max_allowed_length` - if set, isURL will not allow URLs longer than the specified value (default is 2084 that IE maximum URL length).
+
+Treat the README entry as the authoritative black-box behavior description.
+Infer valid inputs, invalid inputs, option-sensitive behaviors, and edge cases from this description.
+
+
+Candidate obligations:
+[
+  {
+    "id": "OB-1",
+    "kind": "blackbox",
+    "rule": "The function must reject strings containing spaces or invalid characters like '<' or '>'.",
+    "why": "The README specifies that the input must be a valid URL, and the implementation explicitly checks for these characters.",
+    "minimal_valid": "http://example.com",
+    "minimal_invalid": "http://exa mple.com"
+  },
+  {
+    "id": "OB-2",
+    "kind": "blackbox",
+    "rule": "The function must reject strings starting with 'mailto:'.",
+    "why": "The implementation explicitly checks for and rejects URLs starting with 'mailto:'.",
+    "minimal_valid": "http://example.com",
+    "minimal_invalid": "mailto:example@example.com"
+  },
+  {
+    "id": "OB-3",
+    "kind": "blackbox",
+    "rule": "The function must enforce the maximum length of the URL if `validate_length` is true.",
+    "why": "The README specifies a default maximum length of 2084, and the implementation enforces this when `validate_length` is true.",
+    "minimal_valid": "http://example.com",
+    "minimal_invalid": "http://example.com/very-long-url-that-exceeds-2084-characters..."
+  },
+  {
+    "id": "OB-4",
+    "kind": "whitebox",
+    "rule": "Ensure `options.validate_length` and `options.max_allowed_length` are correctly enforced.",
+    "why": "Uncovered statement at line 67: `return false;` when URL length exceeds the maximum allowed length.",
+    "minimal_valid": "http://example.com",
+    "minimal_invalid": "http://example.com/",
+    "OB-5": {
+      "kind": "whitebox",
+      "rule": "Ensure `options.allow_fragments` is correctly enforced.",
+      "why": "Uncovered statement at line 71: `return false;` when fragments are present and `allow_fragments` is false.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://example.com#fragment"
+    },
+    "OB-6": {
+      "kind": "whitebox",
+      "rule": "Ensure `options.allow_query_components` is correctly enforced.",
+      "why": "Uncovered statement at line 75: `return false;` when query components are present and `allow_query_components` is false.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://example.com?query=value"
+    }
+  }
+]
+
+Candidate test groups to check:
+[
+  {
+    "title": "Reject invalid characters in URL",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com/path?query=value"
+    ],
+    "invalid": [
+      "http://exa mple.com",
+      "http://example.com<invalid>",
+      "http://example.com>invalid"
+    ],
+    "rationale": "The function explicitly rejects URLs containing spaces or invalid characters like '<' or '>'.",
+    "obligations": [
+      "OB-1"
+    ]
+  },
+  {
+    "title": "Reject URLs starting with 'mailto:'",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com"
+    ],
+    "invalid": [
+      "mailto:example@example.com",
+      "mailto:invalid"
+    ],
+    "rationale": "The implementation explicitly checks for and rejects URLs starting with 'mailto:'.",
+    "obligations": [
+      "OB-2"
+    ]
+  },
+  {
+    "title": "Enforce maximum URL length when `validate_length` is true",
+    "validator": "isURL",
+    "args": [
+      {
+        "validate_length": true
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "http://example.com/short-url"
+    ],
+    "invalid": [
+      "http://example.com/",
+      "http://example.com/very-long-url-that-exceeds-2084-characters"
+    ],
+    "rationale": "The function enforces the maximum URL length of 2084 characters when `validate_length` is true.",
+    "obligations": [
+      "OB-3"
+    ]
+  }
+]
+
+Audit policy:
+1. For every group, first decide one of: keep, trim, or drop.
+2. `keep` means every remaining case is clearly requirement-supported.
+3. `trim` means the group has some requirement-supported cases, but one or more values must be deleted.
+4. `drop` means the whole group should be removed because its central claim is not requirement-supported.
+5. Prefer deletion over speculative preservation.
+6. If a case depends on implementation detail but is not clearly supported by the requirement, delete it.
+7. If an option-sensitive group claims a behavior change, the requirement must clearly support that option effect.
+8. Respect default options exactly as written in the requirement.
+9. Distinguish real executable input strings from presentation wrappers.
+10. If a test value adds an extra outer quoted layer that changes the actual input string, delete it unless the requirement explicitly allows that exact quoted form.
+11. Example: keep `user@example.com`, but delete `"user@example.com"` unless the requirement explicitly says the quotes are part of the accepted input.
+12. Example: keep `John Doe <user@example.com>` when display names are allowed, but delete `"John Doe <user@example.com>"` unless that exact fully quoted form is requirement-supported.
+13. Delete values that are natural-language placeholders, descriptions, or pseudo-code expressions, such as `a.repeat(255) + "@example.com"`.
+14. Delete any case whose expected outcome contradicts the requirement's documented default behavior or documented option behavior.
+15. In the audit array, include one row for every original group title, even if the group is dropped.

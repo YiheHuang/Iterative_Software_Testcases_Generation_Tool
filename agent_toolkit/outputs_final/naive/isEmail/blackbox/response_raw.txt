@@ -1,0 +1,131 @@
+{
+  "obligations": [],
+  "test_groups": [
+    {
+      "title": "Basic email validation (default options)",
+      "validator": "isEmail",
+      "args": [{}],
+      "valid": [
+        "user@example.com",
+        "user.name+tag+sorting@example.com",
+        "user_name@example.com",
+        "user-name@example.co.uk",
+        "user123@example.org"
+      ],
+      "invalid": [
+        "plainaddress",
+        "@missinglocalpart.com",
+        "user@.com",
+        "user@com",
+        "user@domain..com",
+        "user@domain_with_underscore.com"
+      ],
+      "rationale": "Tests basic email validation with default options, including common valid formats and invalid edge cases."
+    },
+    {
+      "title": "Validation with allow_display_name=true",
+      "validator": "isEmail",
+      "args": [{ "allow_display_name": true }],
+      "valid": [
+        "Display Name <user@example.com>",
+        "Display Name <user.name+tag+sorting@example.com>",
+        "Display Name <user-name@example.co.uk>"
+      ],
+      "invalid": [
+        "Display Name user@example.com",
+        "Display Name <user@domain..com>",
+        "<user@example.com>"
+      ],
+      "rationale": "Tests validation when display names are allowed, ensuring correct format and rejecting invalid combinations."
+    },
+    {
+      "title": "Validation with require_display_name=true",
+      "validator": "isEmail",
+      "args": [{ "require_display_name": true }],
+      "valid": [
+        "Display Name <user@example.com>",
+        "Display Name <user.name+tag+sorting@example.com>"
+      ],
+      "invalid": [
+        "user@example.com",
+        "user.name+tag+sorting@example.com",
+        "Display Name user@example.com",
+        "<user@example.com>"
+      ],
+      "rationale": "Tests validation when display names are required, ensuring rejection of emails without display names."
+    },
+    {
+      "title": "Validation with allow_utf8_local_part=false",
+      "validator": "isEmail",
+      "args": [{ "allow_utf8_local_part": false }],
+      "valid": [
+        "user@example.com",
+        "user.name@example.com"
+      ],
+      "invalid": [
+        "üser@example.com",
+        "用户@例子.广告",
+        "user@例子.广告"
+      ],
+      "rationale": "Tests validation when UTF-8 characters are disallowed in the local part of the email."
+    },
+    {
+      "title": "Validation with require_tld=false",
+      "validator": "isEmail",
+      "args": [{ "require_tld": false }],
+      "valid": [
+        "user@example",
+        "user@localhost",
+        "user@subdomain.local"
+      ],
+      "invalid": [
+        "user@domain..com",
+        "user@.com"
+      ],
+      "rationale": "Tests validation when TLD is not required, allowing domains without a TLD."
+    },
+    {
+      "title": "Validation with allow_ip_domain=true",
+      "validator": "isEmail",
+      "args": [{ "allow_ip_domain": true }],
+      "valid": [
+        "user@[192.168.1.1]",
+        "user@[255.255.255.255]"
+      ],
+      "invalid": [
+        "user@192.168.1.1",
+        "user@[300.300.300.300]"
+      ],
+      "rationale": "Tests validation when IP addresses are allowed in the domain part of the email."
+    },
+    {
+      "title": "Validation with blacklisted_chars set",
+      "validator": "isEmail",
+      "args": [{ "blacklisted_chars": "!#$%" }],
+      "valid": [
+        "user@example.com",
+        "user.name@example.com"
+      ],
+      "invalid": [
+        "user!name@example.com",
+        "user#name@example.com",
+        "user%name@example.com"
+      ],
+      "rationale": "Tests validation when certain characters are blacklisted in the local part of the email."
+    },
+    {
+      "title": "Validation with host_blacklist set",
+      "validator": "isEmail",
+      "args": [{ "host_blacklist": ["example.com", "blacklisted.com"] }],
+      "valid": [
+        "user@allowed.com",
+        "user@safe.org"
+      ],
+      "invalid": [
+        "user@example.com",
+        "user@blacklisted.com"
+      ],
+      "rationale": "Tests validation when specific domains are blacklisted."
+    }
+  ]
+}

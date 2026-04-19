@@ -1,0 +1,98 @@
+[
+  {
+    "title": "Trailing Dot Handling",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_trailing_dot": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example.com.",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-2"
+    ]
+  },
+  {
+    "title": "Wildcard Handling",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_wildcard": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "*.example.com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-3"
+    ]
+  },
+  {
+    "title": "Numeric TLD Handling",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example.123",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-5"
+    ]
+  },
+  {
+    "title": "Underscore Handling",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_underscores": true,
+        "require_tld": true,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example_com",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-11"
+    ]
+  }
+]

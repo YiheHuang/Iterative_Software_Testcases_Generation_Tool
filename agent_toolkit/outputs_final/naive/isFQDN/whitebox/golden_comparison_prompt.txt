@@ -1,0 +1,481 @@
+Perform bidirectional category matching for isFQDN.
+
+Fixed golden categories:
+[
+  {
+    "golden_category_id": "GC-1",
+    "name": "Standard FQDN Validation",
+    "description": "Validates fully qualified domain names (FQDN) with default options.",
+    "golden_group_ids": [
+      "GOLDEN-1"
+    ]
+  },
+  {
+    "golden_category_id": "GC-2",
+    "name": "Trailing Dot Option",
+    "description": "Validates FQDNs with the option to allow a trailing dot.",
+    "golden_group_ids": [
+      "GOLDEN-2"
+    ]
+  },
+  {
+    "golden_category_id": "GC-3",
+    "name": "No TLD Requirement",
+    "description": "Validates FQDNs without requiring a top-level domain (TLD).",
+    "golden_group_ids": [
+      "GOLDEN-3"
+    ]
+  },
+  {
+    "golden_category_id": "GC-4",
+    "name": "Numeric TLDs Without Requirement",
+    "description": "Validates FQDNs with numeric TLDs when TLD requirement is disabled.",
+    "golden_group_ids": [
+      "GOLDEN-4"
+    ]
+  },
+  {
+    "golden_category_id": "GC-5",
+    "name": "Wildcard Option",
+    "description": "Validates FQDNs with the option to allow wildcard domains.",
+    "golden_group_ids": [
+      "GOLDEN-5"
+    ]
+  },
+  {
+    "golden_category_id": "GC-6",
+    "name": "Combined Options",
+    "description": "Validates FQDNs with multiple options enabled: trailing dot, underscores, and numeric TLDs.",
+    "golden_group_ids": [
+      "GOLDEN-6"
+    ]
+  }
+]
+
+Indexed golden groups:
+[
+  {
+    "title": "should validate FQDN",
+    "validator": "isFQDN",
+    "args": [],
+    "valid": [
+      "domain.com",
+      "dom.plato",
+      "a.domain.co",
+      "foo--bar.com",
+      "xn--froschgrn-x9a.com",
+      "rebecca.blackfriday",
+      "1337.com"
+    ],
+    "invalid": [
+      "abc",
+      "256.0.0.0",
+      "_.com",
+      "*.some.com",
+      "s!ome.com",
+      "domain.com/",
+      "/more.com",
+      "domain.com\ufffd",
+      "domain.co\u00a0m",
+      "domain.co\u1680m",
+      "domain.co\u2006m",
+      "domain.co\u2028m",
+      "domain.co\u2029m",
+      "domain.co\u202fm",
+      "domain.co\u205fm",
+      "domain.co\u3000m",
+      "domain.com\udc00",
+      "domain.co\uefffm",
+      "domain.co\ufddam",
+      "domain.co\ufff4m",
+      "domain.com\u00a9",
+      "example.0",
+      "192.168.0.9999",
+      "192.168.0"
+    ],
+    "golden_id": "GOLDEN-1"
+  },
+  {
+    "title": "should validate FQDN with trailing dot option",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_trailing_dot": true
+      }
+    ],
+    "valid": [
+      "example.com."
+    ],
+    "invalid": [],
+    "golden_id": "GOLDEN-2"
+  },
+  {
+    "title": "should invalidate FQDN when not require_tld",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": false
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "example.0",
+      "192.168.0",
+      "192.168.0.9999"
+    ],
+    "golden_id": "GOLDEN-3"
+  },
+  {
+    "title": "should validate FQDN when not require_tld but allow_numeric_tld",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": true,
+        "require_tld": false
+      }
+    ],
+    "valid": [
+      "example.0",
+      "192.168.0",
+      "192.168.0.9999"
+    ],
+    "invalid": [],
+    "golden_id": "GOLDEN-4"
+  },
+  {
+    "title": "should validate FQDN with wildcard option",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_wildcard": true
+      }
+    ],
+    "valid": [
+      "*.example.com",
+      "*.shop.example.com"
+    ],
+    "invalid": [],
+    "golden_id": "GOLDEN-5"
+  },
+  {
+    "title": "should validate FQDN with required allow_trailing_dot, allow_underscores and allow_numeric_tld options",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_trailing_dot": true,
+        "allow_underscores": true,
+        "allow_numeric_tld": true
+      }
+    ],
+    "valid": [
+      "abc.efg.g1h.",
+      "as1s.sad3s.ssa2d."
+    ],
+    "invalid": [],
+    "golden_id": "GOLDEN-6"
+  }
+]
+
+Generated categories:
+[
+  {
+    "generated_category_id": "GENC-1",
+    "name": "Default Validation",
+    "description": "Tests the default behavior of isFQDN with common valid and invalid cases.",
+    "generated_group_ids": [
+      "GENERATED-1"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-2",
+    "name": "TLD Requirement Options",
+    "description": "Tests behavior when the requirement for a top-level domain (TLD) is modified.",
+    "generated_group_ids": [
+      "GENERATED-2"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-3",
+    "name": "Underscore Allowance",
+    "description": "Tests behavior when underscores are allowed in domain parts.",
+    "generated_group_ids": [
+      "GENERATED-3"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-4",
+    "name": "Trailing Dot Allowance",
+    "description": "Tests behavior when trailing dots are allowed in domain names.",
+    "generated_group_ids": [
+      "GENERATED-4"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-5",
+    "name": "Numeric TLD Allowance",
+    "description": "Tests behavior when numeric top-level domains (TLDs) are allowed.",
+    "generated_group_ids": [
+      "GENERATED-5"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-6",
+    "name": "Wildcard Domain Allowance",
+    "description": "Tests behavior when wildcard domains are allowed.",
+    "generated_group_ids": [
+      "GENERATED-6"
+    ]
+  }
+]
+
+Indexed generated groups:
+[
+  {
+    "title": "Default options",
+    "validator": "isFQDN",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "example.com",
+      "sub.domain.com",
+      "xn--example.com"
+    ],
+    "invalid": [
+      "example",
+      "example.",
+      "example..com",
+      "example_com",
+      "123",
+      "example.123",
+      "example.-com",
+      "-example.com",
+      "example.com-",
+      "example.com ",
+      "example.com\u0001"
+    ],
+    "rationale": "Tests the default behavior of isFQDN with common valid and invalid cases.",
+    "obligations": [],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "require_tld: false",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": false
+      }
+    ],
+    "valid": [
+      "example",
+      "example.com",
+      "sub.domain"
+    ],
+    "invalid": [
+      "example.",
+      "example..",
+      "example..com",
+      "example_com",
+      "example.-com",
+      "-example.com",
+      "example.com-",
+      "example.com ",
+      "example.com\u0001"
+    ],
+    "rationale": "Tests behavior when TLD is not required.",
+    "obligations": [],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "allow_underscores: true",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_underscores": true
+      }
+    ],
+    "valid": [
+      "example_com",
+      "sub_domain.example.com"
+    ],
+    "invalid": [
+      "example..com",
+      "example.-com",
+      "-example.com",
+      "example.com-",
+      "example.com ",
+      "example.com\u0001"
+    ],
+    "rationale": "Tests behavior when underscores are allowed in domain parts.",
+    "obligations": [],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "allow_trailing_dot: true",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_trailing_dot": true
+      }
+    ],
+    "valid": [
+      "example.com.",
+      "sub.domain.com."
+    ],
+    "invalid": [
+      "example..com.",
+      "example.-com.",
+      "-example.com.",
+      "example.com-.",
+      "example.com .",
+      "example.com\u0001."
+    ],
+    "rationale": "Tests behavior when trailing dots are allowed.",
+    "obligations": [],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "allow_numeric_tld: true",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": true
+      }
+    ],
+    "valid": [
+      "example.123",
+      "sub.domain.456"
+    ],
+    "invalid": [
+      "example..com",
+      "example.-com",
+      "-example.com",
+      "example.com-",
+      "example.com ",
+      "example.com\u0001"
+    ],
+    "rationale": "Tests behavior when numeric TLDs are allowed.",
+    "obligations": [],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "allow_wildcard: true",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_wildcard": true
+      }
+    ],
+    "valid": [
+      "*.example.com",
+      "*.sub.domain.com"
+    ],
+    "invalid": [
+      "*example.com",
+      "example.*.com",
+      "*.example..com",
+      "*.example.-com",
+      "*-example.com",
+      "*.example.com-",
+      "*.example.com ",
+      "*.example.com\u0001"
+    ],
+    "rationale": "Tests behavior when wildcard domains are allowed.",
+    "obligations": [],
+    "generated_id": "GENERATED-6"
+  }
+]
+
+Runtime evaluation details:
+{
+  "summary": {
+    "total_cases": 60,
+    "correct_cases": 59,
+    "incorrect_cases": 1,
+    "exact_match_rate": 0.9833333333333333,
+    "by_expected_kind": {
+      "return": 60,
+      "throw": 0
+    }
+  },
+  "details": {
+    "failed_results": [
+      {
+        "title": "allow_underscores: true",
+        "validator": "isFQDN",
+        "args": [
+          {
+            "allow_underscores": true,
+            "require_tld": true,
+            "allow_trailing_dot": false,
+            "allow_numeric_tld": false,
+            "allow_wildcard": false,
+            "ignore_max_length": false
+          }
+        ],
+        "input_value": "example_com",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": []
+      }
+    ],
+    "coverage_total": {
+      "lines": {
+        "total": 33,
+        "covered": 30,
+        "skipped": 0,
+        "pct": 90.91
+      },
+      "statements": {
+        "total": 34,
+        "covered": 31,
+        "skipped": 0,
+        "pct": 91.18
+      },
+      "functions": {
+        "total": 3,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 38,
+        "covered": 34,
+        "skipped": 0,
+        "pct": 89.47
+      }
+    },
+    "coverage_files": {
+      "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isFQDN.js": {
+        "lines": {
+          "total": 33,
+          "covered": 30,
+          "skipped": 0,
+          "pct": 90.91
+        },
+        "functions": {
+          "total": 3,
+          "covered": 3,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 34,
+          "covered": 31,
+          "skipped": 0,
+          "pct": 91.18
+        },
+        "branches": {
+          "total": 38,
+          "covered": 34,
+          "skipped": 0,
+          "pct": 89.47
+        }
+      }
+    }
+  }
+}

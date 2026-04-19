@@ -1,0 +1,21 @@
+{
+  "obligations": [
+    {
+      "id": "OB-11",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of the condition `/\\s/.test(tld)` at line 41.",
+      "why": "This branch is currently uncovered and corresponds to rejecting TLDs containing spaces.",
+      "minimal_valid": null,
+      "minimal_invalid": "example. com"
+    },
+    {
+      "id": "OB-12",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of the condition `part.length > 63 && !options.ignore_max_length` at line 52.",
+      "why": "This branch is currently uncovered and corresponds to rejecting domain parts exceeding 63 characters when `ignore_max_length` is false.",
+      "minimal_valid": null,
+      "minimal_invalid": "a"
+    }
+  ],
+  "test_groups": []
+}

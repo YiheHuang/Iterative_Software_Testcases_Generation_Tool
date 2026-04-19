@@ -1,0 +1,301 @@
+Group generated tests into generated categories for validator isURL.
+
+Generated groups:
+[
+  {
+    "title": "Default behavior validation",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com",
+      "ftp://example.com",
+      "http://example.com/path?query=value#fragment"
+    ],
+    "invalid": [
+      "example",
+      "http://example_com",
+      "http://example",
+      "http://",
+      "http://example.com:999999"
+    ],
+    "rationale": "Covers the default behavior of the validator as described in the README.",
+    "obligations": [
+      "OB-1"
+    ],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "Require protocol",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": true
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com"
+    ],
+    "invalid": [
+      "example.com",
+      "example"
+    ],
+    "rationale": "Ensures URLs must include a protocol when the `require_protocol` option is enabled.",
+    "obligations": [
+      "OB-2"
+    ],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "Require host",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_host": true
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://"
+    ],
+    "rationale": "Ensures URLs must include a host when the `require_host` option is enabled.",
+    "obligations": [
+      "OB-3"
+    ],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "Require port",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_port": true
+      }
+    ],
+    "valid": [
+      "http://example.com:80"
+    ],
+    "invalid": [
+      "http://example.com"
+    ],
+    "rationale": "Ensures URLs must include a port when the `require_port` option is enabled.",
+    "obligations": [
+      "OB-4"
+    ],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "Require valid protocol",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_valid_protocol": true
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com"
+    ],
+    "invalid": [
+      "custom://example.com",
+      "ftp://example.com"
+    ],
+    "rationale": "Ensures protocols must match the `protocols` list when the `require_valid_protocol` option is enabled.",
+    "obligations": [
+      "OB-5"
+    ],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "Allow underscores in host",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_underscores": true
+      }
+    ],
+    "valid": [
+      "http://example_com"
+    ],
+    "invalid": [
+      "http://example.com"
+    ],
+    "rationale": "Allows underscores in the host when the `allow_underscores` option is enabled.",
+    "obligations": [
+      "OB-6"
+    ],
+    "generated_id": "GENERATED-6"
+  },
+  {
+    "title": "Host whitelist",
+    "validator": "isURL",
+    "args": [
+      {
+        "host_whitelist": [
+          "allowed.com"
+        ]
+      }
+    ],
+    "valid": [
+      "http://allowed.com"
+    ],
+    "invalid": [
+      "http://blocked.com",
+      "http://example.com"
+    ],
+    "rationale": "Ensures only hosts matching the whitelist are valid when the `host_whitelist` option is used.",
+    "obligations": [
+      "OB-7"
+    ],
+    "generated_id": "GENERATED-7"
+  },
+  {
+    "title": "Host blacklist",
+    "validator": "isURL",
+    "args": [
+      {
+        "host_blacklist": [
+          "blocked.com"
+        ]
+      }
+    ],
+    "valid": [
+      "http://allowed.com",
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://blocked.com"
+    ],
+    "rationale": "Ensures hosts matching the blacklist are invalid when the `host_blacklist` option is used.",
+    "obligations": [
+      "OB-8"
+    ],
+    "generated_id": "GENERATED-8"
+  },
+  {
+    "title": "Allow trailing dot",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_trailing_dot": true
+      }
+    ],
+    "valid": [
+      "http://example.com."
+    ],
+    "invalid": [
+      "http://example.com"
+    ],
+    "rationale": "Allows URLs to end with a trailing dot when the `allow_trailing_dot` option is enabled.",
+    "obligations": [
+      "OB-9"
+    ],
+    "generated_id": "GENERATED-9"
+  },
+  {
+    "title": "Allow protocol-relative URLs",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_protocol_relative_urls": true
+      }
+    ],
+    "valid": [
+      "//example.com"
+    ],
+    "invalid": [
+      "example.com"
+    ],
+    "rationale": "Allows protocol-relative URLs when the `allow_protocol_relative_urls` option is enabled.",
+    "obligations": [
+      "OB-10"
+    ],
+    "generated_id": "GENERATED-10"
+  },
+  {
+    "title": "Allow fragments",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_fragments": true
+      }
+    ],
+    "valid": [
+      "http://example.com#fragment"
+    ],
+    "invalid": [
+      "http://example.com"
+    ],
+    "rationale": "Allows fragments in URLs when the `allow_fragments` option is enabled.",
+    "obligations": [
+      "OB-11"
+    ],
+    "generated_id": "GENERATED-11"
+  },
+  {
+    "title": "Allow query components",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_query_components": true
+      }
+    ],
+    "valid": [
+      "http://example.com?query=value"
+    ],
+    "invalid": [
+      "http://example.com"
+    ],
+    "rationale": "Allows query components in URLs when the `allow_query_components` option is enabled.",
+    "obligations": [
+      "OB-12"
+    ],
+    "generated_id": "GENERATED-12"
+  },
+  {
+    "title": "Disallow authentication components",
+    "validator": "isURL",
+    "args": [
+      {
+        "disallow_auth": true
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://user:pass@example.com"
+    ],
+    "rationale": "Disallows URLs with authentication components when the `disallow_auth` option is enabled.",
+    "obligations": [
+      "OB-13"
+    ],
+    "generated_id": "GENERATED-13"
+  },
+  {
+    "title": "Validate length",
+    "validator": "isURL",
+    "args": [
+      {
+        "validate_length": true,
+        "max_allowed_length": 20
+      }
+    ],
+    "valid": [
+      "http://short.com"
+    ],
+    "invalid": [
+      "http://averylongexampleurl.com"
+    ],
+    "rationale": "Ensures URLs exceeding the maximum length are invalid when the `validate_length` option is enabled.",
+    "obligations": [
+      "OB-14"
+    ],
+    "generated_id": "GENERATED-14"
+  }
+]

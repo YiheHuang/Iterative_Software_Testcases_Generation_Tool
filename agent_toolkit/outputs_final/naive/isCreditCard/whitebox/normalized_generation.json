@@ -1,0 +1,100 @@
+{
+  "mode": "whitebox",
+  "approach": "naive",
+  "obligations": [],
+  "test_groups": [
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "4111111111111111",
+        "378282246310005",
+        "6011111111111117",
+        "5555555555554444"
+      ],
+      "invalid": [
+        "1234567890123456",
+        "411111111111111",
+        "37828224631000",
+        "555555555555444"
+      ],
+      "title": "Valid credit card numbers without provider",
+      "rationale": "Tests generic credit card validation without specifying a provider. Includes valid and invalid numbers based on length and format.",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "visa"
+        }
+      ],
+      "valid": [
+        "4111111111111111",
+        "4012888888881881"
+      ],
+      "invalid": [
+        "378282246310005",
+        "5555555555554444",
+        "6011111111111117"
+      ],
+      "title": "Valid credit card numbers with provider",
+      "rationale": "Tests credit card validation for Visa provider. Includes valid Visa numbers and invalid numbers from other providers.",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "invalidProvider"
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "4111111111111111",
+        "378282246310005"
+      ],
+      "title": "Invalid provider option",
+      "rationale": "Tests behavior when an invalid provider is specified. Should throw an error or fail validation.",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "4111-1111-1111-1111",
+        "4111 1111 1111 1111"
+      ],
+      "invalid": [
+        "4111_1111_1111_1111",
+        "4111.1111.1111.1111"
+      ],
+      "title": "Edge cases for formatting",
+      "rationale": "Tests handling of formatted credit card numbers with valid separators (spaces and dashes) and invalid separators.",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [],
+      "invalid": [
+        "",
+        "abcdefg",
+        "4111abcd1111efgh"
+      ],
+      "title": "Empty and non-numeric inputs",
+      "rationale": "Tests behavior with empty strings, non-numeric inputs, and mixed alphanumeric inputs.",
+      "obligations": []
+    }
+  ],
+  "metadata": {
+    "requirement_source": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\README.md",
+    "generation_style": "single_pass_with_repair"
+  }
+}

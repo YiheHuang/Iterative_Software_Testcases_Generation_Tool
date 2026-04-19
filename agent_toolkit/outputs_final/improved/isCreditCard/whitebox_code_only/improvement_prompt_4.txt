@@ -1,0 +1,340 @@
+You are improving an existing whitebox_code_only test suite for isCreditCard.
+You are given only coverage details and fine-grained uncovered white-box locations.
+You must use those uncovered positions as exact white-box targets when updating the suite.
+You must NOT use any golden tests, repository test overlap analysis, or external oracle hints.
+
+Goal:
+- update the full suite so it targets more uncovered code locations
+- preserve useful existing groups when they still help coverage
+- revise, replace, or remove groups only when necessary to better target uncovered code
+- keep the suite conservative and low-redundancy
+
+Return strict JSON with top-level keys obligations and test_groups.
+The returned test_groups must be the full updated suite for the next iteration, not patch groups only.
+
+Requirement source:
+None. This is code-only white-box mode.
+
+Current full test suite from the previous iteration:
+[
+  {
+    "title": "Input validation with assertString",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "\"4111111111111111\""
+    ],
+    "invalid": [
+      "1234567890123456"
+    ],
+    "rationale": "Ensure the input is validated as a string using `assertString`.",
+    "obligations": [
+      "OB-1"
+    ]
+  },
+  {
+    "title": "Invalid provider throws error",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [],
+    "invalid": [
+      "{\"card\": \"4111111111111111\", \"options\": {\"provider\": \"invalid\"}}"
+    ],
+    "rationale": "Test that an invalid provider throws an error.",
+    "obligations": [
+      "OB-2",
+      "OB-10"
+    ]
+  },
+  {
+    "title": "Provider-specific validation",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"amex\"}}"
+    ],
+    "invalid": [
+      "{\"card\": \"4111111111111111\", \"options\": {\"provider\": \"amex\"}}"
+    ],
+    "rationale": "Ensure the card matches the regex for the specified provider.",
+    "obligations": [
+      "OB-3",
+      "OB-9"
+    ]
+  },
+  {
+    "title": "Validation without provider - no match",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [],
+    "invalid": [
+      "\"0000000000000000\""
+    ],
+    "rationale": "Test that the function returns `false` when no provider is specified and the card does not match any regex.",
+    "obligations": [
+      "OB-4"
+    ]
+  },
+  {
+    "title": "Validation without provider - match",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "\"4111111111111111\""
+    ],
+    "invalid": [],
+    "rationale": "Test that the function returns `true` when no provider is specified and the card matches a regex.",
+    "obligations": [
+      "OB-5",
+      "OB-11"
+    ]
+  },
+  {
+    "title": "Luhn algorithm validation",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "\"4111111111111111\""
+    ],
+    "invalid": [
+      "\"4111111111111121\""
+    ],
+    "rationale": "Ensure the card passes the Luhn algorithm check using `isLuhnValid`.",
+    "obligations": [
+      "OB-6",
+      "OB-12"
+    ]
+  },
+  {
+    "title": "Sanitization of card number",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "\"4111-1111-1111-1111\""
+    ],
+    "invalid": [
+      "\"4111-1111-1111-1121\""
+    ],
+    "rationale": "Test that the card number is sanitized by removing spaces and dashes before validation.",
+    "obligations": [
+      "OB-7"
+    ]
+  },
+  {
+    "title": "Provider exists in cards",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "{\"card\": \"4111111111111111\", \"options\": {\"provider\": \"visa\"}}"
+    ],
+    "invalid": [],
+    "rationale": "Test the condition where `provider && provider.toLowerCase() in cards` evaluates to `true`.",
+    "obligations": [
+      "OB-8"
+    ]
+  }
+]
+
+Coverage details allowed for improvement:
+{
+  "coverage_total": {
+    "lines": {
+      "total": 22,
+      "covered": 19,
+      "skipped": 0,
+      "pct": 86.36
+    },
+    "statements": {
+      "total": 24,
+      "covered": 21,
+      "skipped": 0,
+      "pct": 87.5
+    },
+    "functions": {
+      "total": 4,
+      "covered": 4,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 19,
+      "covered": 12,
+      "skipped": 0,
+      "pct": 63.16
+    }
+  },
+  "coverage_files": {
+    "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isCreditCard.js": {
+      "lines": {
+        "total": 22,
+        "covered": 19,
+        "skipped": 0,
+        "pct": 86.36
+      },
+      "functions": {
+        "total": 4,
+        "covered": 4,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 24,
+        "covered": 21,
+        "skipped": 0,
+        "pct": 87.5
+      },
+      "branches": {
+        "total": 19,
+        "covered": 12,
+        "skipped": 0,
+        "pct": 63.16
+      }
+    }
+  },
+  "uncovered_details": {
+    "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isCreditCard.js": {
+      "uncovered_statements": [
+        {
+          "statement_id": "15",
+          "line": 31,
+          "column": 4,
+          "line_text": "    if (!(cards[provider.toLowerCase()].test(sanitized))) {",
+          "source_excerpt": "if (!(cards[provider.toLowerCase()].test(sanitized))) {\n      return false;\n    }",
+          "summary": "Uncovered statement at line 31: if (!(cards[provider.toLowerCase()].test(sanitized))) {\n      return false;\n    }"
+        },
+        {
+          "statement_id": "16",
+          "line": 32,
+          "column": 6,
+          "line_text": "      return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 32: return false;"
+        },
+        {
+          "statement_id": "18",
+          "line": 36,
+          "column": 4,
+          "line_text": "    throw new Error(`${provider} is not a valid credit card provider.`);",
+          "source_excerpt": "throw new Error(`${provider} is not a valid credit card provider.`);",
+          "summary": "Uncovered statement at line 36: throw new Error(`${provider} is not a valid credit card provider.`);"
+        }
+      ],
+      "uncovered_branches": [
+        {
+          "branch_id": "2",
+          "branch_type": "cond-expr",
+          "path_index": 1,
+          "branch_side": "ternary_false_branch",
+          "line": 25,
+          "column": 53,
+          "line_text": "export default function isCreditCard(card, options = {}) {",
+          "source_excerpt": "{}",
+          "condition_excerpt": null,
+          "summary": "Uncovered cond-expr path `ternary_false_branch` at line 25; snippet: {}"
+        },
+        {
+          "branch_id": "4",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 29,
+          "column": 2,
+          "line_text": "  if (provider && provider.toLowerCase() in cards) {",
+          "source_excerpt": "if (provider && provider.toLowerCase() in cards) {\n    // specific provider in the list\n    if (!(cards[provider.toLowerCase()].test(sanitized))) {\n      return false;\n    }\n  } else if (provider && !(provider.toLowerCase() in cards)) {\n    /* specific provider not in the list */\n    throw new Error(`${provider} is not a valid credit card provider.`);\n  } else if (!allCards.some(cardProvider => cardProvider.test(sanitized))) {\n    // no specific provider\n    return false;\n  }",
+          "condition_excerpt": "provider && provider.toLowerCase() in cards",
+          "summary": "Uncovered if path `condition_true_branch` at line 29; condition: provider && provider.toLowerCase() in cards"
+        },
+        {
+          "branch_id": "5",
+          "branch_type": "binary-expr",
+          "path_index": 1,
+          "branch_side": "path_1",
+          "line": 29,
+          "column": 18,
+          "line_text": "  if (provider && provider.toLowerCase() in cards) {",
+          "source_excerpt": "provider.toLowerCase() in cards",
+          "condition_excerpt": "provider && provider.toLowerCase() in cards",
+          "summary": "Uncovered binary-expr path `path_1` at line 29; condition: provider && provider.toLowerCase() in cards"
+        },
+        {
+          "branch_id": "6",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 31,
+          "column": 4,
+          "line_text": "    if (!(cards[provider.toLowerCase()].test(sanitized))) {",
+          "source_excerpt": "if (!(cards[provider.toLowerCase()].test(sanitized))) {\n      return false;\n    }",
+          "condition_excerpt": "!(cards[provider.toLowerCase()].test(sanitized))",
+          "summary": "Uncovered if path `condition_true_branch` at line 31; condition: !(cards[provider.toLowerCase()].test(sanitized))"
+        },
+        {
+          "branch_id": "6",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 31,
+          "column": 4,
+          "line_text": "    if (!(cards[provider.toLowerCase()].test(sanitized))) {",
+          "source_excerpt": "if (!(cards[provider.toLowerCase()].test(sanitized))) {\n      return false;\n    }",
+          "condition_excerpt": "!(cards[provider.toLowerCase()].test(sanitized))",
+          "summary": "Uncovered if path `condition_false_branch` at line 31; condition: !(cards[provider.toLowerCase()].test(sanitized))"
+        },
+        {
+          "branch_id": "7",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 34,
+          "column": 9,
+          "line_text": "  } else if (provider && !(provider.toLowerCase() in cards)) {",
+          "source_excerpt": "} else if (provider && !(provider.toLowerCase() in cards)) {\n    /* specific provider not in the list */\n    throw new Error(`${provider} is not a valid credit card provider.`);\n  } else if (!allCards.some(cardProvider => cardProvider.test(sanitized))) {\n    // no specific provider\n    return false;\n  }",
+          "condition_excerpt": null,
+          "summary": "Uncovered if path `condition_true_branch` at line 34; snippet: } else if (provider && !(provider.toLowerCase() in cards)) {\n    /* specific provider not in the list */\n    throw new Error(`${provider} is not a valid credit card provider.`);\n  } else if (!allCards.some(cardProvider => cardProvider.test(sanitized))) {\n    // no specific provider\n    return false;\n  }"
+        },
+        {
+          "branch_id": "8",
+          "branch_type": "binary-expr",
+          "path_index": 1,
+          "branch_side": "path_1",
+          "line": 34,
+          "column": 25,
+          "line_text": "  } else if (provider && !(provider.toLowerCase() in cards)) {",
+          "source_excerpt": "!(provider.toLowerCase() in cards)",
+          "condition_excerpt": null,
+          "summary": "Uncovered binary-expr path `path_1` at line 34; snippet: !(provider.toLowerCase() in cards)"
+        }
+      ],
+      "uncovered_functions": []
+    }
+  }
+}
+
+Instructions:
+- You must use only the requirement (if provided), the current suite, coverage details, and uncovered details.
+- Do not infer or use any correctness signal, pass/fail summary, failed cases, or hidden oracle information.
+- Treat uncovered_details as exact white-box targets, not as vague hints.
+- Use the previous full suite as the baseline and return an updated full suite.
+- Keep groups that still contribute coverage; change them only when it helps target uncovered code.
+- If an uncovered branch or statement cannot be operationalized from the provided coverage details, do not guess.
+- If uncovered_details are provided, use them only as white-box targets.
+- If uncovered_details are not provided, do not infer any hidden coverage gap.
+- Prefer minimal option-profile-specific groups.
+- Avoid broad extrapolation; every meaningful update should correspond to a concrete uncovered position or condition.
+- Do not mention or infer any golden test information.

@@ -1,0 +1,119 @@
+Task: generate white-box tests for isCurrency.
+
+        Treat this as requirement-constrained white-box testing.
+        Use both the intended external behavior and the implementation structure.
+
+        Apply standard white-box testing methods aggressively:
+        - statement coverage
+        - branch coverage
+        - condition-oriented reasoning
+        - early-return triggering
+        - helper-sensitive path exploration
+        - requirement-grounded partition checking
+
+        Step 1: derive black-box obligations from the requirement.
+        Step 2: enumerate structural white-box obligations directly from the code.
+        Step 3: merge overlaps and contradictions.
+        Step 4: expand them into many grouped validator.js-style tests.
+        Step 5: self-check whether early returns, helper-dependent checks, option flips, boundary-triggered branches, and requirement-visible edge cases were skipped.
+
+        Requirement specification:
+        Function name: isCurrency
+Black-box requirement source: validator_js README function entry
+Signature summary: isCurrency(str [, options])
+README behavior summary:
+| check if the string is a valid currency amount.
+`options` is an object which defaults to `{ symbol: '$', require_symbol: false, allow_space_after_symbol: false, symbol_after_digits: false, allow_negatives: true, parens_for_negatives: false, negative_sign_before_digits: false, negative_sign_after_digits: false, allow_negative_sign_placeholder: false, thousands_separator: ',', decimal_separator: '.', allow_decimal: true, require_decimal: false, digits_after_decimal: [2], allow_space_after_digits: false }`.
+**Note:** The array `digits_after_decimal` is filled with the exact number of digits allowed not a range, for example a range 1 to 3 will be given as [1, 2, 3].
+
+Treat the README entry as the authoritative black-box behavior description.
+Infer valid inputs, invalid inputs, option-sensitive behaviors, and edge cases from this description.
+
+
+        Source code:
+        import merge from './util/merge';
+import assertString from './util/assertString';
+
+function currencyRegex(options) {
+  let decimal_digits = `\\d{${options.digits_after_decimal[0]}}`;
+  options.digits_after_decimal.forEach((digit, index) => { if (index !== 0) decimal_digits = `${decimal_digits}|\\d{${digit}}`; });
+
+  const symbol =
+    `(${options.symbol.replace(/\W/, m => `\\${m}`)})${(options.require_symbol ? '' : '?')}`,
+    negative = '-?',
+    whole_dollar_amount_without_sep = '[1-9]\\d*',
+    whole_dollar_amount_with_sep = `[1-9]\\d{0,2}(\\${options.thousands_separator}\\d{3})*`,
+    valid_whole_dollar_amounts = [
+      '0', whole_dollar_amount_without_sep, whole_dollar_amount_with_sep],
+    whole_dollar_amount = `(${valid_whole_dollar_amounts.join('|')})?`,
+    decimal_amount = `(\\${options.decimal_separator}(${decimal_digits}))${options.require_decimal ? '' : '?'}`;
+  let pattern = whole_dollar_amount + (options.allow_decimal || options.require_decimal ? decimal_amount : '');
+
+  // default is negative sign before symbol, but there are two other options (besides parens)
+  if (options.allow_negatives && !options.parens_for_negatives) {
+    if (options.negative_sign_after_digits) {
+      pattern += negative;
+    } else if (options.negative_sign_before_digits) {
+      pattern = negative + pattern;
+    }
+  }
+
+  // South African Rand, for example, uses R 123 (space) and R-123 (no space)
+  if (options.allow_negative_sign_placeholder) {
+    pattern = `( (?!\\-))?${pattern}`;
+  } else if (options.allow_space_after_symbol) {
+    pattern = ` ?${pattern}`;
+  } else if (options.allow_space_after_digits) {
+    pattern += '( (?!$))?';
+  }
+
+  if (options.symbol_after_digits) {
+    pattern += symbol;
+  } else {
+    pattern = symbol + pattern;
+  }
+
+  if (options.allow_negatives) {
+    if (options.parens_for_negatives) {
+      pattern = `(\\(${pattern}\\)|${pattern})`;
+    } else if (!(options.negative_sign_before_digits || options.negative_sign_after_digits)) {
+      pattern = negative + pattern;
+    }
+  }
+
+  // ensure there's a dollar and/or decimal amount, and that
+  // it doesn't start with a space or a negative sign followed by a space
+  return new RegExp(`^(?!-? )(?=.*\\d)${pattern}$`);
+}
+
+
+const default_currency_options = {
+  symbol: '$',
+  require_symbol: false,
+  allow_space_after_symbol: false,
+  symbol_after_digits: false,
+  allow_negatives: true,
+  parens_for_negatives: false,
+  negative_sign_before_digits: false,
+  negative_sign_after_digits: false,
+  allow_negative_sign_placeholder: false,
+  thousands_separator: ',',
+  decimal_separator: '.',
+  allow_decimal: true,
+  require_decimal: false,
+  digits_after_decimal: [2],
+  allow_space_after_digits: false,
+};
+
+export default function isCurrency(str, options) {
+  assertString(str);
+  options = merge(options, default_currency_options);
+  return currencyRegex(options).test(str);
+}
+
+
+        Output limits:
+        - each group should focus on one option profile or one branch family
+        - explore broadly when requirement-visible behavior and source-level branches genuinely justify it
+        - do not inflate obligations or groups just to reach a target count
+        - prefer a compact suite that still covers materially different paths and edge cases

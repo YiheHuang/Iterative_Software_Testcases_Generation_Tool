@@ -1,0 +1,34 @@
+{
+  "generated_categories": [
+    {
+      "name": "Standard Validation",
+      "description": "Tests the default behavior and baseline email validation rules.",
+      "generated_group_ids": ["GENERATED-1"]
+    },
+    {
+      "name": "Display Name Options",
+      "description": "Tests options related to allowing or requiring display names in email addresses.",
+      "generated_group_ids": ["GENERATED-2", "GENERATED-3"]
+    },
+    {
+      "name": "Local Part Restrictions",
+      "description": "Tests options that restrict or modify the local part of email addresses.",
+      "generated_group_ids": ["GENERATED-4", "GENERATED-7", "GENERATED-9"]
+    },
+    {
+      "name": "Domain Validation",
+      "description": "Tests options related to domain-specific validation, including TLD requirements and blacklists/whitelists.",
+      "generated_group_ids": ["GENERATED-5", "GENERATED-8", "GENERATED-10", "GENERATED-11"]
+    },
+    {
+      "name": "IP Domain Allowance",
+      "description": "Tests the option to allow IP addresses as domains in email addresses.",
+      "generated_group_ids": ["GENERATED-6"]
+    },
+    {
+      "name": "Length Validation",
+      "description": "Tests options related to ignoring maximum length restrictions for email addresses.",
+      "generated_group_ids": ["GENERATED-12"]
+    }
+  ]
+}

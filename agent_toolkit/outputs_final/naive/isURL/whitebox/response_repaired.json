@@ -1,0 +1,157 @@
+{
+  "obligations": [],
+  "test_groups": [
+    {
+      "title": "Default options",
+      "validator": "isURL",
+      "args": [{}],
+      "valid": [
+        "http://example.com",
+        "https://example.com",
+        "ftp://example.com",
+        "http://example.com/path?query=1#fragment"
+      ],
+      "invalid": [
+        "example.com",
+        "http:/example.com",
+        "http://",
+        "http://example",
+        "http://example..com",
+        "http://example.com:99999",
+        "http://example.com:abcd",
+        "http://user:pass@example.com",
+        "mailto:test@example.com",
+        "http://example.com#",
+        "http://example.com?"
+      ],
+      "rationale": "Covers basic URL validation with default options.",
+      "obligations": []
+    },
+    {
+      "title": "require_protocol: true",
+      "validator": "isURL",
+      "args": [{ "require_protocol": true }],
+      "valid": [
+        "http://example.com",
+        "https://example.com",
+        "ftp://example.com"
+      ],
+      "invalid": [
+        "example.com",
+        "www.example.com",
+        "//example.com"
+      ],
+      "rationale": "Ensures URLs must include a protocol when require_protocol is true.",
+      "obligations": []
+    },
+    {
+      "title": "require_tld: false",
+      "validator": "isURL",
+      "args": [{ "require_tld": false }],
+      "valid": [
+        "http://localhost",
+        "http://example",
+        "http://example.local"
+      ],
+      "invalid": [
+        "http://example..com",
+        "http://example.",
+        "http://.com"
+      ],
+      "rationale": "Allows URLs without a top-level domain when require_tld is false.",
+      "obligations": []
+    },
+    {
+      "title": "allow_underscores: true",
+      "validator": "isURL",
+      "args": [{ "allow_underscores": true }],
+      "valid": [
+        "http://example_com",
+        "http://sub_domain.example.com"
+      ],
+      "invalid": [
+        "http://example..com",
+        "http://example_.com"
+      ],
+      "rationale": "Allows underscores in hostnames when allow_underscores is true.",
+      "obligations": []
+    },
+    {
+      "title": "require_port: true",
+      "validator": "isURL",
+      "args": [{ "require_port": true }],
+      "valid": [
+        "http://example.com:80",
+        "https://example.com:443"
+      ],
+      "invalid": [
+        "http://example.com",
+        "https://example.com",
+        "http://example.com:99999"
+      ],
+      "rationale": "Ensures URLs must include a valid port when require_port is true.",
+      "obligations": []
+    },
+    {
+      "title": "allow_protocol_relative_urls: true",
+      "validator": "isURL",
+      "args": [{ "allow_protocol_relative_urls": true }],
+      "valid": [
+        "//example.com",
+        "//example.com/path?query=1#fragment"
+      ],
+      "invalid": [
+        "example.com",
+        "http:/example.com"
+      ],
+      "rationale": "Allows protocol-relative URLs when allow_protocol_relative_urls is true.",
+      "obligations": []
+    },
+    {
+      "title": "disallow_auth: true",
+      "validator": "isURL",
+      "args": [{ "disallow_auth": true }],
+      "valid": [
+        "http://example.com",
+        "https://example.com"
+      ],
+      "invalid": [
+        "http://user:pass@example.com",
+        "http://user:@example.com",
+        "http://:pass@example.com"
+      ],
+      "rationale": "Disallows URLs with authentication components when disallow_auth is true.",
+      "obligations": []
+    },
+    {
+      "title": "allow_fragments: false",
+      "validator": "isURL",
+      "args": [{ "allow_fragments": false }],
+      "valid": [
+        "http://example.com",
+        "http://example.com/path?query=1"
+      ],
+      "invalid": [
+        "http://example.com#fragment",
+        "http://example.com/path#fragment"
+      ],
+      "rationale": "Disallows fragments in URLs when allow_fragments is false.",
+      "obligations": []
+    },
+    {
+      "title": "allow_query_components: false",
+      "validator": "isURL",
+      "args": [{ "allow_query_components": false }],
+      "valid": [
+        "http://example.com",
+        "http://example.com/path"
+      ],
+      "invalid": [
+        "http://example.com?query=1",
+        "http://example.com/path?query=1&param=2"
+      ],
+      "rationale": "Disallows query components in URLs when allow_query_components is false.",
+      "obligations": []
+    }
+  ]
+}

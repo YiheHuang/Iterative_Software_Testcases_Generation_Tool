@@ -1,0 +1,191 @@
+{
+  "mode": "whitebox",
+  "approach": "improved",
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "blackbox",
+      "rule": "The function must reject strings that are not valid fully qualified domain names (FQDNs).",
+      "why": "The README specifies that the function validates FQDNs.",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "invalid_domain"
+    },
+    {
+      "id": "OB-2",
+      "kind": "blackbox",
+      "rule": "The function must reject FQDNs without a TLD when `require_tld` is true.",
+      "why": "The README specifies `require_tld: true` as the default behavior.",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "example"
+    },
+    {
+      "id": "OB-3",
+      "kind": "blackbox",
+      "rule": "The function must allow underscores in domain parts when `allow_underscores` is true.",
+      "why": "The README specifies `allow_underscores` as an option.",
+      "minimal_valid": "example_domain.com",
+      "minimal_invalid": "invalid_domain.com"
+    },
+    {
+      "id": "OB-4",
+      "kind": "blackbox",
+      "rule": "The function must allow trailing dots when `allow_trailing_dot` is true.",
+      "why": "The README specifies `allow_trailing_dot` as an option.",
+      "minimal_valid": "example.com.",
+      "minimal_invalid": "invalid_domain."
+    },
+    {
+      "id": "OB-5",
+      "kind": "blackbox",
+      "rule": "The function must allow numeric TLDs when `allow_numeric_tld` is true.",
+      "why": "The README specifies `allow_numeric_tld` as an option.",
+      "minimal_valid": "example.123",
+      "minimal_invalid": "invalid.123"
+    },
+    {
+      "id": "OB-6",
+      "kind": "blackbox",
+      "rule": "The function must allow wildcard domains when `allow_wildcard` is true.",
+      "why": "The README specifies `allow_wildcard` as an option.",
+      "minimal_valid": "*.example.com",
+      "minimal_invalid": "invalid.*.com"
+    },
+    {
+      "id": "OB-7",
+      "kind": "blackbox",
+      "rule": "The function must ignore the max length constraint when `ignore_max_length` is true.",
+      "why": "The README specifies `ignore_max_length` as an option.",
+      "minimal_valid": "a",
+      "minimal_invalid": null
+    }
+  ],
+  "test_groups": [
+    {
+      "validator": "isFQDN",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "example.com",
+        "sub.domain.com",
+        "xn--example.com"
+      ],
+      "invalid": [
+        "example",
+        "invalid_domain",
+        "-example.com",
+        "example-.com",
+        "example..com",
+        "example.com ",
+        "example.com\u0000"
+      ],
+      "title": "Baseline FQDN validation",
+      "rationale": "Tests the default behavior of the validator without any options.",
+      "obligations": [
+        "OB-1",
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_underscores": true
+        }
+      ],
+      "valid": [
+        "example_domain.com",
+        "sub_domain.example.com"
+      ],
+      "invalid": [
+        "invalid_domain.com"
+      ],
+      "title": "Validation with allow_underscores enabled",
+      "rationale": "Tests the behavior when underscores are allowed in domain parts.",
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_trailing_dot": true
+        }
+      ],
+      "valid": [
+        "example.com.",
+        "sub.domain.com."
+      ],
+      "invalid": [
+        "invalid_domain."
+      ],
+      "title": "Validation with allow_trailing_dot enabled",
+      "rationale": "Tests the behavior when trailing dots are allowed.",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_numeric_tld": true
+        }
+      ],
+      "valid": [
+        "example.123",
+        "sub.domain.456"
+      ],
+      "invalid": [
+        "invalid.123"
+      ],
+      "title": "Validation with allow_numeric_tld enabled",
+      "rationale": "Tests the behavior when numeric TLDs are allowed.",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_wildcard": true
+        }
+      ],
+      "valid": [
+        "*.example.com",
+        "*.sub.domain.com"
+      ],
+      "invalid": [
+        "invalid.*.com"
+      ],
+      "title": "Validation with allow_wildcard enabled",
+      "rationale": "Tests the behavior when wildcard domains are allowed.",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "validator": "isFQDN",
+      "args": [
+        {
+          "ignore_max_length": true
+        }
+      ],
+      "valid": [
+        "a"
+      ],
+      "invalid": [],
+      "title": "Validation with ignore_max_length enabled",
+      "rationale": "Tests the behavior when the max length constraint is ignored.",
+      "obligations": [
+        "OB-7"
+      ]
+    }
+  ],
+  "metadata": {
+    "requirement_source": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\README.md",
+    "generation_style": "improved_initial_pass"
+  }
+}

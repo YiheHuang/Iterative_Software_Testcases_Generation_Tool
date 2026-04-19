@@ -1,0 +1,60 @@
+{
+  "generated_categories": [
+    {
+      "generated_category_id": "GENC-1",
+      "name": "Default Validation",
+      "description": "Tests the default behavior of the `isURL` validator without any options.",
+      "generated_group_ids": [
+        "GENERATED-1"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "name": "Protocol Requirements",
+      "description": "Tests related to enforcing or validating protocols in URLs.",
+      "generated_group_ids": [
+        "GENERATED-2",
+        "GENERATED-5",
+        "GENERATED-10"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "name": "Host Validation",
+      "description": "Tests related to host validation, including requirements, whitelists, blacklists, and special host formats.",
+      "generated_group_ids": [
+        "GENERATED-3",
+        "GENERATED-6",
+        "GENERATED-7",
+        "GENERATED-8",
+        "GENERATED-9"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "name": "Port Validation",
+      "description": "Tests ensuring URLs include or validate ports.",
+      "generated_group_ids": [
+        "GENERATED-4"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-5",
+      "name": "URL Components Validation",
+      "description": "Tests related to validating specific URL components such as fragments, queries, and authentication.",
+      "generated_group_ids": [
+        "GENERATED-11",
+        "GENERATED-12",
+        "GENERATED-13"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-6",
+      "name": "Length Validation",
+      "description": "Tests ensuring URLs meet length constraints.",
+      "generated_group_ids": [
+        "GENERATED-14"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "generated_categories": [
+    {
+      "generated_category_id": "GENC-1",
+      "name": "General Credit Card Validation",
+      "description": "Tests common valid and invalid credit card numbers without specifying a provider.",
+      "generated_group_ids": [
+        "GENERATED-1"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "name": "Provider-Specific Validation",
+      "description": "Tests credit card validation for specific providers like Visa and American Express.",
+      "generated_group_ids": [
+        "GENERATED-2",
+        "GENERATED-3"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "name": "Unsupported Provider Validation",
+      "description": "Tests behavior when an unsupported provider is specified, ensuring no valid numbers are accepted.",
+      "generated_group_ids": [
+        "GENERATED-4"
+      ]
+    }
+  ]
+}

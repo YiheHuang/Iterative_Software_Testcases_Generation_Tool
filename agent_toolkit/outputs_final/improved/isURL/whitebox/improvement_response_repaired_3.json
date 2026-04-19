@@ -1,0 +1,13 @@
+{
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "whitebox",
+      "rule": "options.validate_length && url.length > options.max_allowed_length",
+      "why": "Uncovered statement at line 67: return false; triggered when URL exceeds max_allowed_length.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://example.com/"
+    }
+  ],
+  "test_groups": []
+}

@@ -1,0 +1,99 @@
+Group generated tests into generated categories for validator isCreditCard.
+
+Generated groups:
+[
+  {
+    "title": "General credit card validation without options",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "4111111111111111",
+      "1"
+    ],
+    "invalid": [
+      "1234567890123456",
+      "411111111111111",
+      "41111111111111111",
+      "abcd1234efgh5678",
+      "",
+      "None"
+    ],
+    "rationale": "Tests common valid and invalid credit card numbers without specifying a provider.",
+    "obligations": [],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "Validation with provider 'visa'",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "visa"
+      }
+    ],
+    "valid": [
+      "4111111111111111",
+      "4012888888881881"
+    ],
+    "invalid": [
+      "378282246310005",
+      "6011111111111117",
+      "5555555555554444",
+      "411111111111111",
+      "abcd1234efgh5678",
+      "",
+      "None"
+    ],
+    "rationale": "Tests valid Visa credit card numbers and invalid numbers for other providers or malformed inputs.",
+    "obligations": [],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "Validation with provider 'amex'",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "amex"
+      }
+    ],
+    "valid": [
+      "378282246310005",
+      "371449635398431"
+    ],
+    "invalid": [
+      "4111111111111111",
+      "5555555555554444",
+      "6011111111111117",
+      "37828224631000",
+      "abcd1234efgh5678",
+      "",
+      "None"
+    ],
+    "rationale": "Tests valid American Express credit card numbers and invalid numbers for other providers or malformed inputs.",
+    "obligations": [],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "Validation with unsupported provider",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "unsupported"
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "4111111111111111",
+      "378282246310005",
+      "5555555555554444",
+      "6011111111111117",
+      "abcd1234efgh5678",
+      "",
+      "None"
+    ],
+    "rationale": "Tests behavior when an unsupported provider is specified, ensuring no valid numbers are accepted.",
+    "obligations": [],
+    "generated_id": "GENERATED-4"
+  }
+]

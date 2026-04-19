@@ -1,0 +1,85 @@
+{
+  "golden_to_generated": [
+    {
+      "golden_category_id": "GC-1",
+      "matched_generated_category_ids": ["GENC-3", "GENC-4"],
+      "match_type": "partial",
+      "reason": "GENC-3 covers general validation without specifying a provider, and GENC-4 focuses on Luhn algorithm validation, which is a subset of general credit card validation."
+    },
+    {
+      "golden_category_id": "GC-2",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "strong",
+      "reason": "GENC-2 explicitly addresses provider-specific validation, including handling invalid providers, which aligns directly with GC-2."
+    },
+    {
+      "golden_category_id": "GC-3",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "GENC-2 includes provider-specific validation, which partially overlaps with AmEx validation but does not focus exclusively on AmEx."
+    },
+    {
+      "golden_category_id": "GC-4",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "GENC-2 includes provider-specific validation, which partially overlaps with Diners Club validation but does not focus exclusively on Diners Club."
+    },
+    {
+      "golden_category_id": "GC-5",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "GENC-2 includes provider-specific validation, which partially overlaps with Discover validation but does not focus exclusively on Discover."
+    },
+    {
+      "golden_category_id": "GC-6",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "GENC-2 includes provider-specific validation, which partially overlaps with JCB validation but does not focus exclusively on JCB."
+    },
+    {
+      "golden_category_id": "GC-7",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "GENC-2 includes provider-specific validation, which partially overlaps with Mastercard validation but does not focus exclusively on Mastercard."
+    },
+    {
+      "golden_category_id": "GC-8",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "GENC-2 includes provider-specific validation, which partially overlaps with UnionPay validation but does not focus exclusively on UnionPay."
+    },
+    {
+      "golden_category_id": "GC-9",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "GENC-2 includes provider-specific validation, which partially overlaps with Visa validation but does not focus exclusively on Visa."
+    }
+  ],
+  "generated_to_golden": [
+    {
+      "generated_category_id": "GENC-1",
+      "matched_golden_category_ids": ["GC-1"],
+      "match_type": "partial",
+      "reason": "GENC-1 focuses on input type and format validation, which is a subset of general credit card validation."
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "matched_golden_category_ids": ["GC-2", "GC-3", "GC-4", "GC-5", "GC-6", "GC-7", "GC-8", "GC-9"],
+      "match_type": "partial",
+      "reason": "GENC-2 addresses provider-specific validation, which partially overlaps with multiple golden categories focused on specific providers."
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "matched_golden_category_ids": ["GC-1"],
+      "match_type": "partial",
+      "reason": "GENC-3 covers general validation without specifying a provider, which aligns partially with GC-1."
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "matched_golden_category_ids": ["GC-1"],
+      "match_type": "partial",
+      "reason": "GENC-4 focuses on Luhn algorithm validation, which is a subset of general credit card validation."
+    }
+  ],
+  "novel_generated_categories": []
+}

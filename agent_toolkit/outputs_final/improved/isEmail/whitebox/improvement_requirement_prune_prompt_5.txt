@@ -1,0 +1,408 @@
+You are performing a strict requirement audit for a candidate white-box test suite for isEmail.
+Your job is to remove test cases that are not clearly supported by the requirement.
+Be conservative: when a case is uncertain, implementation-only, or weakly justified, delete it.
+
+Return strict JSON only with this schema:
+{
+  "obligations": [...],
+  "test_groups": [...],
+  "audit": [
+    {
+      "group_title": "string",
+      "decision": "keep|trim|drop",
+      "reason": "string",
+      "removed_valid": ["..."],
+      "removed_invalid": ["..."]
+    }
+  ]
+}
+
+Hard constraints:
+- Preserve the same overall suite schema for obligations and test_groups.
+- Do NOT add new groups, new args, new valid values, or new invalid values.
+- Do NOT rewrite existing test strings into different strings.
+- You may only delete values, delete whole groups, and delete unused obligations.
+- Every input value must be a real executable input string, not a presentation wrapper, not a description, and not a pseudo-code expression.
+- If a group keeps zero valid and zero invalid values after audit, drop the whole group.
+- Remove obligations that no remaining group uses.
+
+Requirement specification:
+Function name: isEmail
+Black-box requirement source: validator_js README function entry
+Signature summary: isEmail(str [, options])
+README behavior summary:
+| check if the string is an email.
+`options` is an object which defaults to `{ allow_display_name: false, require_display_name: false, allow_utf8_local_part: true, require_tld: true, allow_ip_domain: false, allow_underscores: false, domain_specific_validation: false, blacklisted_chars: '', host_blacklist: [] }`. If `allow_display_name` is set to true, the validator will also match `Display Name <email-address>`. If `require_display_name` is set to true, the validator will reject strings without the format `Display Name <email-address>`. If `allow_utf8_local_part` is set to false, the validator will not allow any non-English UTF8 character in email address' local part. If `require_tld` is set to false, email addresses without a TLD in their domain will also be matched. If `ignore_max_length` is set to true, the validator will not check for the standard max length of an email. If `allow_ip_domain` is set to true, the validator will allow IP addresses in the host part. If `domain_specific_validation` is true, some additional validation will be enabled, e.g. disallowing certain syntactically valid email addresses that are rejected by Gmail. If `blacklisted_chars` receives a string, then the validator will reject emails that include any of the characters in the string, in the name part. If `host_blacklist` is set to an array of strings or regexp, and the part of the email after the `@` symbol matches one of the strings defined in it, the validation fails. If `host_whitelist` is set to an array of strings or regexp, and the part of the email after the `@` symbol matches none of the strings defined in it, the validation fails.
+
+Treat the README entry as the authoritative black-box behavior description.
+Infer valid inputs, invalid inputs, option-sensitive behaviors, and edge cases from this description.
+
+
+Candidate obligations:
+[
+  {
+    "id": "OB-1",
+    "kind": "blackbox",
+    "rule": "The function must validate basic email structure (local part, @, domain).",
+    "why": "This is the core functionality of the validator.",
+    "minimal_valid": "test@example.com",
+    "minimal_invalid": "testexample.com"
+  },
+  {
+    "id": "OB-2",
+    "kind": "blackbox",
+    "rule": "The function must respect the `allow_display_name` option to allow 'Display Name <email>' format.",
+    "why": "The README specifies this behavior.",
+    "minimal_valid": "John Doe <john.doe@example.com>",
+    "minimal_invalid": "John Doe john.doe@example.com"
+  },
+  {
+    "id": "OB-3",
+    "kind": "blackbox",
+    "rule": "The function must respect the `require_display_name` option to reject emails without a display name.",
+    "why": "The README specifies this behavior.",
+    "minimal_valid": "John Doe <john.doe@example.com>",
+    "minimal_invalid": "john.doe@example.com"
+  },
+  {
+    "id": "OB-4",
+    "kind": "blackbox",
+    "rule": "The function must reject emails exceeding the default maximum length unless `ignore_max_length` is true.",
+    "why": "The README specifies a default max length of 254 characters.",
+    "minimal_valid": "a@b.co",
+    "minimal_invalid": "a@b."
+  },
+  {
+    "id": "OB-8",
+    "kind": "blackbox",
+    "rule": "The function must respect the `blacklisted_chars` option to reject emails containing blacklisted characters.",
+    "why": "The README specifies this behavior.",
+    "minimal_valid": "test@example.com",
+    "minimal_invalid": "te#st@example.com"
+  },
+  {
+    "id": "OB-9",
+    "kind": "blackbox",
+    "rule": "The function must respect the `host_blacklist` option to reject emails with blacklisted domains.",
+    "why": "The README specifies this behavior.",
+    "minimal_valid": "test@example.com",
+    "minimal_invalid": "test@blacklisted.com"
+  },
+  {
+    "id": "OB-10",
+    "kind": "blackbox",
+    "rule": "The function must respect the `host_whitelist` option to reject emails with domains not in the whitelist.",
+    "why": "The README specifies this behavior.",
+    "minimal_valid": "test@whitelisted.com",
+    "minimal_invalid": "test@nonwhitelisted.com"
+  },
+  {
+    "id": "OB-15",
+    "kind": "whitebox",
+    "rule": "The function must validate Gmail-specific rules when `domain_specific_validation` is true.",
+    "why": "The implementation has a branch for Gmail-specific validation.",
+    "minimal_valid": "test@gmail.com",
+    "minimal_invalid": "test..dots@gmail.com"
+  },
+  {
+    "id": "OB-17",
+    "kind": "whitebox",
+    "rule": "Uncovered statement at line 41: return false;",
+    "why": "This statement is reached when the display name contains only spaces, which is invalid according to RFC2822.",
+    "minimal_valid": null,
+    "minimal_invalid": "\"   <email@example.com>\""
+  },
+  {
+    "id": "OB-19",
+    "kind": "whitebox",
+    "rule": "Uncovered statement at line 159: noBracketdomain.length === 0 || !isIP(noBracketdomain",
+    "why": "This statement is reached when the domain inside brackets is empty or not a valid IP.",
+    "minimal_valid": "test@[127.0.0.1]",
+    "minimal_invalid": "test@[]"
+  },
+  {
+    "id": "OB-21",
+    "kind": "whitebox",
+    "rule": "Targets uncovered statement at line 56 where display names with illegal characters must have properly escaped quotes.",
+    "why": "The uncovered statement at line 56 checks if quotes in the display name are properly escaped.",
+    "minimal_valid": "\"John \\\"Doe\\\"\" <email@example.com>",
+    "minimal_invalid": "\"John \"Doe\"\" <email@example.com>"
+  },
+  {
+    "id": "OB-22",
+    "kind": "whitebox",
+    "rule": "Targets uncovered statement at line 169 where quoted local parts of email addresses are validated.",
+    "why": "The uncovered statement at line 169 validates quoted local parts of email addresses based on the `allow_utf8_local_part` option.",
+    "minimal_valid": "\"quoted.local.part\"@example.com",
+    "minimal_invalid": "\"invalid.local.part@\"example.com"
+  },
+  {
+    "id": "OB-23",
+    "kind": "whitebox",
+    "rule": "Targets uncovered statement at line 50 where display names with illegal characters not enclosed in quotes are rejected.",
+    "why": "The condition `display_name_without_quotes === display_name` evaluates to true, triggering the return statement.",
+    "minimal_valid": "\"John \\\"Doe\\\"\" <email@example.com>",
+    "minimal_invalid": "John \"Doe\" <email@example.com>"
+  },
+  {
+    "id": "OB-24",
+    "kind": "whitebox",
+    "rule": "Targets uncovered statement at line 93 where overly long email strings are rejected when `ignore_max_length` is false.",
+    "why": "The condition `!options.ignore_max_length && str.length > defaultMaxEmailLength` evaluates to true, triggering the return statement.",
+    "minimal_valid": "a@b.co",
+    "minimal_invalid": "a@b"
+  }
+]
+
+Candidate test groups to check:
+[
+  {
+    "title": "Basic email structure validation",
+    "validator": "isEmail",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "test@example.com",
+      "user.name+tag+sorting@example.com"
+    ],
+    "invalid": [
+      "plainaddress",
+      "@missinglocalpart.com",
+      "missingatsign.com"
+    ],
+    "rationale": "Covers the basic structure of an email address.",
+    "obligations": [
+      "OB-1"
+    ]
+  },
+  {
+    "title": "Display name validation",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_display_name": true
+      }
+    ],
+    "valid": [
+      "John Doe <john.doe@example.com>"
+    ],
+    "invalid": [
+      "John Doe john.doe@example.com",
+      "John Doe <john.doe@example.com"
+    ],
+    "rationale": "Tests the `allow_display_name` option.",
+    "obligations": [
+      "OB-2"
+    ]
+  },
+  {
+    "title": "Require display name",
+    "validator": "isEmail",
+    "args": [
+      {
+        "require_display_name": true
+      }
+    ],
+    "valid": [
+      "John Doe <john.doe@example.com>"
+    ],
+    "invalid": [
+      "john.doe@example.com"
+    ],
+    "rationale": "Tests the `require_display_name` option.",
+    "obligations": [
+      "OB-3"
+    ]
+  },
+  {
+    "title": "Max length validation",
+    "validator": "isEmail",
+    "args": [
+      {
+        "ignore_max_length": false
+      }
+    ],
+    "valid": [
+      "a@b.co"
+    ],
+    "invalid": [
+      "a@b."
+    ],
+    "rationale": "Tests the maximum length constraint.",
+    "obligations": [
+      "OB-4"
+    ]
+  },
+  {
+    "title": "Blacklisted characters",
+    "validator": "isEmail",
+    "args": [
+      {
+        "blacklisted_chars": "#"
+      }
+    ],
+    "valid": [
+      "test@example.com"
+    ],
+    "invalid": [
+      "te#st@example.com"
+    ],
+    "rationale": "Tests the `blacklisted_chars` option.",
+    "obligations": [
+      "OB-8"
+    ]
+  },
+  {
+    "title": "Host blacklist",
+    "validator": "isEmail",
+    "args": [
+      {
+        "host_blacklist": [
+          "blacklisted.com"
+        ]
+      }
+    ],
+    "valid": [
+      "test@example.com"
+    ],
+    "invalid": [
+      "test@blacklisted.com"
+    ],
+    "rationale": "Tests the `host_blacklist` option.",
+    "obligations": [
+      "OB-9"
+    ]
+  },
+  {
+    "title": "Host whitelist",
+    "validator": "isEmail",
+    "args": [
+      {
+        "host_whitelist": [
+          "whitelisted.com"
+        ]
+      }
+    ],
+    "valid": [
+      "test@whitelisted.com"
+    ],
+    "invalid": [
+      "test@nonwhitelisted.com"
+    ],
+    "rationale": "Tests the `host_whitelist` option.",
+    "obligations": [
+      "OB-10"
+    ]
+  },
+  {
+    "title": "Gmail-specific validation",
+    "validator": "isEmail",
+    "args": [
+      {
+        "domain_specific_validation": true
+      }
+    ],
+    "valid": [
+      "test@gmail.com"
+    ],
+    "invalid": [
+      "test..dots@gmail.com"
+    ],
+    "rationale": "Tests Gmail-specific validation rules.",
+    "obligations": [
+      "OB-15"
+    ]
+  },
+  {
+    "title": "Invalid display name with only spaces",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_display_name": true
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "   <email@example.com>"
+    ],
+    "rationale": "Targets uncovered statement at line 41 where display names with only spaces are rejected.",
+    "obligations": [
+      "OB-17"
+    ]
+  },
+  {
+    "title": "Empty or invalid IP domain inside brackets",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_ip_domain": true
+      }
+    ],
+    "valid": [
+      "test@[127.0.0.1]"
+    ],
+    "invalid": [
+      "test@[]"
+    ],
+    "rationale": "Targets uncovered statement at line 159 where empty or invalid IP domains inside brackets are rejected.",
+    "obligations": [
+      "OB-19"
+    ]
+  },
+  {
+    "title": "Improperly escaped quotes in display name",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_display_name": true
+      }
+    ],
+    "valid": [
+      "\"John \\\"Doe\\\"\" <email@example.com>"
+    ],
+    "invalid": [
+      "\"John \"Doe\"\" <email@example.com>"
+    ],
+    "rationale": "Targets uncovered statement at line 56 where display names with illegal characters must have properly escaped quotes.",
+    "obligations": [
+      "OB-21"
+    ]
+  },
+  {
+    "title": "Quoted local part validation",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_utf8_local_part": true
+      }
+    ],
+    "valid": [
+      "\"quoted.local.part\"@example.com"
+    ],
+    "invalid": [
+      "\"invalid.local.part@\"example.com"
+    ],
+    "rationale": "Targets uncovered statement at line 169 where quoted local parts of email addresses are validated.",
+    "obligations": [
+      "OB-22"
+    ]
+  }
+]
+
+Audit policy:
+1. For every group, first decide one of: keep, trim, or drop.
+2. `keep` means every remaining case is clearly requirement-supported.
+3. `trim` means the group has some requirement-supported cases, but one or more values must be deleted.
+4. `drop` means the whole group should be removed because its central claim is not requirement-supported.
+5. Prefer deletion over speculative preservation.
+6. If a case depends on implementation detail but is not clearly supported by the requirement, delete it.
+7. If an option-sensitive group claims a behavior change, the requirement must clearly support that option effect.
+8. Respect default options exactly as written in the requirement.
+9. Distinguish real executable input strings from presentation wrappers.
+10. If a test value adds an extra outer quoted layer that changes the actual input string, delete it unless the requirement explicitly allows that exact quoted form.
+11. Example: keep `user@example.com`, but delete `"user@example.com"` unless the requirement explicitly says the quotes are part of the accepted input.
+12. Example: keep `John Doe <user@example.com>` when display names are allowed, but delete `"John Doe <user@example.com>"` unless that exact fully quoted form is requirement-supported.
+13. Delete values that are natural-language placeholders, descriptions, or pseudo-code expressions, such as `a.repeat(255) + "@example.com"`.
+14. Delete any case whose expected outcome contradicts the requirement's documented default behavior or documented option behavior.
+15. In the audit array, include one row for every original group title, even if the group is dropped.

@@ -1,0 +1,310 @@
+Group generated tests into generated categories for validator isCurrency.
+
+Generated groups:
+[
+  {
+    "title": "Default options",
+    "validator": "isCurrency",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "$123.45",
+      "$0.99",
+      "$1,234.56"
+    ],
+    "invalid": [
+      "123.45",
+      "-$123.45",
+      "$123.456",
+      "$123",
+      "$ 123.45"
+    ],
+    "rationale": "Covers the default behavior of the function.",
+    "obligations": [
+      "OB-1"
+    ],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "Require symbol",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "require_symbol": true
+      }
+    ],
+    "valid": [
+      "$123.45"
+    ],
+    "invalid": [
+      "123.45",
+      "123"
+    ],
+    "rationale": "Tests the enforcement of the currency symbol.",
+    "obligations": [
+      "OB-2"
+    ],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "Disallow negatives",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_negatives": false
+      }
+    ],
+    "valid": [
+      "$123.45"
+    ],
+    "invalid": [
+      "-$123.45",
+      "($123.45)"
+    ],
+    "rationale": "Ensures negative amounts are rejected when disallowed.",
+    "obligations": [
+      "OB-3"
+    ],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "Parens for negatives",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "parens_for_negatives": true
+      }
+    ],
+    "valid": [
+      "($123.45)"
+    ],
+    "invalid": [
+      "-$123.45",
+      "$123.45"
+    ],
+    "rationale": "Tests the use of parentheses for negative amounts.",
+    "obligations": [
+      "OB-4"
+    ],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "Symbol after digits",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "symbol_after_digits": true
+      }
+    ],
+    "valid": [
+      "123.45$"
+    ],
+    "invalid": [
+      "$123.45",
+      "123.45"
+    ],
+    "rationale": "Ensures the currency symbol appears after the digits.",
+    "obligations": [
+      "OB-5"
+    ],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "Disallow decimals",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_decimal": false
+      }
+    ],
+    "valid": [
+      "$123",
+      "$1,234"
+    ],
+    "invalid": [
+      "$123.45",
+      "$123.4"
+    ],
+    "rationale": "Tests rejection of decimal amounts when disallowed.",
+    "obligations": [
+      "OB-6"
+    ],
+    "generated_id": "GENERATED-6"
+  },
+  {
+    "title": "Require decimals",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "require_decimal": true
+      }
+    ],
+    "valid": [
+      "$123.45"
+    ],
+    "invalid": [
+      "$123",
+      "$1,234"
+    ],
+    "rationale": "Ensures decimal amounts are required when specified.",
+    "obligations": [
+      "OB-7"
+    ],
+    "generated_id": "GENERATED-7"
+  },
+  {
+    "title": "Multiple digits after decimal",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "digits_after_decimal": [
+          1,
+          2
+        ]
+      }
+    ],
+    "valid": [
+      "$123.4",
+      "$123.45"
+    ],
+    "invalid": [
+      "$123.456",
+      "$123."
+    ],
+    "rationale": "Tests support for varying numbers of digits after the decimal.",
+    "obligations": [
+      "OB-8"
+    ],
+    "generated_id": "GENERATED-8"
+  },
+  {
+    "title": "Allow space after symbol",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_space_after_symbol": true
+      }
+    ],
+    "valid": [
+      "$ 123.45"
+    ],
+    "invalid": [
+      "$123.45",
+      "$ 123"
+    ],
+    "rationale": "Tests allowance of a space after the currency symbol.",
+    "obligations": [
+      "OB-9"
+    ],
+    "generated_id": "GENERATED-9"
+  },
+  {
+    "title": "Allow space after digits",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_space_after_digits": true
+      }
+    ],
+    "valid": [
+      "$123.45 "
+    ],
+    "invalid": [
+      "$123.45",
+      "$123.45  "
+    ],
+    "rationale": "Ensures a space is allowed after the digits.",
+    "obligations": [
+      "OB-10"
+    ],
+    "generated_id": "GENERATED-10"
+  },
+  {
+    "title": "Allow negative sign placeholder",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_negative_sign_placeholder": true
+      }
+    ],
+    "valid": [
+      "$ 123.45"
+    ],
+    "invalid": [
+      "$-123.45",
+      "$123.45"
+    ],
+    "rationale": "Tests the use of a placeholder space for the negative sign.",
+    "obligations": [
+      "OB-11"
+    ],
+    "generated_id": "GENERATED-11"
+  },
+  {
+    "title": "Negative sign after digits",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "negative_sign_after_digits": true
+      }
+    ],
+    "valid": [
+      "$123.45-"
+    ],
+    "invalid": [
+      "-$123.45",
+      "$123.45"
+    ],
+    "rationale": "Tests the placement of the negative sign after the digits.",
+    "obligations": [
+      "OB-12",
+      "OB-14"
+    ],
+    "generated_id": "GENERATED-12"
+  },
+  {
+    "title": "Negative sign before digits",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "negative_sign_before_digits": true
+      }
+    ],
+    "valid": [
+      "-$123.45"
+    ],
+    "invalid": [
+      "$123.45-",
+      "$123.45"
+    ],
+    "rationale": "Tests the placement of the negative sign before the digits.",
+    "obligations": [
+      "OB-13",
+      "OB-15"
+    ],
+    "generated_id": "GENERATED-13"
+  },
+  {
+    "title": "No negative sign placement options",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "negative_sign_before_digits": false,
+        "negative_sign_after_digits": false
+      }
+    ],
+    "valid": [
+      "$123.45"
+    ],
+    "invalid": [
+      "-$123.45",
+      "$123.45-"
+    ],
+    "rationale": "Ensures behavior when neither negative sign placement option is enabled.",
+    "obligations": [
+      "OB-16"
+    ],
+    "generated_id": "GENERATED-14"
+  }
+]

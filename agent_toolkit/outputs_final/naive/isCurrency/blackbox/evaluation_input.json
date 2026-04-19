@@ -1,0 +1,671 @@
+{
+  "cases": [
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "$10.00",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Default options: Basic valid and invalid currency strings",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "$1,000.00",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Default options: Basic valid and invalid currency strings",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "$0.99",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Default options: Basic valid and invalid currency strings",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "10.00",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Default options: Basic valid and invalid currency strings",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "0.99",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Default options: Basic valid and invalid currency strings",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "$0",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Default options: Basic valid and invalid currency strings",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "$1,000",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Default options: Basic valid and invalid currency strings",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "1000.00",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Default options: Basic valid and invalid currency strings",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "10",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Default options: Basic valid and invalid currency strings",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "$10.000",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Default options: Basic valid and invalid currency strings",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "$10.0",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Default options: Basic valid and invalid currency strings",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "$10,00",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Default options: Basic valid and invalid currency strings",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "$10.00.00",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Default options: Basic valid and invalid currency strings",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "10.00$",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Default options: Basic valid and invalid currency strings",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "$-10.00",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Default options: Basic valid and invalid currency strings",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "$ (10.00)",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Default options: Basic valid and invalid currency strings",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "abc",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Default options: Basic valid and invalid currency strings",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Default options: Basic valid and invalid currency strings",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "input_value": "10.00$",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Default options: Basic valid and invalid currency strings",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_symbol": true
+        }
+      ],
+      "input_value": "$10.00",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Option: require_symbol = true",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_symbol": true
+        }
+      ],
+      "input_value": "$1,000.00",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Option: require_symbol = true",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_symbol": true
+        }
+      ],
+      "input_value": "$0.99",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Option: require_symbol = true",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_symbol": true
+        }
+      ],
+      "input_value": "10.00",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Option: require_symbol = true",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_symbol": true
+        }
+      ],
+      "input_value": "1,000.00",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Option: require_symbol = true",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_symbol": true
+        }
+      ],
+      "input_value": "0.99",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Option: require_symbol = true",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_negatives": false
+        }
+      ],
+      "input_value": "$10.00",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Option: allow_negatives = false",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_negatives": false
+        }
+      ],
+      "input_value": "$1,000.00",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Option: allow_negatives = false",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_negatives": false
+        }
+      ],
+      "input_value": "$0.99",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Option: allow_negatives = false",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_negatives": false
+        }
+      ],
+      "input_value": "$-10.00",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Option: allow_negatives = false",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_negatives": false
+        }
+      ],
+      "input_value": "-10.00",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Option: allow_negatives = false",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_negatives": false
+        }
+      ],
+      "input_value": "$ (10.00)",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Option: allow_negatives = false",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "parens_for_negatives": true
+        }
+      ],
+      "input_value": "$(10.00)",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Option: parens_for_negatives = true",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "parens_for_negatives": true
+        }
+      ],
+      "input_value": "$10.00",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Option: parens_for_negatives = true",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "parens_for_negatives": true
+        }
+      ],
+      "input_value": "10.00",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Option: parens_for_negatives = true",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "parens_for_negatives": true
+        }
+      ],
+      "input_value": "$-10.00",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Option: parens_for_negatives = true",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "parens_for_negatives": true
+        }
+      ],
+      "input_value": "-10.00",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Option: parens_for_negatives = true",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "parens_for_negatives": true
+        }
+      ],
+      "input_value": "$ (10.00)",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Option: parens_for_negatives = true",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_decimal": true
+        }
+      ],
+      "input_value": "$10.00",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Option: require_decimal = true",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_decimal": true
+        }
+      ],
+      "input_value": "10.00",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Option: require_decimal = true",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_decimal": true
+        }
+      ],
+      "input_value": "$0.99",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Option: require_decimal = true",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_decimal": true
+        }
+      ],
+      "input_value": "$10",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Option: require_decimal = true",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_decimal": true
+        }
+      ],
+      "input_value": "10",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Option: require_decimal = true",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_decimal": true
+        }
+      ],
+      "input_value": "$1,000",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Option: require_decimal = true",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_decimal": true
+        }
+      ],
+      "input_value": "1000",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Option: require_decimal = true",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "digits_after_decimal": [
+            1,
+            2
+          ]
+        }
+      ],
+      "input_value": "$10.0",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Option: digits_after_decimal = [1, 2]",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "digits_after_decimal": [
+            1,
+            2
+          ]
+        }
+      ],
+      "input_value": "$10.00",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Option: digits_after_decimal = [1, 2]",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "digits_after_decimal": [
+            1,
+            2
+          ]
+        }
+      ],
+      "input_value": "10.0",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Option: digits_after_decimal = [1, 2]",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "digits_after_decimal": [
+            1,
+            2
+          ]
+        }
+      ],
+      "input_value": "10.00",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Option: digits_after_decimal = [1, 2]",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "digits_after_decimal": [
+            1,
+            2
+          ]
+        }
+      ],
+      "input_value": "$10",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Option: digits_after_decimal = [1, 2]",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "digits_after_decimal": [
+            1,
+            2
+          ]
+        }
+      ],
+      "input_value": "$10.000",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Option: digits_after_decimal = [1, 2]",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "digits_after_decimal": [
+            1,
+            2
+          ]
+        }
+      ],
+      "input_value": "10.000",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Option: digits_after_decimal = [1, 2]",
+      "obligations": []
+    },
+    {
+      "validator": "isCurrency",
+      "args": [
+        {
+          "digits_after_decimal": [
+            1,
+            2
+          ]
+        }
+      ],
+      "input_value": "10",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Option: digits_after_decimal = [1, 2]",
+      "obligations": []
+    }
+  ],
+  "mode": "blackbox",
+  "approach": "naive",
+  "target_source_files": [
+    "src/lib/isCurrency.js"
+  ]
+}

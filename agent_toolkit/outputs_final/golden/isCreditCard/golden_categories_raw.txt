@@ -1,0 +1,49 @@
+{
+  "golden_categories": [
+    {
+      "name": "General Credit Card Validation",
+      "description": "Tests for general credit card validation without specifying a provider.",
+      "golden_group_ids": ["GOLDEN-1"]
+    },
+    {
+      "name": "Invalid Provider Handling",
+      "description": "Tests for handling invalid or unsupported credit card providers.",
+      "golden_group_ids": ["GOLDEN-2"]
+    },
+    {
+      "name": "AmEx Credit Card Validation",
+      "description": "Tests for validating American Express (AmEx) credit cards.",
+      "golden_group_ids": ["GOLDEN-3"]
+    },
+    {
+      "name": "Diners Club Credit Card Validation",
+      "description": "Tests for validating Diners Club credit cards.",
+      "golden_group_ids": ["GOLDEN-4"]
+    },
+    {
+      "name": "Discover Credit Card Validation",
+      "description": "Tests for validating Discover credit cards.",
+      "golden_group_ids": ["GOLDEN-5"]
+    },
+    {
+      "name": "JCB Credit Card Validation",
+      "description": "Tests for validating JCB credit cards.",
+      "golden_group_ids": ["GOLDEN-6"]
+    },
+    {
+      "name": "Mastercard Credit Card Validation",
+      "description": "Tests for validating Mastercard credit cards.",
+      "golden_group_ids": ["GOLDEN-7"]
+    },
+    {
+      "name": "UnionPay Credit Card Validation",
+      "description": "Tests for validating UnionPay credit cards.",
+      "golden_group_ids": ["GOLDEN-8"]
+    },
+    {
+      "name": "Visa Credit Card Validation",
+      "description": "Tests for validating Visa credit cards.",
+      "golden_group_ids": ["GOLDEN-9"]
+    }
+  ]
+}

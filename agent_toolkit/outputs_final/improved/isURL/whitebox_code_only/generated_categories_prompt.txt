@@ -1,0 +1,284 @@
+Group generated tests into generated categories for validator isURL.
+
+Generated groups:
+[
+  {
+    "title": "Basic input validation",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com",
+      "ftp://example.com"
+    ],
+    "invalid": [
+      "",
+      " ",
+      "None",
+      "http://<invalid>.com",
+      "http://example .com"
+    ],
+    "rationale": "Covers early returns for null, empty, or invalid characters in input.",
+    "obligations": [
+      "OB-1"
+    ],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "Special case: mailto URLs",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com"
+    ],
+    "invalid": [
+      "mailto:user@example.com",
+      "mailto:example@domain.com"
+    ],
+    "rationale": "Ensures URLs starting with 'mailto:' are rejected.",
+    "obligations": [
+      "OB-2"
+    ],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "Maximum URL length enforcement",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com",
+      "http://a.com/"
+    ],
+    "invalid": [
+      "http://"
+    ],
+    "rationale": "Tests enforcement of maximum URL length when validate_length is true.",
+    "obligations": [
+      "OB-3"
+    ],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "Maximum URL length with validate_length option",
+    "validator": "isURL",
+    "args": [
+      {
+        "validate_length": true,
+        "max_allowed_length": 20
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://example.com/very/long/url/that/exceeds/the/maximum/allowed/length"
+    ],
+    "rationale": "Tests the enforcement of maximum URL length when `validate_length` is enabled.",
+    "obligations": [
+      "OB-4"
+    ],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "Fragment handling with allow_fragments option",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_fragments": false
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://example.com#fragment"
+    ],
+    "rationale": "Ensures URLs with fragments are rejected when `allow_fragments` is disabled.",
+    "obligations": [
+      "OB-5"
+    ],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "Query components handling with allow_query_components option",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_query_components": false
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://example.com?query=1",
+      "http://example.com&param=value"
+    ],
+    "rationale": "Ensures URLs with query components are rejected when `allow_query_components` is disabled.",
+    "obligations": [
+      "OB-6"
+    ],
+    "generated_id": "GENERATED-6"
+  },
+  {
+    "title": "Authentication component handling",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://user:pass@example.com"
+    ],
+    "invalid": [
+      "http://example.com",
+      "http://user:pass:extra@example.com"
+    ],
+    "rationale": "Covers the presence of '@' in the URL and validates the structure of the authentication component.",
+    "obligations": [
+      "OB-7",
+      "OB-9"
+    ],
+    "generated_id": "GENERATED-7"
+  },
+  {
+    "title": "Protocol requirement enforcement",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": true
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "example.com"
+    ],
+    "rationale": "Ensures that URLs without a protocol are rejected when `require_protocol` is enabled.",
+    "obligations": [
+      "OB-8"
+    ],
+    "generated_id": "GENERATED-8"
+  },
+  {
+    "title": "Authentication component validation",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://user:pass@example.com"
+    ],
+    "invalid": [
+      "http://user:pass:extra@example.com"
+    ],
+    "rationale": "Tests validation of authentication components, targeting uncovered statement at line 127.",
+    "obligations": [
+      "OB-10"
+    ],
+    "generated_id": "GENERATED-9"
+  },
+  {
+    "title": "Encoded malicious content in authentication",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://user:pass@example.com"
+    ],
+    "invalid": [
+      "http://javascript:%61%6c%65%72%74%28%31%29@example.com"
+    ],
+    "rationale": "Tests detection of encoded malicious content in authentication, targeting uncovered statement at line 132.",
+    "obligations": [
+      "OB-11"
+    ],
+    "generated_id": "GENERATED-10"
+  },
+  {
+    "title": "Port number validation",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com:80"
+    ],
+    "invalid": [
+      "http://example.com:70000"
+    ],
+    "rationale": "Tests validation of port numbers, targeting uncovered statement at line 241.",
+    "obligations": [
+      "OB-12"
+    ],
+    "generated_id": "GENERATED-11"
+  },
+  {
+    "title": "Invalid protocol with require_valid_protocol option",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_valid_protocol": true,
+        "protocols": [
+          "http",
+          "https"
+        ]
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "javascript:alert(1)"
+    ],
+    "rationale": "Tests rejection of invalid protocols when `require_valid_protocol` is enabled, targeting uncovered statement at line 99.",
+    "obligations": [
+      "OB-13"
+    ],
+    "generated_id": "GENERATED-12"
+  },
+  {
+    "title": "Parsing after colon for first slash",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://example"
+    ],
+    "rationale": "Tests parsing of the portion after the colon to identify the first slash, targeting uncovered statement at line 118.",
+    "obligations": [
+      "OB-14"
+    ],
+    "generated_id": "GENERATED-13"
+  },
+  {
+    "title": "Authentication component detection",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://user:pass@example.com"
+    ],
+    "invalid": [
+      "http://example.com"
+    ],
+    "rationale": "Tests detection of authentication components in the URL, targeting uncovered branch at line 124.",
+    "obligations": [
+      "OB-15"
+    ],
+    "generated_id": "GENERATED-14"
+  }
+]

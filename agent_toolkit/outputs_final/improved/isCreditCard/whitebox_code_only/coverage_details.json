@@ -1,0 +1,195 @@
+{
+  "coverage_total": {
+    "lines": {
+      "total": 22,
+      "covered": 18,
+      "skipped": 0,
+      "pct": 81.82
+    },
+    "statements": {
+      "total": 24,
+      "covered": 20,
+      "skipped": 0,
+      "pct": 83.33
+    },
+    "functions": {
+      "total": 4,
+      "covered": 4,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 19,
+      "covered": 11,
+      "skipped": 0,
+      "pct": 57.89
+    }
+  },
+  "coverage_files": {
+    "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isCreditCard.js": {
+      "lines": {
+        "total": 22,
+        "covered": 18,
+        "skipped": 0,
+        "pct": 81.82
+      },
+      "functions": {
+        "total": 4,
+        "covered": 4,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 24,
+        "covered": 20,
+        "skipped": 0,
+        "pct": 83.33
+      },
+      "branches": {
+        "total": 19,
+        "covered": 11,
+        "skipped": 0,
+        "pct": 57.89
+      }
+    }
+  },
+  "uncovered_details": {
+    "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isCreditCard.js": {
+      "uncovered_statements": [
+        {
+          "statement_id": "15",
+          "line": 31,
+          "column": 4,
+          "line_text": "    if (!(cards[provider.toLowerCase()].test(sanitized))) {",
+          "source_excerpt": "if (!(cards[provider.toLowerCase()].test(sanitized))) {\n      return false;\n    }",
+          "summary": "Uncovered statement at line 31: if (!(cards[provider.toLowerCase()].test(sanitized))) {\n      return false;\n    }"
+        },
+        {
+          "statement_id": "16",
+          "line": 32,
+          "column": 6,
+          "line_text": "      return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 32: return false;"
+        },
+        {
+          "statement_id": "18",
+          "line": 36,
+          "column": 4,
+          "line_text": "    throw new Error(`${provider} is not a valid credit card provider.`);",
+          "source_excerpt": "throw new Error(`${provider} is not a valid credit card provider.`);",
+          "summary": "Uncovered statement at line 36: throw new Error(`${provider} is not a valid credit card provider.`);"
+        },
+        {
+          "statement_id": "22",
+          "line": 41,
+          "column": 2,
+          "line_text": "  return isLuhnValid(card);",
+          "source_excerpt": "return isLuhnValid(card);",
+          "summary": "Uncovered statement at line 41: return isLuhnValid(card);"
+        }
+      ],
+      "uncovered_branches": [
+        {
+          "branch_id": "2",
+          "branch_type": "cond-expr",
+          "path_index": 1,
+          "branch_side": "ternary_false_branch",
+          "line": 25,
+          "column": 53,
+          "line_text": "export default function isCreditCard(card, options = {}) {",
+          "source_excerpt": "{}",
+          "condition_excerpt": null,
+          "summary": "Uncovered cond-expr path `ternary_false_branch` at line 25; snippet: {}"
+        },
+        {
+          "branch_id": "4",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 29,
+          "column": 2,
+          "line_text": "  if (provider && provider.toLowerCase() in cards) {",
+          "source_excerpt": "if (provider && provider.toLowerCase() in cards) {\n    // specific provider in the list\n    if (!(cards[provider.toLowerCase()].test(sanitized))) {\n      return false;\n    }\n  } else if (provider && !(provider.toLowerCase() in cards)) {\n    /* specific provider not in the list */\n    throw new Error(`${provider} is not a valid credit card provider.`);\n  } else if (!allCards.some(cardProvider => cardProvider.test(sanitized))) {\n    // no specific provider\n    return false;\n  }",
+          "condition_excerpt": "provider && provider.toLowerCase() in cards",
+          "summary": "Uncovered if path `condition_true_branch` at line 29; condition: provider && provider.toLowerCase() in cards"
+        },
+        {
+          "branch_id": "5",
+          "branch_type": "binary-expr",
+          "path_index": 1,
+          "branch_side": "path_1",
+          "line": 29,
+          "column": 18,
+          "line_text": "  if (provider && provider.toLowerCase() in cards) {",
+          "source_excerpt": "provider.toLowerCase() in cards",
+          "condition_excerpt": "provider && provider.toLowerCase() in cards",
+          "summary": "Uncovered binary-expr path `path_1` at line 29; condition: provider && provider.toLowerCase() in cards"
+        },
+        {
+          "branch_id": "6",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 31,
+          "column": 4,
+          "line_text": "    if (!(cards[provider.toLowerCase()].test(sanitized))) {",
+          "source_excerpt": "if (!(cards[provider.toLowerCase()].test(sanitized))) {\n      return false;\n    }",
+          "condition_excerpt": "!(cards[provider.toLowerCase()].test(sanitized))",
+          "summary": "Uncovered if path `condition_true_branch` at line 31; condition: !(cards[provider.toLowerCase()].test(sanitized))"
+        },
+        {
+          "branch_id": "6",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 31,
+          "column": 4,
+          "line_text": "    if (!(cards[provider.toLowerCase()].test(sanitized))) {",
+          "source_excerpt": "if (!(cards[provider.toLowerCase()].test(sanitized))) {\n      return false;\n    }",
+          "condition_excerpt": "!(cards[provider.toLowerCase()].test(sanitized))",
+          "summary": "Uncovered if path `condition_false_branch` at line 31; condition: !(cards[provider.toLowerCase()].test(sanitized))"
+        },
+        {
+          "branch_id": "7",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 34,
+          "column": 9,
+          "line_text": "  } else if (provider && !(provider.toLowerCase() in cards)) {",
+          "source_excerpt": "} else if (provider && !(provider.toLowerCase() in cards)) {\n    /* specific provider not in the list */\n    throw new Error(`${provider} is not a valid credit card provider.`);\n  } else if (!allCards.some(cardProvider => cardProvider.test(sanitized))) {\n    // no specific provider\n    return false;\n  }",
+          "condition_excerpt": null,
+          "summary": "Uncovered if path `condition_true_branch` at line 34; snippet: } else if (provider && !(provider.toLowerCase() in cards)) {\n    /* specific provider not in the list */\n    throw new Error(`${provider} is not a valid credit card provider.`);\n  } else if (!allCards.some(cardProvider => cardProvider.test(sanitized))) {\n    // no specific provider\n    return false;\n  }"
+        },
+        {
+          "branch_id": "8",
+          "branch_type": "binary-expr",
+          "path_index": 1,
+          "branch_side": "path_1",
+          "line": 34,
+          "column": 25,
+          "line_text": "  } else if (provider && !(provider.toLowerCase() in cards)) {",
+          "source_excerpt": "!(provider.toLowerCase() in cards)",
+          "condition_excerpt": null,
+          "summary": "Uncovered binary-expr path `path_1` at line 34; snippet: !(provider.toLowerCase() in cards)"
+        },
+        {
+          "branch_id": "9",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 37,
+          "column": 9,
+          "line_text": "  } else if (!allCards.some(cardProvider => cardProvider.test(sanitized))) {",
+          "source_excerpt": "} else if (!allCards.some(cardProvider => cardProvider.test(sanitized))) {\n    // no specific provider\n    return false;\n  }",
+          "condition_excerpt": null,
+          "summary": "Uncovered if path `condition_false_branch` at line 37; snippet: } else if (!allCards.some(cardProvider => cardProvider.test(sanitized))) {\n    // no specific provider\n    return false;\n  }"
+        }
+      ],
+      "uncovered_functions": []
+    }
+  },
+  "coverage_summary_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\improved\\isCreditCard\\whitebox_code_only\\coverage\\coverage-summary.json",
+  "coverage_final_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\improved\\isCreditCard\\whitebox_code_only\\coverage\\coverage-final.json"
+}

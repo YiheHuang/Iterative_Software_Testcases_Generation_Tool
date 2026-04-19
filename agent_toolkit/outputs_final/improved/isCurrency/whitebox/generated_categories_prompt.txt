@@ -1,0 +1,456 @@
+Group generated tests into generated categories for validator isCurrency.
+
+Generated groups:
+[
+  {
+    "title": "Default options profile",
+    "validator": "isCurrency",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "$123.45",
+      "$1,234.56",
+      "$0.99"
+    ],
+    "invalid": [
+      "123.45",
+      "$123,45",
+      "$123.4",
+      "$123.456"
+    ],
+    "rationale": "Tests the default behavior when no options are provided.",
+    "obligations": [
+      "OB-1"
+    ],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "Custom symbol",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "symbol": "\u20ac"
+      }
+    ],
+    "valid": [
+      "\u20ac123.45",
+      "\u20ac1,234.56"
+    ],
+    "invalid": [
+      "$123.45",
+      "123.45"
+    ],
+    "rationale": "Tests the `symbol` option for custom currency symbols.",
+    "obligations": [
+      "OB-2"
+    ],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "Require symbol",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "require_symbol": true
+      }
+    ],
+    "valid": [
+      "$123.45"
+    ],
+    "invalid": [
+      "123.45",
+      "1,234.56"
+    ],
+    "rationale": "Tests the `require_symbol` option enforcing symbol presence.",
+    "obligations": [
+      "OB-3"
+    ],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "Allow space after symbol",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_space_after_symbol": true
+      }
+    ],
+    "valid": [
+      "$ 123.45"
+    ],
+    "invalid": [
+      "$123.45",
+      "$ 123,45"
+    ],
+    "rationale": "Tests the `allow_space_after_symbol` option.",
+    "obligations": [
+      "OB-4"
+    ],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "Symbol after digits",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "symbol_after_digits": true
+      }
+    ],
+    "valid": [
+      "123.45$",
+      "1,234.56$"
+    ],
+    "invalid": [
+      "$123.45",
+      "123.45"
+    ],
+    "rationale": "Tests the `symbol_after_digits` option.",
+    "obligations": [
+      "OB-5"
+    ],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "Negative values allowed",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_negatives": true
+      }
+    ],
+    "valid": [
+      "-$123.45",
+      "($123.45)",
+      "-123.45$"
+    ],
+    "invalid": [
+      "123.45",
+      "$123.45"
+    ],
+    "rationale": "Tests the `allow_negatives` option.",
+    "obligations": [
+      "OB-6",
+      "OB-7",
+      "OB-8",
+      "OB-9"
+    ],
+    "generated_id": "GENERATED-6"
+  },
+  {
+    "title": "Thousands separator",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "thousands_separator": "."
+      }
+    ],
+    "valid": [
+      "$1.234,56"
+    ],
+    "invalid": [
+      "$1234.56",
+      "$1,234.56"
+    ],
+    "rationale": "Tests the `thousands_separator` option.",
+    "obligations": [
+      "OB-11"
+    ],
+    "generated_id": "GENERATED-7"
+  },
+  {
+    "title": "Decimal separator",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "decimal_separator": ","
+      }
+    ],
+    "valid": [
+      "$123,45"
+    ],
+    "invalid": [
+      "$123.45",
+      "$123,456"
+    ],
+    "rationale": "Tests the `decimal_separator` option.",
+    "obligations": [
+      "OB-12"
+    ],
+    "generated_id": "GENERATED-8"
+  },
+  {
+    "title": "Digits after decimal",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "digits_after_decimal": [
+          3
+        ]
+      }
+    ],
+    "valid": [
+      "$123.456"
+    ],
+    "invalid": [
+      "$123.45",
+      "$123.4"
+    ],
+    "rationale": "Tests the `digits_after_decimal` option.",
+    "obligations": [
+      "OB-15"
+    ],
+    "generated_id": "GENERATED-9"
+  },
+  {
+    "title": "Early return for non-string input",
+    "validator": "isCurrency",
+    "args": [
+      {}
+    ],
+    "valid": [],
+    "invalid": [
+      "123",
+      "None",
+      "True"
+    ],
+    "rationale": "Tests the `assertString` helper for type validation.",
+    "obligations": [
+      "OB-17"
+    ],
+    "generated_id": "GENERATED-10"
+  },
+  {
+    "title": "Option merging behavior",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "symbol": "\u20ac"
+      }
+    ],
+    "valid": [
+      "\u20ac123.45"
+    ],
+    "invalid": [
+      "$123.45"
+    ],
+    "rationale": "Tests the `merge` helper for combining options.",
+    "obligations": [
+      "OB-18"
+    ],
+    "generated_id": "GENERATED-11"
+  },
+  {
+    "title": "Regex construction branches",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_negatives": false
+      }
+    ],
+    "valid": [
+      "$123.45"
+    ],
+    "invalid": [
+      "-$123.45"
+    ],
+    "rationale": "Tests regex construction for `allow_negatives` branch.",
+    "obligations": [
+      "OB-19"
+    ],
+    "generated_id": "GENERATED-12"
+  },
+  {
+    "title": "Multiple digits after decimal",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "digits_after_decimal": [
+          1,
+          2,
+          3
+        ]
+      }
+    ],
+    "valid": [
+      "$123.4",
+      "$123.45",
+      "$123.456"
+    ],
+    "invalid": [
+      "$123.4567",
+      "$123.45.6"
+    ],
+    "rationale": "Tests the handling of multiple allowed digit counts for `digits_after_decimal`.",
+    "obligations": [
+      "OB-20"
+    ],
+    "generated_id": "GENERATED-13"
+  },
+  {
+    "title": "Negative sign after digits",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "negative_sign_after_digits": true
+      }
+    ],
+    "valid": [
+      "123.45-$",
+      "1,234.56-$"
+    ],
+    "invalid": [
+      "-123.45$",
+      "$123.45"
+    ],
+    "rationale": "Tests the `negative_sign_after_digits` option behavior.",
+    "obligations": [
+      "OB-21"
+    ],
+    "generated_id": "GENERATED-14"
+  },
+  {
+    "title": "Parentheses for negatives",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "parens_for_negatives": true
+      }
+    ],
+    "valid": [
+      "($123.45)",
+      "($1,234.56)"
+    ],
+    "invalid": [
+      "-$123.45",
+      "$123.45"
+    ],
+    "rationale": "Tests the `parens_for_negatives` option behavior.",
+    "obligations": [
+      "OB-22"
+    ],
+    "generated_id": "GENERATED-15"
+  },
+  {
+    "title": "Negative sign before digits",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "negative_sign_before_digits": true
+      }
+    ],
+    "valid": [
+      "-$123.45"
+    ],
+    "invalid": [
+      "$123.45"
+    ],
+    "rationale": "Tests the `negative_sign_before_digits` option to cover the statement at line 24.",
+    "obligations": [
+      "OB-23"
+    ],
+    "generated_id": "GENERATED-16"
+  },
+  {
+    "title": "Allow negative sign placeholder",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_negative_sign_placeholder": true
+      }
+    ],
+    "valid": [
+      "123.45-"
+    ],
+    "invalid": [
+      "-123.45"
+    ],
+    "rationale": "Tests the `allow_negative_sign_placeholder` option to cover the statement at line 30.",
+    "obligations": [
+      "OB-24"
+    ],
+    "generated_id": "GENERATED-17"
+  },
+  {
+    "title": "Allow space after digits",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_space_after_digits": true
+      }
+    ],
+    "valid": [
+      "$123.45 "
+    ],
+    "invalid": [
+      "$123.45"
+    ],
+    "rationale": "Tests the `allow_space_after_digits` option to cover the statement at line 34.",
+    "obligations": [
+      "OB-25"
+    ],
+    "generated_id": "GENERATED-18"
+  },
+  {
+    "title": "Require decimal",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "require_decimal": true
+      }
+    ],
+    "valid": [
+      "$123.45"
+    ],
+    "invalid": [
+      "$123"
+    ],
+    "rationale": "Tests the ternary true branch for `require_decimal` at line 16.",
+    "obligations": [
+      "OB-26"
+    ],
+    "generated_id": "GENERATED-19"
+  },
+  {
+    "title": "Disallow decimal",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_decimal": false,
+        "require_decimal": false
+      }
+    ],
+    "valid": [
+      "$123"
+    ],
+    "invalid": [
+      "$123.45"
+    ],
+    "rationale": "Tests the ternary false branch for `allow_decimal || require_decimal` at line 17.",
+    "obligations": [
+      "OB-27"
+    ],
+    "generated_id": "GENERATED-20"
+  },
+  {
+    "title": "Require decimal without allowing decimal",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_decimal": false,
+        "require_decimal": true
+      }
+    ],
+    "valid": [
+      "$123.45"
+    ],
+    "invalid": [
+      "$123"
+    ],
+    "rationale": "Tests the binary expression path for `require_decimal` at line 17.",
+    "obligations": [
+      "OB-28"
+    ],
+    "generated_id": "GENERATED-21"
+  }
+]

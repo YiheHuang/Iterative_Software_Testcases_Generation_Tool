@@ -1,0 +1,34 @@
+{
+  "generated_categories": [
+    {
+      "name": "Default and General Behavior",
+      "description": "Tests that validate the default behavior of the isCurrency function and general currency formatting rules.",
+      "generated_group_ids": ["GENERATED-1"]
+    },
+    {
+      "name": "Symbol Placement",
+      "description": "Tests that validate the presence, placement, and spacing of currency symbols.",
+      "generated_group_ids": ["GENERATED-2", "GENERATED-3", "GENERATED-4"]
+    },
+    {
+      "name": "Negative Value Handling",
+      "description": "Tests that validate the handling of negative values, including disallowing negatives, enforcing parentheses, and controlling the placement of the negative sign.",
+      "generated_group_ids": ["GENERATED-5", "GENERATED-6", "GENERATED-7", "GENERATED-8"]
+    },
+    {
+      "name": "Separator Customization",
+      "description": "Tests that validate the use of custom thousands and decimal separators.",
+      "generated_group_ids": ["GENERATED-9", "GENERATED-10"]
+    },
+    {
+      "name": "Decimal Handling",
+      "description": "Tests that validate the presence, absence, and formatting of decimal values.",
+      "generated_group_ids": ["GENERATED-11", "GENERATED-12", "GENERATED-13"]
+    },
+    {
+      "name": "Space Handling",
+      "description": "Tests that validate the handling of spaces after symbols or digits.",
+      "generated_group_ids": ["GENERATED-14"]
+    }
+  ]
+}

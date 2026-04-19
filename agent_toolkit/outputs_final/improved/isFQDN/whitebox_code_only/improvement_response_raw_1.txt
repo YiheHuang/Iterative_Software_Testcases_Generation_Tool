@@ -1,0 +1,96 @@
+{
+  "obligations": [
+    {
+      "id": "OB-12",
+      "kind": "whitebox",
+      "rule": "Cover the false branch of `if (options.require_tld)` at line 30.",
+      "why": "This branch is uncovered and ensures behavior when `require_tld` is false.",
+      "minimal_valid": "example",
+      "minimal_invalid": null
+    },
+    {
+      "id": "OB-13",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of `if (/\\s/.test(tld))` at line 41.",
+      "why": "This branch is uncovered and ensures rejection of TLDs containing spaces.",
+      "minimal_valid": null,
+      "minimal_invalid": "example.c om"
+    },
+    {
+      "id": "OB-14",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of `if (!options.allow_numeric_tld && /^\\d+$/.test(tld))` at line 47.",
+      "why": "This branch is uncovered and ensures rejection of numeric TLDs when `allow_numeric_tld` is false.",
+      "minimal_valid": null,
+      "minimal_invalid": "example.123"
+    },
+    {
+      "id": "OB-15",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of `if (!options.allow_underscores && /_/.test(part))` at line 70.",
+      "why": "This branch is uncovered and ensures rejection of underscores when `allow_underscores` is false.",
+      "minimal_valid": null,
+      "minimal_invalid": "example_com"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Require TLD Disabled",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "require_tld": false
+        }
+      ],
+      "valid": [
+        "example"
+      ],
+      "invalid": [],
+      "rationale": "Ensure behavior when `require_tld` is false.",
+      "obligations": ["OB-12"]
+    },
+    {
+      "title": "Spaces in TLD",
+      "validator": "isFQDN",
+      "args": [
+        {}
+      ],
+      "valid": [],
+      "invalid": [
+        "example.c om"
+      ],
+      "rationale": "Ensure rejection of TLDs containing spaces.",
+      "obligations": ["OB-13"]
+    },
+    {
+      "title": "Numeric TLD Rejection",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_numeric_tld": false
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "example.123"
+      ],
+      "rationale": "Ensure rejection of numeric TLDs when `allow_numeric_tld` is false.",
+      "obligations": ["OB-14"]
+    },
+    {
+      "title": "Underscore Rejection",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_underscores": false
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "example_com"
+      ],
+      "rationale": "Ensure rejection of underscores when `allow_underscores` is false.",
+      "obligations": ["OB-15"]
+    }
+  ]
+}

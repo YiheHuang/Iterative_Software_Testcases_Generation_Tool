@@ -1,0 +1,218 @@
+{
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "blackbox",
+      "rule": "The function must validate credit card numbers against the Luhn algorithm.",
+      "why": "The README specifies that the function checks if the string is a credit card number, which implies Luhn validation.",
+      "minimal_valid": "4111111111111111",
+      "minimal_invalid": "4111111111111112"
+    },
+    {
+      "id": "OB-2",
+      "kind": "blackbox",
+      "rule": "The function must accept optional `provider` and validate against specific card provider patterns.",
+      "why": "The README specifies the `provider` option to restrict validation to specific card issuers.",
+      "minimal_valid": "4111111111111111 with provider='visa'",
+      "minimal_invalid": "4111111111111111 with provider='mastercard'"
+    },
+    {
+      "id": "OB-3",
+      "kind": "blackbox",
+      "rule": "The function must throw an error if an invalid provider is supplied.",
+      "why": "The README specifies that invalid providers should result in an error.",
+      "minimal_valid": null,
+      "minimal_invalid": "4111111111111111 with provider='invalid_provider'"
+    },
+    {
+      "id": "OB-4",
+      "kind": "whitebox",
+      "rule": "The function must sanitize input by removing spaces and dashes before validation.",
+      "why": "The implementation sanitizes the input string before applying regex and Luhn validation.",
+      "minimal_valid": "4111-1111-1111-1111",
+      "minimal_invalid": "4111-1111-1111-1112"
+    },
+    {
+      "id": "OB-5",
+      "kind": "whitebox",
+      "rule": "The function must validate against all card provider patterns if no `provider` is specified.",
+      "why": "The implementation checks all card patterns when `provider` is not supplied.",
+      "minimal_valid": "4111111111111111",
+      "minimal_invalid": "1234567812345678"
+    },
+    {
+      "id": "OB-7",
+      "kind": "whitebox",
+      "rule": "The function must correctly handle early returns for invalid provider-specific patterns.",
+      "why": "The implementation returns false immediately if the sanitized input does not match the provider-specific regex.",
+      "minimal_valid": "378282246310005 with provider='amex'",
+      "minimal_invalid": "378282246310005 with provider='visa'"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Basic Luhn validation",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "4111111111111111"
+      ],
+      "invalid": [
+        "4111111111111112"
+      ],
+      "rationale": "Tests the core Luhn algorithm validation for credit card numbers.",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "title": "Provider-specific validation",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "visa"
+        }
+      ],
+      "valid": [
+        "4111111111111111"
+      ],
+      "invalid": [
+        "378282246310005"
+      ],
+      "rationale": "Tests validation restricted to a specific card provider.",
+      "obligations": [
+        "OB-2"
+      ]
+    },
+    {
+      "title": "Invalid provider error handling",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "invalid_provider"
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "4111111111111111"
+      ],
+      "rationale": "Tests that an error is thrown for invalid provider values.",
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "title": "Input sanitization",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "4111-1111-1111-1111"
+      ],
+      "invalid": [
+        "4111-1111-1111-1112"
+      ],
+      "rationale": "Tests that spaces and dashes are removed before validation.",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "title": "Global pattern matching",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "4111111111111111"
+      ],
+      "invalid": [
+        "1234567812345678"
+      ],
+      "rationale": "Tests validation against all card provider patterns when no provider is specified.",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "title": "Provider-specific early return",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "amex"
+        }
+      ],
+      "valid": [
+        "378282246310005"
+      ],
+      "invalid": [
+        "4111111111111111"
+      ],
+      "rationale": "Tests early return behavior for invalid provider-specific patterns.",
+      "obligations": [
+        "OB-7"
+      ]
+    }
+  ],
+  "audit": [
+    {
+      "group_title": "Basic Luhn validation",
+      "decision": "keep",
+      "reason": "The Luhn algorithm is explicitly required by the specification.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Provider-specific validation",
+      "decision": "keep",
+      "reason": "The `provider` option and its behavior are explicitly supported by the specification.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Invalid provider error handling",
+      "decision": "keep",
+      "reason": "The specification explicitly states that invalid providers should result in an error.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Input sanitization",
+      "decision": "keep",
+      "reason": "Sanitization of spaces and dashes is a documented implementation behavior.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Global pattern matching",
+      "decision": "trim",
+      "reason": "The specification supports global pattern matching, but OB-6 is redundant with OB-5.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Provider-specific early return",
+      "decision": "keep",
+      "reason": "The specification supports provider-specific validation and early return behavior.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Global early return",
+      "decision": "drop",
+      "reason": "The group duplicates global pattern matching behavior already covered by OB-5.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Invalid provider ternary false branch",
+      "decision": "drop",
+      "reason": "The ternary false branch is an implementation detail not explicitly supported by the specification.",
+      "removed_valid": [],
+      "removed_invalid": []
+    }
+  ]
+}

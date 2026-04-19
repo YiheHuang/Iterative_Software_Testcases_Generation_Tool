@@ -1,0 +1,526 @@
+You are improving an existing whitebox test suite for isCurrency.
+You are given only coverage details and fine-grained uncovered white-box locations.
+You must use those uncovered positions as exact white-box targets when updating the suite.
+You must NOT use any golden tests, repository test overlap analysis, or external oracle hints.
+
+Goal:
+- propose a small patch that helps the current suite target more uncovered code locations
+- preserve the current suite unless a new patch is clearly justified by uncovered locations
+- keep the patch conservative and additive whenever possible
+- keep the suite conservative and low-redundancy
+
+Return strict JSON with top-level keys obligations and test_groups.
+The returned test_groups must be patch groups only, not a full rewritten suite.
+
+Black-box requirement source:
+Function name: isCurrency
+Black-box requirement source: validator_js README function entry
+Signature summary: isCurrency(str [, options])
+README behavior summary:
+| check if the string is a valid currency amount.
+`options` is an object which defaults to `{ symbol: '$', require_symbol: false, allow_space_after_symbol: false, symbol_after_digits: false, allow_negatives: true, parens_for_negatives: false, negative_sign_before_digits: false, negative_sign_after_digits: false, allow_negative_sign_placeholder: false, thousands_separator: ',', decimal_separator: '.', allow_decimal: true, require_decimal: false, digits_after_decimal: [2], allow_space_after_digits: false }`.
+**Note:** The array `digits_after_decimal` is filled with the exact number of digits allowed not a range, for example a range 1 to 3 will be given as [1, 2, 3].
+
+Treat the README entry as the authoritative black-box behavior description.
+Infer valid inputs, invalid inputs, option-sensitive behaviors, and edge cases from this description.
+
+
+Current full test suite from the previous iteration:
+[
+  {
+    "title": "Default options profile",
+    "validator": "isCurrency",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "$123.45",
+      "$1,234.56",
+      "$0.99"
+    ],
+    "invalid": [
+      "123.45",
+      "$123,45",
+      "$123.4",
+      "$123.456"
+    ],
+    "rationale": "Tests the default behavior when no options are provided.",
+    "obligations": [
+      "OB-1"
+    ]
+  },
+  {
+    "title": "Custom symbol",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "symbol": "\u20ac"
+      }
+    ],
+    "valid": [
+      "\u20ac123.45",
+      "\u20ac1,234.56"
+    ],
+    "invalid": [
+      "$123.45",
+      "123.45"
+    ],
+    "rationale": "Tests the `symbol` option for custom currency symbols.",
+    "obligations": [
+      "OB-2"
+    ]
+  },
+  {
+    "title": "Require symbol",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "require_symbol": true
+      }
+    ],
+    "valid": [
+      "$123.45"
+    ],
+    "invalid": [
+      "123.45",
+      "1,234.56"
+    ],
+    "rationale": "Tests the `require_symbol` option enforcing symbol presence.",
+    "obligations": [
+      "OB-3"
+    ]
+  },
+  {
+    "title": "Allow space after symbol",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_space_after_symbol": true
+      }
+    ],
+    "valid": [
+      "$ 123.45"
+    ],
+    "invalid": [
+      "$123.45",
+      "$ 123,45"
+    ],
+    "rationale": "Tests the `allow_space_after_symbol` option.",
+    "obligations": [
+      "OB-4"
+    ]
+  },
+  {
+    "title": "Symbol after digits",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "symbol_after_digits": true
+      }
+    ],
+    "valid": [
+      "123.45$",
+      "1,234.56$"
+    ],
+    "invalid": [
+      "$123.45",
+      "123.45"
+    ],
+    "rationale": "Tests the `symbol_after_digits` option.",
+    "obligations": [
+      "OB-5"
+    ]
+  },
+  {
+    "title": "Negative values allowed",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_negatives": true
+      }
+    ],
+    "valid": [
+      "-$123.45",
+      "($123.45)",
+      "-123.45$"
+    ],
+    "invalid": [
+      "123.45",
+      "$123.45"
+    ],
+    "rationale": "Tests the `allow_negatives` option.",
+    "obligations": [
+      "OB-6",
+      "OB-7",
+      "OB-8",
+      "OB-9"
+    ]
+  },
+  {
+    "title": "Thousands separator",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "thousands_separator": "."
+      }
+    ],
+    "valid": [
+      "$1.234,56"
+    ],
+    "invalid": [
+      "$1234.56",
+      "$1,234.56"
+    ],
+    "rationale": "Tests the `thousands_separator` option.",
+    "obligations": [
+      "OB-11"
+    ]
+  },
+  {
+    "title": "Decimal separator",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "decimal_separator": ","
+      }
+    ],
+    "valid": [
+      "$123,45"
+    ],
+    "invalid": [
+      "$123.45",
+      "$123,456"
+    ],
+    "rationale": "Tests the `decimal_separator` option.",
+    "obligations": [
+      "OB-12"
+    ]
+  },
+  {
+    "title": "Digits after decimal",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "digits_after_decimal": [
+          3
+        ]
+      }
+    ],
+    "valid": [
+      "$123.456"
+    ],
+    "invalid": [
+      "$123.45",
+      "$123.4"
+    ],
+    "rationale": "Tests the `digits_after_decimal` option.",
+    "obligations": [
+      "OB-15"
+    ]
+  },
+  {
+    "title": "Early return for non-string input",
+    "validator": "isCurrency",
+    "args": [
+      {}
+    ],
+    "valid": [],
+    "invalid": [
+      "123",
+      "None",
+      "True"
+    ],
+    "rationale": "Tests the `assertString` helper for type validation.",
+    "obligations": [
+      "OB-17"
+    ]
+  },
+  {
+    "title": "Option merging behavior",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "symbol": "\u20ac"
+      }
+    ],
+    "valid": [
+      "\u20ac123.45"
+    ],
+    "invalid": [
+      "$123.45"
+    ],
+    "rationale": "Tests the `merge` helper for combining options.",
+    "obligations": [
+      "OB-18"
+    ]
+  },
+  {
+    "title": "Regex construction branches",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_negatives": false
+      }
+    ],
+    "valid": [
+      "$123.45"
+    ],
+    "invalid": [
+      "-$123.45"
+    ],
+    "rationale": "Tests regex construction for `allow_negatives` branch.",
+    "obligations": [
+      "OB-19"
+    ]
+  }
+]
+
+Coverage details allowed for improvement:
+{
+  "coverage_total": {
+    "lines": {
+      "total": 38,
+      "covered": 33,
+      "skipped": 0,
+      "pct": 86.84
+    },
+    "statements": {
+      "total": 41,
+      "covered": 35,
+      "skipped": 0,
+      "pct": 85.37
+    },
+    "functions": {
+      "total": 5,
+      "covered": 5,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 36,
+      "covered": 26,
+      "skipped": 0,
+      "pct": 72.22
+    }
+  },
+  "coverage_files": {
+    "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isCurrency.js": {
+      "lines": {
+        "total": 38,
+        "covered": 33,
+        "skipped": 0,
+        "pct": 86.84
+      },
+      "functions": {
+        "total": 5,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 41,
+        "covered": 35,
+        "skipped": 0,
+        "pct": 85.37
+      },
+      "branches": {
+        "total": 36,
+        "covered": 26,
+        "skipped": 0,
+        "pct": 72.22
+      }
+    }
+  },
+  "uncovered_details": {
+    "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isCurrency.js": {
+      "uncovered_statements": [
+        {
+          "statement_id": "6",
+          "line": 6,
+          "column": 76,
+          "line_text": "  options.digits_after_decimal.forEach((digit, index) => { if (index !== 0) decimal_digits = `${decimal_digits}|\\\\d{${digit}}`; });",
+          "source_excerpt": "decimal_digits = `${decimal_digits}|\\\\d{${digit}}`;",
+          "summary": "Uncovered statement at line 6: decimal_digits = `${decimal_digits}|\\\\d{${digit}}`;"
+        },
+        {
+          "statement_id": "18",
+          "line": 22,
+          "column": 6,
+          "line_text": "      pattern += negative;",
+          "source_excerpt": "pattern += negative;",
+          "summary": "Uncovered statement at line 22: pattern += negative;"
+        },
+        {
+          "statement_id": "20",
+          "line": 24,
+          "column": 6,
+          "line_text": "      pattern = negative + pattern;",
+          "source_excerpt": "pattern = negative + pattern;",
+          "summary": "Uncovered statement at line 24: pattern = negative + pattern;"
+        },
+        {
+          "statement_id": "22",
+          "line": 30,
+          "column": 4,
+          "line_text": "    pattern = `( (?!\\\\-))?${pattern}`;",
+          "source_excerpt": "pattern = `( (?!\\\\-))?${pattern}`;",
+          "summary": "Uncovered statement at line 30: pattern = `( (?!\\\\-))?${pattern}`;"
+        },
+        {
+          "statement_id": "26",
+          "line": 34,
+          "column": 4,
+          "line_text": "    pattern += '( (?!$))?';",
+          "source_excerpt": "pattern += '( (?!$))?';",
+          "summary": "Uncovered statement at line 34: pattern += '( (?!$))?';"
+        },
+        {
+          "statement_id": "32",
+          "line": 45,
+          "column": 6,
+          "line_text": "      pattern = `(\\\\(${pattern}\\\\)|${pattern})`;",
+          "source_excerpt": "pattern = `(\\\\(${pattern}\\\\)|${pattern})`;",
+          "summary": "Uncovered statement at line 45: pattern = `(\\\\(${pattern}\\\\)|${pattern})`;"
+        }
+      ],
+      "uncovered_branches": [
+        {
+          "branch_id": "1",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 6,
+          "column": 59,
+          "line_text": "  options.digits_after_decimal.forEach((digit, index) => { if (index !== 0) decimal_digits = `${decimal_digits}|\\\\d{${digit}}`; });",
+          "source_excerpt": "if (index !== 0) decimal_digits = `${decimal_digits}|\\\\d{${digit}}`;",
+          "condition_excerpt": null,
+          "summary": "Uncovered if path `condition_true_branch` at line 6; snippet: if (index !== 0) decimal_digits = `${decimal_digits}|\\\\d{${digit}}`;"
+        },
+        {
+          "branch_id": "3",
+          "branch_type": "cond-expr",
+          "path_index": 0,
+          "branch_side": "ternary_true_branch",
+          "line": 16,
+          "column": 101,
+          "line_text": "    decimal_amount = `(\\\\${options.decimal_separator}(${decimal_digits}))${options.require_decimal ? '' : '?'}`;",
+          "source_excerpt": "''",
+          "condition_excerpt": null,
+          "summary": "Uncovered cond-expr path `ternary_true_branch` at line 16; snippet: ''"
+        },
+        {
+          "branch_id": "4",
+          "branch_type": "cond-expr",
+          "path_index": 1,
+          "branch_side": "ternary_false_branch",
+          "line": 17,
+          "column": 107,
+          "line_text": "  let pattern = whole_dollar_amount + (options.allow_decimal || options.require_decimal ? decimal_amount : '');",
+          "source_excerpt": "''",
+          "condition_excerpt": null,
+          "summary": "Uncovered cond-expr path `ternary_false_branch` at line 17; snippet: ''"
+        },
+        {
+          "branch_id": "5",
+          "branch_type": "binary-expr",
+          "path_index": 1,
+          "branch_side": "path_1",
+          "line": 17,
+          "column": 64,
+          "line_text": "  let pattern = whole_dollar_amount + (options.allow_decimal || options.require_decimal ? decimal_amount : '');",
+          "source_excerpt": "options.require_decimal",
+          "condition_excerpt": null,
+          "summary": "Uncovered binary-expr path `path_1` at line 17; snippet: options.require_decimal"
+        },
+        {
+          "branch_id": "8",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 21,
+          "column": 4,
+          "line_text": "    if (options.negative_sign_after_digits) {",
+          "source_excerpt": "if (options.negative_sign_after_digits) {\n      pattern += negative;\n    } else if (options.negative_sign_before_digits) {\n      pattern = negative + pattern;\n    }",
+          "condition_excerpt": "options.negative_sign_after_digits",
+          "summary": "Uncovered if path `condition_true_branch` at line 21; condition: options.negative_sign_after_digits"
+        },
+        {
+          "branch_id": "9",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 23,
+          "column": 11,
+          "line_text": "    } else if (options.negative_sign_before_digits) {",
+          "source_excerpt": "} else if (options.negative_sign_before_digits) {\n      pattern = negative + pattern;\n    }",
+          "condition_excerpt": null,
+          "summary": "Uncovered if path `condition_true_branch` at line 23; snippet: } else if (options.negative_sign_before_digits) {\n      pattern = negative + pattern;\n    }"
+        },
+        {
+          "branch_id": "10",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 29,
+          "column": 2,
+          "line_text": "  if (options.allow_negative_sign_placeholder) {",
+          "source_excerpt": "if (options.allow_negative_sign_placeholder) {\n    pattern = `( (?!\\\\-))?${pattern}`;\n  } else if (options.allow_space_after_symbol) {\n    pattern = ` ?${pattern}`;\n  } else if (options.allow_space_after_digits) {\n    pattern += '( (?!$))?';\n  }",
+          "condition_excerpt": "options.allow_negative_sign_placeholder",
+          "summary": "Uncovered if path `condition_true_branch` at line 29; condition: options.allow_negative_sign_placeholder"
+        },
+        {
+          "branch_id": "12",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 33,
+          "column": 9,
+          "line_text": "  } else if (options.allow_space_after_digits) {",
+          "source_excerpt": "} else if (options.allow_space_after_digits) {\n    pattern += '( (?!$))?';\n  }",
+          "condition_excerpt": null,
+          "summary": "Uncovered if path `condition_true_branch` at line 33; snippet: } else if (options.allow_space_after_digits) {\n    pattern += '( (?!$))?';\n  }"
+        },
+        {
+          "branch_id": "15",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 44,
+          "column": 4,
+          "line_text": "    if (options.parens_for_negatives) {",
+          "source_excerpt": "if (options.parens_for_negatives) {\n      pattern = `(\\\\(${pattern}\\\\)|${pattern})`;\n    } else if (!(options.negative_sign_before_digits || options.negative_sign_after_digits)) {\n      pattern = negative + pattern;\n    }",
+          "condition_excerpt": "options.parens_for_negatives",
+          "summary": "Uncovered if path `condition_true_branch` at line 44; condition: options.parens_for_negatives"
+        },
+        {
+          "branch_id": "16",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 46,
+          "column": 11,
+          "line_text": "    } else if (!(options.negative_sign_before_digits || options.negative_sign_after_digits)) {",
+          "source_excerpt": "} else if (!(options.negative_sign_before_digits || options.negative_sign_after_digits)) {\n      pattern = negative + pattern;\n    }",
+          "condition_excerpt": null,
+          "summary": "Uncovered if path `condition_false_branch` at line 46; snippet: } else if (!(options.negative_sign_before_digits || options.negative_sign_after_digits)) {\n      pattern = negative + pattern;\n    }"
+        }
+      ],
+      "uncovered_functions": []
+    }
+  }
+}
+
+Instructions:
+- You must use only the requirement (if provided), the current suite, coverage details, and uncovered details.
+- Do not infer or use any correctness signal, pass/fail summary, failed cases, or hidden oracle information.
+- Treat uncovered_details as exact white-box targets, not as vague hints.
+- Use the previous full suite as the baseline and return only the incremental patch groups.
+- Do not rewrite, delete, or duplicate the existing groups already shown in the current suite.
+- Add only groups that cover meaningfully new targets beyond the current suite.
+- Prefer at most 3 patch groups, each focused on one concrete uncovered condition or path family.
+- If an uncovered branch or statement cannot be operationalized from the provided coverage details, do not guess.
+- If uncovered_details are provided, use them only as white-box targets.
+- If uncovered_details are not provided, do not infer any hidden coverage gap.
+- Prefer minimal option-profile-specific groups.
+- Avoid broad extrapolation; every meaningful update should correspond to a concrete uncovered position or condition.
+- Do not mention or infer any golden test information.

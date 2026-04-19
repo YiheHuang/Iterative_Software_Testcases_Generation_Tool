@@ -1,0 +1,18 @@
+{
+  "iteration_count": 1,
+  "feedback_sources": [
+    "runtime_correctness"
+  ],
+  "golden_feedback_used": false,
+  "decision": "keep_initial_blackbox_no_patch",
+  "initial_summary": {
+    "total_cases": 25,
+    "correct_cases": 22,
+    "incorrect_cases": 3,
+    "exact_match_rate": 0.88,
+    "by_expected_kind": {
+      "return": 25,
+      "throw": 0
+    }
+  }
+}

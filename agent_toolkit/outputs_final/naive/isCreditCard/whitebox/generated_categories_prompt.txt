@@ -1,0 +1,99 @@
+Group generated tests into generated categories for validator isCreditCard.
+
+Generated groups:
+[
+  {
+    "title": "Valid credit card numbers without provider",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "4111111111111111",
+      "378282246310005",
+      "6011111111111117",
+      "5555555555554444"
+    ],
+    "invalid": [
+      "1234567890123456",
+      "411111111111111",
+      "37828224631000",
+      "555555555555444"
+    ],
+    "rationale": "Tests generic credit card validation without specifying a provider. Includes valid and invalid numbers based on length and format.",
+    "obligations": [],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "Valid credit card numbers with provider",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "visa"
+      }
+    ],
+    "valid": [
+      "4111111111111111",
+      "4012888888881881"
+    ],
+    "invalid": [
+      "378282246310005",
+      "5555555555554444",
+      "6011111111111117"
+    ],
+    "rationale": "Tests credit card validation for Visa provider. Includes valid Visa numbers and invalid numbers from other providers.",
+    "obligations": [],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "Invalid provider option",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "invalidProvider"
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "4111111111111111",
+      "378282246310005"
+    ],
+    "rationale": "Tests behavior when an invalid provider is specified. Should throw an error or fail validation.",
+    "obligations": [],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "Edge cases for formatting",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "4111-1111-1111-1111",
+      "4111 1111 1111 1111"
+    ],
+    "invalid": [
+      "4111_1111_1111_1111",
+      "4111.1111.1111.1111"
+    ],
+    "rationale": "Tests handling of formatted credit card numbers with valid separators (spaces and dashes) and invalid separators.",
+    "obligations": [],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "Empty and non-numeric inputs",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [],
+    "invalid": [
+      "",
+      "abcdefg",
+      "4111abcd1111efgh"
+    ],
+    "rationale": "Tests behavior with empty strings, non-numeric inputs, and mixed alphanumeric inputs.",
+    "obligations": [],
+    "generated_id": "GENERATED-5"
+  }
+]

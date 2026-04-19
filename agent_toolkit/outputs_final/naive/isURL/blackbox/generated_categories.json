@@ -1,0 +1,41 @@
+{
+  "generated_categories": [
+    {
+      "generated_category_id": "GENC-1",
+      "name": "Default and General Behavior",
+      "description": "Tests covering the default behavior and general URL validation rules.",
+      "generated_group_ids": [
+        "GENERATED-1"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "name": "Protocol Requirements",
+      "description": "Tests focusing on the presence or absence of protocols in URLs.",
+      "generated_group_ids": [
+        "GENERATED-2",
+        "GENERATED-6"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "name": "Top-Level Domain and Hostname Rules",
+      "description": "Tests related to top-level domain requirements and hostname formatting.",
+      "generated_group_ids": [
+        "GENERATED-3",
+        "GENERATED-4",
+        "GENERATED-5"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "name": "Authentication and URL Components",
+      "description": "Tests targeting authentication components, fragments, and query components in URLs.",
+      "generated_group_ids": [
+        "GENERATED-7",
+        "GENERATED-8",
+        "GENERATED-9"
+      ]
+    }
+  ]
+}

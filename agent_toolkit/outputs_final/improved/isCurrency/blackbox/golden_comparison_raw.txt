@@ -1,0 +1,144 @@
+{
+  "golden_to_generated": [
+    {
+      "golden_category_id": "GC-1",
+      "matched_generated_category_ids": ["GENC-1"],
+      "match_type": "strong",
+      "reason": "The generated category 'Default and General Behavior' aligns closely with the golden category 'Default Currency Validation' as both validate general currency formats without specific constraints."
+    },
+    {
+      "golden_category_id": "GC-2",
+      "matched_generated_category_ids": ["GENC-5"],
+      "match_type": "strong",
+      "reason": "The generated category 'Decimal Handling' includes tests for disallowing decimals, which matches the golden category 'No Decimal Allowed'."
+    },
+    {
+      "golden_category_id": "GC-3",
+      "matched_generated_category_ids": ["GENC-5"],
+      "match_type": "strong",
+      "reason": "The generated category 'Decimal Handling' includes tests for requiring decimals, which matches the golden category 'Require Decimal'."
+    },
+    {
+      "golden_category_id": "GC-4",
+      "matched_generated_category_ids": ["GENC-5"],
+      "match_type": "partial",
+      "reason": "The generated category 'Decimal Handling' partially matches the golden category 'Specific Decimal Precision' as it includes tests for digits after the decimal, but does not specify precision constraints as detailed in the golden category."
+    },
+    {
+      "golden_category_id": "GC-5",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "strong",
+      "reason": "The generated category 'Symbol Placement' includes tests for requiring a currency symbol, which aligns with the golden category 'Require Symbol'."
+    },
+    {
+      "golden_category_id": "GC-6",
+      "matched_generated_category_ids": ["GENC-3"],
+      "match_type": "strong",
+      "reason": "The generated category 'Negative Value Handling' includes tests for negative sign placement before digits, which matches the golden category 'Custom Symbol with Negative Sign Before Digits'."
+    },
+    {
+      "golden_category_id": "GC-7",
+      "matched_generated_category_ids": ["GENC-3"],
+      "match_type": "strong",
+      "reason": "The generated category 'Negative Value Handling' includes tests for negative sign placement after digits, which matches the golden category 'Negative Sign After Digits'."
+    },
+    {
+      "golden_category_id": "GC-8",
+      "matched_generated_category_ids": ["GENC-3"],
+      "match_type": "strong",
+      "reason": "The generated category 'Negative Value Handling' includes tests for disallowing negatives, which matches the golden category 'Custom Symbol Without Negatives'."
+    },
+    {
+      "golden_category_id": "GC-9",
+      "matched_generated_category_ids": ["GENC-4"],
+      "match_type": "strong",
+      "reason": "The generated category 'Separator Customization' includes tests for custom thousands and decimal separators, which matches the golden category 'Custom Symbol with Space and Specific Separators'."
+    },
+    {
+      "golden_category_id": "GC-10",
+      "matched_generated_category_ids": ["GENC-2", "GENC-4"],
+      "match_type": "partial",
+      "reason": "The generated categories 'Symbol Placement' and 'Separator Customization' partially match the golden category 'Custom Symbol with Space After Symbol' as they cover symbol spacing and separator customization but do not fully address the specific constraints of the golden category."
+    },
+    {
+      "golden_category_id": "GC-11",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "The generated category 'Symbol Placement' partially matches the golden category 'Custom Symbol After Digits' as it includes tests for symbol placement but does not fully address the specific constraints of the golden category."
+    },
+    {
+      "golden_category_id": "GC-12",
+      "matched_generated_category_ids": ["GENC-2", "GENC-3"],
+      "match_type": "partial",
+      "reason": "The generated categories 'Symbol Placement' and 'Negative Value Handling' partially match the golden category 'Custom Symbol with Negative Sign Before Digits and Space' as they cover symbol placement and negative sign handling but do not fully address the specific constraints of the golden category."
+    },
+    {
+      "golden_category_id": "GC-13",
+      "matched_generated_category_ids": ["GENC-2", "GENC-3"],
+      "match_type": "partial",
+      "reason": "The generated categories 'Symbol Placement' and 'Negative Value Handling' partially match the golden category 'Custom Symbol Without Negatives and Space' as they cover symbol placement and disallowing negatives but do not fully address the specific constraints of the golden category."
+    },
+    {
+      "golden_category_id": "GC-14",
+      "matched_generated_category_ids": ["GENC-3"],
+      "match_type": "strong",
+      "reason": "The generated category 'Negative Value Handling' includes tests for enforcing parentheses for negatives, which matches the golden category 'Parentheses for Negatives'."
+    },
+    {
+      "golden_category_id": "GC-15",
+      "matched_generated_category_ids": ["GENC-3"],
+      "match_type": "strong",
+      "reason": "The generated category 'Negative Value Handling' includes tests for disallowing negatives, which matches the golden category 'Disallow Negatives'."
+    },
+    {
+      "golden_category_id": "GC-16",
+      "matched_generated_category_ids": ["GENC-4", "GENC-2"],
+      "match_type": "partial",
+      "reason": "The generated categories 'Separator Customization' and 'Symbol Placement' partially match the golden category 'Custom Brazilian Real Format' as they cover separator customization and symbol placement but do not fully address the specific constraints of the golden category."
+    }
+  ],
+  "generated_to_golden": [
+    {
+      "generated_category_id": "GENC-1",
+      "matched_golden_category_ids": ["GC-1"],
+      "match_type": "strong",
+      "reason": "The generated category 'Default and General Behavior' aligns closely with the golden category 'Default Currency Validation' as both validate general currency formats without specific constraints."
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "matched_golden_category_ids": ["GC-5", "GC-10", "GC-11", "GC-12", "GC-13", "GC-16"],
+      "match_type": "partial",
+      "reason": "The generated category 'Symbol Placement' partially matches multiple golden categories as it addresses symbol presence, placement, and spacing but does not fully cover the specific constraints of each golden category."
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "matched_golden_category_ids": ["GC-6", "GC-7", "GC-8", "GC-12", "GC-13", "GC-14", "GC-15"],
+      "match_type": "strong",
+      "reason": "The generated category 'Negative Value Handling' strongly matches multiple golden categories as it includes tests for various negative value handling scenarios, including disallowing negatives, enforcing parentheses, and controlling negative sign placement."
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "matched_golden_category_ids": ["GC-9", "GC-10", "GC-16"],
+      "match_type": "strong",
+      "reason": "The generated category 'Separator Customization' strongly matches multiple golden categories as it includes tests for custom thousands and decimal separators, which are key aspects of these golden categories."
+    },
+    {
+      "generated_category_id": "GENC-5",
+      "matched_golden_category_ids": ["GC-2", "GC-3", "GC-4"],
+      "match_type": "strong",
+      "reason": "The generated category 'Decimal Handling' strongly matches multiple golden categories as it includes tests for disallowing decimals, requiring decimals, and specific decimal precision."
+    },
+    {
+      "generated_category_id": "GENC-6",
+      "matched_golden_category_ids": [],
+      "match_type": "none",
+      "reason": "The generated category 'Space Handling' does not meaningfully map to any golden category as it focuses on space handling, which is not explicitly covered in the golden categories."
+    }
+  ],
+  "novel_generated_categories": [
+    {
+      "generated_category_id": "GENC-6",
+      "reason": "The generated category 'Space Handling' introduces a novel aspect of currency validation that is not explicitly covered in the golden categories."
+    }
+  ]
+}

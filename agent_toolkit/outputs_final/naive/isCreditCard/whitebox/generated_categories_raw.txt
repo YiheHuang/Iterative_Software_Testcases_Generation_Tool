@@ -1,0 +1,24 @@
+{
+  "generated_categories": [
+    {
+      "name": "Generic Credit Card Validation",
+      "description": "Tests generic credit card validation without specifying a provider, including valid and invalid numbers based on length and format.",
+      "generated_group_ids": ["GENERATED-1"]
+    },
+    {
+      "name": "Provider-Specific Validation",
+      "description": "Tests credit card validation for specific providers, including valid numbers for the provider and invalid numbers from other providers or invalid provider options.",
+      "generated_group_ids": ["GENERATED-2", "GENERATED-3"]
+    },
+    {
+      "name": "Formatting Edge Cases",
+      "description": "Tests handling of formatted credit card numbers with valid and invalid separators.",
+      "generated_group_ids": ["GENERATED-4"]
+    },
+    {
+      "name": "Invalid Input Handling",
+      "description": "Tests behavior with empty strings, non-numeric inputs, and mixed alphanumeric inputs.",
+      "generated_group_ids": ["GENERATED-5"]
+    }
+  ]
+}

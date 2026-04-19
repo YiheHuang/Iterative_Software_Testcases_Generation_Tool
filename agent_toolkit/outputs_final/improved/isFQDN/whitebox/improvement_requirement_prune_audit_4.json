@@ -1,0 +1,85 @@
+{
+  "audit": [
+    {
+      "group_title": "Validation with default options",
+      "decision": "keep",
+      "reason": "All cases are clearly supported by the default behavior described in the requirement.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Validation with `require_tld` set to false",
+      "decision": "keep",
+      "reason": "All cases are supported by the requirement's description of the `require_tld` option.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Validation with `allow_underscores` set to true",
+      "decision": "keep",
+      "reason": "All cases are supported by the requirement's description of the `allow_underscores` option.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Validation with `allow_trailing_dot` set to true",
+      "decision": "keep",
+      "reason": "All cases are supported by the requirement's description of the `allow_trailing_dot` option.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Validation with `allow_numeric_tld` set to true",
+      "decision": "keep",
+      "reason": "All cases are supported by the requirement's description of the `allow_numeric_tld` option.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Validation with `allow_wildcard` set to true",
+      "decision": "keep",
+      "reason": "All cases are supported by the requirement's description of the `allow_wildcard` option.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Validation with `ignore_max_length` set to true",
+      "decision": "keep",
+      "reason": "All cases are supported by the requirement's description of the `ignore_max_length` option.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Validation for TLDs containing spaces",
+      "decision": "keep",
+      "reason": "All cases are supported by the requirement's rejection of TLDs containing spaces.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Validation for domain parts exceeding 63 characters",
+      "decision": "keep",
+      "reason": "All cases are supported by the requirement's rejection of domain parts exceeding 63 characters.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Validation for domain parts containing full-width characters",
+      "decision": "trim",
+      "reason": "Duplicate group exists; removed redundant cases.",
+      "removed_valid": [],
+      "removed_invalid": [
+        "example.\u0012\u0013\u0014",
+        "sub.\u0012\u0013\u0014.domain",
+        "\u0012\u0013\u0014.example.com"
+      ]
+    },
+    {
+      "group_title": "Validation for domain parts starting or ending with a hyphen",
+      "decision": "keep",
+      "reason": "All cases are supported by the requirement's rejection of domain parts starting or ending with a hyphen.",
+      "removed_valid": [],
+      "removed_invalid": []
+    }
+  ]
+}

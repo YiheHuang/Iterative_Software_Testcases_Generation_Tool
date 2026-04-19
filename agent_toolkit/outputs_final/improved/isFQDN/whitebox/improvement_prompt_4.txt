@@ -1,0 +1,411 @@
+You are improving an existing whitebox test suite for isFQDN.
+You are given only coverage details and fine-grained uncovered white-box locations.
+You must use those uncovered positions as exact white-box targets when updating the suite.
+You must NOT use any golden tests, repository test overlap analysis, or external oracle hints.
+
+Goal:
+- propose a small patch that helps the current suite target more uncovered code locations
+- preserve the current suite unless a new patch is clearly justified by uncovered locations
+- keep the patch conservative and additive whenever possible
+- keep the suite conservative and low-redundancy
+
+Return strict JSON with top-level keys obligations and test_groups.
+The returned test_groups must be patch groups only, not a full rewritten suite.
+
+Black-box requirement source:
+Function name: isFQDN
+Black-box requirement source: validator_js README function entry
+Signature summary: isFQDN(str [, options])
+README behavior summary:
+| check if the string is a fully qualified domain name (e.g. domain.com).
+`options` is an object which defaults to `{ require_tld: true, allow_underscores: false, allow_trailing_dot: false, allow_numeric_tld: false, allow_wildcard: false, ignore_max_length: false }`.
+`require_tld` - If set to false the validator will not check if the domain includes a TLD.
+`allow_underscores` - if set to true, the validator will allow underscores in the domain.
+`allow_trailing_dot` - if set to true, the validator will allow the domain to end with a `.` character.
+`allow_numeric_tld` - if set to true, the validator will allow the TLD of the domain to be made up solely of numbers.
+`allow_wildcard` - if set to true, the validator will allow domains starting with `*.` (e.g. `*.example.com` or `*.shop.example.com`).
+`ignore_max_length` - if set to true, the validator will not check for the standard max length of a domain.
+
+Treat the README entry as the authoritative black-box behavior description.
+Infer valid inputs, invalid inputs, option-sensitive behaviors, and edge cases from this description.
+
+
+Current full test suite from the previous iteration:
+[
+  {
+    "title": "Baseline FQDN validation",
+    "validator": "isFQDN",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "example.com",
+      "sub.domain.com",
+      "xn--example.com"
+    ],
+    "invalid": [
+      "example",
+      "invalid_domain",
+      "-example.com",
+      "example-.com",
+      "example..com",
+      "example.com ",
+      "example.com\u0000"
+    ],
+    "rationale": "Tests the default behavior of the validator without any options.",
+    "obligations": [
+      "OB-1",
+      "OB-2"
+    ]
+  },
+  {
+    "title": "Validation with allow_underscores enabled",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_underscores": true
+      }
+    ],
+    "valid": [
+      "example_domain.com",
+      "sub_domain.example.com"
+    ],
+    "invalid": [
+      "invalid_domain.com"
+    ],
+    "rationale": "Tests the behavior when underscores are allowed in domain parts.",
+    "obligations": [
+      "OB-3"
+    ]
+  },
+  {
+    "title": "Validation with allow_trailing_dot enabled",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_trailing_dot": true
+      }
+    ],
+    "valid": [
+      "example.com.",
+      "sub.domain.com."
+    ],
+    "invalid": [
+      "invalid_domain."
+    ],
+    "rationale": "Tests the behavior when trailing dots are allowed.",
+    "obligations": [
+      "OB-4"
+    ]
+  },
+  {
+    "title": "Validation with allow_numeric_tld enabled",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": true
+      }
+    ],
+    "valid": [
+      "example.123",
+      "sub.domain.456"
+    ],
+    "invalid": [
+      "invalid.123"
+    ],
+    "rationale": "Tests the behavior when numeric TLDs are allowed.",
+    "obligations": [
+      "OB-5"
+    ]
+  },
+  {
+    "title": "Validation with allow_wildcard enabled",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_wildcard": true
+      }
+    ],
+    "valid": [
+      "*.example.com",
+      "*.sub.domain.com"
+    ],
+    "invalid": [
+      "invalid.*.com"
+    ],
+    "rationale": "Tests the behavior when wildcard domains are allowed.",
+    "obligations": [
+      "OB-6"
+    ]
+  },
+  {
+    "title": "Validation with ignore_max_length enabled",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "ignore_max_length": true
+      }
+    ],
+    "valid": [
+      "a"
+    ],
+    "invalid": [],
+    "rationale": "Tests the behavior when the max length constraint is ignored.",
+    "obligations": [
+      "OB-7"
+    ]
+  },
+  {
+    "title": "Validation with require_tld disabled",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": false
+      }
+    ],
+    "valid": [
+      "example",
+      "subdomain"
+    ],
+    "invalid": [
+      "example..com",
+      "-example",
+      "example-.com"
+    ],
+    "rationale": "Tests the behavior when `require_tld` is disabled, covering the false branch of the condition `options.require_tld`.",
+    "obligations": [
+      "OB-8"
+    ]
+  },
+  {
+    "title": "Validation with TLD containing spaces",
+    "validator": "isFQDN",
+    "args": [
+      {}
+    ],
+    "valid": [],
+    "invalid": [
+      "example. com",
+      "example. co m"
+    ],
+    "rationale": "Tests rejection of TLDs containing spaces, covering the true branch of the condition `/\\s/.test(tld)`.",
+    "obligations": [
+      "OB-9"
+    ]
+  },
+  {
+    "title": "Validation with numeric TLDs disallowed",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": false
+      }
+    ],
+    "valid": [
+      "example.com",
+      "sub.domain.org"
+    ],
+    "invalid": [
+      "example.123",
+      "subdomain.456"
+    ],
+    "rationale": "Tests rejection of numeric TLDs when `allow_numeric_tld` is false, covering the true branch of the condition `!options.allow_numeric_tld && /^\\d+$/.test(tld)`.",
+    "obligations": [
+      "OB-10"
+    ]
+  }
+]
+
+Coverage details allowed for improvement:
+{
+  "coverage_total": {
+    "lines": {
+      "total": 33,
+      "covered": 28,
+      "skipped": 0,
+      "pct": 84.85
+    },
+    "statements": {
+      "total": 34,
+      "covered": 29,
+      "skipped": 0,
+      "pct": 85.29
+    },
+    "functions": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 38,
+      "covered": 32,
+      "skipped": 0,
+      "pct": 84.21
+    }
+  },
+  "coverage_files": {
+    "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isFQDN.js": {
+      "lines": {
+        "total": 33,
+        "covered": 28,
+        "skipped": 0,
+        "pct": 84.85
+      },
+      "functions": {
+        "total": 3,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 34,
+        "covered": 29,
+        "skipped": 0,
+        "pct": 85.29
+      },
+      "branches": {
+        "total": 38,
+        "covered": 32,
+        "skipped": 0,
+        "pct": 84.21
+      }
+    }
+  },
+  "uncovered_details": {
+    "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isFQDN.js": {
+      "uncovered_statements": [
+        {
+          "statement_id": "18",
+          "line": 42,
+          "column": 6,
+          "line_text": "      return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 42: return false;"
+        },
+        {
+          "statement_id": "20",
+          "line": 48,
+          "column": 4,
+          "line_text": "    return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 48: return false;"
+        },
+        {
+          "statement_id": "23",
+          "line": 53,
+          "column": 6,
+          "line_text": "      return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 53: return false;"
+        },
+        {
+          "statement_id": "27",
+          "line": 62,
+          "column": 6,
+          "line_text": "      return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 62: return false;"
+        },
+        {
+          "statement_id": "31",
+          "line": 71,
+          "column": 6,
+          "line_text": "      return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 71: return false;"
+        }
+      ],
+      "uncovered_branches": [
+        {
+          "branch_id": "9",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 41,
+          "column": 4,
+          "line_text": "    if (/\\s/.test(tld)) {",
+          "source_excerpt": "if (/\\s/.test(tld)) {\n      return false;\n    }",
+          "condition_excerpt": "/\\s/.test(tld)",
+          "summary": "Uncovered if path `condition_true_branch` at line 41; condition: /\\s/.test(tld)"
+        },
+        {
+          "branch_id": "10",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 47,
+          "column": 2,
+          "line_text": "  if (!options.allow_numeric_tld && /^\\d+$/.test(tld)) {",
+          "source_excerpt": "if (!options.allow_numeric_tld && /^\\d+$/.test(tld)) {\n    return false;\n  }",
+          "condition_excerpt": "!options.allow_numeric_tld && /^\\d+$/.test(tld)",
+          "summary": "Uncovered if path `condition_true_branch` at line 47; condition: !options.allow_numeric_tld && /^\\d+$/.test(tld)"
+        },
+        {
+          "branch_id": "12",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 52,
+          "column": 4,
+          "line_text": "    if (part.length > 63 && !options.ignore_max_length) {",
+          "source_excerpt": "if (part.length > 63 && !options.ignore_max_length) {\n      return false;\n    }",
+          "condition_excerpt": "part.length > 63 && !options.ignore_max_length",
+          "summary": "Uncovered if path `condition_true_branch` at line 52; condition: part.length > 63 && !options.ignore_max_length"
+        },
+        {
+          "branch_id": "13",
+          "branch_type": "binary-expr",
+          "path_index": 1,
+          "branch_side": "path_1",
+          "line": 52,
+          "column": 28,
+          "line_text": "    if (part.length > 63 && !options.ignore_max_length) {",
+          "source_excerpt": "!options.ignore_max_length",
+          "condition_excerpt": "part.length > 63 && !options.ignore_max_length",
+          "summary": "Uncovered binary-expr path `path_1` at line 52; condition: part.length > 63 && !options.ignore_max_length"
+        },
+        {
+          "branch_id": "15",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 61,
+          "column": 4,
+          "line_text": "    if (/[\\uff01-\\uff5e]/.test(part)) {",
+          "source_excerpt": "if (/[\\uff01-\\uff5e]/.test(part)) {\n      return false;\n    }",
+          "condition_excerpt": "/[\\uff01-\\uff5e]/.test(part)",
+          "summary": "Uncovered if path `condition_true_branch` at line 61; condition: /[\\uff01-\\uff5e]/.test(part)"
+        },
+        {
+          "branch_id": "17",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 70,
+          "column": 4,
+          "line_text": "    if (!options.allow_underscores && /_/.test(part)) {",
+          "source_excerpt": "if (!options.allow_underscores && /_/.test(part)) {\n      return false;\n    }",
+          "condition_excerpt": "!options.allow_underscores && /_/.test(part)",
+          "summary": "Uncovered if path `condition_true_branch` at line 70; condition: !options.allow_underscores && /_/.test(part)"
+        }
+      ],
+      "uncovered_functions": []
+    }
+  }
+}
+
+Instructions:
+- You must use only the requirement (if provided), the current suite, coverage details, and uncovered details.
+- Do not infer or use any correctness signal, pass/fail summary, failed cases, or hidden oracle information.
+- Treat uncovered_details as exact white-box targets, not as vague hints.
+- Use the previous full suite as the baseline and return only the incremental patch groups.
+- Do not rewrite, delete, or duplicate the existing groups already shown in the current suite.
+- Add only groups that cover meaningfully new targets beyond the current suite.
+- Prefer at most 3 patch groups, each focused on one concrete uncovered condition or path family.
+- If an uncovered branch or statement cannot be operationalized from the provided coverage details, do not guess.
+- If uncovered_details are provided, use them only as white-box targets.
+- If uncovered_details are not provided, do not infer any hidden coverage gap.
+- Prefer minimal option-profile-specific groups.
+- Avoid broad extrapolation; every meaningful update should correspond to a concrete uncovered position or condition.
+- Do not mention or infer any golden test information.

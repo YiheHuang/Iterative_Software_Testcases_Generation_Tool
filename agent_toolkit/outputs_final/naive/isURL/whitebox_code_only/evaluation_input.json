@@ -1,0 +1,536 @@
+{
+  "cases": [
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Basic URL validation",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "https://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Basic URL validation",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "ftp://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Basic URL validation",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://example.com/path?query=value#fragment",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Basic URL validation",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Basic URL validation",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Basic URL validation",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http:/example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Basic URL validation",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Basic URL validation",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://example.com:99999",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Basic URL validation",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "input_value": "http://example.com:abc",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Basic URL validation",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Protocol requirement",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "input_value": "https://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Protocol requirement",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "input_value": "ftp://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Protocol requirement",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "input_value": "example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Protocol requirement",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "input_value": "//example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Protocol requirement",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "input_value": "example.com/path",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Protocol requirement",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false
+        }
+      ],
+      "input_value": "http://",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Host requirement",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false
+        }
+      ],
+      "input_value": "http://:8080",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Host requirement",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false
+        }
+      ],
+      "input_value": "//:8080",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Host requirement",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false
+        }
+      ],
+      "input_value": "ftp://",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Host requirement",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Host requirement",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false
+        }
+      ],
+      "input_value": "https://example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Host requirement",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_fragments": false
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Allow fragments",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_fragments": false
+        }
+      ],
+      "input_value": "http://example.com/path?query=value",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Allow fragments",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_fragments": false
+        }
+      ],
+      "input_value": "http://example.com#fragment",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Allow fragments",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_fragments": false
+        }
+      ],
+      "input_value": "http://example.com/path#fragment",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Allow fragments",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_query_components": false
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Allow query components",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_query_components": false
+        }
+      ],
+      "input_value": "http://example.com/path",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Allow query components",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_query_components": false
+        }
+      ],
+      "input_value": "http://example.com?query=value",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Allow query components",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_query_components": false
+        }
+      ],
+      "input_value": "http://example.com/path?query=value&other=value",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Allow query components",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Disallow authentication",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true
+        }
+      ],
+      "input_value": "https://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Disallow authentication",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true
+        }
+      ],
+      "input_value": "http://user:pass@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Disallow authentication",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true
+        }
+      ],
+      "input_value": "http://user:@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Disallow authentication",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true
+        }
+      ],
+      "input_value": "http://:pass@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Disallow authentication",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "validate_length": true,
+          "max_allowed_length": 20
+        }
+      ],
+      "input_value": "http://short.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Validate length",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "validate_length": true,
+          "max_allowed_length": 20
+        }
+      ],
+      "input_value": "http://this-is-a-very-long-url.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Validate length",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "protocols": [
+            "custom",
+            "http"
+          ]
+        }
+      ],
+      "input_value": "custom://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Custom protocol list",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "protocols": [
+            "custom",
+            "http"
+          ]
+        }
+      ],
+      "input_value": "http://example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Custom protocol list",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "protocols": [
+            "custom",
+            "http"
+          ]
+        }
+      ],
+      "input_value": "https://example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Custom protocol list",
+      "obligations": []
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "protocols": [
+            "custom",
+            "http"
+          ]
+        }
+      ],
+      "input_value": "ftp://example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Custom protocol list",
+      "obligations": []
+    }
+  ],
+  "mode": "whitebox_code_only",
+  "approach": "naive",
+  "target_source_files": [
+    "src/lib/isURL.js"
+  ]
+}

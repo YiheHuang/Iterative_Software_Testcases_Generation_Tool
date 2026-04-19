@@ -1,0 +1,66 @@
+{
+  "audit": [
+    {
+      "group_title": "Basic Luhn validation",
+      "decision": "keep",
+      "reason": "The Luhn algorithm is explicitly required by the README.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Provider-specific validation",
+      "decision": "keep",
+      "reason": "The README explicitly supports provider-specific validation.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Invalid provider error handling",
+      "decision": "keep",
+      "reason": "The README specifies that invalid providers should result in an error.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Input sanitization",
+      "decision": "keep",
+      "reason": "The implementation sanitizes input before validation, which aligns with expected behavior.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Global pattern matching",
+      "decision": "keep",
+      "reason": "The README supports validation against all card provider patterns when no provider is specified.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Provider-specific early return",
+      "decision": "keep",
+      "reason": "The README supports provider-specific validation, and early returns are consistent with this behavior.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Global early return",
+      "decision": "drop",
+      "reason": "The group duplicates the behavior already covered by 'Global pattern matching' and does not add new requirement-supported cases.",
+      "removed_valid": [],
+      "removed_invalid": [
+        "1234567812345678"
+      ]
+    },
+    {
+      "group_title": "Invalid provider error handling (patch)",
+      "decision": "drop",
+      "reason": "The group duplicates the behavior already covered by 'Invalid provider error handling' and does not add new requirement-supported cases.",
+      "removed_valid": [],
+      "removed_invalid": [
+        "4111111111111111",
+        "378282246310005",
+        "1234567812345678"
+      ]
+    }
+  ]
+}

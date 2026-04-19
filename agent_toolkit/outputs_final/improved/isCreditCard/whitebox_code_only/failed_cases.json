@@ -1,0 +1,105 @@
+[
+  {
+    "title": "Input type validation",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "input_value": "\"378282246310005\"",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-1"
+    ]
+  },
+  {
+    "title": "Specific provider validation",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "input_value": "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"amex\"}}",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-2"
+    ]
+  },
+  {
+    "title": "Default provider validation",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "input_value": "\"378282246310005\"",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-4",
+      "OB-5"
+    ]
+  },
+  {
+    "title": "Luhn algorithm validation",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "input_value": "\"378282246310005\"",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-6"
+    ]
+  },
+  {
+    "title": "Input sanitization",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "input_value": "\"3782-8224-6310-005\"",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-7"
+    ]
+  },
+  {
+    "title": "Input sanitization",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "input_value": "\"3782 8224 6310 005\"",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-7"
+    ]
+  }
+]

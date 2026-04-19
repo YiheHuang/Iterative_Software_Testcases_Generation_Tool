@@ -1,0 +1,103 @@
+{
+  "generated_categories": [
+    {
+      "generated_category_id": "GENC-1",
+      "name": "Basic URL Validation",
+      "description": "Tests covering default behavior and basic URL validation logic.",
+      "generated_group_ids": [
+        "GENERATED-1",
+        "GENERATED-11",
+        "GENERATED-13",
+        "GENERATED-18"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "name": "Protocol Handling",
+      "description": "Tests related to protocol requirements, custom protocols, and protocol-relative URLs.",
+      "generated_group_ids": [
+        "GENERATED-2",
+        "GENERATED-3",
+        "GENERATED-6",
+        "GENERATED-19",
+        "GENERATED-20"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "name": "Allow Underscores",
+      "description": "fallback_singleton_category",
+      "generated_group_ids": [
+        "GENERATED-4"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "name": "Host and Domain Validation",
+      "description": "Tests focusing on host-related options such as whitelists, blacklists, and trailing dots.",
+      "generated_group_ids": [
+        "GENERATED-5",
+        "GENERATED-14",
+        "GENERATED-17"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-5",
+      "name": "Fragment and Query Handling",
+      "description": "Tests focusing on the handling of fragments and query components in URLs.",
+      "generated_group_ids": [
+        "GENERATED-7",
+        "GENERATED-8"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-6",
+      "name": "Authentication Handling",
+      "description": "Tests targeting authentication components and their validation logic.",
+      "generated_group_ids": [
+        "GENERATED-9",
+        "GENERATED-15",
+        "GENERATED-16",
+        "GENERATED-26",
+        "GENERATED-29"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-7",
+      "name": "Length Validation",
+      "description": "Tests related to URL length validation and its configuration.",
+      "generated_group_ids": [
+        "GENERATED-10",
+        "GENERATED-21"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-8",
+      "name": "Port Parsing",
+      "description": "fallback_singleton_category",
+      "generated_group_ids": [
+        "GENERATED-12"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-9",
+      "name": "Empty URL Validation",
+      "description": "Tests targeting validation of empty URLs under specific configurations.",
+      "generated_group_ids": [
+        "GENERATED-22",
+        "GENERATED-24",
+        "GENERATED-27"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-10",
+      "name": "URL Structure and Parsing",
+      "description": "Tests validating URL structure, including invalid split elements and malformed authentication formats.",
+      "generated_group_ids": [
+        "GENERATED-23",
+        "GENERATED-25",
+        "GENERATED-28"
+      ]
+    }
+  ]
+}

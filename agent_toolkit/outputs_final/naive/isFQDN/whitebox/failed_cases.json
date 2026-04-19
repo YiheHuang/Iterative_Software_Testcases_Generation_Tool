@@ -1,0 +1,24 @@
+[
+  {
+    "title": "allow_underscores: true",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_underscores": true,
+        "require_tld": true,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example_com",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": []
+  }
+]

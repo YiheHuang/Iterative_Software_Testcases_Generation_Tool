@@ -1,0 +1,519 @@
+{
+  "mode": "whitebox_code_only",
+  "approach": "improved",
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "whitebox",
+      "rule": "Validate display name when `allow_display_name` or `require_display_name` is true.",
+      "why": "The code explicitly checks for display name validity when these options are enabled.",
+      "minimal_valid": "\"John Doe <john.doe@example.com>\"",
+      "minimal_invalid": "\"Invalid<>Name <john.doe@example.com>\""
+    },
+    {
+      "id": "OB-2",
+      "kind": "whitebox",
+      "rule": "Reject emails exceeding the default maximum length unless `ignore_max_length` is true.",
+      "why": "The code enforces a maximum email length of 254 characters unless overridden.",
+      "minimal_valid": "\"a@b.com\"",
+      "minimal_invalid": "\"a\" + \"a\".repeat(253) + \"@b.com\""
+    },
+    {
+      "id": "OB-3",
+      "kind": "whitebox",
+      "rule": "Reject emails with domains in the `host_blacklist`.",
+      "why": "The code explicitly checks if the domain is blacklisted using `checkHost`.",
+      "minimal_valid": "\"user@allowed.com\"",
+      "minimal_invalid": "\"user@blacklisted.com\""
+    },
+    {
+      "id": "OB-4",
+      "kind": "whitebox",
+      "rule": "Reject emails not in the `host_whitelist` when it is non-empty.",
+      "why": "The code explicitly checks if the domain is whitelisted using `checkHost`.",
+      "minimal_valid": "\"user@whitelisted.com\"",
+      "minimal_invalid": "\"user@notwhitelisted.com\""
+    },
+    {
+      "id": "OB-5",
+      "kind": "whitebox",
+      "rule": "Validate Gmail-specific rules when `domain_specific_validation` is true and the domain is Gmail.",
+      "why": "The code applies Gmail-specific username length and character rules.",
+      "minimal_valid": "\"validuser@gmail.com\"",
+      "minimal_invalid": "\"invalid..user@gmail.com\""
+    },
+    {
+      "id": "OB-6",
+      "kind": "whitebox",
+      "rule": "Reject emails with invalid FQDNs unless `allow_ip_domain` is true and the domain is a valid IP.",
+      "why": "The code validates the domain as an FQDN or IP based on these options.",
+      "minimal_valid": "\"user@valid-domain.com\"",
+      "minimal_invalid": "\"user@invalid_domain\""
+    },
+    {
+      "id": "OB-7",
+      "kind": "whitebox",
+      "rule": "Reject emails with blacklisted characters in the local part.",
+      "why": "The code explicitly checks for blacklisted characters in the local part.",
+      "minimal_valid": "\"user@domain.com\"",
+      "minimal_invalid": "\"us#er@domain.com\""
+    },
+    {
+      "id": "OB-8",
+      "kind": "whitebox",
+      "rule": "Validate quoted local parts based on `allow_utf8_local_part`.",
+      "why": "The code applies different regex patterns for quoted local parts depending on this option.",
+      "minimal_valid": "\"\\\"quoted\\\"@domain.com\"",
+      "minimal_invalid": "\"\\\"invalid\\\"@domain.com\""
+    },
+    {
+      "id": "OB-9",
+      "kind": "whitebox",
+      "rule": "Validate unquoted local parts based on `allow_utf8_local_part`.",
+      "why": "The code applies different regex patterns for unquoted local parts depending on this option.",
+      "minimal_valid": "\"user@domain.com\"",
+      "minimal_invalid": "\"usér@domain.com\""
+    },
+    {
+      "id": "OB-10",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 41: `return false;` and the uncovered branch at line 40: `if (!display_name_without_quotes.trim())`.",
+      "why": "This ensures that the validator correctly handles cases where the display name is empty or consists only of whitespace.",
+      "minimal_valid": "John Doe <john.doe@example.com>",
+      "minimal_invalid": " <john.doe@example.com>"
+    },
+    {
+      "id": "OB-11",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 56: `if (!all_start_with_back_slash)` and its true/false branches.",
+      "why": "This ensures that the validator correctly handles cases where backslashes in the display name are improperly escaped.",
+      "minimal_valid": "\"John \\\"Doe\\\"\" <john.doe@example.com>",
+      "minimal_invalid": "\"John \"Doe\"\" <john.doe@example.com>"
+    },
+    {
+      "id": "OB-12",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered branch at line 92: `if (!options.ignore_max_length && str.length > defaultMaxEmailLength)`.",
+      "why": "This ensures that the validator correctly enforces the maximum email length when `ignore_max_length` is false.",
+      "minimal_valid": "a@b.com",
+      "minimal_invalid": "a_very_long_email_address_that_exceeds_the_maximum_length@example.com"
+    },
+    {
+      "id": "OB-13",
+      "kind": "whitebox",
+      "rule": "Cover the false branch of `display_name.endsWith(' ')` at line 81.",
+      "why": "This branch is currently uncovered and relates to trimming trailing spaces in display names.",
+      "minimal_valid": "\"John \" <john.doe@example.com>",
+      "minimal_invalid": "\"John \" <john.doe@example.com>"
+    },
+    {
+      "id": "OB-14",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of `options.require_display_name` at line 88.",
+      "why": "This branch is currently uncovered and ensures emails without display names are rejected when required.",
+      "minimal_valid": "\"John Doe\" <john.doe@example.com>",
+      "minimal_invalid": "john.doe@example.com"
+    },
+    {
+      "id": "OB-15",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of `!options.ignore_max_length && str.length > defaultMaxEmailLength` at line 92.",
+      "why": "This branch is currently uncovered and ensures emails exceeding the maximum length are rejected when `ignore_max_length` is false.",
+      "minimal_valid": "a@b.com",
+      "minimal_invalid": "a_very_long_email_address_that_exceeds_the_maximum_length@example.com"
+    },
+    {
+      "id": "OB-16",
+      "kind": "whitebox",
+      "rule": "Covers the false branch of `display_name.endsWith(' ')` at line 81.",
+      "why": "This branch is currently uncovered and ensures that display names without trailing spaces are handled correctly.",
+      "minimal_valid": "\"John\" <john.doe@example.com>",
+      "minimal_invalid": "\"John \" <john.doe@example.com>"
+    },
+    {
+      "id": "OB-17",
+      "kind": "whitebox",
+      "rule": "Covers the true branch of `!options.ignore_max_length && str.length > defaultMaxEmailLength` at line 92.",
+      "why": "This branch is currently uncovered and ensures that emails exceeding the maximum length are rejected when `ignore_max_length` is false.",
+      "minimal_valid": "a@b.com",
+      "minimal_invalid": "a_very_long_email_address_that_exceeds_the_maximum_length@example.com"
+    },
+    {
+      "id": "OB-18",
+      "kind": "whitebox",
+      "rule": "Covers the true branch of `!isByteLength(username.replace(/\\./g, ''), { min: 6, max: 30 })` at line 124.",
+      "why": "This branch is currently uncovered and ensures that usernames not meeting the byte length constraints are rejected.",
+      "minimal_valid": "validuser@gmail.com",
+      "minimal_invalid": "short@gmail.com"
+    }
+  ],
+  "test_groups": [
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "valid": [
+        "John Doe <john.doe@example.com>",
+        "\"John Doe\" <john.doe@example.com>"
+      ],
+      "invalid": [
+        "Invalid<>Name <john.doe@example.com>",
+        "John Doe john.doe@example.com"
+      ],
+      "title": "Display name validation",
+      "rationale": "Covers cases where display name is allowed or required.",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "ignore_max_length": false
+        }
+      ],
+      "valid": [
+        "a@b.com",
+        "a"
+      ],
+      "invalid": [
+        "a"
+      ],
+      "title": "Maximum length validation",
+      "rationale": "Ensures emails exceeding the maximum length are rejected unless `ignore_max_length` is true.",
+      "obligations": [
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "host_blacklist": [
+            "blacklisted.com"
+          ]
+        }
+      ],
+      "valid": [
+        "user@allowed.com"
+      ],
+      "invalid": [
+        "user@blacklisted.com"
+      ],
+      "title": "Host blacklist validation",
+      "rationale": "Ensures emails with blacklisted domains are rejected.",
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "host_whitelist": [
+            "whitelisted.com"
+          ]
+        }
+      ],
+      "valid": [
+        "user@whitelisted.com"
+      ],
+      "invalid": [
+        "user@notwhitelisted.com"
+      ],
+      "title": "Host whitelist validation",
+      "rationale": "Ensures emails not in the whitelist are rejected when a whitelist is provided.",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "domain_specific_validation": true
+        }
+      ],
+      "valid": [
+        "validuser@gmail.com",
+        "validuser@googlemail.com"
+      ],
+      "invalid": [
+        "invalid..user@gmail.com",
+        "toolongusername@gmail.com"
+      ],
+      "title": "Gmail-specific validation",
+      "rationale": "Covers Gmail-specific username rules when `domain_specific_validation` is enabled.",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_ip_domain": true
+        }
+      ],
+      "valid": [
+        "user@valid-domain.com",
+        "user@[127.0.0.1]"
+      ],
+      "invalid": [
+        "user@invalid_domain",
+        "user@[999.999.999.999]"
+      ],
+      "title": "FQDN and IP domain validation",
+      "rationale": "Ensures domains are valid FQDNs or IPs based on options.",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "blacklisted_chars": "#"
+        }
+      ],
+      "valid": [
+        "user@domain.com"
+      ],
+      "invalid": [
+        "us#er@domain.com"
+      ],
+      "title": "Blacklisted character validation",
+      "rationale": "Ensures emails with blacklisted characters in the local part are rejected.",
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_utf8_local_part": true
+        }
+      ],
+      "valid": [
+        "\"quoted\"@domain.com",
+        "\"utf8ñ\"@domain.com"
+      ],
+      "invalid": [
+        "\"invalid\"@domain.com",
+        "\"utf8ñ\"@domain.com"
+      ],
+      "title": "Quoted local part validation",
+      "rationale": "Covers quoted local part validation with and without UTF-8 support.",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_utf8_local_part": true
+        }
+      ],
+      "valid": [
+        "user@domain.com",
+        "usér@domain.com"
+      ],
+      "invalid": [
+        "user@domain.com",
+        "usér@domain.com"
+      ],
+      "title": "Unquoted local part validation",
+      "rationale": "Covers unquoted local part validation with and without UTF-8 support.",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "valid": [
+        "John Doe <john.doe@example.com>"
+      ],
+      "invalid": [
+        " <john.doe@example.com>"
+      ],
+      "title": "Empty or whitespace-only display name validation",
+      "rationale": "Covers cases where the display name is empty or consists only of whitespace.",
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "valid": [
+        "\"John \\\"Doe\\\"\" <john.doe@example.com>"
+      ],
+      "invalid": [
+        "\"John \"Doe\"\" <john.doe@example.com>"
+      ],
+      "title": "Improperly escaped backslashes in display name",
+      "rationale": "Covers cases where backslashes in the display name are improperly escaped.",
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "ignore_max_length": false
+        }
+      ],
+      "valid": [
+        "a@b.com"
+      ],
+      "invalid": [
+        "a_very_long_email_address_that_exceeds_the_maximum_length@example.com"
+      ],
+      "title": "Maximum email length enforcement",
+      "rationale": "Ensures that the validator enforces the maximum email length when `ignore_max_length` is false.",
+      "obligations": [
+        "OB-12"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "valid": [
+        "\"John\" <john.doe@example.com>"
+      ],
+      "invalid": [
+        "\"John \" <john.doe@example.com>"
+      ],
+      "title": "Trailing space in display name",
+      "rationale": "Covers the false branch of `display_name.endsWith(' ')` to ensure trailing spaces in display names are handled correctly.",
+      "obligations": [
+        "OB-13"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_display_name": true
+        }
+      ],
+      "valid": [
+        "\"John Doe\" <john.doe@example.com>"
+      ],
+      "invalid": [
+        "john.doe@example.com"
+      ],
+      "title": "Require display name validation",
+      "rationale": "Covers the true branch of `options.require_display_name` to ensure emails without display names are rejected when required.",
+      "obligations": [
+        "OB-14"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "ignore_max_length": false
+        }
+      ],
+      "valid": [
+        "a@b.com"
+      ],
+      "invalid": [
+        "a_very_long_email_address_that_exceeds_the_maximum_length@example.com"
+      ],
+      "title": "Maximum email length validation",
+      "rationale": "Covers the true branch of `!options.ignore_max_length && str.length > defaultMaxEmailLength` to ensure emails exceeding the maximum length are rejected when `ignore_max_length` is false.",
+      "obligations": [
+        "OB-15"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "valid": [
+        "\"John\" <john.doe@example.com>"
+      ],
+      "invalid": [
+        "\"John \" <john.doe@example.com>"
+      ],
+      "title": "Trailing space in display name (false branch)",
+      "rationale": "Covers the false branch of `display_name.endsWith(' ')` to ensure display names without trailing spaces are handled correctly.",
+      "obligations": [
+        "OB-16"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "ignore_max_length": false
+        }
+      ],
+      "valid": [
+        "a@b.com"
+      ],
+      "invalid": [
+        "a_very_long_email_address_that_exceeds_the_maximum_length@example.com"
+      ],
+      "title": "Maximum email length enforcement (true branch)",
+      "rationale": "Covers the true branch of `!options.ignore_max_length && str.length > defaultMaxEmailLength` to ensure emails exceeding the maximum length are rejected when `ignore_max_length` is false.",
+      "obligations": [
+        "OB-17"
+      ]
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "domain_specific_validation": true
+        }
+      ],
+      "valid": [
+        "validuser@gmail.com"
+      ],
+      "invalid": [
+        "short@gmail.com"
+      ],
+      "title": "Username byte length validation",
+      "rationale": "Covers the true branch of `!isByteLength(username.replace(/\\./g, ''), { min: 6, max: 30 })` to ensure usernames not meeting the byte length constraints are rejected.",
+      "obligations": [
+        "OB-18"
+      ]
+    }
+  ],
+  "metadata": {
+    "requirement_source": "not_used_code_only_mode",
+    "generation_style": "improved_initial_pass",
+    "iteration_count": 4,
+    "improvement_applied": true,
+    "feedback_sources": [
+      "coverage"
+    ],
+    "decision": "stop_after_reverts"
+  }
+}

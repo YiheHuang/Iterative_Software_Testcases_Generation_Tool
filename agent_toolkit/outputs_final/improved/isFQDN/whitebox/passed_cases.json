@@ -1,0 +1,756 @@
+[
+  {
+    "title": "Baseline FQDN validation",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example.com",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1",
+      "OB-2"
+    ]
+  },
+  {
+    "title": "Baseline FQDN validation",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "sub.domain.com",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1",
+      "OB-2"
+    ]
+  },
+  {
+    "title": "Baseline FQDN validation",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "xn--example.com",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1",
+      "OB-2"
+    ]
+  },
+  {
+    "title": "Baseline FQDN validation",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1",
+      "OB-2"
+    ]
+  },
+  {
+    "title": "Baseline FQDN validation",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "invalid_domain",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1",
+      "OB-2"
+    ]
+  },
+  {
+    "title": "Baseline FQDN validation",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "-example.com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1",
+      "OB-2"
+    ]
+  },
+  {
+    "title": "Baseline FQDN validation",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example-.com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1",
+      "OB-2"
+    ]
+  },
+  {
+    "title": "Baseline FQDN validation",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example..com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1",
+      "OB-2"
+    ]
+  },
+  {
+    "title": "Baseline FQDN validation",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example.com ",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1",
+      "OB-2"
+    ]
+  },
+  {
+    "title": "Baseline FQDN validation",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example.com\u0000",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1",
+      "OB-2"
+    ]
+  },
+  {
+    "title": "Validation with allow_underscores enabled",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_underscores": true,
+        "require_tld": true,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example_domain.com",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-3"
+    ]
+  },
+  {
+    "title": "Validation with allow_underscores enabled",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_underscores": true,
+        "require_tld": true,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "sub_domain.example.com",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-3"
+    ]
+  },
+  {
+    "title": "Validation with allow_trailing_dot enabled",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_trailing_dot": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example.com.",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-4"
+    ]
+  },
+  {
+    "title": "Validation with allow_trailing_dot enabled",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_trailing_dot": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "sub.domain.com.",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-4"
+    ]
+  },
+  {
+    "title": "Validation with allow_trailing_dot enabled",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_trailing_dot": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "invalid_domain.",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-4"
+    ]
+  },
+  {
+    "title": "Validation with allow_numeric_tld enabled",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example.123",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-5"
+    ]
+  },
+  {
+    "title": "Validation with allow_numeric_tld enabled",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "sub.domain.456",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-5"
+    ]
+  },
+  {
+    "title": "Validation with allow_wildcard enabled",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_wildcard": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "*.example.com",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-6"
+    ]
+  },
+  {
+    "title": "Validation with allow_wildcard enabled",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_wildcard": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "*.sub.domain.com",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-6"
+    ]
+  },
+  {
+    "title": "Validation with allow_wildcard enabled",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_wildcard": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "invalid.*.com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-6"
+    ]
+  },
+  {
+    "title": "Validation with require_tld disabled",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": false,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-8"
+    ]
+  },
+  {
+    "title": "Validation with require_tld disabled",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": false,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "subdomain",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-8"
+    ]
+  },
+  {
+    "title": "Validation with require_tld disabled",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": false,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example..com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-8"
+    ]
+  },
+  {
+    "title": "Validation with require_tld disabled",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": false,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "-example",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-8"
+    ]
+  },
+  {
+    "title": "Validation with require_tld disabled",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": false,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example-.com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-8"
+    ]
+  },
+  {
+    "title": "Validation with TLD containing spaces",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example. com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-9"
+    ]
+  },
+  {
+    "title": "Validation with TLD containing spaces",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example. co m",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-9"
+    ]
+  },
+  {
+    "title": "Validation with numeric TLDs disallowed",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": false,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example.com",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-10"
+    ]
+  },
+  {
+    "title": "Validation with numeric TLDs disallowed",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": false,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "sub.domain.org",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-10"
+    ]
+  },
+  {
+    "title": "Validation with numeric TLDs disallowed",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": false,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example.123",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-10"
+    ]
+  },
+  {
+    "title": "Validation with numeric TLDs disallowed",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": false,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "subdomain.456",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-10"
+    ]
+  }
+]

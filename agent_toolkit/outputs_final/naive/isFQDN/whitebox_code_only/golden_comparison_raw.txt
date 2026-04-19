@@ -1,0 +1,49 @@
+{
+  "golden_to_generated": [
+    {
+      "golden_category_id": "GC-1",
+      "matched_generated_category_ids": ["GENC-1"],
+      "match_type": "strong",
+      "reason": "The generated category 'Default FQDN Validation' aligns strongly with the golden category 'Standard FQDN Validation' as both focus on validating fully qualified domain names using default options. The valid and invalid cases overlap significantly."
+    },
+    {
+      "golden_category_id": "GC-2",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "The generated category does not address the trailing dot option, which is the focus of the golden category 'Trailing Dot Option'."
+    },
+    {
+      "golden_category_id": "GC-3",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "The generated category does not address the absence of a TLD requirement, which is the focus of the golden category 'No TLD Requirement'."
+    },
+    {
+      "golden_category_id": "GC-4",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "The generated category does not address numeric TLDs without requiring a TLD, which is the focus of the golden category 'Numeric TLDs Without Requirement'."
+    },
+    {
+      "golden_category_id": "GC-5",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "The generated category does not address wildcard domains, which is the focus of the golden category 'Wildcard Option'."
+    },
+    {
+      "golden_category_id": "GC-6",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "The generated category does not address combined options like trailing dot, underscores, and numeric TLDs, which is the focus of the golden category 'Combined Options'."
+    }
+  ],
+  "generated_to_golden": [
+    {
+      "generated_category_id": "GENC-1",
+      "matched_golden_category_ids": ["GC-1"],
+      "match_type": "strong",
+      "reason": "The generated category 'Default FQDN Validation' aligns strongly with the golden category 'Standard FQDN Validation' as both focus on validating fully qualified domain names using default options. The valid and invalid cases overlap significantly."
+    }
+  ],
+  "novel_generated_categories": []
+}

@@ -1,0 +1,13 @@
+{
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "whitebox",
+      "rule": "Target uncovered statement at line 67: return false;",
+      "why": "This statement is executed when the URL length exceeds the maximum allowed length, and the `validate_length` option is enabled.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://example.com/"
+    }
+  ],
+  "test_groups": []
+}

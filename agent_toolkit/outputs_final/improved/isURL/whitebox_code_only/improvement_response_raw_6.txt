@@ -1,0 +1,81 @@
+{
+  "obligations": [
+    {
+      "id": "OB-16",
+      "kind": "whitebox",
+      "rule": "Ensure the ternary false branch at line 121 is exercised.",
+      "why": "This branch handles cases where the substring operation does not find a slash position.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://example"
+    },
+    {
+      "id": "OB-17",
+      "kind": "whitebox",
+      "rule": "Ensure the true branch of the condition at line 124 is exercised.",
+      "why": "This branch checks for the presence of an '@' symbol in the URL, indicating potential authentication.",
+      "minimal_valid": "http://user:pass@example.com",
+      "minimal_invalid": "http://example.com"
+    },
+    {
+      "id": "OB-18",
+      "kind": "whitebox",
+      "rule": "Ensure both true and false branches of the condition at line 134 are exercised.",
+      "why": "This condition determines whether the authentication component is valid and does not contain encoded malicious content.",
+      "minimal_valid": "http://user:pass@example.com",
+      "minimal_invalid": "http://javascript:%61%6c%65%72%74%28%31%29@example.com"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Ternary false branch for substring operation",
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        "http://example"
+      ],
+      "rationale": "Tests the ternary false branch at line 121 where the substring operation does not find a slash position.",
+      "obligations": [
+        "OB-16"
+      ]
+    },
+    {
+      "title": "Authentication detection with '@' symbol",
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://user:pass@example.com"
+      ],
+      "invalid": [
+        "http://example.com"
+      ],
+      "rationale": "Tests the true branch of the condition at line 124, ensuring URLs with an '@' symbol are correctly identified as containing authentication components.",
+      "obligations": [
+        "OB-17"
+      ]
+    },
+    {
+      "title": "Authentication validation and encoded content detection",
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://user:pass@example.com"
+      ],
+      "invalid": [
+        "http://javascript:%61%6c%65%72%74%28%31%29@example.com"
+      ],
+      "rationale": "Tests both true and false branches of the condition at line 134, ensuring valid authentication components are accepted and encoded malicious content is rejected.",
+      "obligations": [
+        "OB-18"
+      ]
+    }
+  ]
+}

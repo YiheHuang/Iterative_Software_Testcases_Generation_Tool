@@ -1,0 +1,12 @@
+{
+  "generated_categories": [
+    {
+      "generated_category_id": "GENC-1",
+      "name": "Default FQDN Validation",
+      "description": "Tests the validation of fully qualified domain names using the default options for the isFQDN validator.",
+      "generated_group_ids": [
+        "GENERATED-1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+Group generated tests into generated categories for validator isCreditCard.
+
+Generated groups:
+[
+  {
+    "title": "Valid credit card numbers without provider",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "4111111111111111",
+      "378282246310005",
+      "6011111111111117"
+    ],
+    "invalid": [
+      "1234567890123456",
+      "4111-1111-1111-111X",
+      "0000000000000000"
+    ],
+    "rationale": "Covers baseline behavior for valid and invalid credit card numbers without specifying a provider.",
+    "obligations": [
+      "OB-1",
+      "OB-4",
+      "OB-5",
+      "OB-6",
+      "OB-7"
+    ],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "Valid credit card numbers with specific provider",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "amex"
+      }
+    ],
+    "valid": [
+      "378282246310005",
+      "371449635398431"
+    ],
+    "invalid": [
+      "4111111111111111",
+      "6011111111111117",
+      "37828224631000X"
+    ],
+    "rationale": "Tests provider-specific validation for valid and invalid credit card numbers.",
+    "obligations": [
+      "OB-2",
+      "OB-4",
+      "OB-5",
+      "OB-6",
+      "OB-7"
+    ],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "Invalid provider option",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "invalidprovider"
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "4111111111111111"
+    ],
+    "rationale": "Ensures the function throws an error for invalid providers.",
+    "obligations": [
+      "OB-3"
+    ],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "Sanitization of input",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "4111 1111 1111 1111",
+      "3782-822463-10005"
+    ],
+    "invalid": [
+      "4111-1111-1111-111X",
+      "3782 822463 1000X"
+    ],
+    "rationale": "Tests the function's ability to handle and sanitize input with spaces and dashes.",
+    "obligations": [
+      "OB-5"
+    ],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "Luhn algorithm validation",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "4111111111111111",
+      "378282246310005"
+    ],
+    "invalid": [
+      "4111111111111112",
+      "378282246310006"
+    ],
+    "rationale": "Ensures the function correctly validates numbers using the Luhn algorithm.",
+    "obligations": [
+      "OB-7"
+    ],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "Default options behavior (uncovered ternary false branch)",
+    "validator": "isCreditCard",
+    "args": [],
+    "valid": [
+      "4111111111111111"
+    ],
+    "invalid": [
+      "1234567890123456"
+    ],
+    "rationale": "Targets the uncovered ternary false branch at line 25 by testing the default behavior when no `options` parameter is provided.",
+    "obligations": [
+      "OB-8"
+    ],
+    "generated_id": "GENERATED-6"
+  }
+]

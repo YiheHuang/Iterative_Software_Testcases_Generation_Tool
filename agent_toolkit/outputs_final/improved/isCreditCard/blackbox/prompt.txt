@@ -1,0 +1,48 @@
+Task: generate black-box tests for isCreditCard.
+
+        Apply standard black-box testing methods aggressively:
+        - equivalence partitioning
+        - boundary value analysis
+        - option-combination testing
+        - negative-input testing
+        - special-case and rare-option exploration
+
+        Step 1: extract explicit black-box obligations from the requirement.
+        Step 2: cluster the obligations into semantically distinct black-box categories.
+        Step 3: expand each category into grouped validator.js-style tests.
+        Step 4: self-check whether rare options, boundary-adjacent cases, invalid partitions, and documented option flips were skipped.
+
+        Requirement specification:
+        Function name: isCreditCard
+Black-box requirement source: validator_js README function entry
+Signature summary: isCreditCard(str [, options])
+README behavior summary:
+| check if the string is a credit card number.
+ `options` is an optional object that can be supplied with the following key(s): `provider` is an optional key whose value should be a string, and defines the company issuing the credit card. Valid values include `['amex', 'dinersclub', 'discover', 'jcb', 'mastercard', 'unionpay', 'visa']` or blank will check for any provider.
+
+Treat the README entry as the authoritative black-box behavior description.
+Infer valid inputs, invalid inputs, option-sensitive behaviors, and edge cases from this description.
+
+
+        Output guidance:
+        - first identify the major requirement-visible categories before writing any examples
+        - keep one coherent option profile or one closely related rule family per group
+        - do not collapse many unrelated options into one catch-all "default" group
+        - if the requirement documents many independent switches or acceptance/rejection rules, reflect them in multiple groups
+        - cover both baseline behavior and option-sensitive deviations
+        - prefer broad category exploration, but keep each example requirement-grounded and likely correct
+        - for every option-sensitive group, choose examples whose validity actually changes because of that option profile
+        - if a documented option effect is only observable together with another option value, configure both so the distinction is real
+        - do not claim an example is invalid for an option if the requirement text still permits it under the provided args
+        - prefer paired examples that differ by one rule or one option flip when demonstrating requirement changes
+        - when a default already allows a behavior, do not present enabling the same behavior as a meaningful new category unless another argument makes the contrast observable
+        - when uncertain, choose fewer examples inside a group rather than merging unrelated categories
+        - include multiple concrete valid and invalid examples only when they cover meaningfully different cases
+        - try to ensure most obligations are represented by at least one dedicated or clearly focused group
+
+        Self-audit before finalizing:
+        - Did you create separate groups for materially different option families instead of one oversized group?
+        - Did you include default behavior, strictness-raising options, permissive options, whitelist/blacklist style filters, and length-related behavior when documented?
+        - For each option-focused group, would at least one valid/invalid pair change outcome if that option were flipped back?
+        - Did you accidentally use examples whose expected result depends on undocumented implementation details rather than the visible requirement?
+        - Are your expectations aligned with the requirement text rather than guessed from hidden implementation details?

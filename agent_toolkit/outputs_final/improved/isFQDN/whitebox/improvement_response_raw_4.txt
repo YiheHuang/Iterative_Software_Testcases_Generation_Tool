@@ -1,0 +1,240 @@
+{
+  "obligations": [
+    {
+      "id": "OB-16",
+      "kind": "whitebox",
+      "rule": "Ensure the validator rejects TLDs containing whitespace.",
+      "why": "Targets uncovered branch at line 41 where `/\\s/.test(tld)` evaluates true.",
+      "minimal_valid": null,
+      "minimal_invalid": "example. com"
+    },
+    {
+      "id": "OB-17",
+      "kind": "whitebox",
+      "rule": "Ensure the validator rejects numeric TLDs when `allow_numeric_tld` is false.",
+      "why": "Targets uncovered branch at line 47 where `!options.allow_numeric_tld && /^\\d+$/.test(tld)` evaluates true.",
+      "minimal_valid": null,
+      "minimal_invalid": "example.123"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Default validation behavior",
+      "validator": "isFQDN",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "example.com",
+        "sub.domain.com"
+      ],
+      "invalid": [
+        "invalid_domain",
+        "example..com",
+        "example.-com",
+        "-example.com",
+        "example.com-",
+        "example.com "
+      ],
+      "rationale": "Tests the default behavior of the validator, ensuring it rejects invalid FQDNs and accepts valid ones.",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "title": "Validation with require_tld set to false",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "require_tld": false
+        }
+      ],
+      "valid": [
+        "localhost",
+        "sub.localhost"
+      ],
+      "invalid": [
+        "localhost.com",
+        "invalid_domain"
+      ],
+      "rationale": "Tests the behavior when TLD validation is disabled, allowing FQDNs without TLDs.",
+      "obligations": [
+        "OB-2"
+      ]
+    },
+    {
+      "title": "Validation with allow_underscores set to true",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_underscores": true
+        }
+      ],
+      "valid": [
+        "example_domain.com",
+        "sub_domain.example.com"
+      ],
+      "invalid": [
+        "example-domain.com",
+        "example..com"
+      ],
+      "rationale": "Tests the behavior when underscores are allowed in domain parts.",
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "title": "Validation with allow_trailing_dot set to true",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_trailing_dot": true
+        }
+      ],
+      "valid": [
+        "example.com.",
+        "sub.domain.com."
+      ],
+      "invalid": [
+        "example.com",
+        "invalid_domain."
+      ],
+      "rationale": "Tests the behavior when trailing dots are allowed in FQDNs.",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "title": "Validation with allow_numeric_tld set to true",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_numeric_tld": true
+        }
+      ],
+      "valid": [
+        "example.123",
+        "sub.domain.456"
+      ],
+      "invalid": [
+        "example.com",
+        "example.12a"
+      ],
+      "rationale": "Tests the behavior when numeric TLDs are allowed.",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "title": "Validation with allow_wildcard set to true",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_wildcard": true
+        }
+      ],
+      "valid": [
+        "*.example.com",
+        "*.sub.domain.com"
+      ],
+      "invalid": [
+        "example.com",
+        "sub.*.domain.com"
+      ],
+      "rationale": "Tests the behavior when wildcard domains are allowed.",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "title": "Validation with ignore_max_length set to true",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "ignore_max_length": true
+        }
+      ],
+      "valid": [
+        "a",
+        "a"
+      ],
+      "invalid": [
+        "a"
+      ],
+      "rationale": "Tests the behavior when max length constraints are ignored.",
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "title": "Validation for TLDs containing whitespace",
+      "validator": "isFQDN",
+      "args": [
+        {}
+      ],
+      "valid": [],
+      "invalid": [
+        "example. com"
+      ],
+      "rationale": "Tests that TLDs containing whitespace are rejected.",
+      "obligations": [
+        "OB-8",
+        "OB-12",
+        "OB-16"
+      ]
+    },
+    {
+      "title": "Validation for numeric TLDs when allow_numeric_tld is false",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_numeric_tld": false
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "example.123"
+      ],
+      "rationale": "Tests that numeric TLDs are rejected when allow_numeric_tld is false.",
+      "obligations": [
+        "OB-9",
+        "OB-13",
+        "OB-17"
+      ]
+    },
+    {
+      "title": "Validation for domain parts exceeding 63 characters",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "ignore_max_length": false
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"
+      ],
+      "rationale": "Tests that domain parts exceeding 63 characters are rejected when ignore_max_length is false.",
+      "obligations": [
+        "OB-10",
+        "OB-14"
+      ]
+    },
+    {
+      "title": "Validation for domain parts containing full-width characters",
+      "validator": "isFQDN",
+      "args": [
+        {}
+      ],
+      "valid": [],
+      "invalid": [
+        "example.\u000ff43\u000ff4d"
+      ],
+      "rationale": "Tests that domain parts containing full-width characters are rejected.",
+      "obligations": [
+        "OB-11",
+        "OB-15"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "obligations": [
+    {
+      "id": "OB-24",
+      "kind": "whitebox",
+      "rule": "Targets uncovered statement at line 93: return false;",
+      "why": "The uncovered statement at line 93 is related to rejecting emails that exceed the maximum length when ignore_max_length is not set.",
+      "minimal_valid": "example@example.com",
+      "minimal_invalid": "a@b.com"
+    },
+    {
+      "id": "OB-25",
+      "kind": "whitebox",
+      "rule": "Targets uncovered statement at line 140: return false;",
+      "why": "The uncovered statement at line 140 is related to rejecting emails where the user or domain exceeds the byte length constraints when ignore_max_length is false.",
+      "minimal_valid": "user@domain.com",
+      "minimal_invalid": "a-very-long-user-name-that-exceeds-sixty-four-characters@example.com"
+    },
+    {
+      "id": "OB-26",
+      "kind": "whitebox",
+      "rule": "Targets uncovered statement at line 154: return false;",
+      "why": "The uncovered statement at line 154 is related to rejecting IP domains that do not start and end with square brackets.",
+      "minimal_valid": "example@[192.168.1.1]",
+      "minimal_invalid": "example@192.168.1.1"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Validation for maximum email length with ignore_max_length=false",
+      "validator": "isEmail",
+      "args": [
+        {
+          "ignore_max_length": false
+        }
+      ],
+      "valid": [
+        "example@example.com"
+      ],
+      "invalid": [
+        "a@b.com"
+      ],
+      "rationale": "Targets uncovered statement at line 93 by testing rejection of emails exceeding the maximum length when ignore_max_length is false.",
+      "obligations": [
+        "OB-24"
+      ]
+    },
+    {
+      "title": "Validation for user and domain byte length constraints with ignore_max_length=false",
+      "validator": "isEmail",
+      "args": [
+        {
+          "ignore_max_length": false
+        }
+      ],
+      "valid": [
+        "user@domain.com"
+      ],
+      "invalid": [
+        "a-very-long-user-name-that-exceeds-sixty-four-characters@example.com"
+      ],
+      "rationale": "Targets uncovered statement at line 140 by testing rejection of emails where the user or domain exceeds the byte length constraints when ignore_max_length is false.",
+      "obligations": [
+        "OB-25"
+      ]
+    },
+    {
+      "title": "Validation for IP domains with incorrect brackets",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_ip_domain": true
+        }
+      ],
+      "valid": [
+        "example@[192.168.1.1]"
+      ],
+      "invalid": [
+        "example@192.168.1.1"
+      ],
+      "rationale": "Targets uncovered statement at line 154 by testing rejection of IP domains that do not start and end with square brackets.",
+      "obligations": [
+        "OB-26"
+      ]
+    }
+  ]
+}

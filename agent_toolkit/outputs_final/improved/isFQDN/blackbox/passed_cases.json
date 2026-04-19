@@ -1,0 +1,698 @@
+[
+  {
+    "title": "Default behavior tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example.com",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1",
+      "OB-8",
+      "OB-9",
+      "OB-10"
+    ]
+  },
+  {
+    "title": "Default behavior tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "sub.example.com",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1",
+      "OB-8",
+      "OB-9",
+      "OB-10"
+    ]
+  },
+  {
+    "title": "Default behavior tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example.co.uk",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1",
+      "OB-8",
+      "OB-9",
+      "OB-10"
+    ]
+  },
+  {
+    "title": "Default behavior tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1",
+      "OB-8",
+      "OB-9",
+      "OB-10"
+    ]
+  },
+  {
+    "title": "Default behavior tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "exa$mple.com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1",
+      "OB-8",
+      "OB-9",
+      "OB-10"
+    ]
+  },
+  {
+    "title": "Default behavior tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example..com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1",
+      "OB-8",
+      "OB-9",
+      "OB-10"
+    ]
+  },
+  {
+    "title": "Default behavior tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example.com.",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1",
+      "OB-8",
+      "OB-9",
+      "OB-10"
+    ]
+  },
+  {
+    "title": "Default behavior tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example.123",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1",
+      "OB-8",
+      "OB-9",
+      "OB-10"
+    ]
+  },
+  {
+    "title": "require_tld=false tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": false,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "localhost",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-2"
+    ]
+  },
+  {
+    "title": "require_tld=false tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": false,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-2"
+    ]
+  },
+  {
+    "title": "require_tld=false tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": false,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "exa$mple",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-2"
+    ]
+  },
+  {
+    "title": "require_tld=false tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "require_tld": false,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example..com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-2"
+    ]
+  },
+  {
+    "title": "allow_underscores=true tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_underscores": true,
+        "require_tld": true,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "sub_domain.example.com",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-3"
+    ]
+  },
+  {
+    "title": "allow_underscores=true tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_underscores": true,
+        "require_tld": true,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "exa$mple.com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-3"
+    ]
+  },
+  {
+    "title": "allow_underscores=true tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_underscores": true,
+        "require_tld": true,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example..com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-3"
+    ]
+  },
+  {
+    "title": "allow_trailing_dot=true tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_trailing_dot": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example.com.",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-4"
+    ]
+  },
+  {
+    "title": "allow_trailing_dot=true tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_trailing_dot": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "sub.example.com.",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-4"
+    ]
+  },
+  {
+    "title": "allow_trailing_dot=true tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_trailing_dot": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "exa$mple.com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-4"
+    ]
+  },
+  {
+    "title": "allow_trailing_dot=true tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_trailing_dot": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example..com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-4"
+    ]
+  },
+  {
+    "title": "allow_numeric_tld=true tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example.123",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-5"
+    ]
+  },
+  {
+    "title": "allow_numeric_tld=true tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "sub.example.456",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-5"
+    ]
+  },
+  {
+    "title": "allow_numeric_tld=true tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "exa$mple.com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-5"
+    ]
+  },
+  {
+    "title": "allow_numeric_tld=true tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_numeric_tld": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_wildcard": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example..com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-5"
+    ]
+  },
+  {
+    "title": "allow_wildcard=true tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_wildcard": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "*.example.com",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-6"
+    ]
+  },
+  {
+    "title": "allow_wildcard=true tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_wildcard": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "*.sub.example.com",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-6"
+    ]
+  },
+  {
+    "title": "allow_wildcard=true tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_wildcard": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "exa$mple.com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-6"
+    ]
+  },
+  {
+    "title": "allow_wildcard=true tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "allow_wildcard": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "ignore_max_length": false
+      }
+    ],
+    "input_value": "example..com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-6"
+    ]
+  },
+  {
+    "title": "ignore_max_length=true tests",
+    "validator": "isFQDN",
+    "args": [
+      {
+        "ignore_max_length": true,
+        "require_tld": true,
+        "allow_underscores": false,
+        "allow_trailing_dot": false,
+        "allow_numeric_tld": false,
+        "allow_wildcard": false
+      }
+    ],
+    "input_value": "exa$mple.com",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-7"
+    ]
+  }
+]

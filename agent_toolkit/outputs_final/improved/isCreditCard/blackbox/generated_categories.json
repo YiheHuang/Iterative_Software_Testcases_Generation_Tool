@@ -1,0 +1,24 @@
+{
+  "generated_categories": [
+    {
+      "generated_category_id": "GENC-1",
+      "name": "General Validation",
+      "description": "Tests the default behavior of validating general credit card numbers, including checks for invalid characters, length, and Luhn algorithm compliance.",
+      "generated_group_ids": [
+        "GENERATED-1",
+        "GENERATED-4",
+        "GENERATED-5",
+        "GENERATED-6"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "name": "Provider-Specific Validation",
+      "description": "Tests validation restricted to specific credit card providers using the 'provider' option.",
+      "generated_group_ids": [
+        "GENERATED-2",
+        "GENERATED-3"
+      ]
+    }
+  ]
+}

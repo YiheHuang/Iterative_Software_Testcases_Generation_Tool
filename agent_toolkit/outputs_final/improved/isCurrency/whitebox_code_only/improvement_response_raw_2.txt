@@ -1,0 +1,255 @@
+{
+  "obligations": [
+    {
+      "id": "OB-11",
+      "kind": "whitebox",
+      "rule": "Target uncovered statement at line 6: `decimal_digits = `${decimal_digits}|\\\\d{${digit}}`;`",
+      "why": "This statement is uncovered and involves dynamically constructing the `decimal_digits` regex based on the `digits_after_decimal` option.",
+      "minimal_valid": "{ \"digits_after_decimal\": [2, 3] }",
+      "minimal_invalid": "{ \"digits_after_decimal\": [] }"
+    },
+    {
+      "id": "OB-12",
+      "kind": "whitebox",
+      "rule": "Target uncovered branch at line 6: `if (index !== 0)` condition_true_branch.",
+      "why": "This branch is uncovered and tests whether the `index` is not the first element in the `digits_after_decimal` array.",
+      "minimal_valid": "{ \"digits_after_decimal\": [2, 3] }",
+      "minimal_invalid": "{ \"digits_after_decimal\": [2] }"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Default options",
+      "validator": "isCurrency",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "$123.45",
+        "$0.99",
+        "$1,234.56"
+      ],
+      "invalid": [
+        "123.45",
+        "-$123.45",
+        "$123.456",
+        "$123,45"
+      ],
+      "rationale": "Covers the default behavior with no options overridden.",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "title": "Require symbol",
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_symbol": true
+        }
+      ],
+      "valid": [
+        "$123.45",
+        "$0.99"
+      ],
+      "invalid": [
+        "123.45",
+        "0.99"
+      ],
+      "rationale": "Tests the `require_symbol` option to ensure symbols are mandatory.",
+      "obligations": [
+        "OB-2"
+      ]
+    },
+    {
+      "title": "Disallow negatives",
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_negatives": false
+        }
+      ],
+      "valid": [
+        "$123.45",
+        "$0.99"
+      ],
+      "invalid": [
+        "-$123.45",
+        "($123.45)"
+      ],
+      "rationale": "Ensures negatives are rejected when `allow_negatives` is false.",
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "title": "Parentheses for negatives",
+      "validator": "isCurrency",
+      "args": [
+        {
+          "parens_for_negatives": true
+        }
+      ],
+      "valid": [
+        "($123.45)",
+        "$123.45"
+      ],
+      "invalid": [
+        "-$123.45",
+        "$-123.45"
+      ],
+      "rationale": "Tests the use of parentheses for negative values.",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "title": "Symbol after digits",
+      "validator": "isCurrency",
+      "args": [
+        {
+          "symbol_after_digits": true
+        }
+      ],
+      "valid": [
+        "123.45$",
+        "0.99$"
+      ],
+      "invalid": [
+        "$123.45",
+        "$0.99"
+      ],
+      "rationale": "Validates the format when the symbol is placed after digits.",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "title": "Disallow decimals",
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_decimal": false
+        }
+      ],
+      "valid": [
+        "$123",
+        "$0"
+      ],
+      "invalid": [
+        "$123.45",
+        "$0.99"
+      ],
+      "rationale": "Ensures decimals are rejected when `allow_decimal` is false.",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "title": "Require decimals",
+      "validator": "isCurrency",
+      "args": [
+        {
+          "require_decimal": true
+        }
+      ],
+      "valid": [
+        "$123.45",
+        "$0.99"
+      ],
+      "invalid": [
+        "$123",
+        "$0"
+      ],
+      "rationale": "Tests the requirement for decimals when `require_decimal` is true.",
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "title": "Allow space after symbol",
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_space_after_symbol": true
+        }
+      ],
+      "valid": [
+        "$ 123.45",
+        "$ 0.99"
+      ],
+      "invalid": [
+        "$123.45",
+        "$0.99"
+      ],
+      "rationale": "Validates the format when spaces are allowed after the symbol.",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "title": "Allow space after digits",
+      "validator": "isCurrency",
+      "args": [
+        {
+          "allow_space_after_digits": true
+        }
+      ],
+      "valid": [
+        "$123.45 ",
+        "$0.99 "
+      ],
+      "invalid": [
+        "$123.45",
+        "$0.99"
+      ],
+      "rationale": "Tests the acceptance of spaces after digits.",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "title": "Custom thousands separator",
+      "validator": "isCurrency",
+      "args": [
+        {
+          "thousands_separator": "."
+        }
+      ],
+      "valid": [
+        "$1.234,56",
+        "$0.99"
+      ],
+      "invalid": [
+        "$1,234.56",
+        "$1234.56"
+      ],
+      "rationale": "Ensures the custom thousands separator is respected.",
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "title": "Custom digits after decimal",
+      "validator": "isCurrency",
+      "args": [
+        {
+          "digits_after_decimal": [2, 3]
+        }
+      ],
+      "valid": [
+        "$123.45",
+        "$123.456"
+      ],
+      "invalid": [
+        "$123.4",
+        "$123.4567"
+      ],
+      "rationale": "Tests the `digits_after_decimal` option to ensure it handles multiple valid digit lengths and rejects invalid ones.",
+      "obligations": [
+        "OB-11",
+        "OB-12"
+      ]
+    }
+  ]
+}

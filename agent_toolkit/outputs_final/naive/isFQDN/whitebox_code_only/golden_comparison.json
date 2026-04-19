@@ -1,0 +1,164 @@
+{
+  "golden_categories": [
+    {
+      "golden_category_id": "GC-1",
+      "name": "Standard FQDN Validation",
+      "description": "Validates fully qualified domain names (FQDN) with default options.",
+      "golden_group_ids": [
+        "GOLDEN-1"
+      ]
+    },
+    {
+      "golden_category_id": "GC-2",
+      "name": "Trailing Dot Option",
+      "description": "Validates FQDNs with the option to allow a trailing dot.",
+      "golden_group_ids": [
+        "GOLDEN-2"
+      ]
+    },
+    {
+      "golden_category_id": "GC-3",
+      "name": "No TLD Requirement",
+      "description": "Validates FQDNs without requiring a top-level domain (TLD).",
+      "golden_group_ids": [
+        "GOLDEN-3"
+      ]
+    },
+    {
+      "golden_category_id": "GC-4",
+      "name": "Numeric TLDs Without Requirement",
+      "description": "Validates FQDNs with numeric TLDs when TLD requirement is disabled.",
+      "golden_group_ids": [
+        "GOLDEN-4"
+      ]
+    },
+    {
+      "golden_category_id": "GC-5",
+      "name": "Wildcard Option",
+      "description": "Validates FQDNs with the option to allow wildcard domains.",
+      "golden_group_ids": [
+        "GOLDEN-5"
+      ]
+    },
+    {
+      "golden_category_id": "GC-6",
+      "name": "Combined Options",
+      "description": "Validates FQDNs with multiple options enabled: trailing dot, underscores, and numeric TLDs.",
+      "golden_group_ids": [
+        "GOLDEN-6"
+      ]
+    }
+  ],
+  "generated_categories": [
+    {
+      "generated_category_id": "GENC-1",
+      "name": "Default FQDN Validation",
+      "description": "Tests the validation of fully qualified domain names using the default options for the isFQDN validator.",
+      "generated_group_ids": [
+        "GENERATED-1"
+      ]
+    }
+  ],
+  "golden_to_generated": [
+    {
+      "golden_category_id": "GC-1",
+      "matched_generated_category_ids": [
+        "GENC-1"
+      ],
+      "match_type": "strong",
+      "reason": "The generated category 'Default FQDN Validation' aligns strongly with the golden category 'Standard FQDN Validation' as both focus on validating fully qualified domain names using default options. The valid and invalid cases overlap significantly."
+    },
+    {
+      "golden_category_id": "GC-2",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "The generated category does not address the trailing dot option, which is the focus of the golden category 'Trailing Dot Option'."
+    },
+    {
+      "golden_category_id": "GC-3",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "The generated category does not address the absence of a TLD requirement, which is the focus of the golden category 'No TLD Requirement'."
+    },
+    {
+      "golden_category_id": "GC-4",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "The generated category does not address numeric TLDs without requiring a TLD, which is the focus of the golden category 'Numeric TLDs Without Requirement'."
+    },
+    {
+      "golden_category_id": "GC-5",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "The generated category does not address wildcard domains, which is the focus of the golden category 'Wildcard Option'."
+    },
+    {
+      "golden_category_id": "GC-6",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "The generated category does not address combined options like trailing dot, underscores, and numeric TLDs, which is the focus of the golden category 'Combined Options'."
+    }
+  ],
+  "generated_to_golden": [
+    {
+      "generated_category_id": "GENC-1",
+      "matched_golden_category_ids": [
+        "GC-1"
+      ],
+      "match_type": "strong",
+      "reason": "The generated category 'Default FQDN Validation' aligns strongly with the golden category 'Standard FQDN Validation' as both focus on validating fully qualified domain names using default options. The valid and invalid cases overlap significantly."
+    }
+  ],
+  "novel_generated_categories": [],
+  "missing_golden_categories": [
+    {
+      "golden_category_id": "GC-2",
+      "golden_category_name": "Trailing Dot Option",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-3",
+      "golden_category_name": "No TLD Requirement",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-4",
+      "golden_category_name": "Numeric TLDs Without Requirement",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-5",
+      "golden_category_name": "Wildcard Option",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    },
+    {
+      "golden_category_id": "GC-6",
+      "golden_category_name": "Combined Options",
+      "reason": "No generated categories achieved strong or partial semantic overlap with this fixed golden category."
+    }
+  ],
+  "summary": {
+    "total_golden_categories": 6,
+    "total_generated_categories": 1,
+    "overlap_golden_categories": 1,
+    "missing_golden_categories": 5,
+    "matched_generated_categories": 1,
+    "novel_generated_categories": 0,
+    "strong_golden_category_matches": 1,
+    "partial_golden_category_matches": 0,
+    "fragmented_golden_matches": 0,
+    "matched_golden_ratio": 0.16666666666666666,
+    "total_golden_groups": 6,
+    "total_generated_groups": 1,
+    "overlap_golden_groups": 1,
+    "missing_golden_groups": 5,
+    "novel_valid_groups": 0,
+    "exact_or_near_overlap_groups": 1,
+    "golden_groups_with_semantic_match": 1,
+    "generated_groups_with_semantic_match": 1,
+    "novel_valid_categories": 0
+  },
+  "golden_source_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\golden\\isFQDN\\isFQDN_golden_tests.json",
+  "golden_categories_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\golden\\isFQDN\\isFQDN_golden_categories.json",
+  "generated_categories_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\naive\\isFQDN\\whitebox_code_only\\generated_categories.json"
+}

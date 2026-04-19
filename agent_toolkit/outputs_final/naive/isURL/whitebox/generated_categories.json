@@ -1,0 +1,43 @@
+{
+  "generated_categories": [
+    {
+      "generated_category_id": "GENC-1",
+      "name": "Basic URL Validation",
+      "description": "Tests covering default URL validation behavior and basic requirements like protocol, TLD, and port.",
+      "generated_group_ids": [
+        "GENERATED-1",
+        "GENERATED-2",
+        "GENERATED-3",
+        "GENERATED-4"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "name": "Hostname Customization",
+      "description": "Tests focusing on hostname-related options like allowing underscores and trailing dots.",
+      "generated_group_ids": [
+        "GENERATED-5",
+        "GENERATED-6"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "name": "Protocol and Path Customization",
+      "description": "Tests targeting protocol-relative URLs, fragments, and query components.",
+      "generated_group_ids": [
+        "GENERATED-7",
+        "GENERATED-8",
+        "GENERATED-9"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "name": "Authentication and Length Validation",
+      "description": "Tests addressing authentication components and length validation in URLs.",
+      "generated_group_ids": [
+        "GENERATED-10",
+        "GENERATED-11"
+      ]
+    }
+  ]
+}

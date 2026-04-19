@@ -1,0 +1,97 @@
+{
+  "golden_to_generated": [
+    {
+      "golden_category_id": "GC-1",
+      "matched_generated_category_ids": ["GENC-1"],
+      "match_type": "strong",
+      "reason": "Both categories focus on general URL validation with standard protocols and formats."
+    },
+    {
+      "golden_category_id": "GC-2",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "strong",
+      "reason": "Both categories address URLs without protocols or with localhost and non-TLD domains."
+    },
+    {
+      "golden_category_id": "GC-3",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "GENC-2 partially overlaps with GC-3 by focusing on protocol requirements but does not cover custom protocols or protocol validation comprehensively."
+    },
+    {
+      "golden_category_id": "GC-4",
+      "matched_generated_category_ids": ["GENC-3"],
+      "match_type": "partial",
+      "reason": "GENC-3 includes hostname formatting rules, which partially align with underscore handling in GC-4."
+    },
+    {
+      "golden_category_id": "GC-5",
+      "matched_generated_category_ids": ["GENC-3"],
+      "match_type": "strong",
+      "reason": "GENC-3 explicitly addresses top-level domain requirements and trailing dot handling, matching GC-5."
+    },
+    {
+      "golden_category_id": "GC-6",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "GENC-2 includes protocol-relative URLs but does not fully address the broader scope of GC-6."
+    },
+    {
+      "golden_category_id": "GC-7",
+      "matched_generated_category_ids": ["GENC-4"],
+      "match_type": "strong",
+      "reason": "GENC-4 explicitly targets fragments and query components, aligning with GC-7."
+    },
+    {
+      "golden_category_id": "GC-8",
+      "matched_generated_category_ids": ["GENC-4"],
+      "match_type": "partial",
+      "reason": "GENC-4 covers authentication components but does not fully address all aspects of authentication handling in GC-8."
+    },
+    {
+      "golden_category_id": "GC-9",
+      "matched_generated_category_ids": ["GENC-3"],
+      "match_type": "partial",
+      "reason": "GENC-3 includes hostname rules but does not fully cover host validation techniques like whitelists and blacklists in GC-9."
+    },
+    {
+      "golden_category_id": "GC-10",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category explicitly addresses security-related cases or vulnerability handling."
+    },
+    {
+      "golden_category_id": "GC-11",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category explicitly addresses URL length validation or configuration."
+    }
+  ],
+  "generated_to_golden": [
+    {
+      "generated_category_id": "GENC-1",
+      "matched_golden_category_ids": ["GC-1"],
+      "match_type": "strong",
+      "reason": "GENC-1 aligns with GC-1 by focusing on general URL validation rules."
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "matched_golden_category_ids": ["GC-2", "GC-3", "GC-6"],
+      "match_type": "partial",
+      "reason": "GENC-2 covers protocol requirements and localhost handling, partially aligning with GC-2, GC-3, and GC-6."
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "matched_golden_category_ids": ["GC-4", "GC-5", "GC-9"],
+      "match_type": "partial",
+      "reason": "GENC-3 addresses hostname rules and top-level domain requirements, partially aligning with GC-4, GC-5, and GC-9."
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "matched_golden_category_ids": ["GC-7", "GC-8"],
+      "match_type": "partial",
+      "reason": "GENC-4 covers fragments, query components, and authentication handling, partially aligning with GC-7 and GC-8."
+    }
+  ],
+  "novel_generated_categories": []
+}

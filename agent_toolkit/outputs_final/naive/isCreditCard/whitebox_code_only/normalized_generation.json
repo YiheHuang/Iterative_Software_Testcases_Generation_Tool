@@ -1,0 +1,64 @@
+{
+  "mode": "whitebox_code_only",
+  "approach": "naive",
+  "obligations": [],
+  "test_groups": [
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "4111111111111111",
+        "378282246310005",
+        "6011111111111117"
+      ],
+      "invalid": [
+        "1234567890123456",
+        "4111111111111",
+        "abcdefg"
+      ],
+      "title": "Valid credit card numbers without provider specified",
+      "rationale": "Tests valid and invalid credit card numbers without specifying a provider",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "visa"
+        }
+      ],
+      "valid": [
+        "4111111111111111"
+      ],
+      "invalid": [
+        "1234567890123456",
+        "4111111111111",
+        "abcdefg"
+      ],
+      "title": "Valid credit card numbers with provider specified",
+      "rationale": "Tests valid and invalid credit card numbers with a provider specified",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "invalid"
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "4111111111111111"
+      ],
+      "title": "Invalid provider specified",
+      "rationale": "Tests invalid provider specified",
+      "obligations": []
+    }
+  ],
+  "metadata": {
+    "requirement_source": "not_used_code_only_mode",
+    "generation_style": "single_pass_with_repair"
+  }
+}

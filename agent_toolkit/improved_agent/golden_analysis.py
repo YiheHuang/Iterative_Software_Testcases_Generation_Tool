@@ -127,6 +127,9 @@ class GoldenSuite:
     path: Path
 
 
+GOLDEN_TEST_EXTRACTOR_VERSION = 3
+
+
 class GoldenTestService:
     def __init__(self, paths: ProjectPaths) -> None:
         self.paths = paths
@@ -135,7 +138,8 @@ class GoldenTestService:
         output_path = golden_output_root(self.paths, validator_name) / f"{validator_name}_golden_tests.json"
         if output_path.exists():
             payload = json.loads(output_path.read_text(encoding="utf-8"))
-            return GoldenSuite(test_groups=payload["test_groups"], path=output_path)
+            if payload.get("extractor_version") == GOLDEN_TEST_EXTRACTOR_VERSION:
+                return GoldenSuite(test_groups=payload["test_groups"], path=output_path)
         script_path = self.paths.workspace_root / "agent_toolkit" / "extract_golden_tests.js"
         validators_test_path = self.paths.validator_root / "test" / "validators.test.js"
         command = [
@@ -466,7 +470,6 @@ class GoldenAnalysisService:
                 "args": group.args,
                 "valid": group.valid,
                 "invalid": group.invalid,
-                "error": group.error,
                 "rationale": group.rationale,
                 "obligations": group.obligations,
             }

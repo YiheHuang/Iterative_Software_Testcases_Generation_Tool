@@ -1,0 +1,29 @@
+{
+  "generated_categories": [
+    {
+      "name": "Default Behavior Validation",
+      "description": "Tests the default behavior of the isCurrency validator, ensuring proper handling of valid and invalid currency strings with standard formatting.",
+      "generated_group_ids": ["GENERATED-1"]
+    },
+    {
+      "name": "Symbol Requirement",
+      "description": "Validates the behavior when the `require_symbol` option is set to true, ensuring that currency strings must include a symbol.",
+      "generated_group_ids": ["GENERATED-2"]
+    },
+    {
+      "name": "Negative Value Handling",
+      "description": "Tests the handling of negative values with different configurations, including disallowing negatives and allowing parentheses for negatives.",
+      "generated_group_ids": ["GENERATED-3", "GENERATED-4"]
+    },
+    {
+      "name": "Decimal Requirement",
+      "description": "Ensures proper validation of currency strings when the `require_decimal` option is set to true, requiring the presence of a decimal point.",
+      "generated_group_ids": ["GENERATED-5"]
+    },
+    {
+      "name": "Decimal Precision",
+      "description": "Validates the behavior of the `digits_after_decimal` option, ensuring that only specific numbers of digits are allowed after the decimal point.",
+      "generated_group_ids": ["GENERATED-6"]
+    }
+  ]
+}

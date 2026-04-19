@@ -1,0 +1,900 @@
+You are improving an existing whitebox test suite for isURL.
+You are given only coverage details and fine-grained uncovered white-box locations.
+You must use those uncovered positions as exact white-box targets when updating the suite.
+You must NOT use any golden tests, repository test overlap analysis, or external oracle hints.
+
+Goal:
+- propose a small patch that helps the current suite target more uncovered code locations
+- preserve the current suite unless a new patch is clearly justified by uncovered locations
+- keep the patch conservative and additive whenever possible
+- keep the suite conservative and low-redundancy
+
+Return strict JSON with top-level keys obligations and test_groups.
+The returned test_groups must be patch groups only, not a full rewritten suite.
+
+Black-box requirement source:
+Function name: isURL
+Black-box requirement source: validator_js README function entry
+Signature summary: isURL(str [, options])
+README behavior summary:
+| check if the string is a URL.
+`options` is an object which defaults to `{ protocols: ['http','https','ftp'], require_tld: true, require_protocol: false, require_host: true, require_port: false, require_valid_protocol: true, allow_underscores: false, host_whitelist: false, host_blacklist: false, allow_trailing_dot: false, allow_protocol_relative_urls: false, allow_fragments: true, allow_query_components: true, disallow_auth: false, validate_length: true }`.
+`protocols` - valid protocols can be modified with this option.
+`require_tld` - If set to false isURL will not check if the URL's host includes a top-level domain.
+`require_protocol` - **RECOMMENDED** if set to true isURL will return false if protocol is not present in the URL. Without this setting, some malicious URLs cannot be distinguishable from a valid URL with authentication information.
+`require_host` - if set to false isURL will not check if host is present in the URL.
+`require_port` - if set to true isURL will check if port is present in the URL.
+`require_valid_protocol` - isURL will check if the URL's protocol is present in the protocols option.
+`allow_underscores` - if set to true, the validator will allow underscores in the URL.
+`host_whitelist` - if set to an array of strings or regexp, and the domain matches none of the strings defined in it, the validation fails.
+`host_blacklist` - if set to an array of strings or regexp, and the domain matches any of the strings defined in it, the validation fails.
+`allow_trailing_dot` - if set to true, the validator will allow the domain to end with a `.` character.
+`allow_protocol_relative_urls` - if set to true protocol relative URLs will be allowed.
+`allow_fragments` - if set to false isURL will return false if fragments are present.
+`allow_query_components` - if set to false isURL will return false if query components are present.
+`disallow_auth` - if set to true, the validator will fail if the URL contains an authentication component, e.g. `http://username:password@example.com`.
+`validate_length` - if set to false isURL will skip string length validation. `max_allowed_length` will be ignored if this is set as `false`.
+`max_allowed_length` - if set, isURL will not allow URLs longer than the specified value (default is 2084 that IE maximum URL length).
+
+Treat the README entry as the authoritative black-box behavior description.
+Infer valid inputs, invalid inputs, option-sensitive behaviors, and edge cases from this description.
+
+
+Current full test suite from the previous iteration:
+[
+  {
+    "title": "Default Options",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com",
+      "ftp://example.com"
+    ],
+    "invalid": [
+      "example",
+      "http://",
+      "mailto:example@example.com"
+    ],
+    "rationale": "Test basic URL validation with default settings.",
+    "obligations": [
+      "OB-1",
+      "OB-12",
+      "OB-13"
+    ]
+  },
+  {
+    "title": "Custom Protocols",
+    "validator": "isURL",
+    "args": [
+      {
+        "protocols": [
+          "ftp",
+          "custom"
+        ]
+      }
+    ],
+    "valid": [
+      "ftp://example.com",
+      "custom://example.com"
+    ],
+    "invalid": [
+      "http://example.com",
+      "https://example.com"
+    ],
+    "rationale": "Test validation with custom protocols.",
+    "obligations": [
+      "OB-2"
+    ]
+  },
+  {
+    "title": "Require Protocol",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": true
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com"
+    ],
+    "invalid": [
+      "example.com",
+      "ftp://"
+    ],
+    "rationale": "Test validation when protocol is required.",
+    "obligations": [
+      "OB-3"
+    ]
+  },
+  {
+    "title": "Allow Underscores",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_underscores": true
+      }
+    ],
+    "valid": [
+      "http://example_domain.com"
+    ],
+    "invalid": [
+      "http://example_domain.com"
+    ],
+    "rationale": "Test validation when underscores are allowed in the host.",
+    "obligations": [
+      "OB-5"
+    ]
+  },
+  {
+    "title": "Allow Trailing Dot",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_trailing_dot": true
+      }
+    ],
+    "valid": [
+      "http://example.com."
+    ],
+    "invalid": [
+      "http://example.com."
+    ],
+    "rationale": "Test validation when trailing dots are allowed in the host.",
+    "obligations": [
+      "OB-6"
+    ]
+  },
+  {
+    "title": "Allow Protocol Relative URLs",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_protocol_relative_urls": true
+      }
+    ],
+    "valid": [
+      "//example.com"
+    ],
+    "invalid": [
+      "//example.com"
+    ],
+    "rationale": "Test validation when protocol-relative URLs are allowed.",
+    "obligations": [
+      "OB-7"
+    ]
+  },
+  {
+    "title": "Disallow Fragments",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_fragments": false
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://example.com#fragment"
+    ],
+    "rationale": "Test validation when fragments are disallowed.",
+    "obligations": [
+      "OB-8"
+    ]
+  },
+  {
+    "title": "Disallow Query Components",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_query_components": false
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://example.com?query=value"
+    ],
+    "rationale": "Test validation when query components are disallowed.",
+    "obligations": [
+      "OB-9"
+    ]
+  },
+  {
+    "title": "Disallow Authentication",
+    "validator": "isURL",
+    "args": [
+      {
+        "disallow_auth": true
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://user:pass@example.com"
+    ],
+    "rationale": "Test validation when authentication components are disallowed.",
+    "obligations": [
+      "OB-10"
+    ]
+  },
+  {
+    "title": "Validate Length",
+    "validator": "isURL",
+    "args": [
+      {
+        "validate_length": false
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://example.com"
+    ],
+    "rationale": "Test validation when length validation is disabled.",
+    "obligations": [
+      "OB-11"
+    ]
+  },
+  {
+    "title": "Protocol Parsing",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "javascript:alert(1)"
+    ],
+    "rationale": "Test protocol parsing logic.",
+    "obligations": [
+      "OB-14"
+    ]
+  },
+  {
+    "title": "Port Parsing",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_port": true
+      }
+    ],
+    "valid": [
+      "http://example.com:80"
+    ],
+    "invalid": [
+      "http://example.com:99999"
+    ],
+    "rationale": "Test port parsing logic.",
+    "obligations": [
+      "OB-15"
+    ]
+  },
+  {
+    "title": "IPv6 Parsing",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://[2001:db8::1]"
+    ],
+    "invalid": [
+      "http://[2001:db8::1]:99999"
+    ],
+    "rationale": "Test IPv6 parsing logic.",
+    "obligations": [
+      "OB-16"
+    ]
+  },
+  {
+    "title": "Host Whitelist and Blacklist",
+    "validator": "isURL",
+    "args": [
+      {
+        "host_whitelist": [
+          "allowed.com"
+        ],
+        "host_blacklist": [
+          "blocked.com"
+        ]
+      }
+    ],
+    "valid": [
+      "http://allowed.com"
+    ],
+    "invalid": [
+      "http://blocked.com"
+    ],
+    "rationale": "Test host whitelist and blacklist logic.",
+    "obligations": [
+      "OB-17"
+    ]
+  },
+  {
+    "title": "Authentication and Malicious Protocols",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": false
+      }
+    ],
+    "valid": [
+      "http://user:password@example.com"
+    ],
+    "invalid": [
+      "javascript:%61%6c%65%72%74%28%31%29@example.com"
+    ],
+    "rationale": "Test the condition `is_valid_auth && !has_encoded_content` to distinguish authentication from malicious protocols.",
+    "obligations": [
+      "OB-18"
+    ]
+  },
+  {
+    "title": "Require Protocol with Authentication",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": true
+      }
+    ],
+    "valid": [
+      "http://user:password@example.com"
+    ],
+    "invalid": [
+      "user:password@example.com"
+    ],
+    "rationale": "Test the condition `options.require_protocol` when authentication components are present.",
+    "obligations": [
+      "OB-20"
+    ]
+  },
+  {
+    "title": "Host Blacklist Validation",
+    "validator": "isURL",
+    "args": [
+      {
+        "host_blacklist": [
+          "blocked.com"
+        ]
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://blocked.com"
+    ],
+    "rationale": "Test the condition `options.host_blacklist && checkHost(host, options.host_blacklist)` to ensure hosts in the blacklist are rejected.",
+    "obligations": [
+      "OB-54"
+    ]
+  },
+  {
+    "title": "Reject URLs with Invalid Characters",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [],
+    "invalid": [
+      "http://example.com<invalid>",
+      "http://example.com invalid"
+    ],
+    "rationale": "Test rejection of URLs containing spaces or angle brackets.",
+    "obligations": [
+      "OB-101"
+    ]
+  },
+  {
+    "title": "Require Protocol with Looks-Like-Port URLs",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": true
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "example.com:80"
+    ],
+    "rationale": "Test rejection of URLs resembling hostname:port when `require_protocol` is enabled.",
+    "obligations": [
+      "OB-102"
+    ]
+  },
+  {
+    "title": "Disallow Protocol-Relative URLs",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_protocol_relative_urls": false
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "//example.com"
+    ],
+    "rationale": "Test rejection of protocol-relative URLs when the option is disabled.",
+    "obligations": [
+      "OB-103"
+    ]
+  },
+  {
+    "title": "Validate Length Exceeds Maximum",
+    "validator": "isURL",
+    "args": [
+      {
+        "validate_length": true,
+        "max_allowed_length": 20
+      }
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://example.com/very/long/url/that/exceeds/max/allowed/length"
+    ],
+    "rationale": "Test URL length validation when `validate_length` is enabled and the URL exceeds the maximum allowed length.",
+    "obligations": [
+      "OB-201"
+    ]
+  },
+  {
+    "title": "Empty URL with Require Host Disabled",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_host": false
+      }
+    ],
+    "valid": [
+      ""
+    ],
+    "invalid": [
+      "http://example.com"
+    ],
+    "rationale": "Test validation of empty URLs when `require_host` is disabled.",
+    "obligations": [
+      "OB-202"
+    ]
+  },
+  {
+    "title": "Invalid URL Structure with Empty Split Element",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      ":example.com"
+    ],
+    "rationale": "Test validation of URLs with an invalid structure where the split array's first element is empty.",
+    "obligations": [
+      "OB-203"
+    ]
+  },
+  {
+    "title": "Empty URL with Require Host Disabled",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_host": false
+      }
+    ],
+    "valid": [
+      ""
+    ],
+    "invalid": [
+      "http://example.com"
+    ],
+    "rationale": "Test validation of empty URLs when `require_host` is disabled.",
+    "obligations": [
+      "OB-204"
+    ]
+  },
+  {
+    "title": "Invalid URL Structure with Empty Split Element",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      ":example.com"
+    ],
+    "rationale": "Test validation of URLs with an invalid structure where the split array's first element is empty.",
+    "obligations": [
+      "OB-205"
+    ]
+  },
+  {
+    "title": "Invalid Authentication Format",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://user:password@example.com"
+    ],
+    "invalid": [
+      "http://user:password:extra@example.com"
+    ],
+    "rationale": "Test validation of URLs with invalid authentication format containing excessive colons.",
+    "obligations": [
+      "OB-206"
+    ]
+  },
+  {
+    "title": "Empty URL with Require Host Disabled",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_host": false
+      }
+    ],
+    "valid": [
+      ""
+    ],
+    "invalid": [
+      "http://example.com"
+    ],
+    "rationale": "Test validation of empty URLs when `require_host` is disabled.",
+    "obligations": [
+      "OB-301"
+    ]
+  },
+  {
+    "title": "Invalid URL Structure with Empty Split Element",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com"
+    ],
+    "invalid": [
+      ":example.com"
+    ],
+    "rationale": "Test validation of URLs with an invalid structure where the split array's first element is empty.",
+    "obligations": [
+      "OB-302"
+    ]
+  },
+  {
+    "title": "Invalid Authentication Format with Empty User and Password",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://user:password@example.com"
+    ],
+    "invalid": [
+      "http://:@example.com"
+    ],
+    "rationale": "Test validation of URLs with invalid authentication components where both user and password are empty.",
+    "obligations": [
+      "OB-303"
+    ]
+  }
+]
+
+Coverage details allowed for improvement:
+{
+  "coverage_total": {
+    "lines": {
+      "total": 114,
+      "covered": 110,
+      "skipped": 0,
+      "pct": 96.49
+    },
+    "statements": {
+      "total": 118,
+      "covered": 114,
+      "skipped": 0,
+      "pct": 96.61
+    },
+    "functions": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 119,
+      "covered": 103,
+      "skipped": 0,
+      "pct": 86.55
+    }
+  },
+  "coverage_files": {
+    "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isURL.js": {
+      "lines": {
+        "total": 114,
+        "covered": 110,
+        "skipped": 0,
+        "pct": 96.49
+      },
+      "functions": {
+        "total": 3,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 118,
+        "covered": 114,
+        "skipped": 0,
+        "pct": 96.61
+      },
+      "branches": {
+        "total": 119,
+        "covered": 103,
+        "skipped": 0,
+        "pct": 86.55
+      }
+    }
+  },
+  "uncovered_details": {
+    "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isURL.js": {
+      "uncovered_statements": [
+        {
+          "statement_id": "73",
+          "line": 202,
+          "column": 4,
+          "line_text": "    return true;",
+          "source_excerpt": "return true;",
+          "summary": "Uncovered statement at line 202: return true;"
+        },
+        {
+          "statement_id": "79",
+          "line": 211,
+          "column": 6,
+          "line_text": "      return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 211: return false;"
+        },
+        {
+          "statement_id": "106",
+          "line": 245,
+          "column": 4,
+          "line_text": "    return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 245: return false;"
+        },
+        {
+          "statement_id": "110",
+          "line": 253,
+          "column": 4,
+          "line_text": "    return true;",
+          "source_excerpt": "return true;",
+          "summary": "Uncovered statement at line 253: return true;"
+        }
+      ],
+      "uncovered_branches": [
+        {
+          "branch_id": "1",
+          "branch_type": "binary-expr",
+          "path_index": 1,
+          "branch_side": "path_1",
+          "line": 7,
+          "column": 33,
+          "line_text": "import merge from './util/merge';",
+          "source_excerpt": "import merge from './util/merge';",
+          "condition_excerpt": null,
+          "summary": "Uncovered binary-expr path `path_1` at line 7; snippet: import merge from './util/merge';"
+        },
+        {
+          "branch_id": "1",
+          "branch_type": "binary-expr",
+          "path_index": 2,
+          "branch_side": "path_2",
+          "line": 7,
+          "column": 33,
+          "line_text": "import merge from './util/merge';",
+          "source_excerpt": "import merge from './util/merge';",
+          "condition_excerpt": null,
+          "summary": "Uncovered binary-expr path `path_2` at line 7; snippet: import merge from './util/merge';"
+        },
+        {
+          "branch_id": "1",
+          "branch_type": "binary-expr",
+          "path_index": 3,
+          "branch_side": "path_3",
+          "line": 7,
+          "column": 33,
+          "line_text": "import merge from './util/merge';",
+          "source_excerpt": "import merge from './util/merge';",
+          "condition_excerpt": null,
+          "summary": "Uncovered binary-expr path `path_3` at line 7; snippet: import merge from './util/merge';"
+        },
+        {
+          "branch_id": "2",
+          "branch_type": "binary-expr",
+          "path_index": 0,
+          "branch_side": "path_0",
+          "line": 7,
+          "column": 33,
+          "line_text": "import merge from './util/merge';",
+          "source_excerpt": "import merge from './util/merge';",
+          "condition_excerpt": null,
+          "summary": "Uncovered binary-expr path `path_0` at line 7; snippet: import merge from './util/merge';"
+        },
+        {
+          "branch_id": "2",
+          "branch_type": "binary-expr",
+          "path_index": 1,
+          "branch_side": "path_1",
+          "line": 7,
+          "column": 33,
+          "line_text": "import merge from './util/merge';",
+          "source_excerpt": "import merge from './util/merge';",
+          "condition_excerpt": null,
+          "summary": "Uncovered binary-expr path `path_1` at line 7; snippet: import merge from './util/merge';"
+        },
+        {
+          "branch_id": "2",
+          "branch_type": "binary-expr",
+          "path_index": 2,
+          "branch_side": "path_2",
+          "line": 7,
+          "column": 33,
+          "line_text": "import merge from './util/merge';",
+          "source_excerpt": "import merge from './util/merge';",
+          "condition_excerpt": null,
+          "summary": "Uncovered binary-expr path `path_2` at line 7; snippet: import merge from './util/merge';"
+        },
+        {
+          "branch_id": "16",
+          "branch_type": "cond-expr",
+          "path_index": 1,
+          "branch_side": "ternary_false_branch",
+          "line": 121,
+          "column": 10,
+          "line_text": "        : after_colon.substring(0, first_slash_position);",
+          "source_excerpt": "after_colon.substring(0, first_slash_position)",
+          "condition_excerpt": null,
+          "summary": "Uncovered cond-expr path `ternary_false_branch` at line 121; snippet: after_colon.substring(0, first_slash_position)"
+        },
+        {
+          "branch_id": "20",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 136,
+          "column": 10,
+          "line_text": "          if (options.require_protocol) {",
+          "source_excerpt": "if (options.require_protocol) {\n            return false;\n          }",
+          "condition_excerpt": "options.require_protocol",
+          "summary": "Uncovered if path `condition_false_branch` at line 136; condition: options.require_protocol"
+        },
+        {
+          "branch_id": "21",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 146,
+          "column": 10,
+          "line_text": "          if (url === false) {",
+          "source_excerpt": "if (url === false) {\n            return false;\n          }",
+          "condition_excerpt": "url === false",
+          "summary": "Uncovered if path `condition_false_branch` at line 146; condition: url === false"
+        },
+        {
+          "branch_id": "23",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 158,
+          "column": 10,
+          "line_text": "          if (options.require_protocol) {",
+          "source_excerpt": "if (options.require_protocol) {\n            return false;\n          }",
+          "condition_excerpt": "options.require_protocol",
+          "summary": "Uncovered if path `condition_false_branch` at line 158; condition: options.require_protocol"
+        },
+        {
+          "branch_id": "24",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 166,
+          "column": 10,
+          "line_text": "          if (url === false) {",
+          "source_excerpt": "if (url === false) {\n            return false;\n          }",
+          "condition_excerpt": "url === false",
+          "summary": "Uncovered if path `condition_false_branch` at line 166; condition: url === false"
+        },
+        {
+          "branch_id": "31",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 201,
+          "column": 2,
+          "line_text": "  if (url === '' && !options.require_host) {",
+          "source_excerpt": "if (url === '' && !options.require_host) {\n    return true;\n  }",
+          "condition_excerpt": "url === '' && !options.require_host",
+          "summary": "Uncovered if path `condition_true_branch` at line 201; condition: url === '' && !options.require_host"
+        },
+        {
+          "branch_id": "32",
+          "branch_type": "binary-expr",
+          "path_index": 1,
+          "branch_side": "path_1",
+          "line": 201,
+          "column": 20,
+          "line_text": "  if (url === '' && !options.require_host) {",
+          "source_excerpt": "!options.require_host",
+          "condition_excerpt": "url === '' && !options.require_host",
+          "summary": "Uncovered binary-expr path `path_1` at line 201; condition: url === '' && !options.require_host"
+        },
+        {
+          "branch_id": "35",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 210,
+          "column": 4,
+          "line_text": "    if (split[0] === '') {",
+          "source_excerpt": "if (split[0] === '') {\n      return false;\n    }",
+          "condition_excerpt": "split[0] === ''",
+          "summary": "Uncovered if path `condition_true_branch` at line 210; condition: split[0] === ''"
+        },
+        {
+          "branch_id": "47",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 244,
+          "column": 9,
+          "line_text": "  } else if (options.require_port) {",
+          "source_excerpt": "} else if (options.require_port) {\n    return false;\n  }",
+          "condition_excerpt": null,
+          "summary": "Uncovered if path `condition_true_branch` at line 244; snippet: } else if (options.require_port) {\n    return false;\n  }"
+        },
+        {
+          "branch_id": "49",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 252,
+          "column": 2,
+          "line_text": "  if (host === '' && !options.require_host) {",
+          "source_excerpt": "if (host === '' && !options.require_host) {\n    return true;\n  }",
+          "condition_excerpt": "host === '' && !options.require_host",
+          "summary": "Uncovered if path `condition_true_branch` at line 252; condition: host === '' && !options.require_host"
+        }
+      ],
+      "uncovered_functions": []
+    }
+  }
+}
+
+Instructions:
+- You must use only the requirement (if provided), the current suite, coverage details, and uncovered details.
+- Do not infer or use any correctness signal, pass/fail summary, failed cases, or hidden oracle information.
+- Treat uncovered_details as exact white-box targets, not as vague hints.
+- Use the previous full suite as the baseline and return only the incremental patch groups.
+- Do not rewrite, delete, or duplicate the existing groups already shown in the current suite.
+- Add only groups that cover meaningfully new targets beyond the current suite.
+- Prefer at most 3 patch groups, each focused on one concrete uncovered condition or path family.
+- If an uncovered branch or statement cannot be operationalized from the provided coverage details, do not guess.
+- If uncovered_details are provided, use them only as white-box targets.
+- If uncovered_details are not provided, do not infer any hidden coverage gap.
+- Prefer minimal option-profile-specific groups.
+- Avoid broad extrapolation; every meaningful update should correspond to a concrete uncovered position or condition.
+- Do not mention or infer any golden test information.

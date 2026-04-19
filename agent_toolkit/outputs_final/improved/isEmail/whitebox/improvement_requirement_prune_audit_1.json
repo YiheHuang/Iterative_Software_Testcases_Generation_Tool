@@ -1,0 +1,129 @@
+{
+  "audit": [
+    {
+      "group_title": "Basic email structure validation",
+      "decision": "keep",
+      "reason": "All cases are supported by the requirement for basic email structure validation.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Display name validation",
+      "decision": "trim",
+      "reason": "Invalid case 'John Doe <john.doe@example.com' is not requirement-supported due to missing closing angle bracket.",
+      "removed_valid": [],
+      "removed_invalid": [
+        "John Doe <john.doe@example.com"
+      ]
+    },
+    {
+      "group_title": "Require display name",
+      "decision": "keep",
+      "reason": "All cases are supported by the requirement for requiring display names.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Max length validation",
+      "decision": "trim",
+      "reason": "Invalid case 'a@b.' is not requirement-supported as it does not relate to max length.",
+      "removed_valid": [],
+      "removed_invalid": [
+        "a@b."
+      ]
+    },
+    {
+      "group_title": "UTF-8 local part validation",
+      "decision": "trim",
+      "reason": "Invalid case 't\u00000e9st@example.com' duplicates the valid case and is redundant.",
+      "removed_valid": [],
+      "removed_invalid": [
+        "t\u00000e9st@example.com"
+      ]
+    },
+    {
+      "group_title": "TLD requirement",
+      "decision": "trim",
+      "reason": "Invalid case 'test@localhost' duplicates the valid case and is redundant.",
+      "removed_valid": [],
+      "removed_invalid": [
+        "test@localhost"
+      ]
+    },
+    {
+      "group_title": "IP domain validation",
+      "decision": "trim",
+      "reason": "Invalid case 'test@[127.0.0.1]' duplicates the valid case and is redundant.",
+      "removed_valid": [],
+      "removed_invalid": [
+        "test@[127.0.0.1]"
+      ]
+    },
+    {
+      "group_title": "Blacklisted characters",
+      "decision": "keep",
+      "reason": "All cases are supported by the requirement for blacklisted characters.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Host blacklist",
+      "decision": "keep",
+      "reason": "All cases are supported by the requirement for host blacklist.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Host whitelist",
+      "decision": "keep",
+      "reason": "All cases are supported by the requirement for host whitelist.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Gmail-specific validation",
+      "decision": "keep",
+      "reason": "All cases are supported by the requirement for Gmail-specific validation.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Quoted local part validation",
+      "decision": "drop",
+      "reason": "Quoted local parts are not explicitly supported by the requirement.",
+      "removed_valid": [
+        "\"quoted\"@example.com"
+      ],
+      "removed_invalid": [
+        "\"quoted\"@example.com"
+      ]
+    },
+    {
+      "group_title": "Display name with only spaces",
+      "decision": "drop",
+      "reason": "The case targets implementation detail not explicitly supported by the requirement.",
+      "removed_valid": [],
+      "removed_invalid": [
+        "   <user@example.com>"
+      ]
+    },
+    {
+      "group_title": "Display name with illegal characters not enclosed in quotes",
+      "decision": "drop",
+      "reason": "The case targets implementation detail not explicitly supported by the requirement.",
+      "removed_valid": [],
+      "removed_invalid": [
+        "John.Doe <john.doe@example.com>"
+      ]
+    },
+    {
+      "group_title": "Improperly escaped quotes in display name",
+      "decision": "drop",
+      "reason": "The case targets implementation detail not explicitly supported by the requirement.",
+      "removed_valid": [],
+      "removed_invalid": [
+        "\"John \\\"Doe\" <john.doe@example.com>"
+      ]
+    }
+  ]
+}

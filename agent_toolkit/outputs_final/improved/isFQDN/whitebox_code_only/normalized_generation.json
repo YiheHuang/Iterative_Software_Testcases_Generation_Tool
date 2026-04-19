@@ -1,0 +1,403 @@
+{
+  "mode": "whitebox_code_only",
+  "approach": "improved",
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "whitebox",
+      "rule": "Ensure `assertString` is called to validate input type.",
+      "why": "The function explicitly calls `assertString` to enforce that the input is a string.",
+      "minimal_valid": "\"example.com\"",
+      "minimal_invalid": "123"
+    },
+    {
+      "id": "OB-2",
+      "kind": "whitebox",
+      "rule": "Handle `allow_trailing_dot` option correctly by removing trailing dots.",
+      "why": "The code removes trailing dots if `allow_trailing_dot` is true.",
+      "minimal_valid": "\"example.com.\"",
+      "minimal_invalid": "\"example.com.\" with `allow_trailing_dot: false`"
+    },
+    {
+      "id": "OB-3",
+      "kind": "whitebox",
+      "rule": "Handle `allow_wildcard` option correctly by removing leading `*.`.",
+      "why": "The code removes `*.` if `allow_wildcard` is true.",
+      "minimal_valid": "\"*.example.com\"",
+      "minimal_invalid": "\"*.example.com\" with `allow_wildcard: false`"
+    },
+    {
+      "id": "OB-4",
+      "kind": "whitebox",
+      "rule": "Ensure `require_tld` enforces presence of a TLD.",
+      "why": "The code checks for at least two parts in the domain if `require_tld` is true.",
+      "minimal_valid": "\"example.com\"",
+      "minimal_invalid": "\"example\" with `require_tld: true`"
+    },
+    {
+      "id": "OB-5",
+      "kind": "whitebox",
+      "rule": "Ensure `allow_numeric_tld` correctly handles numeric TLDs.",
+      "why": "The code rejects numeric TLDs unless `allow_numeric_tld` is true.",
+      "minimal_valid": "\"example.123\" with `allow_numeric_tld: true`",
+      "minimal_invalid": "\"example.123\" with `allow_numeric_tld: false`"
+    },
+    {
+      "id": "OB-6",
+      "kind": "whitebox",
+      "rule": "Reject TLDs containing spaces.",
+      "why": "The code explicitly checks for spaces in the TLD.",
+      "minimal_valid": "\"example.com\"",
+      "minimal_invalid": "\"example.c om\""
+    },
+    {
+      "id": "OB-7",
+      "kind": "whitebox",
+      "rule": "Reject parts exceeding 63 characters unless `ignore_max_length` is true.",
+      "why": "The code checks the length of each part and respects the `ignore_max_length` option.",
+      "minimal_valid": "\"a.com\"",
+      "minimal_invalid": "\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com\" with `ignore_max_length: false`"
+    },
+    {
+      "id": "OB-8",
+      "kind": "whitebox",
+      "rule": "Reject parts with invalid characters.",
+      "why": "The code uses a regex to validate allowed characters in each part.",
+      "minimal_valid": "\"example.com\"",
+      "minimal_invalid": "\"exa$mple.com\""
+    },
+    {
+      "id": "OB-9",
+      "kind": "whitebox",
+      "rule": "Reject parts containing full-width characters.",
+      "why": "The code explicitly checks for full-width characters.",
+      "minimal_valid": "\"example.com\"",
+      "minimal_invalid": "\"ｅｘａｍｐｌｅ.com\""
+    },
+    {
+      "id": "OB-10",
+      "kind": "whitebox",
+      "rule": "Reject parts starting or ending with hyphens.",
+      "why": "The code checks for hyphens at the start or end of each part.",
+      "minimal_valid": "\"example.com\"",
+      "minimal_invalid": "\"-example.com\""
+    },
+    {
+      "id": "OB-11",
+      "kind": "whitebox",
+      "rule": "Handle `allow_underscores` option correctly.",
+      "why": "The code rejects underscores unless `allow_underscores` is true.",
+      "minimal_valid": "\"example_com\" with `allow_underscores: true`",
+      "minimal_invalid": "\"example_com\" with `allow_underscores: false`"
+    },
+    {
+      "id": "OB-12",
+      "kind": "whitebox",
+      "rule": "Cover the false branch of `if (options.require_tld)` at line 30.",
+      "why": "This branch is uncovered and ensures behavior when `require_tld` is false.",
+      "minimal_valid": "example",
+      "minimal_invalid": null
+    },
+    {
+      "id": "OB-13",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of `if (/\\s/.test(tld))` at line 41.",
+      "why": "This branch is uncovered and ensures rejection of TLDs containing spaces.",
+      "minimal_valid": null,
+      "minimal_invalid": "example.c om"
+    },
+    {
+      "id": "OB-14",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of `if (!options.allow_numeric_tld && /^\\d+$/.test(tld))` at line 47.",
+      "why": "This branch is uncovered and ensures rejection of numeric TLDs when `allow_numeric_tld` is false.",
+      "minimal_valid": null,
+      "minimal_invalid": "example.123"
+    },
+    {
+      "id": "OB-15",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of `if (!options.allow_underscores && /_/.test(part))` at line 70.",
+      "why": "This branch is uncovered and ensures rejection of underscores when `allow_underscores` is false.",
+      "minimal_valid": null,
+      "minimal_invalid": "example_com"
+    }
+  ],
+  "test_groups": [
+    {
+      "validator": "isFQDN",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "example.com"
+      ],
+      "invalid": [
+        "123"
+      ],
+      "title": "Basic Input Validation",
+      "rationale": "Ensure the input is a string using `assertString`.",
+      "obligations": [
+        "OB-1"
+      ]
+    },
+    {
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_trailing_dot": true
+        }
+      ],
+      "valid": [
+        "example.com."
+      ],
+      "invalid": [
+        "example.com."
+      ],
+      "title": "Trailing Dot Handling",
+      "rationale": "Test removal of trailing dots when `allow_trailing_dot` is true.",
+      "obligations": [
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_wildcard": true
+        }
+      ],
+      "valid": [
+        "*.example.com"
+      ],
+      "invalid": [
+        "*.example.com"
+      ],
+      "title": "Wildcard Handling",
+      "rationale": "Test removal of `*.` when `allow_wildcard` is true.",
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "validator": "isFQDN",
+      "args": [
+        {
+          "require_tld": true
+        }
+      ],
+      "valid": [
+        "example.com"
+      ],
+      "invalid": [
+        "example"
+      ],
+      "title": "TLD Requirement",
+      "rationale": "Ensure presence of a TLD when `require_tld` is true.",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_numeric_tld": true
+        }
+      ],
+      "valid": [
+        "example.123"
+      ],
+      "invalid": [
+        "example.123"
+      ],
+      "title": "Numeric TLD Handling",
+      "rationale": "Test acceptance of numeric TLDs when `allow_numeric_tld` is true.",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "validator": "isFQDN",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "example.com"
+      ],
+      "invalid": [
+        "example.c om"
+      ],
+      "title": "Space in TLD",
+      "rationale": "Reject TLDs containing spaces.",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "validator": "isFQDN",
+      "args": [
+        {
+          "ignore_max_length": false
+        }
+      ],
+      "valid": [
+        "a.com"
+      ],
+      "invalid": [
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"
+      ],
+      "title": "Max Length Enforcement",
+      "rationale": "Reject parts exceeding 63 characters unless `ignore_max_length` is true.",
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "validator": "isFQDN",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "example.com"
+      ],
+      "invalid": [
+        "exa$mple.com"
+      ],
+      "title": "Invalid Characters in Parts",
+      "rationale": "Reject parts with invalid characters.",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "validator": "isFQDN",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "example.com"
+      ],
+      "invalid": [
+        "ｅｘａｍｐｌｅ.com"
+      ],
+      "title": "Full-Width Characters",
+      "rationale": "Reject parts containing full-width characters.",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "validator": "isFQDN",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "example.com"
+      ],
+      "invalid": [
+        "-example.com"
+      ],
+      "title": "Hyphen Placement",
+      "rationale": "Reject parts starting or ending with hyphens.",
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_underscores": true
+        }
+      ],
+      "valid": [
+        "example_com"
+      ],
+      "invalid": [
+        "example_com"
+      ],
+      "title": "Underscore Handling",
+      "rationale": "Test acceptance of underscores when `allow_underscores` is true.",
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "validator": "isFQDN",
+      "args": [
+        {
+          "require_tld": false
+        }
+      ],
+      "valid": [
+        "example"
+      ],
+      "invalid": [],
+      "title": "Require TLD Disabled",
+      "rationale": "Ensure behavior when `require_tld` is false.",
+      "obligations": [
+        "OB-12"
+      ]
+    },
+    {
+      "validator": "isFQDN",
+      "args": [
+        {}
+      ],
+      "valid": [],
+      "invalid": [
+        "example.c om"
+      ],
+      "title": "Spaces in TLD",
+      "rationale": "Ensure rejection of TLDs containing spaces.",
+      "obligations": [
+        "OB-13"
+      ]
+    },
+    {
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_numeric_tld": false
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "example.123"
+      ],
+      "title": "Numeric TLD Rejection",
+      "rationale": "Ensure rejection of numeric TLDs when `allow_numeric_tld` is false.",
+      "obligations": [
+        "OB-14"
+      ]
+    },
+    {
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_underscores": false
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "example_com"
+      ],
+      "title": "Underscore Rejection",
+      "rationale": "Ensure rejection of underscores when `allow_underscores` is false.",
+      "obligations": [
+        "OB-15"
+      ]
+    }
+  ],
+  "metadata": {
+    "requirement_source": "not_used_code_only_mode",
+    "generation_style": "improved_initial_pass",
+    "iteration_count": 2,
+    "improvement_applied": true,
+    "feedback_sources": [
+      "coverage"
+    ],
+    "decision": "stop_after_reverts"
+  }
+}

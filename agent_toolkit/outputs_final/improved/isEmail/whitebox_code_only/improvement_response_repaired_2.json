@@ -1,0 +1,29 @@
+{
+  "obligations": [
+    {
+      "id": "OB-13",
+      "kind": "whitebox",
+      "rule": "Cover uncovered statement at line 57: return false;",
+      "why": "Tests the condition where display name quotes are improperly escaped.",
+      "minimal_valid": "\"\\\"escaped\\\"\" <user@example.com>",
+      "minimal_invalid": "\"unescaped\" <user@example.com>"
+    },
+    {
+      "id": "OB-14",
+      "kind": "whitebox",
+      "rule": "Cover uncovered statement at line 93: return false;",
+      "why": "Tests rejection of emails exceeding the maximum length when `ignore_max_length` is false.",
+      "minimal_valid": "a@b.com",
+      "minimal_invalid": "a@b.com"
+    },
+    {
+      "id": "OB-15",
+      "kind": "whitebox",
+      "rule": "Cover uncovered statement at line 125: return false;",
+      "why": "Tests Gmail-specific username length validation.",
+      "minimal_valid": "validuser@gmail.com",
+      "minimal_invalid": "toolongusername@gmail.com"
+    }
+  ],
+  "test_groups": []
+}

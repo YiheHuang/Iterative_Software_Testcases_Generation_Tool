@@ -1,0 +1,823 @@
+{
+  "mode": "whitebox",
+  "approach": "improved",
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "blackbox",
+      "rule": "Validate URLs with default options.",
+      "why": "Ensure basic functionality of the validator with default settings.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "example"
+    },
+    {
+      "id": "OB-2",
+      "kind": "blackbox",
+      "rule": "Validate URLs with custom protocols.",
+      "why": "Test the `protocols` option to ensure only specified protocols are accepted.",
+      "minimal_valid": "ftp://example.com",
+      "minimal_invalid": "custom://example.com"
+    },
+    {
+      "id": "OB-3",
+      "kind": "blackbox",
+      "rule": "Validate URLs with `require_protocol` set to true.",
+      "why": "Ensure URLs without protocols are rejected when `require_protocol` is enabled.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "example.com"
+    },
+    {
+      "id": "OB-4",
+      "kind": "blackbox",
+      "rule": "Validate URLs with `require_host` set to false.",
+      "why": "Ensure URLs without hosts are accepted when `require_host` is disabled.",
+      "minimal_valid": "http://",
+      "minimal_invalid": null
+    },
+    {
+      "id": "OB-5",
+      "kind": "blackbox",
+      "rule": "Validate URLs with `allow_underscores` set to true.",
+      "why": "Ensure URLs with underscores in the host are accepted when `allow_underscores` is enabled.",
+      "minimal_valid": "http://example_domain.com",
+      "minimal_invalid": "http://example_domain.com"
+    },
+    {
+      "id": "OB-6",
+      "kind": "blackbox",
+      "rule": "Validate URLs with `allow_trailing_dot` set to true.",
+      "why": "Ensure URLs with trailing dots in the host are accepted when `allow_trailing_dot` is enabled.",
+      "minimal_valid": "http://example.com.",
+      "minimal_invalid": "http://example.com."
+    },
+    {
+      "id": "OB-7",
+      "kind": "blackbox",
+      "rule": "Validate URLs with `allow_protocol_relative_urls` set to true.",
+      "why": "Ensure protocol-relative URLs are accepted when `allow_protocol_relative_urls` is enabled.",
+      "minimal_valid": "//example.com",
+      "minimal_invalid": "//example.com"
+    },
+    {
+      "id": "OB-8",
+      "kind": "blackbox",
+      "rule": "Validate URLs with `allow_fragments` set to false.",
+      "why": "Ensure URLs with fragments are rejected when `allow_fragments` is disabled.",
+      "minimal_valid": null,
+      "minimal_invalid": "http://example.com#fragment"
+    },
+    {
+      "id": "OB-9",
+      "kind": "blackbox",
+      "rule": "Validate URLs with `allow_query_components` set to false.",
+      "why": "Ensure URLs with query components are rejected when `allow_query_components` is disabled.",
+      "minimal_valid": null,
+      "minimal_invalid": "http://example.com?query=value"
+    },
+    {
+      "id": "OB-10",
+      "kind": "blackbox",
+      "rule": "Validate URLs with `disallow_auth` set to true.",
+      "why": "Ensure URLs with authentication components are rejected when `disallow_auth` is enabled.",
+      "minimal_valid": null,
+      "minimal_invalid": "http://user:pass@example.com"
+    },
+    {
+      "id": "OB-11",
+      "kind": "blackbox",
+      "rule": "Validate URLs with `validate_length` set to false.",
+      "why": "Ensure URLs exceeding the maximum length are accepted when `validate_length` is disabled.",
+      "minimal_valid": "http://",
+      "minimal_invalid": "http://"
+    },
+    {
+      "id": "OB-12",
+      "kind": "whitebox",
+      "rule": "Trigger early return for empty or invalid strings.",
+      "why": "Ensure the function correctly rejects empty strings and strings with invalid characters.",
+      "minimal_valid": null,
+      "minimal_invalid": ""
+    },
+    {
+      "id": "OB-13",
+      "kind": "whitebox",
+      "rule": "Trigger early return for `mailto:` URLs.",
+      "why": "Ensure `mailto:` URLs are explicitly rejected.",
+      "minimal_valid": null,
+      "minimal_invalid": "mailto:example@example.com"
+    },
+    {
+      "id": "OB-14",
+      "kind": "whitebox",
+      "rule": "Test protocol parsing logic with valid and invalid protocols.",
+      "why": "Ensure the function correctly identifies and validates protocols.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "javascript:alert(1)"
+    },
+    {
+      "id": "OB-15",
+      "kind": "whitebox",
+      "rule": "Test port parsing logic with valid and invalid ports.",
+      "why": "Ensure the function correctly validates port numbers.",
+      "minimal_valid": "http://example.com:80",
+      "minimal_invalid": "http://example.com:99999"
+    },
+    {
+      "id": "OB-16",
+      "kind": "whitebox",
+      "rule": "Test IPv6 parsing logic with valid and invalid IPv6 addresses.",
+      "why": "Ensure the function correctly validates IPv6 addresses.",
+      "minimal_valid": "http://[2001:db8::1]",
+      "minimal_invalid": "http://[2001:db8::1]:99999"
+    },
+    {
+      "id": "OB-17",
+      "kind": "whitebox",
+      "rule": "Test host whitelist and blacklist logic.",
+      "why": "Ensure the function correctly validates hosts against whitelist and blacklist rules.",
+      "minimal_valid": "http://allowed.com",
+      "minimal_invalid": "http://blocked.com"
+    },
+    {
+      "id": "OB-18",
+      "kind": "whitebox",
+      "rule": "Cover the condition `is_valid_auth && !has_encoded_content` at line 134.",
+      "why": "This condition is uncovered and determines whether the input is treated as authentication or a malicious protocol.",
+      "minimal_valid": "http://user:password@example.com",
+      "minimal_invalid": "javascript:%61%6c%65%72%74%28%31%29@example.com"
+    },
+    {
+      "id": "OB-20",
+      "kind": "whitebox",
+      "rule": "Cover the condition `options.require_protocol` at line 136.",
+      "why": "This condition is uncovered and affects the validation of authentication components when `require_protocol` is true.",
+      "minimal_valid": "http://user:password@example.com",
+      "minimal_invalid": "user:password@example.com"
+    },
+    {
+      "id": "OB-54",
+      "kind": "whitebox",
+      "rule": "Cover the condition `options.host_blacklist && checkHost(host, options.host_blacklist)` at line 262.",
+      "why": "This condition is uncovered and determines whether the host matches the blacklist.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://blocked.com"
+    },
+    {
+      "id": "OB-101",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 59: `return false;` triggered by invalid URLs containing spaces or angle brackets.",
+      "why": "This statement is part of the validation logic for rejecting URLs with invalid characters.",
+      "minimal_valid": null,
+      "minimal_invalid": "http://example.com<invalid>"
+    },
+    {
+      "id": "OB-102",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 158: `if (options.require_protocol) { return false; }` triggered when `looks_like_port` is true and `require_protocol` is enabled.",
+      "why": "This statement ensures URLs resembling hostname:port are rejected when `require_protocol` is required.",
+      "minimal_valid": null,
+      "minimal_invalid": "example.com:80"
+    },
+    {
+      "id": "OB-103",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 188: `return false;` triggered when `had_explicit_protocol` is false and `allow_protocol_relative_urls` is disabled.",
+      "why": "This statement ensures protocol-relative URLs are rejected when the option is disabled.",
+      "minimal_valid": null,
+      "minimal_invalid": "//example.com"
+    },
+    {
+      "id": "OB-201",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 67: `return false;`.",
+      "why": "This statement is reached when `options.validate_length` is true and the URL length exceeds `options.max_allowed_length`.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://example.com/very/long/url/that/exceeds/max/allowed/length"
+    },
+    {
+      "id": "OB-202",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 201: `return true;`.",
+      "why": "This statement is reached when the URL is empty and `options.require_host` is false.",
+      "minimal_valid": "",
+      "minimal_invalid": "http://example.com"
+    },
+    {
+      "id": "OB-203",
+      "kind": "whitebox",
+      "rule": "Cover the uncovered statement at line 211: `return false;`.",
+      "why": "This statement is reached when the split array's first element is empty, indicating an invalid URL structure.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": ":example.com"
+    },
+    {
+      "id": "OB-204",
+      "kind": "whitebox",
+      "rule": "Cover the condition `url === '' && !options.require_host` at line 201.",
+      "why": "Uncovered condition at line 201 checks if an empty URL is valid when `require_host` is disabled.",
+      "minimal_valid": "",
+      "minimal_invalid": "http://example.com"
+    },
+    {
+      "id": "OB-205",
+      "kind": "whitebox",
+      "rule": "Cover the condition `split[0] === ''` at line 210.",
+      "why": "Uncovered condition at line 210 checks if the first element of the split array is empty.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": ":example.com"
+    },
+    {
+      "id": "OB-206",
+      "kind": "whitebox",
+      "rule": "Cover the condition `auth.indexOf(':') >= 0 && auth.split(':').length > 2` at line 214.",
+      "why": "Uncovered condition at line 214 checks for invalid authentication format with excessive colons.",
+      "minimal_valid": "http://user:password@example.com",
+      "minimal_invalid": "http://user:password:extra@example.com"
+    },
+    {
+      "id": "OB-301",
+      "kind": "whitebox",
+      "rule": "Cover the condition `url === '' && !options.require_host` at line 201.",
+      "why": "This condition checks if an empty URL is valid when `require_host` is disabled.",
+      "minimal_valid": "",
+      "minimal_invalid": "http://example.com"
+    },
+    {
+      "id": "OB-302",
+      "kind": "whitebox",
+      "rule": "Cover the condition `split[0] === ''` at line 210.",
+      "why": "This condition checks for invalid URL structures where the first split element is empty.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": ":example.com"
+    },
+    {
+      "id": "OB-303",
+      "kind": "whitebox",
+      "rule": "Cover the condition `user === '' && password === ''` at line 218.",
+      "why": "This condition checks for invalid authentication components where both user and password are empty.",
+      "minimal_valid": "http://user:password@example.com",
+      "minimal_invalid": "http://:@example.com"
+    }
+  ],
+  "test_groups": [
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com",
+        "ftp://example.com"
+      ],
+      "invalid": [
+        "example",
+        "http://",
+        "mailto:example@example.com"
+      ],
+      "title": "Default Options",
+      "rationale": "Test basic URL validation with default settings.",
+      "obligations": [
+        "OB-1",
+        "OB-12",
+        "OB-13"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "protocols": [
+            "ftp",
+            "custom"
+          ]
+        }
+      ],
+      "valid": [
+        "ftp://example.com",
+        "custom://example.com"
+      ],
+      "invalid": [
+        "http://example.com",
+        "https://example.com"
+      ],
+      "title": "Custom Protocols",
+      "rationale": "Test validation with custom protocols.",
+      "obligations": [
+        "OB-2"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "valid": [
+        "http://example.com",
+        "https://example.com"
+      ],
+      "invalid": [
+        "example.com",
+        "ftp://"
+      ],
+      "title": "Require Protocol",
+      "rationale": "Test validation when protocol is required.",
+      "obligations": [
+        "OB-3"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_underscores": true
+        }
+      ],
+      "valid": [
+        "http://example_domain.com"
+      ],
+      "invalid": [
+        "http://example_domain.com"
+      ],
+      "title": "Allow Underscores",
+      "rationale": "Test validation when underscores are allowed in the host.",
+      "obligations": [
+        "OB-5"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_trailing_dot": true
+        }
+      ],
+      "valid": [
+        "http://example.com."
+      ],
+      "invalid": [
+        "http://example.com."
+      ],
+      "title": "Allow Trailing Dot",
+      "rationale": "Test validation when trailing dots are allowed in the host.",
+      "obligations": [
+        "OB-6"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_protocol_relative_urls": true
+        }
+      ],
+      "valid": [
+        "//example.com"
+      ],
+      "invalid": [
+        "//example.com"
+      ],
+      "title": "Allow Protocol Relative URLs",
+      "rationale": "Test validation when protocol-relative URLs are allowed.",
+      "obligations": [
+        "OB-7"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_fragments": false
+        }
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        "http://example.com#fragment"
+      ],
+      "title": "Disallow Fragments",
+      "rationale": "Test validation when fragments are disallowed.",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_query_components": false
+        }
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        "http://example.com?query=value"
+      ],
+      "title": "Disallow Query Components",
+      "rationale": "Test validation when query components are disallowed.",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "disallow_auth": true
+        }
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        "http://user:pass@example.com"
+      ],
+      "title": "Disallow Authentication",
+      "rationale": "Test validation when authentication components are disallowed.",
+      "obligations": [
+        "OB-10"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "validate_length": false
+        }
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        "http://example.com"
+      ],
+      "title": "Validate Length",
+      "rationale": "Test validation when length validation is disabled.",
+      "obligations": [
+        "OB-11"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        "javascript:alert(1)"
+      ],
+      "title": "Protocol Parsing",
+      "rationale": "Test protocol parsing logic.",
+      "obligations": [
+        "OB-14"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_port": true
+        }
+      ],
+      "valid": [
+        "http://example.com:80"
+      ],
+      "invalid": [
+        "http://example.com:99999"
+      ],
+      "title": "Port Parsing",
+      "rationale": "Test port parsing logic.",
+      "obligations": [
+        "OB-15"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://[2001:db8::1]"
+      ],
+      "invalid": [
+        "http://[2001:db8::1]:99999"
+      ],
+      "title": "IPv6 Parsing",
+      "rationale": "Test IPv6 parsing logic.",
+      "obligations": [
+        "OB-16"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "host_whitelist": [
+            "allowed.com"
+          ],
+          "host_blacklist": [
+            "blocked.com"
+          ]
+        }
+      ],
+      "valid": [
+        "http://allowed.com"
+      ],
+      "invalid": [
+        "http://blocked.com"
+      ],
+      "title": "Host Whitelist and Blacklist",
+      "rationale": "Test host whitelist and blacklist logic.",
+      "obligations": [
+        "OB-17"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": false
+        }
+      ],
+      "valid": [
+        "http://user:password@example.com"
+      ],
+      "invalid": [
+        "javascript:%61%6c%65%72%74%28%31%29@example.com"
+      ],
+      "title": "Authentication and Malicious Protocols",
+      "rationale": "Test the condition `is_valid_auth && !has_encoded_content` to distinguish authentication from malicious protocols.",
+      "obligations": [
+        "OB-18"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "valid": [
+        "http://user:password@example.com"
+      ],
+      "invalid": [
+        "user:password@example.com"
+      ],
+      "title": "Require Protocol with Authentication",
+      "rationale": "Test the condition `options.require_protocol` when authentication components are present.",
+      "obligations": [
+        "OB-20"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "host_blacklist": [
+            "blocked.com"
+          ]
+        }
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        "http://blocked.com"
+      ],
+      "title": "Host Blacklist Validation",
+      "rationale": "Test the condition `options.host_blacklist && checkHost(host, options.host_blacklist)` to ensure hosts in the blacklist are rejected.",
+      "obligations": [
+        "OB-54"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [],
+      "invalid": [
+        "http://example.com<invalid>",
+        "http://example.com invalid"
+      ],
+      "title": "Reject URLs with Invalid Characters",
+      "rationale": "Test rejection of URLs containing spaces or angle brackets.",
+      "obligations": [
+        "OB-101"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_protocol": true
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "example.com:80"
+      ],
+      "title": "Require Protocol with Looks-Like-Port URLs",
+      "rationale": "Test rejection of URLs resembling hostname:port when `require_protocol` is enabled.",
+      "obligations": [
+        "OB-102"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "allow_protocol_relative_urls": false
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "//example.com"
+      ],
+      "title": "Disallow Protocol-Relative URLs",
+      "rationale": "Test rejection of protocol-relative URLs when the option is disabled.",
+      "obligations": [
+        "OB-103"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "validate_length": true,
+          "max_allowed_length": 20
+        }
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        "http://example.com/very/long/url/that/exceeds/max/allowed/length"
+      ],
+      "title": "Validate Length Exceeds Maximum",
+      "rationale": "Test URL length validation when `validate_length` is enabled and the URL exceeds the maximum allowed length.",
+      "obligations": [
+        "OB-201"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false
+        }
+      ],
+      "valid": [
+        ""
+      ],
+      "invalid": [
+        "http://example.com"
+      ],
+      "title": "Empty URL with Require Host Disabled",
+      "rationale": "Test validation of empty URLs when `require_host` is disabled.",
+      "obligations": [
+        "OB-202"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        ":example.com"
+      ],
+      "title": "Invalid URL Structure with Empty Split Element",
+      "rationale": "Test validation of URLs with an invalid structure where the split array's first element is empty.",
+      "obligations": [
+        "OB-203"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false
+        }
+      ],
+      "valid": [
+        ""
+      ],
+      "invalid": [
+        "http://example.com"
+      ],
+      "title": "Empty URL with Require Host Disabled",
+      "rationale": "Test validation of empty URLs when `require_host` is disabled.",
+      "obligations": [
+        "OB-204"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        ":example.com"
+      ],
+      "title": "Invalid URL Structure with Empty Split Element",
+      "rationale": "Test validation of URLs with an invalid structure where the split array's first element is empty.",
+      "obligations": [
+        "OB-205"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://user:password@example.com"
+      ],
+      "invalid": [
+        "http://user:password:extra@example.com"
+      ],
+      "title": "Invalid Authentication Format",
+      "rationale": "Test validation of URLs with invalid authentication format containing excessive colons.",
+      "obligations": [
+        "OB-206"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {
+          "require_host": false
+        }
+      ],
+      "valid": [
+        ""
+      ],
+      "invalid": [
+        "http://example.com"
+      ],
+      "title": "Empty URL with Require Host Disabled",
+      "rationale": "Test validation of empty URLs when `require_host` is disabled.",
+      "obligations": [
+        "OB-301"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        ":example.com"
+      ],
+      "title": "Invalid URL Structure with Empty Split Element",
+      "rationale": "Test validation of URLs with an invalid structure where the split array's first element is empty.",
+      "obligations": [
+        "OB-302"
+      ]
+    },
+    {
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://user:password@example.com"
+      ],
+      "invalid": [
+        "http://:@example.com"
+      ],
+      "title": "Invalid Authentication Format with Empty User and Password",
+      "rationale": "Test validation of URLs with invalid authentication components where both user and password are empty.",
+      "obligations": [
+        "OB-303"
+      ]
+    }
+  ],
+  "metadata": {
+    "requirement_source": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\README.md",
+    "generation_style": "improved_initial_pass",
+    "iteration_count": 6,
+    "improvement_applied": true,
+    "feedback_sources": [
+      "coverage"
+    ],
+    "decision": "stop_after_reverts"
+  }
+}

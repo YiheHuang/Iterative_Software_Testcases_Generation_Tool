@@ -1,0 +1,34 @@
+{
+  "generated_categories": [
+    {
+      "name": "Default Validation",
+      "description": "Tests the default behavior of isFQDN with common valid and invalid cases.",
+      "generated_group_ids": ["GENERATED-1"]
+    },
+    {
+      "name": "TLD Requirement Options",
+      "description": "Tests behavior when the requirement for a top-level domain (TLD) is modified.",
+      "generated_group_ids": ["GENERATED-2"]
+    },
+    {
+      "name": "Underscore Allowance",
+      "description": "Tests behavior when underscores are allowed in domain parts.",
+      "generated_group_ids": ["GENERATED-3"]
+    },
+    {
+      "name": "Trailing Dot Allowance",
+      "description": "Tests behavior when trailing dots are allowed in domain names.",
+      "generated_group_ids": ["GENERATED-4"]
+    },
+    {
+      "name": "Numeric TLD Allowance",
+      "description": "Tests behavior when numeric top-level domains (TLDs) are allowed.",
+      "generated_group_ids": ["GENERATED-5"]
+    },
+    {
+      "name": "Wildcard Domain Allowance",
+      "description": "Tests behavior when wildcard domains are allowed.",
+      "generated_group_ids": ["GENERATED-6"]
+    }
+  ]
+}

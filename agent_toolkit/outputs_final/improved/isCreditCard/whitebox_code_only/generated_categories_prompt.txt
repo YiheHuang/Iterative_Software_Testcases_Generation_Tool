@@ -1,0 +1,118 @@
+Group generated tests into generated categories for validator isCreditCard.
+
+Generated groups:
+[
+  {
+    "title": "Input type validation",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "\"378282246310005\""
+    ],
+    "invalid": [
+      "1234567890123456",
+      "null",
+      "true",
+      "[]",
+      "{}"
+    ],
+    "rationale": "Ensure `assertString` correctly validates the input type.",
+    "obligations": [
+      "OB-1"
+    ],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "Specific provider validation",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"amex\"}}"
+    ],
+    "invalid": [
+      "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"visa\"}}"
+    ],
+    "rationale": "Test behavior when a valid provider is specified in the options.",
+    "obligations": [
+      "OB-2"
+    ],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "Invalid provider error",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [],
+    "invalid": [
+      "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"invalid\"}}"
+    ],
+    "rationale": "Ensure the function throws an error for invalid providers.",
+    "obligations": [
+      "OB-3"
+    ],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "Default provider validation",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "\"378282246310005\""
+    ],
+    "invalid": [
+      "\"1234567890123456\""
+    ],
+    "rationale": "Test behavior when no provider is specified and the card matches or does not match any patterns.",
+    "obligations": [
+      "OB-4",
+      "OB-5"
+    ],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "Luhn algorithm validation",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "\"378282246310005\""
+    ],
+    "invalid": [
+      "\"378282246310006\""
+    ],
+    "rationale": "Ensure the `isLuhnValid` helper is called and its result is respected.",
+    "obligations": [
+      "OB-6"
+    ],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "Input sanitization",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "\"3782-8224-6310-005\"",
+      "\"3782 8224 6310 005\""
+    ],
+    "invalid": [
+      "\"1234-5678-9012-3456\"",
+      "\"1234 5678 9012 3456\""
+    ],
+    "rationale": "Test the sanitization of input by removing spaces and dashes.",
+    "obligations": [
+      "OB-7"
+    ],
+    "generated_id": "GENERATED-6"
+  }
+]

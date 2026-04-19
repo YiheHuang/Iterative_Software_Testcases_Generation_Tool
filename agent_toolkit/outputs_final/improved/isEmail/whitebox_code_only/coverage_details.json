@@ -1,0 +1,155 @@
+{
+  "coverage_total": {
+    "lines": {
+      "total": 80,
+      "covered": 78,
+      "skipped": 0,
+      "pct": 97.5
+    },
+    "statements": {
+      "total": 84,
+      "covered": 82,
+      "skipped": 0,
+      "pct": 97.62
+    },
+    "functions": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 76,
+      "covered": 70,
+      "skipped": 0,
+      "pct": 92.11
+    }
+  },
+  "coverage_files": {
+    "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isEmail.js": {
+      "lines": {
+        "total": 80,
+        "covered": 78,
+        "skipped": 0,
+        "pct": 97.5
+      },
+      "functions": {
+        "total": 3,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 84,
+        "covered": 82,
+        "skipped": 0,
+        "pct": 97.62
+      },
+      "branches": {
+        "total": 76,
+        "covered": 70,
+        "skipped": 0,
+        "pct": 92.11
+      }
+    }
+  },
+  "uncovered_details": {
+    "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isEmail.js": {
+      "uncovered_statements": [
+        {
+          "statement_id": "40",
+          "line": 93,
+          "column": 4,
+          "line_text": "    return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 93: return false;"
+        },
+        {
+          "statement_id": "60",
+          "line": 140,
+          "column": 4,
+          "line_text": "    return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 140: return false;"
+        }
+      ],
+      "uncovered_branches": [
+        {
+          "branch_id": "8",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 81,
+          "column": 6,
+          "line_text": "      if (display_name.endsWith(' ')) {",
+          "source_excerpt": "if (display_name.endsWith(' ')) {\n        display_name = display_name.slice(0, -1);\n      }",
+          "condition_excerpt": "display_name.endsWith(' ')",
+          "summary": "Uncovered if path `condition_false_branch` at line 81; condition: display_name.endsWith(' ')"
+        },
+        {
+          "branch_id": "11",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 92,
+          "column": 2,
+          "line_text": "  if (!options.ignore_max_length && str.length > defaultMaxEmailLength) {",
+          "source_excerpt": "if (!options.ignore_max_length && str.length > defaultMaxEmailLength) {\n    return false;\n  }",
+          "condition_excerpt": "!options.ignore_max_length && str.length > defaultMaxEmailLength",
+          "summary": "Uncovered if path `condition_true_branch` at line 92; condition: !options.ignore_max_length && str.length > defaultMaxEmailLength"
+        },
+        {
+          "branch_id": "21",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 136,
+          "column": 2,
+          "line_text": "  if (options.ignore_max_length === false && (",
+          "source_excerpt": "if (options.ignore_max_length === false && (\n    !isByteLength(user, { max: 64 }) ||\n    !isByteLength(domain, { max: 254 }))\n  ) {\n    return false;\n  }",
+          "condition_excerpt": null,
+          "summary": "Uncovered if path `condition_true_branch` at line 136; snippet: if (options.ignore_max_length === false && (\n    !isByteLength(user, { max: 64 }) ||\n    !isByteLength(domain, { max: 254 }))\n  ) {\n    return false;\n  }"
+        },
+        {
+          "branch_id": "25",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 152,
+          "column": 4,
+          "line_text": "    if (!isIP(domain)) {",
+          "source_excerpt": "if (!isIP(domain)) {\n      if (!domain.startsWith('[') || !domain.endsWith(']')) {\n        return false;\n      }\n\n      let noBracketdomain = domain.slice(1, -1);\n\n      if (noBracketdomain.length === 0 || !isIP(noBracketdomain)) {\n        return false;\n      }\n    }",
+          "condition_excerpt": "!isIP(domain)",
+          "summary": "Uncovered if path `condition_false_branch` at line 152; condition: !isIP(domain)"
+        },
+        {
+          "branch_id": "34",
+          "branch_type": "cond-expr",
+          "path_index": 1,
+          "branch_side": "ternary_false_branch",
+          "line": 173,
+          "column": 6,
+          "line_text": "      quotedEmailUser.test(user);",
+          "source_excerpt": "quotedEmailUser.test(user)",
+          "condition_excerpt": null,
+          "summary": "Uncovered cond-expr path `ternary_false_branch` at line 173; snippet: quotedEmailUser.test(user)"
+        },
+        {
+          "branch_id": "35",
+          "branch_type": "cond-expr",
+          "path_index": 1,
+          "branch_side": "ternary_false_branch",
+          "line": 177,
+          "column": 24,
+          "line_text": "    emailUserUtf8Part : emailUserPart;",
+          "source_excerpt": "emailUserPart",
+          "condition_excerpt": null,
+          "summary": "Uncovered cond-expr path `ternary_false_branch` at line 177; snippet: emailUserPart"
+        }
+      ],
+      "uncovered_functions": []
+    }
+  },
+  "coverage_summary_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\improved\\isEmail\\whitebox_code_only\\coverage\\coverage-summary.json",
+  "coverage_final_path": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\agent_toolkit\\outputs\\improved\\isEmail\\whitebox_code_only\\coverage\\coverage-final.json"
+}

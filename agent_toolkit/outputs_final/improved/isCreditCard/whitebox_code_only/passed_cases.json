@@ -1,0 +1,190 @@
+[
+  {
+    "title": "Input type validation",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "input_value": "1234567890123456",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1"
+    ]
+  },
+  {
+    "title": "Input type validation",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "input_value": "null",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1"
+    ]
+  },
+  {
+    "title": "Input type validation",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "input_value": "true",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1"
+    ]
+  },
+  {
+    "title": "Input type validation",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "input_value": "[]",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1"
+    ]
+  },
+  {
+    "title": "Input type validation",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "input_value": "{}",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-1"
+    ]
+  },
+  {
+    "title": "Specific provider validation",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "input_value": "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"visa\"}}",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-2"
+    ]
+  },
+  {
+    "title": "Invalid provider error",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "input_value": "{\"card\": \"378282246310005\", \"options\": {\"provider\": \"invalid\"}}",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-3"
+    ]
+  },
+  {
+    "title": "Default provider validation",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "input_value": "\"1234567890123456\"",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-4",
+      "OB-5"
+    ]
+  },
+  {
+    "title": "Luhn algorithm validation",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "input_value": "\"378282246310006\"",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-6"
+    ]
+  },
+  {
+    "title": "Input sanitization",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "input_value": "\"1234-5678-9012-3456\"",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-7"
+    ]
+  },
+  {
+    "title": "Input sanitization",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "input_value": "\"1234 5678 9012 3456\"",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": true,
+    "obligations": [
+      "OB-7"
+    ]
+  }
+]

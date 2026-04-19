@@ -1,0 +1,391 @@
+{
+  "results": [
+    {
+      "title": "Valid credit card numbers without provider specified",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "4111111111111111",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Valid credit card numbers without provider specified",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "378282246310005",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Valid credit card numbers without provider specified",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "6011111111111117",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Valid credit card numbers without provider specified",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "1234567890123456",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Valid credit card numbers without provider specified",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "4111111111111",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Valid credit card numbers without provider specified",
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "input_value": "abcdefg",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Valid credit card numbers with provider specified",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "visa"
+        }
+      ],
+      "input_value": "4111111111111111",
+      "expected_kind": "return",
+      "expected": true,
+      "actual_kind": "return",
+      "actual_value": true,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Valid credit card numbers with provider specified",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "visa"
+        }
+      ],
+      "input_value": "1234567890123456",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Valid credit card numbers with provider specified",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "visa"
+        }
+      ],
+      "input_value": "4111111111111",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Valid credit card numbers with provider specified",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "visa"
+        }
+      ],
+      "input_value": "abcdefg",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "return",
+      "actual_value": false,
+      "actual_error_name": null,
+      "passed": true,
+      "obligations": []
+    },
+    {
+      "title": "Invalid provider specified",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "invalid"
+        }
+      ],
+      "input_value": "4111111111111111",
+      "expected_kind": "return",
+      "expected": false,
+      "actual_kind": "throw",
+      "actual_value": null,
+      "actual_error_name": "Error",
+      "passed": false,
+      "obligations": []
+    }
+  ],
+  "summary": {
+    "total_cases": 11,
+    "correct_cases": 10,
+    "incorrect_cases": 1,
+    "exact_match_rate": 0.9090909090909091,
+    "by_expected_kind": {
+      "return": 11,
+      "throw": 0
+    }
+  },
+  "details": {
+    "passed_results": [
+      {
+        "title": "Valid credit card numbers without provider specified",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "4111111111111111",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Valid credit card numbers without provider specified",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "378282246310005",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Valid credit card numbers without provider specified",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "6011111111111117",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Valid credit card numbers without provider specified",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "1234567890123456",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Valid credit card numbers without provider specified",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "4111111111111",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Valid credit card numbers without provider specified",
+        "validator": "isCreditCard",
+        "args": [
+          {}
+        ],
+        "input_value": "abcdefg",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Valid credit card numbers with provider specified",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "visa"
+          }
+        ],
+        "input_value": "4111111111111111",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Valid credit card numbers with provider specified",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "visa"
+          }
+        ],
+        "input_value": "1234567890123456",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Valid credit card numbers with provider specified",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "visa"
+          }
+        ],
+        "input_value": "4111111111111",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      },
+      {
+        "title": "Valid credit card numbers with provider specified",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "visa"
+          }
+        ],
+        "input_value": "abcdefg",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": true,
+        "obligations": []
+      }
+    ],
+    "failed_results": [
+      {
+        "title": "Invalid provider specified",
+        "validator": "isCreditCard",
+        "args": [
+          {
+            "provider": "invalid"
+          }
+        ],
+        "input_value": "4111111111111111",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "throw",
+        "actual_value": null,
+        "actual_error_name": "Error",
+        "passed": false,
+        "obligations": []
+      }
+    ],
+    "by_title": {
+      "Valid credit card numbers without provider specified": {
+        "total": 6,
+        "passed": 6,
+        "failed": 0
+      },
+      "Valid credit card numbers with provider specified": {
+        "total": 4,
+        "passed": 4,
+        "failed": 0
+      },
+      "Invalid provider specified": {
+        "total": 1,
+        "passed": 0,
+        "failed": 1
+      }
+    },
+    "by_obligation": {},
+    "coverage_summary_path": null,
+    "coverage_total": null,
+    "coverage_files": {}
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "generated_categories": [
+    {
+      "name": "Basic Input Validation",
+      "description": "Tests basic validation of URLs, including null, empty, invalid characters, and special cases like 'mailto:' URLs.",
+      "generated_group_ids": ["GENERATED-1", "GENERATED-2"]
+    },
+    {
+      "name": "URL Length Enforcement",
+      "description": "Tests enforcement of maximum URL length, with and without the `validate_length` option.",
+      "generated_group_ids": ["GENERATED-3", "GENERATED-4"]
+    },
+    {
+      "name": "Fragment and Query Component Handling",
+      "description": "Tests handling of URL fragments and query components when specific options are enabled or disabled.",
+      "generated_group_ids": ["GENERATED-5", "GENERATED-6"]
+    },
+    {
+      "name": "Authentication Component Validation",
+      "description": "Tests validation and detection of authentication components in URLs, including malformed or malicious content.",
+      "generated_group_ids": ["GENERATED-7", "GENERATED-9", "GENERATED-10", "GENERATED-14"]
+    },
+    {
+      "name": "Protocol and Port Validation",
+      "description": "Tests validation of protocols and port numbers, including requirements for valid protocols and specific port ranges.",
+      "generated_group_ids": ["GENERATED-8", "GENERATED-11", "GENERATED-12"]
+    },
+    {
+      "name": "URL Parsing Logic",
+      "description": "Tests specific parsing logic, such as identifying the first slash after the colon in a URL.",
+      "generated_group_ids": ["GENERATED-13"]
+    }
+  ]
+}

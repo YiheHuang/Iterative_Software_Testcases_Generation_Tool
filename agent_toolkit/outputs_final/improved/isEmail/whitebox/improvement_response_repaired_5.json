@@ -1,0 +1,21 @@
+{
+  "obligations": [
+    {
+      "id": "OB-23",
+      "kind": "whitebox",
+      "rule": "Targets uncovered statement at line 50 where display names with illegal characters not enclosed in quotes are rejected.",
+      "why": "The condition `display_name_without_quotes === display_name` evaluates to true, triggering the return statement.",
+      "minimal_valid": "\"John \\\"Doe\\\"\" <email@example.com>",
+      "minimal_invalid": "John \"Doe\" <email@example.com>"
+    },
+    {
+      "id": "OB-24",
+      "kind": "whitebox",
+      "rule": "Targets uncovered statement at line 93 where overly long email strings are rejected when `ignore_max_length` is false.",
+      "why": "The condition `!options.ignore_max_length && str.length > defaultMaxEmailLength` evaluates to true, triggering the return statement.",
+      "minimal_valid": "a@b.co",
+      "minimal_invalid": "a@b"
+    }
+  ],
+  "test_groups": []
+}

@@ -1,0 +1,21 @@
+[
+  {
+    "title": "Invalid provider option",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "invalidprovider"
+      }
+    ],
+    "input_value": "4111111111111111",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "throw",
+    "actual_value": null,
+    "actual_error_name": "Error",
+    "passed": false,
+    "obligations": [
+      "OB-3"
+    ]
+  }
+]

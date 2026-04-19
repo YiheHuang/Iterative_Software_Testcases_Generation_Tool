@@ -1,0 +1,273 @@
+You are performing a strict requirement audit for a candidate white-box test suite for isCreditCard.
+Your job is to remove test cases that are not clearly supported by the requirement.
+Be conservative: when a case is uncertain, implementation-only, or weakly justified, delete it.
+
+Return strict JSON only with this schema:
+{
+  "obligations": [...],
+  "test_groups": [...],
+  "audit": [
+    {
+      "group_title": "string",
+      "decision": "keep|trim|drop",
+      "reason": "string",
+      "removed_valid": ["..."],
+      "removed_invalid": ["..."]
+    }
+  ]
+}
+
+Hard constraints:
+- Preserve the same overall suite schema for obligations and test_groups.
+- Do NOT add new groups, new args, new valid values, or new invalid values.
+- Do NOT rewrite existing test strings into different strings.
+- You may only delete values, delete whole groups, and delete unused obligations.
+- Every input value must be a real executable input string, not a presentation wrapper, not a description, and not a pseudo-code expression.
+- If a group keeps zero valid and zero invalid values after audit, drop the whole group.
+- Remove obligations that no remaining group uses.
+
+Requirement specification:
+Function name: isCreditCard
+Black-box requirement source: validator_js README function entry
+Signature summary: isCreditCard(str [, options])
+README behavior summary:
+| check if the string is a credit card number.
+ `options` is an optional object that can be supplied with the following key(s): `provider` is an optional key whose value should be a string, and defines the company issuing the credit card. Valid values include `['amex', 'dinersclub', 'discover', 'jcb', 'mastercard', 'unionpay', 'visa']` or blank will check for any provider.
+
+Treat the README entry as the authoritative black-box behavior description.
+Infer valid inputs, invalid inputs, option-sensitive behaviors, and edge cases from this description.
+
+
+Candidate obligations:
+[
+  {
+    "id": "OB-1",
+    "kind": "blackbox",
+    "rule": "The function must validate credit card numbers against the Luhn algorithm.",
+    "why": "The README specifies that the function checks if the string is a credit card number, which implies Luhn validation.",
+    "minimal_valid": "4111111111111111",
+    "minimal_invalid": "4111111111111112"
+  },
+  {
+    "id": "OB-2",
+    "kind": "blackbox",
+    "rule": "The function must accept optional `provider` and validate against specific card provider patterns.",
+    "why": "The README specifies the `provider` option to restrict validation to specific card issuers.",
+    "minimal_valid": "4111111111111111 with provider='visa'",
+    "minimal_invalid": "4111111111111111 with provider='mastercard'"
+  },
+  {
+    "id": "OB-3",
+    "kind": "blackbox",
+    "rule": "The function must throw an error if an invalid provider is supplied.",
+    "why": "The README specifies that invalid providers should result in an error.",
+    "minimal_valid": null,
+    "minimal_invalid": "4111111111111111 with provider='invalid_provider'"
+  },
+  {
+    "id": "OB-4",
+    "kind": "whitebox",
+    "rule": "The function must sanitize input by removing spaces and dashes before validation.",
+    "why": "The implementation sanitizes the input string before applying regex and Luhn validation.",
+    "minimal_valid": "4111-1111-1111-1111",
+    "minimal_invalid": "4111-1111-1111-1112"
+  },
+  {
+    "id": "OB-5",
+    "kind": "whitebox",
+    "rule": "The function must validate against all card provider patterns if no `provider` is specified.",
+    "why": "The implementation checks all card patterns when `provider` is not supplied.",
+    "minimal_valid": "4111111111111111",
+    "minimal_invalid": "1234567812345678"
+  },
+  {
+    "id": "OB-6",
+    "kind": "whitebox",
+    "rule": "The function must return false if no card pattern matches the sanitized input.",
+    "why": "The implementation explicitly checks if no pattern matches and returns false.",
+    "minimal_valid": null,
+    "minimal_invalid": "1234567812345678"
+  },
+  {
+    "id": "OB-7",
+    "kind": "whitebox",
+    "rule": "The function must correctly handle early returns for invalid provider-specific patterns.",
+    "why": "The implementation returns false immediately if the sanitized input does not match the provider-specific regex.",
+    "minimal_valid": "378282246310005 with provider='amex'",
+    "minimal_invalid": "378282246310005 with provider='visa'"
+  },
+  {
+    "id": "OB-8",
+    "kind": "whitebox",
+    "rule": "The function must correctly handle early returns for invalid global patterns when no provider is specified.",
+    "why": "The implementation returns false immediately if no global pattern matches the sanitized input.",
+    "minimal_valid": null,
+    "minimal_invalid": "1234567812345678"
+  },
+  {
+    "id": "OB-9",
+    "kind": "whitebox",
+    "rule": "Test the ternary false branch for the `options` parameter defaulting to an empty object when not provided.",
+    "why": "The uncovered branch at line 25 corresponds to the ternary operator's false branch, which occurs when `options` is not provided and defaults to `{}`.",
+    "minimal_valid": "4111111111111111",
+    "minimal_invalid": "1234567812345678"
+  }
+]
+
+Candidate test groups to check:
+[
+  {
+    "title": "Basic Luhn validation",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "4111111111111111"
+    ],
+    "invalid": [
+      "4111111111111112"
+    ],
+    "rationale": "Tests the core Luhn algorithm validation for credit card numbers.",
+    "obligations": [
+      "OB-1"
+    ]
+  },
+  {
+    "title": "Provider-specific validation",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "visa"
+      }
+    ],
+    "valid": [
+      "4111111111111111"
+    ],
+    "invalid": [
+      "378282246310005"
+    ],
+    "rationale": "Tests validation restricted to a specific card provider.",
+    "obligations": [
+      "OB-2"
+    ]
+  },
+  {
+    "title": "Invalid provider error handling",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "invalid_provider"
+      }
+    ],
+    "valid": [],
+    "invalid": [
+      "4111111111111111"
+    ],
+    "rationale": "Tests that an error is thrown for invalid provider values.",
+    "obligations": [
+      "OB-3"
+    ]
+  },
+  {
+    "title": "Input sanitization",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "4111-1111-1111-1111"
+    ],
+    "invalid": [
+      "4111-1111-1111-1112"
+    ],
+    "rationale": "Tests that spaces and dashes are removed before validation.",
+    "obligations": [
+      "OB-4"
+    ]
+  },
+  {
+    "title": "Global pattern matching",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "4111111111111111"
+    ],
+    "invalid": [
+      "1234567812345678"
+    ],
+    "rationale": "Tests validation against all card provider patterns when no provider is specified.",
+    "obligations": [
+      "OB-5",
+      "OB-6"
+    ]
+  },
+  {
+    "title": "Provider-specific early return",
+    "validator": "isCreditCard",
+    "args": [
+      {
+        "provider": "amex"
+      }
+    ],
+    "valid": [
+      "378282246310005"
+    ],
+    "invalid": [
+      "4111111111111111"
+    ],
+    "rationale": "Tests early return behavior for invalid provider-specific patterns.",
+    "obligations": [
+      "OB-7"
+    ]
+  },
+  {
+    "title": "Global early return",
+    "validator": "isCreditCard",
+    "args": [
+      {}
+    ],
+    "valid": [],
+    "invalid": [
+      "1234567812345678"
+    ],
+    "rationale": "Tests early return behavior when no global pattern matches the sanitized input.",
+    "obligations": [
+      "OB-8"
+    ]
+  },
+  {
+    "title": "Default options behavior",
+    "validator": "isCreditCard",
+    "args": [],
+    "valid": [
+      "4111111111111111"
+    ],
+    "invalid": [
+      "1234567812345678"
+    ],
+    "rationale": "Tests the behavior of the function when the `options` parameter is not provided, ensuring it defaults to an empty object.",
+    "obligations": [
+      "OB-9"
+    ]
+  }
+]
+
+Audit policy:
+1. For every group, first decide one of: keep, trim, or drop.
+2. `keep` means every remaining case is clearly requirement-supported.
+3. `trim` means the group has some requirement-supported cases, but one or more values must be deleted.
+4. `drop` means the whole group should be removed because its central claim is not requirement-supported.
+5. Prefer deletion over speculative preservation.
+6. If a case depends on implementation detail but is not clearly supported by the requirement, delete it.
+7. If an option-sensitive group claims a behavior change, the requirement must clearly support that option effect.
+8. Respect default options exactly as written in the requirement.
+9. Distinguish real executable input strings from presentation wrappers.
+10. If a test value adds an extra outer quoted layer that changes the actual input string, delete it unless the requirement explicitly allows that exact quoted form.
+11. Example: keep `user@example.com`, but delete `"user@example.com"` unless the requirement explicitly says the quotes are part of the accepted input.
+12. Example: keep `John Doe <user@example.com>` when display names are allowed, but delete `"John Doe <user@example.com>"` unless that exact fully quoted form is requirement-supported.
+13. Delete values that are natural-language placeholders, descriptions, or pseudo-code expressions, such as `a.repeat(255) + "@example.com"`.
+14. Delete any case whose expected outcome contradicts the requirement's documented default behavior or documented option behavior.
+15. In the audit array, include one row for every original group title, even if the group is dropped.

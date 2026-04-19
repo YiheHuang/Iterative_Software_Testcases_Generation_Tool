@@ -1,0 +1,352 @@
+[
+  {
+    "title": "Allow space after symbol tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_space_after_symbol": true,
+        "symbol": "$",
+        "require_symbol": false,
+        "symbol_after_digits": false,
+        "allow_negatives": true,
+        "parens_for_negatives": false,
+        "negative_sign_before_digits": false,
+        "negative_sign_after_digits": false,
+        "allow_negative_sign_placeholder": false,
+        "thousands_separator": ",",
+        "decimal_separator": ".",
+        "allow_decimal": true,
+        "require_decimal": false,
+        "digits_after_decimal": [
+          2
+        ],
+        "allow_space_after_digits": false
+      }
+    ],
+    "input_value": "$123.45",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-3"
+    ]
+  },
+  {
+    "title": "Allow space after symbol tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_space_after_symbol": true,
+        "symbol": "$",
+        "require_symbol": false,
+        "symbol_after_digits": false,
+        "allow_negatives": true,
+        "parens_for_negatives": false,
+        "negative_sign_before_digits": false,
+        "negative_sign_after_digits": false,
+        "allow_negative_sign_placeholder": false,
+        "thousands_separator": ",",
+        "decimal_separator": ".",
+        "allow_decimal": true,
+        "require_decimal": false,
+        "digits_after_decimal": [
+          2
+        ],
+        "allow_space_after_digits": false
+      }
+    ],
+    "input_value": "$1,234.56",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-3"
+    ]
+  },
+  {
+    "title": "Custom thousands separator tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "thousands_separator": ".",
+        "symbol": "$",
+        "require_symbol": false,
+        "allow_space_after_symbol": false,
+        "symbol_after_digits": false,
+        "allow_negatives": true,
+        "parens_for_negatives": false,
+        "negative_sign_before_digits": false,
+        "negative_sign_after_digits": false,
+        "allow_negative_sign_placeholder": false,
+        "decimal_separator": ".",
+        "allow_decimal": true,
+        "require_decimal": false,
+        "digits_after_decimal": [
+          2
+        ],
+        "allow_space_after_digits": false
+      }
+    ],
+    "input_value": "1.234,56",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-10"
+    ]
+  },
+  {
+    "title": "Custom thousands separator tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "thousands_separator": ".",
+        "symbol": "$",
+        "require_symbol": false,
+        "allow_space_after_symbol": false,
+        "symbol_after_digits": false,
+        "allow_negatives": true,
+        "parens_for_negatives": false,
+        "negative_sign_before_digits": false,
+        "negative_sign_after_digits": false,
+        "allow_negative_sign_placeholder": false,
+        "decimal_separator": ".",
+        "allow_decimal": true,
+        "require_decimal": false,
+        "digits_after_decimal": [
+          2
+        ],
+        "allow_space_after_digits": false
+      }
+    ],
+    "input_value": "123.456,78",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-10"
+    ]
+  },
+  {
+    "title": "Custom thousands separator tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "thousands_separator": ".",
+        "symbol": "$",
+        "require_symbol": false,
+        "allow_space_after_symbol": false,
+        "symbol_after_digits": false,
+        "allow_negatives": true,
+        "parens_for_negatives": false,
+        "negative_sign_before_digits": false,
+        "negative_sign_after_digits": false,
+        "allow_negative_sign_placeholder": false,
+        "decimal_separator": ".",
+        "allow_decimal": true,
+        "require_decimal": false,
+        "digits_after_decimal": [
+          2
+        ],
+        "allow_space_after_digits": false
+      }
+    ],
+    "input_value": "1234.56",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-10"
+    ]
+  },
+  {
+    "title": "Custom decimal separator tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "decimal_separator": ",",
+        "symbol": "$",
+        "require_symbol": false,
+        "allow_space_after_symbol": false,
+        "symbol_after_digits": false,
+        "allow_negatives": true,
+        "parens_for_negatives": false,
+        "negative_sign_before_digits": false,
+        "negative_sign_after_digits": false,
+        "allow_negative_sign_placeholder": false,
+        "thousands_separator": ",",
+        "allow_decimal": true,
+        "require_decimal": false,
+        "digits_after_decimal": [
+          2
+        ],
+        "allow_space_after_digits": false
+      }
+    ],
+    "input_value": "1.234,56",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-11"
+    ]
+  },
+  {
+    "title": "Allow space after digits tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_space_after_digits": true,
+        "symbol": "$",
+        "require_symbol": false,
+        "allow_space_after_symbol": false,
+        "symbol_after_digits": false,
+        "allow_negatives": true,
+        "parens_for_negatives": false,
+        "negative_sign_before_digits": false,
+        "negative_sign_after_digits": false,
+        "allow_negative_sign_placeholder": false,
+        "thousands_separator": ",",
+        "decimal_separator": ".",
+        "allow_decimal": true,
+        "require_decimal": false,
+        "digits_after_decimal": [
+          2
+        ]
+      }
+    ],
+    "input_value": "123.45 ",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-15"
+    ]
+  },
+  {
+    "title": "Allow space after digits tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_space_after_digits": true,
+        "symbol": "$",
+        "require_symbol": false,
+        "allow_space_after_symbol": false,
+        "symbol_after_digits": false,
+        "allow_negatives": true,
+        "parens_for_negatives": false,
+        "negative_sign_before_digits": false,
+        "negative_sign_after_digits": false,
+        "allow_negative_sign_placeholder": false,
+        "thousands_separator": ",",
+        "decimal_separator": ".",
+        "allow_decimal": true,
+        "require_decimal": false,
+        "digits_after_decimal": [
+          2
+        ]
+      }
+    ],
+    "input_value": "1,234.56 ",
+    "expected_kind": "return",
+    "expected": true,
+    "actual_kind": "return",
+    "actual_value": false,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-15"
+    ]
+  },
+  {
+    "title": "Allow space after digits tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_space_after_digits": true,
+        "symbol": "$",
+        "require_symbol": false,
+        "allow_space_after_symbol": false,
+        "symbol_after_digits": false,
+        "allow_negatives": true,
+        "parens_for_negatives": false,
+        "negative_sign_before_digits": false,
+        "negative_sign_after_digits": false,
+        "allow_negative_sign_placeholder": false,
+        "thousands_separator": ",",
+        "decimal_separator": ".",
+        "allow_decimal": true,
+        "require_decimal": false,
+        "digits_after_decimal": [
+          2
+        ]
+      }
+    ],
+    "input_value": "123.45",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-15"
+    ]
+  },
+  {
+    "title": "Allow space after digits tests",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_space_after_digits": true,
+        "symbol": "$",
+        "require_symbol": false,
+        "allow_space_after_symbol": false,
+        "symbol_after_digits": false,
+        "allow_negatives": true,
+        "parens_for_negatives": false,
+        "negative_sign_before_digits": false,
+        "negative_sign_after_digits": false,
+        "allow_negative_sign_placeholder": false,
+        "thousands_separator": ",",
+        "decimal_separator": ".",
+        "allow_decimal": true,
+        "require_decimal": false,
+        "digits_after_decimal": [
+          2
+        ]
+      }
+    ],
+    "input_value": "1,234.56",
+    "expected_kind": "return",
+    "expected": false,
+    "actual_kind": "return",
+    "actual_value": true,
+    "actual_error_name": null,
+    "passed": false,
+    "obligations": [
+      "OB-15"
+    ]
+  }
+]

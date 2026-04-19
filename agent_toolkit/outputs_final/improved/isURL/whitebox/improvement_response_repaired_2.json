@@ -1,0 +1,13 @@
+{
+  "obligations": [
+    {
+      "id": "OB-7",
+      "kind": "whitebox",
+      "rule": "Ensure the condition `options.validate_length && url.length > options.max_allowed_length` is covered.",
+      "why": "Line 66 contains an uncovered statement and branch related to URL length validation.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://example.com/"
+    }
+  ],
+  "test_groups": []
+}

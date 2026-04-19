@@ -1,0 +1,127 @@
+{
+  "golden_to_generated": [
+    {
+      "golden_category_id": "GC-1",
+      "matched_generated_category_ids": ["GENC-1"],
+      "match_type": "strong",
+      "reason": "The generated category 'Standard Validation' aligns with the golden category 'Basic Email Validation' as both focus on baseline email validation rules."
+    },
+    {
+      "golden_category_id": "GC-2",
+      "matched_generated_category_ids": ["GENC-4"],
+      "match_type": "strong",
+      "reason": "The generated category 'Domain Validation' includes domain-specific validation, which matches the golden category 'Domain-Specific Validation'."
+    },
+    {
+      "golden_category_id": "GC-3",
+      "matched_generated_category_ids": ["GENC-3"],
+      "match_type": "partial",
+      "reason": "The generated category 'Local Part Restrictions' partially overlaps with 'Underscore in Domain' as it includes restrictions on the local part but does not explicitly focus on underscores in the domain."
+    },
+    {
+      "golden_category_id": "GC-4",
+      "matched_generated_category_ids": ["GENC-3"],
+      "match_type": "strong",
+      "reason": "The generated category 'Local Part Restrictions' explicitly covers restrictions on UTF8 characters in the local part, matching the golden category 'UTF8 Local Part Restriction'."
+    },
+    {
+      "golden_category_id": "GC-5",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "strong",
+      "reason": "The generated category 'Display Name Options' includes tests for allowing display names, aligning with the golden category 'Display Name Support'."
+    },
+    {
+      "golden_category_id": "GC-6",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "strong",
+      "reason": "The generated category 'Display Name Options' includes tests for requiring display names, aligning with the golden category 'Required Display Name'."
+    },
+    {
+      "golden_category_id": "GC-7",
+      "matched_generated_category_ids": ["GENC-5"],
+      "match_type": "strong",
+      "reason": "The generated category 'IP Domain Allowance' directly matches the golden category 'IP Domain Validation' as both focus on allowing IPs as domains."
+    },
+    {
+      "golden_category_id": "GC-8",
+      "matched_generated_category_ids": ["GENC-3"],
+      "match_type": "partial",
+      "reason": "The generated category 'Local Part Restrictions' includes blacklisted character restrictions, which partially overlaps with the golden category 'Blacklisted Characters'."
+    },
+    {
+      "golden_category_id": "GC-9",
+      "matched_generated_category_ids": ["GENC-6"],
+      "match_type": "partial",
+      "reason": "The generated category 'Length Validation' includes tests for ignoring maximum length restrictions, which partially overlaps with the golden category 'Max Length Restriction'."
+    },
+    {
+      "golden_category_id": "GC-10",
+      "matched_generated_category_ids": ["GENC-6"],
+      "match_type": "strong",
+      "reason": "The generated category 'Length Validation' explicitly covers ignoring maximum length restrictions, aligning with the golden category 'Ignore Max Length'."
+    },
+    {
+      "golden_category_id": "GC-11",
+      "matched_generated_category_ids": ["GENC-4"],
+      "match_type": "strong",
+      "reason": "The generated category 'Domain Validation' includes blacklisted domains, aligning with the golden category 'Blacklisted Domains'."
+    },
+    {
+      "golden_category_id": "GC-12",
+      "matched_generated_category_ids": ["GENC-4"],
+      "match_type": "strong",
+      "reason": "The generated category 'Domain Validation' includes blacklists using regular expressions, aligning with the golden category 'Blacklist with Regular Expressions'."
+    },
+    {
+      "golden_category_id": "GC-13",
+      "matched_generated_category_ids": ["GENC-4"],
+      "match_type": "strong",
+      "reason": "The generated category 'Domain Validation' includes whitelisted domains, aligning with the golden category 'Whitelisted Domains'."
+    },
+    {
+      "golden_category_id": "GC-14",
+      "matched_generated_category_ids": ["GENC-4"],
+      "match_type": "strong",
+      "reason": "The generated category 'Domain Validation' includes whitelists using regular expressions, aligning with the golden category 'Whitelist with Regular Expressions'."
+    }
+  ],
+  "generated_to_golden": [
+    {
+      "generated_category_id": "GENC-1",
+      "matched_golden_category_ids": ["GC-1"],
+      "match_type": "strong",
+      "reason": "The generated category 'Standard Validation' aligns with the golden category 'Basic Email Validation' as both focus on baseline email validation rules."
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "matched_golden_category_ids": ["GC-5", "GC-6"],
+      "match_type": "strong",
+      "reason": "The generated category 'Display Name Options' covers both allowing and requiring display names, aligning with the golden categories 'Display Name Support' and 'Required Display Name'."
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "matched_golden_category_ids": ["GC-3", "GC-4", "GC-8"],
+      "match_type": "partial",
+      "reason": "The generated category 'Local Part Restrictions' partially overlaps with 'Underscore in Domain', matches 'UTF8 Local Part Restriction', and partially overlaps with 'Blacklisted Characters'."
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "matched_golden_category_ids": ["GC-2", "GC-11", "GC-12", "GC-13", "GC-14"],
+      "match_type": "strong",
+      "reason": "The generated category 'Domain Validation' includes domain-specific validation, blacklists, and whitelists, aligning with the golden categories 'Domain-Specific Validation', 'Blacklisted Domains', 'Blacklist with Regular Expressions', 'Whitelisted Domains', and 'Whitelist with Regular Expressions'."
+    },
+    {
+      "generated_category_id": "GENC-5",
+      "matched_golden_category_ids": ["GC-7"],
+      "match_type": "strong",
+      "reason": "The generated category 'IP Domain Allowance' directly matches the golden category 'IP Domain Validation' as both focus on allowing IPs as domains."
+    },
+    {
+      "generated_category_id": "GENC-6",
+      "matched_golden_category_ids": ["GC-9", "GC-10"],
+      "match_type": "partial",
+      "reason": "The generated category 'Length Validation' includes tests for ignoring maximum length restrictions, which partially overlaps with 'Max Length Restriction' and aligns with 'Ignore Max Length'."
+    }
+  ],
+  "novel_generated_categories": []
+}

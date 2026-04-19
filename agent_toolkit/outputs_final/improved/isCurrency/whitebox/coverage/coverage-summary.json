@@ -1,0 +1,3 @@
+{"total": {"lines":{"total":38,"covered":38,"skipped":0,"pct":100},"statements":{"total":41,"covered":41,"skipped":0,"pct":100},"functions":{"total":5,"covered":5,"skipped":0,"pct":100},"branches":{"total":36,"covered":36,"skipped":0,"pct":100}}
+,"C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isCurrency.js": {"lines":{"total":38,"covered":38,"skipped":0,"pct":100},"functions":{"total":5,"covered":5,"skipped":0,"pct":100},"statements":{"total":41,"covered":41,"skipped":0,"pct":100},"branches":{"total":36,"covered":36,"skipped":0,"pct":100}}
+}

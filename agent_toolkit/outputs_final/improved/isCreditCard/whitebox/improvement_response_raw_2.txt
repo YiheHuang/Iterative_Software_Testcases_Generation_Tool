@@ -1,0 +1,259 @@
+{
+  "obligations": [
+    {
+      "id": "OB-9",
+      "kind": "whitebox",
+      "rule": "Ensure the ternary_false_branch of options initialization is covered.",
+      "why": "Uncovered cond-expr path `ternary_false_branch` at line 25.",
+      "minimal_valid": null,
+      "minimal_invalid": null
+    },
+    {
+      "id": "OB-10",
+      "kind": "whitebox",
+      "rule": "Ensure the condition_true_branch of `provider && provider.toLowerCase() in cards` is covered.",
+      "why": "Uncovered if path `condition_true_branch` at line 29.",
+      "minimal_valid": null,
+      "minimal_invalid": null
+    },
+    {
+      "id": "OB-11",
+      "kind": "whitebox",
+      "rule": "Ensure the path_1 of `provider && provider.toLowerCase() in cards` is covered.",
+      "why": "Uncovered binary-expr path `path_1` at line 29.",
+      "minimal_valid": null,
+      "minimal_invalid": null
+    },
+    {
+      "id": "OB-12",
+      "kind": "whitebox",
+      "rule": "Ensure the condition_true_branch of `!(cards[provider.toLowerCase()].test(sanitized))` is covered.",
+      "why": "Uncovered if path `condition_true_branch` at line 31.",
+      "minimal_valid": null,
+      "minimal_invalid": null
+    },
+    {
+      "id": "OB-13",
+      "kind": "whitebox",
+      "rule": "Ensure the condition_false_branch of `!(cards[provider.toLowerCase()].test(sanitized))` is covered.",
+      "why": "Uncovered if path `condition_false_branch` at line 31.",
+      "minimal_valid": null,
+      "minimal_invalid": null
+    },
+    {
+      "id": "OB-14",
+      "kind": "whitebox",
+      "rule": "Ensure the statement `return false;` is covered.",
+      "why": "Uncovered statement at line 32.",
+      "minimal_valid": null,
+      "minimal_invalid": null
+    },
+    {
+      "id": "OB-15",
+      "kind": "whitebox",
+      "rule": "Ensure the condition_true_branch of `provider && !(provider.toLowerCase() in cards)` is covered.",
+      "why": "Uncovered if path `condition_true_branch` at line 34.",
+      "minimal_valid": null,
+      "minimal_invalid": null
+    },
+    {
+      "id": "OB-16",
+      "kind": "whitebox",
+      "rule": "Ensure the path_1 of `provider && !(provider.toLowerCase() in cards)` is covered.",
+      "why": "Uncovered binary-expr path `path_1` at line 34.",
+      "minimal_valid": null,
+      "minimal_invalid": null
+    },
+    {
+      "id": "OB-17",
+      "kind": "whitebox",
+      "rule": "Ensure the statement `throw new Error(`${provider} is not a valid credit card provider.`);` is covered.",
+      "why": "Uncovered statement at line 36.",
+      "minimal_valid": null,
+      "minimal_invalid": null
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "General validation without provider",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "card": "4111111111111111"
+        },
+        {
+          "card": "1234567890123456"
+        }
+      ],
+      "valid": [
+        "4111111111111111"
+      ],
+      "invalid": [
+        "1234567890123456"
+      ],
+      "rationale": "Tests general validation against all card providers without specifying a provider.",
+      "obligations": [
+        "OB-1",
+        "OB-6",
+        "OB-7"
+      ]
+    },
+    {
+      "title": "Provider-specific validation",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "card": "378282246310005",
+          "options": {
+            "provider": "amex"
+          }
+        },
+        {
+          "card": "4111111111111111",
+          "options": {
+            "provider": "amex"
+          }
+        }
+      ],
+      "valid": [
+        "378282246310005"
+      ],
+      "invalid": [
+        "4111111111111111"
+      ],
+      "rationale": "Tests validation restricted to a specific provider (Amex).",
+      "obligations": [
+        "OB-2",
+        "OB-5"
+      ]
+    },
+    {
+      "title": "Invalid provider key",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "card": "4111111111111111",
+          "options": {
+            "provider": "invalidProvider"
+          }
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "4111111111111111"
+      ],
+      "rationale": "Tests behavior when an invalid provider is specified in the options.",
+      "obligations": [
+        "OB-3",
+        "OB-15",
+        "OB-16",
+        "OB-17"
+      ]
+    },
+    {
+      "title": "Sanitization of input",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "card": "4111-1111-1111-1111"
+        },
+        {
+          "card": "1234-5678-9012-3456"
+        }
+      ],
+      "valid": [
+        "4111-1111-1111-1111"
+      ],
+      "invalid": [
+        "1234-5678-9012-3456"
+      ],
+      "rationale": "Tests input sanitization by removing spaces and dashes before validation.",
+      "obligations": [
+        "OB-4"
+      ]
+    },
+    {
+      "title": "Luhn algorithm validation",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "card": "4111111111111111"
+        },
+        {
+          "card": "4111111111111121"
+        }
+      ],
+      "valid": [
+        "4111111111111111"
+      ],
+      "invalid": [
+        "4111111111111121"
+      ],
+      "rationale": "Tests the final validation step using the Luhn algorithm.",
+      "obligations": [
+        "OB-8"
+      ]
+    },
+    {
+      "title": "Validation with empty options object",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "card": "4111111111111111",
+          "options": {}
+        }
+      ],
+      "valid": [
+        "4111111111111111"
+      ],
+      "invalid": [],
+      "rationale": "Tests the ternary_false_branch of options initialization.",
+      "obligations": [
+        "OB-9"
+      ]
+    },
+    {
+      "title": "Validation with specific provider in cards",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "card": "4111111111111111",
+          "options": {
+            "provider": "visa"
+          }
+        }
+      ],
+      "valid": [
+        "4111111111111111"
+      ],
+      "invalid": [],
+      "rationale": "Tests the condition_true_branch and path_1 of `provider && provider.toLowerCase() in cards`.",
+      "obligations": [
+        "OB-10",
+        "OB-11"
+      ]
+    },
+    {
+      "title": "Validation with provider-specific regex failure",
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "card": "1234567890123456",
+          "options": {
+            "provider": "visa"
+          }
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "1234567890123456"
+      ],
+      "rationale": "Tests the condition_true_branch and condition_false_branch of `!(cards[provider.toLowerCase()].test(sanitized))` and the statement `return false;`.",
+      "obligations": [
+        "OB-12",
+        "OB-13",
+        "OB-14"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "obligations": [
+    {
+      "id": "OB-13",
+      "kind": "whitebox",
+      "rule": "Cover uncovered statement at line 99: return false;",
+      "why": "This statement is reached when an invalid protocol is detected and `require_valid_protocol` is true.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "javascript:alert(1)"
+    },
+    {
+      "id": "OB-14",
+      "kind": "whitebox",
+      "rule": "Cover uncovered statement at line 118: after_colon.indexOf('/');",
+      "why": "This statement is reached when parsing the portion of the URL after the colon to identify the first slash.",
+      "minimal_valid": "http://example.com",
+      "minimal_invalid": "http://example"
+    },
+    {
+      "id": "OB-15",
+      "kind": "whitebox",
+      "rule": "Cover uncovered branch at line 124: if (at_position !== -1).",
+      "why": "This branch is taken when the portion of the URL before the first slash contains an '@' symbol, indicating potential authentication information.",
+      "minimal_valid": "http://user:pass@example.com",
+      "minimal_invalid": "http://example.com"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Invalid protocol with require_valid_protocol option",
+      "validator": "isURL",
+      "args": [
+        {
+          "require_valid_protocol": true,
+          "protocols": ["http", "https"]
+        }
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        "javascript:alert(1)"
+      ],
+      "rationale": "Tests rejection of invalid protocols when `require_valid_protocol` is enabled, targeting uncovered statement at line 99.",
+      "obligations": ["OB-13"]
+    },
+    {
+      "title": "Parsing after colon for first slash",
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://example.com"
+      ],
+      "invalid": [
+        "http://example"
+      ],
+      "rationale": "Tests parsing of the portion after the colon to identify the first slash, targeting uncovered statement at line 118.",
+      "obligations": ["OB-14"]
+    },
+    {
+      "title": "Authentication component detection",
+      "validator": "isURL",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "http://user:pass@example.com"
+      ],
+      "invalid": [
+        "http://example.com"
+      ],
+      "rationale": "Tests detection of authentication components in the URL, targeting uncovered branch at line 124.",
+      "obligations": ["OB-15"]
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "generated_categories": [
+    {
+      "generated_category_id": "GENC-1",
+      "name": "Default Behavior",
+      "description": "Tests the default behavior of the isCurrency validator without any options provided.",
+      "generated_group_ids": [
+        "GENERATED-1"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "name": "Symbol Handling",
+      "description": "Tests related to the presence, position, and spacing of the currency symbol.",
+      "generated_group_ids": [
+        "GENERATED-2",
+        "GENERATED-7",
+        "GENERATED-8"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "name": "Negative Values",
+      "description": "Tests the handling of negative currency values when the allow_negatives option is enabled.",
+      "generated_group_ids": [
+        "GENERATED-3"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "name": "Decimal Handling",
+      "description": "Tests related to the presence, format, and customization of the decimal portion.",
+      "generated_group_ids": [
+        "GENERATED-4",
+        "GENERATED-5",
+        "GENERATED-10"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-5",
+      "name": "Thousands Separator",
+      "description": "Tests the behavior when a custom thousands separator is used.",
+      "generated_group_ids": [
+        "GENERATED-6"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-6",
+      "name": "Space Handling",
+      "description": "Tests related to spaces allowed after digits or symbols.",
+      "generated_group_ids": [
+        "GENERATED-9"
+      ]
+    }
+  ]
+}

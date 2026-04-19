@@ -1,0 +1,101 @@
+{
+  "mode": "blackbox",
+  "approach": "naive",
+  "obligations": [],
+  "test_groups": [
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {}
+      ],
+      "valid": [
+        "4111111111111111",
+        "1"
+      ],
+      "invalid": [
+        "1234567890123456",
+        "411111111111111",
+        "41111111111111111",
+        "abcd1234efgh5678",
+        "",
+        "None"
+      ],
+      "title": "General credit card validation without options",
+      "rationale": "Tests common valid and invalid credit card numbers without specifying a provider.",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "visa"
+        }
+      ],
+      "valid": [
+        "4111111111111111",
+        "4012888888881881"
+      ],
+      "invalid": [
+        "378282246310005",
+        "6011111111111117",
+        "5555555555554444",
+        "411111111111111",
+        "abcd1234efgh5678",
+        "",
+        "None"
+      ],
+      "title": "Validation with provider 'visa'",
+      "rationale": "Tests valid Visa credit card numbers and invalid numbers for other providers or malformed inputs.",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "amex"
+        }
+      ],
+      "valid": [
+        "378282246310005",
+        "371449635398431"
+      ],
+      "invalid": [
+        "4111111111111111",
+        "5555555555554444",
+        "6011111111111117",
+        "37828224631000",
+        "abcd1234efgh5678",
+        "",
+        "None"
+      ],
+      "title": "Validation with provider 'amex'",
+      "rationale": "Tests valid American Express credit card numbers and invalid numbers for other providers or malformed inputs.",
+      "obligations": []
+    },
+    {
+      "validator": "isCreditCard",
+      "args": [
+        {
+          "provider": "unsupported"
+        }
+      ],
+      "valid": [],
+      "invalid": [
+        "4111111111111111",
+        "378282246310005",
+        "5555555555554444",
+        "6011111111111117",
+        "abcd1234efgh5678",
+        "",
+        "None"
+      ],
+      "title": "Validation with unsupported provider",
+      "rationale": "Tests behavior when an unsupported provider is specified, ensuring no valid numbers are accepted.",
+      "obligations": []
+    }
+  ],
+  "metadata": {
+    "requirement_source": "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\README.md",
+    "generation_style": "single_pass_with_repair"
+  }
+}

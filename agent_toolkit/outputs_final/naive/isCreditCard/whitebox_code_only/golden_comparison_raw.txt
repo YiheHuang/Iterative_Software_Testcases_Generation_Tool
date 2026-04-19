@@ -1,0 +1,79 @@
+{
+  "golden_to_generated": [
+    {
+      "golden_category_id": "GC-1",
+      "matched_generated_category_ids": ["GENC-1"],
+      "match_type": "strong",
+      "reason": "Both categories focus on general credit card validation without specifying a provider, and their descriptions and test cases align closely."
+    },
+    {
+      "golden_category_id": "GC-2",
+      "matched_generated_category_ids": ["GENC-3"],
+      "match_type": "strong",
+      "reason": "Both categories address handling invalid or unsupported credit card providers, with matching descriptions and test cases."
+    },
+    {
+      "golden_category_id": "GC-3",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses validation for American Express (AmEx) credit cards."
+    },
+    {
+      "golden_category_id": "GC-4",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses validation for Diners Club credit cards."
+    },
+    {
+      "golden_category_id": "GC-5",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses validation for Discover credit cards."
+    },
+    {
+      "golden_category_id": "GC-6",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses validation for JCB credit cards."
+    },
+    {
+      "golden_category_id": "GC-7",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses validation for Mastercard credit cards."
+    },
+    {
+      "golden_category_id": "GC-8",
+      "matched_generated_category_ids": [],
+      "match_type": "none",
+      "reason": "No generated category specifically addresses validation for UnionPay credit cards."
+    },
+    {
+      "golden_category_id": "GC-9",
+      "matched_generated_category_ids": ["GENC-2"],
+      "match_type": "partial",
+      "reason": "GENC-2 addresses provider-specific validation, which partially overlaps with Visa validation, but does not exclusively focus on Visa credit cards."
+    }
+  ],
+  "generated_to_golden": [
+    {
+      "generated_category_id": "GENC-1",
+      "matched_golden_category_ids": ["GC-1"],
+      "match_type": "strong",
+      "reason": "GENC-1 aligns closely with GC-1 in scope and description, focusing on general credit card validation without specifying a provider."
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "matched_golden_category_ids": ["GC-9"],
+      "match_type": "partial",
+      "reason": "GENC-2 addresses provider-specific validation, which partially overlaps with GC-9 (Visa validation), but does not exclusively focus on Visa credit cards."
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "matched_golden_category_ids": ["GC-2"],
+      "match_type": "strong",
+      "reason": "GENC-3 aligns closely with GC-2 in scope and description, focusing on handling invalid or unsupported credit card providers."
+    }
+  ],
+  "novel_generated_categories": []
+}

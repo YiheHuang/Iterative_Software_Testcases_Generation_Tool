@@ -1,0 +1,266 @@
+Group generated tests into generated categories for validator isEmail.
+
+Generated groups:
+[
+  {
+    "title": "Default behavior: standard email validation",
+    "validator": "isEmail",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "test@example.com",
+      "user.name+tag+sorting@example.com",
+      "x@example.com"
+    ],
+    "invalid": [
+      "plainaddress",
+      "@missinglocalpart.com",
+      "test@com",
+      "test@.com"
+    ],
+    "rationale": "Covers baseline email validation rules with no options.",
+    "obligations": [
+      "OB-1"
+    ],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "Allow display name format",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_display_name": true
+      }
+    ],
+    "valid": [
+      "John Doe <test@example.com>",
+      "Jane <jane.doe@example.com>"
+    ],
+    "invalid": [
+      "John Doe test@example.com",
+      "test@example.com"
+    ],
+    "rationale": "Tests the `allow_display_name` option allowing 'Display Name <email>' syntax.",
+    "obligations": [
+      "OB-2"
+    ],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "Require display name format",
+    "validator": "isEmail",
+    "args": [
+      {
+        "require_display_name": true
+      }
+    ],
+    "valid": [
+      "John Doe <test@example.com>"
+    ],
+    "invalid": [
+      "test@example.com",
+      "user.name@example.com"
+    ],
+    "rationale": "Tests the `require_display_name` option enforcing display name syntax.",
+    "obligations": [
+      "OB-3"
+    ],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "Disallow UTF-8 in local part",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_utf8_local_part": false
+      }
+    ],
+    "valid": [
+      "test@example.com"
+    ],
+    "invalid": [
+      "t\u00e9st@example.com",
+      "\u00fcser@example.com"
+    ],
+    "rationale": "Tests the `allow_utf8_local_part` option restricting local part to ASCII.",
+    "obligations": [
+      "OB-4"
+    ],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "Allow domains without TLD",
+    "validator": "isEmail",
+    "args": [
+      {
+        "require_tld": false
+      }
+    ],
+    "valid": [
+      "test@localhost",
+      "user@intranet"
+    ],
+    "invalid": [
+      "test@",
+      "@localhost"
+    ],
+    "rationale": "Tests the `require_tld` option allowing domains without TLD.",
+    "obligations": [
+      "OB-5"
+    ],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "Allow IP addresses in domain",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_ip_domain": true
+      }
+    ],
+    "valid": [
+      "test@[192.168.1.1]",
+      "user@[127.0.0.1]"
+    ],
+    "invalid": [
+      "test@[192.168.1.1.1]",
+      "test@[300.300.300.300]"
+    ],
+    "rationale": "Tests the `allow_ip_domain` option permitting IP-based domains.",
+    "obligations": [
+      "OB-6"
+    ],
+    "generated_id": "GENERATED-6"
+  },
+  {
+    "title": "Allow underscores in local part",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_underscores": true
+      }
+    ],
+    "valid": [
+      "test_email@example.com",
+      "user_name@example.com"
+    ],
+    "invalid": [
+      "test_email@.com",
+      "test_email@com"
+    ],
+    "rationale": "Tests the `allow_underscores` option permitting underscores in the local part.",
+    "obligations": [
+      "OB-7"
+    ],
+    "generated_id": "GENERATED-7"
+  },
+  {
+    "title": "Domain-specific validation",
+    "validator": "isEmail",
+    "args": [
+      {
+        "domain_specific_validation": true
+      }
+    ],
+    "valid": [
+      "test@gmail.com"
+    ],
+    "invalid": [
+      "test@invalid..com",
+      "test@gmail..com"
+    ],
+    "rationale": "Tests the `domain_specific_validation` option enforcing stricter domain rules.",
+    "obligations": [
+      "OB-8"
+    ],
+    "generated_id": "GENERATED-8"
+  },
+  {
+    "title": "Blacklist specific characters in local part",
+    "validator": "isEmail",
+    "args": [
+      {
+        "blacklisted_chars": "*"
+      }
+    ],
+    "valid": [
+      "test@example.com"
+    ],
+    "invalid": [
+      "te*st@example.com",
+      "user*name@example.com"
+    ],
+    "rationale": "Tests the `blacklisted_chars` option rejecting specific characters in the local part.",
+    "obligations": [
+      "OB-9"
+    ],
+    "generated_id": "GENERATED-9"
+  },
+  {
+    "title": "Blacklist specific domains",
+    "validator": "isEmail",
+    "args": [
+      {
+        "host_blacklist": [
+          "blacklisted.com"
+        ]
+      }
+    ],
+    "valid": [
+      "test@example.com"
+    ],
+    "invalid": [
+      "test@blacklisted.com",
+      "user@blacklisted.com"
+    ],
+    "rationale": "Tests the `host_blacklist` option rejecting emails with blacklisted domains.",
+    "obligations": [
+      "OB-10"
+    ],
+    "generated_id": "GENERATED-10"
+  },
+  {
+    "title": "Whitelist specific domains",
+    "validator": "isEmail",
+    "args": [
+      {
+        "host_whitelist": [
+          "whitelisted.com"
+        ]
+      }
+    ],
+    "valid": [
+      "test@whitelisted.com"
+    ],
+    "invalid": [
+      "test@nonwhitelisted.com",
+      "user@example.com"
+    ],
+    "rationale": "Tests the `host_whitelist` option rejecting emails not in the whitelist.",
+    "obligations": [
+      "OB-11"
+    ],
+    "generated_id": "GENERATED-11"
+  },
+  {
+    "title": "Ignore max length restriction",
+    "validator": "isEmail",
+    "args": [
+      {
+        "ignore_max_length": true
+      }
+    ],
+    "valid": [
+      "a...a@example.com (256 characters)"
+    ],
+    "invalid": [
+      "a...a@example.com (257 characters)"
+    ],
+    "rationale": "Tests the `ignore_max_length` option allowing longer email addresses.",
+    "obligations": [
+      "OB-12"
+    ],
+    "generated_id": "GENERATED-12"
+  }
+]

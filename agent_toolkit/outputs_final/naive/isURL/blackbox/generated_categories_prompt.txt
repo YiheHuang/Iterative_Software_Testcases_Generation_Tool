@@ -1,0 +1,197 @@
+Group generated tests into generated categories for validator isURL.
+
+Generated groups:
+[
+  {
+    "title": "Default behavior - common valid URLs",
+    "validator": "isURL",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com",
+      "ftp://example.com",
+      "http://www.example.com",
+      "https://subdomain.example.com/path?query=1#fragment"
+    ],
+    "invalid": [
+      "example.com",
+      "http:/example.com",
+      "http://",
+      "http://example",
+      "http://example..com"
+    ],
+    "rationale": "Covers common valid and invalid URLs under default settings.",
+    "obligations": [],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "require_protocol: true",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_protocol": true
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com",
+      "ftp://example.com"
+    ],
+    "invalid": [
+      "example.com",
+      "www.example.com",
+      "//example.com"
+    ],
+    "rationale": "Ensures URLs must include a protocol when require_protocol is true.",
+    "obligations": [],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "require_tld: false",
+    "validator": "isURL",
+    "args": [
+      {
+        "require_tld": false
+      }
+    ],
+    "valid": [
+      "http://localhost",
+      "http://example",
+      "http://example.com",
+      "http://example."
+    ],
+    "invalid": [
+      "http://",
+      "http://.com",
+      "http://example..com"
+    ],
+    "rationale": "Allows URLs without a top-level domain when require_tld is false.",
+    "obligations": [],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "allow_underscores: true",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_underscores": true
+      }
+    ],
+    "valid": [
+      "http://example_com",
+      "http://sub_domain.example.com",
+      "http://example.com"
+    ],
+    "invalid": [
+      "http://example..com",
+      "http://example_.com"
+    ],
+    "rationale": "Allows underscores in hostnames when allow_underscores is true.",
+    "obligations": [],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "allow_trailing_dot: true",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_trailing_dot": true
+      }
+    ],
+    "valid": [
+      "http://example.com.",
+      "http://example.",
+      "http://subdomain.example.com."
+    ],
+    "invalid": [
+      "http://example..com",
+      "http://example.."
+    ],
+    "rationale": "Allows trailing dots in hostnames when allow_trailing_dot is true.",
+    "obligations": [],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "allow_protocol_relative_urls: true",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_protocol_relative_urls": true
+      }
+    ],
+    "valid": [
+      "//example.com",
+      "//subdomain.example.com/path?query=1#fragment"
+    ],
+    "invalid": [
+      "example.com",
+      "/example.com",
+      "http://"
+    ],
+    "rationale": "Allows protocol-relative URLs when allow_protocol_relative_urls is true.",
+    "obligations": [],
+    "generated_id": "GENERATED-6"
+  },
+  {
+    "title": "disallow_auth: true",
+    "validator": "isURL",
+    "args": [
+      {
+        "disallow_auth": true
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "https://example.com"
+    ],
+    "invalid": [
+      "http://user:pass@example.com",
+      "http://user@example.com"
+    ],
+    "rationale": "Disallows URLs with authentication components when disallow_auth is true.",
+    "obligations": [],
+    "generated_id": "GENERATED-7"
+  },
+  {
+    "title": "allow_fragments: false",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_fragments": false
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "http://example.com/path?query=1"
+    ],
+    "invalid": [
+      "http://example.com#fragment",
+      "http://example.com/path#fragment"
+    ],
+    "rationale": "Disallows fragments in URLs when allow_fragments is false.",
+    "obligations": [],
+    "generated_id": "GENERATED-8"
+  },
+  {
+    "title": "allow_query_components: false",
+    "validator": "isURL",
+    "args": [
+      {
+        "allow_query_components": false
+      }
+    ],
+    "valid": [
+      "http://example.com",
+      "http://example.com/path"
+    ],
+    "invalid": [
+      "http://example.com?query=1",
+      "http://example.com/path?query=1"
+    ],
+    "rationale": "Disallows query components in URLs when allow_query_components is false.",
+    "obligations": [],
+    "generated_id": "GENERATED-9"
+  }
+]

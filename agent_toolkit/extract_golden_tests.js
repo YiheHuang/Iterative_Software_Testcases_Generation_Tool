@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
 
+const EXTRACTOR_VERSION = 3;
+
 function skipString(source, start, quote) {
   let i = start + 1;
   while (i < source.length) {
@@ -100,7 +102,7 @@ function parseTitleLiteral(argText) {
 }
 
 function serializeValue(value) {
-  if (value instanceof RegExp) {
+  if (Object.prototype.toString.call(value) === '[object RegExp]') {
     return {
       __type__: 'RegExp',
       source: value.source,
@@ -237,7 +239,6 @@ function extractGoldenTests(source, validatorName) {
         args: normalizeArgs(evaluated.args || []),
         valid: serializeValue(evaluated.valid || []),
         invalid: serializeValue(evaluated.invalid || []),
-        error: serializeValue(evaluated.error || []),
       });
     }
 
@@ -255,7 +256,11 @@ function main() {
   const source = fs.readFileSync(path.resolve(inputPath), 'utf8');
   const tests = extractGoldenTests(source, validatorName);
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-  fs.writeFileSync(outputPath, JSON.stringify({ test_groups: tests }, null, 2), 'utf8');
+  fs.writeFileSync(
+    outputPath,
+    JSON.stringify({ extractor_version: EXTRACTOR_VERSION, test_groups: tests }, null, 2),
+    'utf8',
+  );
 }
 
 main();

@@ -1,0 +1,1474 @@
+Perform bidirectional category matching for isCurrency.
+
+Fixed golden categories:
+[
+  {
+    "golden_category_id": "GC-1",
+    "name": "Default Currency Validation",
+    "description": "Validates general currency formats without specific constraints.",
+    "golden_group_ids": [
+      "GOLDEN-1"
+    ]
+  },
+  {
+    "golden_category_id": "GC-2",
+    "name": "No Decimal Allowed",
+    "description": "Validates currency formats where decimals are not allowed.",
+    "golden_group_ids": [
+      "GOLDEN-2"
+    ]
+  },
+  {
+    "golden_category_id": "GC-3",
+    "name": "Require Decimal",
+    "description": "Validates currency formats where decimals are mandatory.",
+    "golden_group_ids": [
+      "GOLDEN-3"
+    ]
+  },
+  {
+    "golden_category_id": "GC-4",
+    "name": "Specific Decimal Precision",
+    "description": "Validates currency formats with specific digits allowed after the decimal.",
+    "golden_group_ids": [
+      "GOLDEN-4"
+    ]
+  },
+  {
+    "golden_category_id": "GC-5",
+    "name": "Require Symbol",
+    "description": "Validates currency formats where a currency symbol is mandatory.",
+    "golden_group_ids": [
+      "GOLDEN-5"
+    ]
+  },
+  {
+    "golden_category_id": "GC-6",
+    "name": "Custom Symbol with Negative Sign Before Digits",
+    "description": "Validates currency formats with a custom symbol and negative sign before digits.",
+    "golden_group_ids": [
+      "GOLDEN-6"
+    ]
+  },
+  {
+    "golden_category_id": "GC-7",
+    "name": "Negative Sign After Digits",
+    "description": "Validates currency formats where the negative sign appears after the digits.",
+    "golden_group_ids": [
+      "GOLDEN-7"
+    ]
+  },
+  {
+    "golden_category_id": "GC-8",
+    "name": "Custom Symbol Without Negatives",
+    "description": "Validates currency formats with a custom symbol and disallows negative values.",
+    "golden_group_ids": [
+      "GOLDEN-8"
+    ]
+  },
+  {
+    "golden_category_id": "GC-9",
+    "name": "Custom Symbol with Space and Specific Separators",
+    "description": "Validates currency formats with a custom symbol, space after the symbol, and specific thousands and decimal separators.",
+    "golden_group_ids": [
+      "GOLDEN-9"
+    ]
+  },
+  {
+    "golden_category_id": "GC-10",
+    "name": "Custom Symbol with Space After Symbol",
+    "description": "Validates currency formats with a custom symbol, space after the symbol, and specific separators.",
+    "golden_group_ids": [
+      "GOLDEN-10"
+    ]
+  },
+  {
+    "golden_category_id": "GC-11",
+    "name": "Custom Symbol After Digits",
+    "description": "Validates currency formats with a custom symbol placed after the digits.",
+    "golden_group_ids": [
+      "GOLDEN-11"
+    ]
+  },
+  {
+    "golden_category_id": "GC-12",
+    "name": "Custom Symbol with Negative Sign Before Digits and Space",
+    "description": "Validates currency formats with a custom symbol, negative sign before digits, and space after the symbol.",
+    "golden_group_ids": [
+      "GOLDEN-12"
+    ]
+  },
+  {
+    "golden_category_id": "GC-13",
+    "name": "Custom Symbol Without Negatives and Space",
+    "description": "Validates currency formats with a custom symbol, disallows negatives, and allows space after the symbol.",
+    "golden_group_ids": [
+      "GOLDEN-13"
+    ]
+  },
+  {
+    "golden_category_id": "GC-14",
+    "name": "Parentheses for Negatives",
+    "description": "Validates currency formats where negative values are enclosed in parentheses.",
+    "golden_group_ids": [
+      "GOLDEN-14"
+    ]
+  },
+  {
+    "golden_category_id": "GC-15",
+    "name": "Disallow Negatives",
+    "description": "Validates currency formats where negative values are not allowed.",
+    "golden_group_ids": [
+      "GOLDEN-15"
+    ]
+  },
+  {
+    "golden_category_id": "GC-16",
+    "name": "Custom Brazilian Real Format",
+    "description": "Validates currency formats specific to Brazilian Real with custom symbol and separators.",
+    "golden_group_ids": [
+      "GOLDEN-16"
+    ]
+  }
+]
+
+Indexed golden groups:
+[
+  {
+    "title": "should validate currency",
+    "validator": "isCurrency",
+    "args": [],
+    "valid": [
+      "-$10,123.45",
+      "$10,123.45",
+      "$10123.45",
+      "10,123.45",
+      "10123.45",
+      "10,123",
+      "1,123,456",
+      "1123456",
+      "1.39",
+      ".03",
+      "0.10",
+      "$0.10",
+      "-$0.01",
+      "-$.99",
+      "$100,234,567.89",
+      "$10,123",
+      "10,123",
+      "-10123"
+    ],
+    "invalid": [
+      "1.234",
+      "$1.1",
+      "$ 32.50",
+      "500$",
+      ".0001",
+      "$.001",
+      "$0.001",
+      "12,34.56",
+      "123456,123,123456",
+      "123,4",
+      ",123",
+      "$-,123",
+      "$",
+      ".",
+      ",",
+      "00",
+      "$-",
+      "$-,.",
+      "-",
+      "-$",
+      "",
+      "- $"
+    ],
+    "golden_id": "GOLDEN-1"
+  },
+  {
+    "title": "should validate currency",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_decimal": false
+      }
+    ],
+    "valid": [
+      "-$10,123",
+      "$10,123",
+      "$10123",
+      "10,123",
+      "10123",
+      "10,123",
+      "1,123,456",
+      "1123456",
+      "1",
+      "0",
+      "$0",
+      "-$0",
+      "$100,234,567",
+      "$10,123",
+      "10,123",
+      "-10123"
+    ],
+    "invalid": [
+      "-$10,123.45",
+      "$10,123.45",
+      "$10123.45",
+      "10,123.45",
+      "10123.45",
+      "1.39",
+      ".03",
+      "0.10",
+      "$0.10",
+      "-$0.01",
+      "-$.99",
+      "$100,234,567.89",
+      "1.234",
+      "$1.1",
+      "$ 32.50",
+      ".0001",
+      "$.001",
+      "$0.001",
+      "12,34.56",
+      "123,4",
+      ",123",
+      "$-,123",
+      "$",
+      ".",
+      ",",
+      "00",
+      "$-",
+      "$-,.",
+      "-",
+      "-$",
+      "",
+      "- $"
+    ],
+    "golden_id": "GOLDEN-2"
+  },
+  {
+    "title": "should validate currency",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "require_decimal": true
+      }
+    ],
+    "valid": [
+      "-$10,123.45",
+      "$10,123.45",
+      "$10123.45",
+      "10,123.45",
+      "10123.45",
+      "10,123.00",
+      "1.39",
+      ".03",
+      "0.10",
+      "$0.10",
+      "-$0.01",
+      "-$.99",
+      "$100,234,567.89"
+    ],
+    "invalid": [
+      "$10,123",
+      "10,123",
+      "-10123",
+      "1,123,456",
+      "1123456",
+      "1.234",
+      "$1.1",
+      "$ 32.50",
+      "500$",
+      ".0001",
+      "$.001",
+      "$0.001",
+      "12,34.56",
+      "123456,123,123456",
+      "123,4",
+      ",123",
+      "$-,123",
+      "$",
+      ".",
+      ",",
+      "00",
+      "$-",
+      "$-,.",
+      "-",
+      "-$",
+      "",
+      "- $"
+    ],
+    "golden_id": "GOLDEN-3"
+  },
+  {
+    "title": "should validate currency",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "digits_after_decimal": [
+          1,
+          3
+        ]
+      }
+    ],
+    "valid": [
+      "-$10,123.4",
+      "$10,123.454",
+      "$10123.452",
+      "10,123.453",
+      "10123.450",
+      "10,123",
+      "1,123,456",
+      "1123456",
+      "1.3",
+      ".030",
+      "0.100",
+      "$0.1",
+      "-$0.0",
+      "-$.9",
+      "$100,234,567.893",
+      "$10,123",
+      "10,123.123",
+      "-10123.1"
+    ],
+    "invalid": [
+      "1.23",
+      "$1.13322",
+      "$ 32.50",
+      "500$",
+      ".0001",
+      "$.01",
+      "$0.01",
+      "12,34.56",
+      "123456,123,123456",
+      "123,4",
+      ",123",
+      "$-,123",
+      "$",
+      ".",
+      ",",
+      "00",
+      "$-",
+      "$-,.",
+      "-",
+      "-$",
+      "",
+      "- $"
+    ],
+    "golden_id": "GOLDEN-4"
+  },
+  {
+    "title": "should validate currency",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "require_symbol": true
+      }
+    ],
+    "valid": [
+      "-$10,123.45",
+      "$10,123.45",
+      "$10123.45",
+      "$10,123.45",
+      "$10,123",
+      "$1,123,456",
+      "$1123456",
+      "$1.39",
+      "$.03",
+      "$0.10",
+      "$0.10",
+      "-$0.01",
+      "-$.99",
+      "$100,234,567.89",
+      "$10,123",
+      "-$10123"
+    ],
+    "invalid": [
+      "1.234",
+      "$1.234",
+      "1.1",
+      "$1.1",
+      "$ 32.50",
+      " 32.50",
+      "500",
+      "10,123,456",
+      ".0001",
+      "$.001",
+      "$0.001",
+      "1,234.56",
+      "123456,123,123456",
+      "$123456,123,123456",
+      "123.4",
+      "$123.4",
+      ",123",
+      "$,123",
+      "$-,123",
+      "$",
+      ".",
+      "$.",
+      ",",
+      "$,",
+      "00",
+      "$00",
+      "$-",
+      "$-,.",
+      "-",
+      "-$",
+      "",
+      "$ ",
+      "- $"
+    ],
+    "golden_id": "GOLDEN-5"
+  },
+  {
+    "title": "should validate currency",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "symbol": "\u00a5",
+        "negative_sign_before_digits": true
+      }
+    ],
+    "valid": [
+      "123,456.78",
+      "-123,456.78",
+      "\u00a56,954,231",
+      "\u00a5-6,954,231",
+      "\u00a510.03",
+      "\u00a5-10.03",
+      "10.03",
+      "1.39",
+      ".03",
+      "0.10",
+      "\u00a5-10567.01",
+      "\u00a50.01",
+      "\u00a51,234,567.89",
+      "\u00a510,123",
+      "\u00a5-10,123",
+      "\u00a5-10,123.45",
+      "10,123",
+      "10123",
+      "\u00a5-100"
+    ],
+    "invalid": [
+      "1.234",
+      "\u00a51.1",
+      "5,00",
+      ".0001",
+      "\u00a5.001",
+      "\u00a50.001",
+      "12,34.56",
+      "123456,123,123456",
+      "123 456",
+      ",123",
+      "\u00a5-,123",
+      "",
+      " ",
+      "\u00a5",
+      "\u00a5-",
+      "\u00a5-,.",
+      "-",
+      "- \u00a5",
+      "-\u00a5"
+    ],
+    "golden_id": "GOLDEN-6"
+  },
+  {
+    "title": "should validate currency",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "negative_sign_after_digits": true
+      }
+    ],
+    "valid": [
+      "$10,123.45-",
+      "$10,123.45",
+      "$10123.45",
+      "10,123.45",
+      "10123.45",
+      "10,123",
+      "1,123,456",
+      "1123456",
+      "1.39",
+      ".03",
+      "0.10",
+      "$0.10",
+      "$0.01-",
+      "$.99-",
+      "$100,234,567.89",
+      "$10,123",
+      "10,123",
+      "10123-"
+    ],
+    "invalid": [
+      "-123",
+      "1.234",
+      "$1.1",
+      "$ 32.50",
+      "500$",
+      ".0001",
+      "$.001",
+      "$0.001",
+      "12,34.56",
+      "123456,123,123456",
+      "123,4",
+      ",123",
+      "$-,123",
+      "$",
+      ".",
+      ",",
+      "00",
+      "$-",
+      "$-,.",
+      "-",
+      "-$",
+      "",
+      "- $"
+    ],
+    "golden_id": "GOLDEN-7"
+  },
+  {
+    "title": "should validate currency",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "symbol": "\u00a5",
+        "allow_negatives": false
+      }
+    ],
+    "valid": [
+      "123,456.78",
+      "\u00a56,954,231",
+      "\u00a510.03",
+      "10.03",
+      "1.39",
+      ".03",
+      "0.10",
+      "\u00a50.01",
+      "\u00a51,234,567.89",
+      "\u00a510,123",
+      "10,123",
+      "10123",
+      "\u00a5100"
+    ],
+    "invalid": [
+      "1.234",
+      "-123,456.78",
+      "\u00a5-6,954,231",
+      "\u00a5-10.03",
+      "\u00a5-10567.01",
+      "\u00a51.1",
+      "\u00a5-10,123",
+      "\u00a5-10,123.45",
+      "5,00",
+      "\u00a5-100",
+      ".0001",
+      "\u00a5.001",
+      "\u00a5-.001",
+      "\u00a50.001",
+      "12,34.56",
+      "123456,123,123456",
+      "123 456",
+      ",123",
+      "\u00a5-,123",
+      "",
+      " ",
+      "\u00a5",
+      "\u00a5-",
+      "\u00a5-,.",
+      "-",
+      "- \u00a5",
+      "-\u00a5"
+    ],
+    "golden_id": "GOLDEN-8"
+  },
+  {
+    "title": "should validate currency",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "symbol": "R",
+        "negative_sign_before_digits": true,
+        "thousands_separator": " ",
+        "decimal_separator": ",",
+        "allow_negative_sign_placeholder": true
+      }
+    ],
+    "valid": [
+      "123 456,78",
+      "-10 123",
+      "R-10 123",
+      "R 6 954 231",
+      "R10,03",
+      "10,03",
+      "1,39",
+      ",03",
+      "0,10",
+      "R10567,01",
+      "R0,01",
+      "R1 234 567,89",
+      "R10 123",
+      "R 10 123",
+      "R 10123",
+      "R-10123",
+      "10 123",
+      "10123"
+    ],
+    "invalid": [
+      "1,234",
+      "R -10123",
+      "R- 10123",
+      "R,1",
+      ",0001",
+      "R,001",
+      "R0,001",
+      "12 34,56",
+      "123456 123 123456",
+      " 123",
+      "- 123",
+      "123 ",
+      "",
+      " ",
+      "R",
+      "R- .1",
+      "R-",
+      "-",
+      "-R 10123",
+      "R00",
+      "R -",
+      "-R"
+    ],
+    "golden_id": "GOLDEN-9"
+  },
+  {
+    "title": "should validate currency",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "symbol": "\u20ac",
+        "thousands_separator": ".",
+        "decimal_separator": ",",
+        "allow_space_after_symbol": true
+      }
+    ],
+    "valid": [
+      "123.456,78",
+      "-123.456,78",
+      "\u20ac6.954.231",
+      "-\u20ac6.954.231",
+      "\u20ac 896.954.231",
+      "-\u20ac 896.954.231",
+      "16.954.231",
+      "-16.954.231",
+      "\u20ac10,03",
+      "-\u20ac10,03",
+      "10,03",
+      "-10,03",
+      "-1,39",
+      ",03",
+      "0,10",
+      "-\u20ac10567,01",
+      "-\u20ac 10567,01",
+      "\u20ac 0,01",
+      "\u20ac1.234.567,89",
+      "\u20ac10.123",
+      "10.123",
+      "-\u20ac10.123",
+      "\u20ac 10.123",
+      "\u20ac10.123",
+      "\u20ac 10123",
+      "10.123",
+      "-10123"
+    ],
+    "invalid": [
+      "1,234",
+      "\u20ac 1,1",
+      "50#,50",
+      "123,@\u20ac ",
+      "\u20ac\u20ac500",
+      ",0001",
+      "\u20ac ,001",
+      "\u20ac0,001",
+      "12.34,56",
+      "123456.123.123456",
+      "\u20ac123\u20ac",
+      "",
+      " ",
+      "\u20ac",
+      " \u20ac",
+      "\u20ac ",
+      "\u20ac\u20ac",
+      " 123",
+      "- 123",
+      ".123",
+      "-\u20ac.123",
+      "123 ",
+      "\u20ac-",
+      "- \u20ac",
+      "\u20ac - ",
+      "-",
+      "- ",
+      "-\u20ac"
+    ],
+    "golden_id": "GOLDEN-10"
+  },
+  {
+    "title": "should validate currency",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "symbol": "\u20ac",
+        "thousands_separator": ".",
+        "symbol_after_digits": true,
+        "decimal_separator": ",",
+        "allow_space_after_digits": true
+      }
+    ],
+    "valid": [
+      "123.456,78",
+      "-123.456,78",
+      "6.954.231 \u20ac",
+      "-6.954.231 \u20ac",
+      "896.954.231",
+      "-896.954.231",
+      "16.954.231",
+      "-16.954.231",
+      "10,03\u20ac",
+      "-10,03\u20ac",
+      "10,03",
+      "-10,03",
+      "1,39",
+      ",03",
+      "-,03",
+      "-,03 \u20ac",
+      "-,03\u20ac",
+      "0,10",
+      "10567,01\u20ac",
+      "0,01 \u20ac",
+      "1.234.567,89\u20ac",
+      "10.123\u20ac",
+      "10.123",
+      "10.123\u20ac",
+      "10.123 \u20ac",
+      "10123 \u20ac",
+      "10.123",
+      "10123"
+    ],
+    "invalid": [
+      "1,234",
+      "1,1 \u20ac",
+      ",0001",
+      ",001 \u20ac",
+      "0,001\u20ac",
+      "12.34,56",
+      "123456.123.123456",
+      "\u20ac123\u20ac",
+      "",
+      " ",
+      "\u20ac",
+      " \u20ac",
+      "\u20ac ",
+      " 123",
+      "- 123",
+      ".123",
+      "-.123\u20ac",
+      "-.123 \u20ac",
+      "123 ",
+      "-\u20ac",
+      "- \u20ac",
+      "-",
+      "- "
+    ],
+    "golden_id": "GOLDEN-11"
+  },
+  {
+    "title": "should validate currency",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "symbol": "kr.",
+        "negative_sign_before_digits": true,
+        "thousands_separator": ".",
+        "decimal_separator": ",",
+        "allow_space_after_symbol": true
+      }
+    ],
+    "valid": [
+      "123.456,78",
+      "-10.123",
+      "kr. -10.123",
+      "kr.-10.123",
+      "kr. 6.954.231",
+      "kr.10,03",
+      "kr. -10,03",
+      "10,03",
+      "1,39",
+      ",03",
+      "0,10",
+      "kr. 10567,01",
+      "kr. 0,01",
+      "kr. 1.234.567,89",
+      "kr. -1.234.567,89",
+      "10.123",
+      "kr. 10.123",
+      "kr.10.123",
+      "10123",
+      "10.123",
+      "kr.-10123"
+    ],
+    "invalid": [
+      "1,234",
+      "kr.  -10123",
+      "kr.,1",
+      ",0001",
+      "kr. ,001",
+      "kr.0,001",
+      "12.34,56",
+      "123456.123.123456",
+      ".123",
+      "kr.-.123",
+      "kr. -.123",
+      "- 123",
+      "123 ",
+      "",
+      " ",
+      "kr.",
+      " kr.",
+      "kr. ",
+      "kr.-",
+      "kr. -",
+      "kr. - ",
+      " - ",
+      "-",
+      "- kr.",
+      "-kr."
+    ],
+    "golden_id": "GOLDEN-12"
+  },
+  {
+    "title": "should validate currency",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "symbol": "kr.",
+        "allow_negatives": false,
+        "negative_sign_before_digits": true,
+        "thousands_separator": ".",
+        "decimal_separator": ",",
+        "allow_space_after_symbol": true
+      }
+    ],
+    "valid": [
+      "123.456,78",
+      "10.123",
+      "kr. 10.123",
+      "kr.10.123",
+      "kr. 6.954.231",
+      "kr.10,03",
+      "kr. 10,03",
+      "10,03",
+      "1,39",
+      ",03",
+      "0,10",
+      "kr. 10567,01",
+      "kr. 0,01",
+      "kr. 1.234.567,89",
+      "kr.1.234.567,89",
+      "10.123",
+      "kr. 10.123",
+      "kr.10.123",
+      "10123",
+      "10.123",
+      "kr.10123"
+    ],
+    "invalid": [
+      "1,234",
+      "-10.123",
+      "kr. -10.123",
+      "kr. -1.234.567,89",
+      "kr.-10123",
+      "kr.  -10123",
+      "kr.-10.123",
+      "kr. -10,03",
+      "kr.,1",
+      ",0001",
+      "kr. ,001",
+      "kr.0,001",
+      "12.34,56",
+      "123456.123.123456",
+      ".123",
+      "kr.-.123",
+      "kr. -.123",
+      "- 123",
+      "123 ",
+      "",
+      " ",
+      "kr.",
+      " kr.",
+      "kr. ",
+      "kr.-",
+      "kr. -",
+      "kr. - ",
+      " - ",
+      "-",
+      "- kr.",
+      "-kr."
+    ],
+    "golden_id": "GOLDEN-13"
+  },
+  {
+    "title": "should validate currency",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "parens_for_negatives": true
+      }
+    ],
+    "valid": [
+      "1,234",
+      "(1,234)",
+      "($6,954,231)",
+      "$10.03",
+      "(10.03)",
+      "($10.03)",
+      "1.39",
+      ".03",
+      "(.03)",
+      "($.03)",
+      "0.10",
+      "$10567.01",
+      "($0.01)",
+      "$1,234,567.89",
+      "$10,123",
+      "(10,123)",
+      "10123"
+    ],
+    "invalid": [
+      "1.234",
+      "($1.1)",
+      "-$1.10",
+      "$ 32.50",
+      "500$",
+      ".0001",
+      "$.001",
+      "($0.001)",
+      "12,34.56",
+      "123456,123,123456",
+      "( 123)",
+      ",123",
+      "$-,123",
+      "",
+      " ",
+      "  ",
+      "   ",
+      "$",
+      "$ ",
+      " $",
+      " 123",
+      "(123) ",
+      ".",
+      ",",
+      "00",
+      "$-",
+      "$ - ",
+      "$- ",
+      " - ",
+      "-",
+      "- $",
+      "-$",
+      "()",
+      "( )",
+      "(  -)",
+      "(  - )",
+      "(  -  )",
+      "(-)",
+      "(-$)"
+    ],
+    "golden_id": "GOLDEN-14"
+  },
+  {
+    "title": "should validate currency",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_negatives": false
+      }
+    ],
+    "valid": [
+      "$10,123.45",
+      "$10123.45",
+      "10,123.45",
+      "10123.45",
+      "10,123",
+      "1,123,456",
+      "1123456",
+      "1.39",
+      ".03",
+      "0.10",
+      "$0.10",
+      "$100,234,567.89",
+      "$10,123",
+      "10,123"
+    ],
+    "invalid": [
+      "1.234",
+      "-1.234",
+      "-10123",
+      "-$0.01",
+      "-$.99",
+      "$1.1",
+      "-$1.1",
+      "$ 32.50",
+      "500$",
+      ".0001",
+      "$.001",
+      "$0.001",
+      "12,34.56",
+      "123456,123,123456",
+      "-123456,123,123456",
+      "123,4",
+      ",123",
+      "$-,123",
+      "$",
+      ".",
+      ",",
+      "00",
+      "$-",
+      "$-,.",
+      "-",
+      "-$",
+      "",
+      "- $",
+      "-$10,123.45"
+    ],
+    "golden_id": "GOLDEN-15"
+  },
+  {
+    "title": "should validate currency",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "symbol": "R$",
+        "require_symbol": true,
+        "allow_space_after_symbol": true,
+        "symbol_after_digits": false,
+        "thousands_separator": ".",
+        "decimal_separator": ","
+      }
+    ],
+    "valid": [
+      "R$ 1.400,00",
+      "R$ 400,00"
+    ],
+    "invalid": [
+      "$ 1.400,00",
+      "$R 1.400,00"
+    ],
+    "golden_id": "GOLDEN-16"
+  }
+]
+
+Generated categories:
+[
+  {
+    "generated_category_id": "GENC-1",
+    "name": "Default Behavior Validation",
+    "description": "Tests the default behavior of the isCurrency validator, ensuring proper handling of valid and invalid currency strings with standard formatting.",
+    "generated_group_ids": [
+      "GENERATED-1"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-2",
+    "name": "Symbol Requirement",
+    "description": "Validates the behavior when the `require_symbol` option is set to true, ensuring that currency strings must include a symbol.",
+    "generated_group_ids": [
+      "GENERATED-2"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-3",
+    "name": "Negative Value Handling",
+    "description": "Tests the handling of negative values with different configurations, including disallowing negatives and allowing parentheses for negatives.",
+    "generated_group_ids": [
+      "GENERATED-3",
+      "GENERATED-4"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-4",
+    "name": "Decimal Requirement",
+    "description": "Ensures proper validation of currency strings when the `require_decimal` option is set to true, requiring the presence of a decimal point.",
+    "generated_group_ids": [
+      "GENERATED-5"
+    ]
+  },
+  {
+    "generated_category_id": "GENC-5",
+    "name": "Decimal Precision",
+    "description": "Validates the behavior of the `digits_after_decimal` option, ensuring that only specific numbers of digits are allowed after the decimal point.",
+    "generated_group_ids": [
+      "GENERATED-6"
+    ]
+  }
+]
+
+Indexed generated groups:
+[
+  {
+    "title": "Default options: Basic valid and invalid currency strings",
+    "validator": "isCurrency",
+    "args": [
+      {}
+    ],
+    "valid": [
+      "$10.00",
+      "$1,000.00",
+      "$0.99",
+      "10.00",
+      "0.99",
+      "$0",
+      "$1,000",
+      "1000.00"
+    ],
+    "invalid": [
+      "10",
+      "$10.000",
+      "$10.0",
+      "$10,00",
+      "$10.00.00",
+      "10.00$",
+      "$-10.00",
+      "$ (10.00)",
+      "abc",
+      "",
+      "10.00$"
+    ],
+    "rationale": "Covers basic valid and invalid cases with default options, including proper formatting with symbol, decimal, and thousands separator.",
+    "obligations": [],
+    "generated_id": "GENERATED-1"
+  },
+  {
+    "title": "Option: require_symbol = true",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "require_symbol": true
+      }
+    ],
+    "valid": [
+      "$10.00",
+      "$1,000.00",
+      "$0.99"
+    ],
+    "invalid": [
+      "10.00",
+      "1,000.00",
+      "0.99"
+    ],
+    "rationale": "Ensures that the currency symbol is required when `require_symbol` is true.",
+    "obligations": [],
+    "generated_id": "GENERATED-2"
+  },
+  {
+    "title": "Option: allow_negatives = false",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "allow_negatives": false
+      }
+    ],
+    "valid": [
+      "$10.00",
+      "$1,000.00",
+      "$0.99"
+    ],
+    "invalid": [
+      "$-10.00",
+      "-10.00",
+      "$ (10.00)"
+    ],
+    "rationale": "Ensures that negative values are not allowed when `allow_negatives` is false.",
+    "obligations": [],
+    "generated_id": "GENERATED-3"
+  },
+  {
+    "title": "Option: parens_for_negatives = true",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "parens_for_negatives": true
+      }
+    ],
+    "valid": [
+      "$(10.00)",
+      "$10.00",
+      "10.00"
+    ],
+    "invalid": [
+      "$-10.00",
+      "-10.00",
+      "$ (10.00)"
+    ],
+    "rationale": "Allows parentheses for negative values when `parens_for_negatives` is true.",
+    "obligations": [],
+    "generated_id": "GENERATED-4"
+  },
+  {
+    "title": "Option: require_decimal = true",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "require_decimal": true
+      }
+    ],
+    "valid": [
+      "$10.00",
+      "10.00",
+      "$0.99"
+    ],
+    "invalid": [
+      "$10",
+      "10",
+      "$1,000",
+      "1000"
+    ],
+    "rationale": "Ensures that a decimal is required when `require_decimal` is true.",
+    "obligations": [],
+    "generated_id": "GENERATED-5"
+  },
+  {
+    "title": "Option: digits_after_decimal = [1, 2]",
+    "validator": "isCurrency",
+    "args": [
+      {
+        "digits_after_decimal": [
+          1,
+          2
+        ]
+      }
+    ],
+    "valid": [
+      "$10.0",
+      "$10.00",
+      "10.0",
+      "10.00"
+    ],
+    "invalid": [
+      "$10",
+      "$10.000",
+      "10.000",
+      "10"
+    ],
+    "rationale": "Ensures that only 1 or 2 digits are allowed after the decimal point.",
+    "obligations": [],
+    "generated_id": "GENERATED-6"
+  }
+]
+
+Runtime evaluation details:
+{
+  "summary": {
+    "total_cases": 52,
+    "correct_cases": 48,
+    "incorrect_cases": 4,
+    "exact_match_rate": 0.9230769230769231,
+    "by_expected_kind": {
+      "return": 52,
+      "throw": 0
+    }
+  },
+  "details": {
+    "failed_results": [
+      {
+        "title": "Default options: Basic valid and invalid currency strings",
+        "validator": "isCurrency",
+        "args": [
+          {
+            "symbol": "$",
+            "require_symbol": false,
+            "allow_space_after_symbol": false,
+            "symbol_after_digits": false,
+            "allow_negatives": true,
+            "parens_for_negatives": false,
+            "negative_sign_before_digits": false,
+            "negative_sign_after_digits": false,
+            "allow_negative_sign_placeholder": false,
+            "thousands_separator": ",",
+            "decimal_separator": ".",
+            "allow_decimal": true,
+            "require_decimal": false,
+            "digits_after_decimal": [
+              2
+            ],
+            "allow_space_after_digits": false
+          }
+        ],
+        "input_value": "10",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "Option: parens_for_negatives = true",
+        "validator": "isCurrency",
+        "args": [
+          {
+            "parens_for_negatives": true,
+            "symbol": "$",
+            "require_symbol": false,
+            "allow_space_after_symbol": false,
+            "symbol_after_digits": false,
+            "allow_negatives": true,
+            "negative_sign_before_digits": false,
+            "negative_sign_after_digits": false,
+            "allow_negative_sign_placeholder": false,
+            "thousands_separator": ",",
+            "decimal_separator": ".",
+            "allow_decimal": true,
+            "require_decimal": false,
+            "digits_after_decimal": [
+              2
+            ],
+            "allow_space_after_digits": false
+          }
+        ],
+        "input_value": "$(10.00)",
+        "expected_kind": "return",
+        "expected": true,
+        "actual_kind": "return",
+        "actual_value": false,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "Option: digits_after_decimal = [1, 2]",
+        "validator": "isCurrency",
+        "args": [
+          {
+            "digits_after_decimal": [
+              1,
+              2
+            ],
+            "symbol": "$",
+            "require_symbol": false,
+            "allow_space_after_symbol": false,
+            "symbol_after_digits": false,
+            "allow_negatives": true,
+            "parens_for_negatives": false,
+            "negative_sign_before_digits": false,
+            "negative_sign_after_digits": false,
+            "allow_negative_sign_placeholder": false,
+            "thousands_separator": ",",
+            "decimal_separator": ".",
+            "allow_decimal": true,
+            "require_decimal": false,
+            "allow_space_after_digits": false
+          }
+        ],
+        "input_value": "$10",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": []
+      },
+      {
+        "title": "Option: digits_after_decimal = [1, 2]",
+        "validator": "isCurrency",
+        "args": [
+          {
+            "digits_after_decimal": [
+              1,
+              2
+            ],
+            "symbol": "$",
+            "require_symbol": false,
+            "allow_space_after_symbol": false,
+            "symbol_after_digits": false,
+            "allow_negatives": true,
+            "parens_for_negatives": false,
+            "negative_sign_before_digits": false,
+            "negative_sign_after_digits": false,
+            "allow_negative_sign_placeholder": false,
+            "thousands_separator": ",",
+            "decimal_separator": ".",
+            "allow_decimal": true,
+            "require_decimal": false,
+            "allow_space_after_digits": false
+          }
+        ],
+        "input_value": "10",
+        "expected_kind": "return",
+        "expected": false,
+        "actual_kind": "return",
+        "actual_value": true,
+        "actual_error_name": null,
+        "passed": false,
+        "obligations": []
+      }
+    ],
+    "coverage_total": {
+      "lines": {
+        "total": 38,
+        "covered": 32,
+        "skipped": 0,
+        "pct": 84.21
+      },
+      "statements": {
+        "total": 41,
+        "covered": 35,
+        "skipped": 0,
+        "pct": 85.37
+      },
+      "functions": {
+        "total": 5,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 36,
+        "covered": 27,
+        "skipped": 0,
+        "pct": 75
+      }
+    },
+    "coverage_files": {
+      "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isCurrency.js": {
+        "lines": {
+          "total": 38,
+          "covered": 32,
+          "skipped": 0,
+          "pct": 84.21
+        },
+        "functions": {
+          "total": 5,
+          "covered": 5,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 41,
+          "covered": 35,
+          "skipped": 0,
+          "pct": 85.37
+        },
+        "branches": {
+          "total": 36,
+          "covered": 27,
+          "skipped": 0,
+          "pct": 75
+        }
+      }
+    }
+  }
+}

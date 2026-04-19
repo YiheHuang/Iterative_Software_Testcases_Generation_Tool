@@ -1,0 +1,28 @@
+{
+  "generated_categories": [
+    {
+      "generated_category_id": "GENC-1",
+      "name": "General Credit Card Validation",
+      "description": "Tests the validation of credit card numbers without specifying a provider.",
+      "generated_group_ids": [
+        "GENERATED-1"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "name": "Provider-Specific Credit Card Validation",
+      "description": "Tests the validation of credit card numbers with a specific provider specified.",
+      "generated_group_ids": [
+        "GENERATED-2"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "name": "Invalid Provider Handling",
+      "description": "Tests the behavior when an invalid provider is specified.",
+      "generated_group_ids": [
+        "GENERATED-3"
+      ]
+    }
+  ]
+}

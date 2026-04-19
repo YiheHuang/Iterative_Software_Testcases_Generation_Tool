@@ -1,0 +1,39 @@
+{
+  "generated_categories": [
+    {
+      "name": "Display Name Validation",
+      "description": "Covers cases related to the validation of display names, including allowing, requiring, and handling edge cases like trailing spaces or improper escaping.",
+      "generated_group_ids": ["GENERATED-1", "GENERATED-10", "GENERATED-11", "GENERATED-13", "GENERATED-14", "GENERATED-16"]
+    },
+    {
+      "name": "Maximum Length Validation",
+      "description": "Ensures emails exceeding the maximum length are rejected unless the `ignore_max_length` option is enabled.",
+      "generated_group_ids": ["GENERATED-2", "GENERATED-12", "GENERATED-15", "GENERATED-17"]
+    },
+    {
+      "name": "Host Validation",
+      "description": "Validates emails against host-specific rules, including blacklists and whitelists.",
+      "generated_group_ids": ["GENERATED-3", "GENERATED-4"]
+    },
+    {
+      "name": "Domain-Specific Validation",
+      "description": "Covers rules specific to certain domains, such as Gmail, including username constraints and byte length validation.",
+      "generated_group_ids": ["GENERATED-5", "GENERATED-18"]
+    },
+    {
+      "name": "Domain Format Validation",
+      "description": "Ensures domains are valid FQDNs or IPs based on configuration options.",
+      "generated_group_ids": ["GENERATED-6"]
+    },
+    {
+      "name": "Blacklisted Character Validation",
+      "description": "Ensures emails with blacklisted characters in the local part are rejected.",
+      "generated_group_ids": ["GENERATED-7"]
+    },
+    {
+      "name": "Local Part Validation",
+      "description": "Validates the local part of the email, including quoted and unquoted formats, with and without UTF-8 support.",
+      "generated_group_ids": ["GENERATED-8", "GENERATED-9"]
+    }
+  ]
+}

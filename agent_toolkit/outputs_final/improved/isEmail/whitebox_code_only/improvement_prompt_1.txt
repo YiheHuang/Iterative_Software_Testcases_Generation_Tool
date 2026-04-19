@@ -1,0 +1,496 @@
+You are improving an existing whitebox_code_only test suite for isEmail.
+You are given only coverage details and fine-grained uncovered white-box locations.
+You must use those uncovered positions as exact white-box targets when updating the suite.
+You must NOT use any golden tests, repository test overlap analysis, or external oracle hints.
+
+Goal:
+- propose a small patch that helps the current suite target more uncovered code locations
+- preserve the current suite unless a new patch is clearly justified by uncovered locations
+- keep the patch conservative and additive whenever possible
+- keep the suite conservative and low-redundancy
+
+Return strict JSON with top-level keys obligations and test_groups.
+The returned test_groups must be patch groups only, not a full rewritten suite.
+
+Requirement source:
+None. This is code-only white-box mode.
+
+Current full test suite from the previous iteration:
+[
+  {
+    "title": "Display name validation",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_display_name": true
+      }
+    ],
+    "valid": [
+      "John Doe <john.doe@example.com>",
+      "\"John Doe\" <john.doe@example.com>"
+    ],
+    "invalid": [
+      "Invalid<>Name <john.doe@example.com>",
+      "John Doe john.doe@example.com"
+    ],
+    "rationale": "Covers cases where display name is allowed or required.",
+    "obligations": [
+      "OB-1"
+    ]
+  },
+  {
+    "title": "Maximum length validation",
+    "validator": "isEmail",
+    "args": [
+      {
+        "ignore_max_length": false
+      }
+    ],
+    "valid": [
+      "a@b.com",
+      "a"
+    ],
+    "invalid": [
+      "a"
+    ],
+    "rationale": "Ensures emails exceeding the maximum length are rejected unless `ignore_max_length` is true.",
+    "obligations": [
+      "OB-2"
+    ]
+  },
+  {
+    "title": "Host blacklist validation",
+    "validator": "isEmail",
+    "args": [
+      {
+        "host_blacklist": [
+          "blacklisted.com"
+        ]
+      }
+    ],
+    "valid": [
+      "user@allowed.com"
+    ],
+    "invalid": [
+      "user@blacklisted.com"
+    ],
+    "rationale": "Ensures emails with blacklisted domains are rejected.",
+    "obligations": [
+      "OB-3"
+    ]
+  },
+  {
+    "title": "Host whitelist validation",
+    "validator": "isEmail",
+    "args": [
+      {
+        "host_whitelist": [
+          "whitelisted.com"
+        ]
+      }
+    ],
+    "valid": [
+      "user@whitelisted.com"
+    ],
+    "invalid": [
+      "user@notwhitelisted.com"
+    ],
+    "rationale": "Ensures emails not in the whitelist are rejected when a whitelist is provided.",
+    "obligations": [
+      "OB-4"
+    ]
+  },
+  {
+    "title": "Gmail-specific validation",
+    "validator": "isEmail",
+    "args": [
+      {
+        "domain_specific_validation": true
+      }
+    ],
+    "valid": [
+      "validuser@gmail.com",
+      "validuser@googlemail.com"
+    ],
+    "invalid": [
+      "invalid..user@gmail.com",
+      "toolongusername@gmail.com"
+    ],
+    "rationale": "Covers Gmail-specific username rules when `domain_specific_validation` is enabled.",
+    "obligations": [
+      "OB-5"
+    ]
+  },
+  {
+    "title": "FQDN and IP domain validation",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_ip_domain": true
+      }
+    ],
+    "valid": [
+      "user@valid-domain.com",
+      "user@[127.0.0.1]"
+    ],
+    "invalid": [
+      "user@invalid_domain",
+      "user@[999.999.999.999]"
+    ],
+    "rationale": "Ensures domains are valid FQDNs or IPs based on options.",
+    "obligations": [
+      "OB-6"
+    ]
+  },
+  {
+    "title": "Blacklisted character validation",
+    "validator": "isEmail",
+    "args": [
+      {
+        "blacklisted_chars": "#"
+      }
+    ],
+    "valid": [
+      "user@domain.com"
+    ],
+    "invalid": [
+      "us#er@domain.com"
+    ],
+    "rationale": "Ensures emails with blacklisted characters in the local part are rejected.",
+    "obligations": [
+      "OB-7"
+    ]
+  },
+  {
+    "title": "Quoted local part validation",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_utf8_local_part": true
+      }
+    ],
+    "valid": [
+      "\"quoted\"@domain.com",
+      "\"utf8\u00f1\"@domain.com"
+    ],
+    "invalid": [
+      "\"invalid\"@domain.com",
+      "\"utf8\u00f1\"@domain.com"
+    ],
+    "rationale": "Covers quoted local part validation with and without UTF-8 support.",
+    "obligations": [
+      "OB-8"
+    ]
+  },
+  {
+    "title": "Unquoted local part validation",
+    "validator": "isEmail",
+    "args": [
+      {
+        "allow_utf8_local_part": true
+      }
+    ],
+    "valid": [
+      "user@domain.com",
+      "us\u00e9r@domain.com"
+    ],
+    "invalid": [
+      "user@domain.com",
+      "us\u00e9r@domain.com"
+    ],
+    "rationale": "Covers unquoted local part validation with and without UTF-8 support.",
+    "obligations": [
+      "OB-9"
+    ]
+  }
+]
+
+Coverage details allowed for improvement:
+{
+  "coverage_total": {
+    "lines": {
+      "total": 80,
+      "covered": 72,
+      "skipped": 0,
+      "pct": 90
+    },
+    "statements": {
+      "total": 84,
+      "covered": 76,
+      "skipped": 0,
+      "pct": 90.48
+    },
+    "functions": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 76,
+      "covered": 64,
+      "skipped": 0,
+      "pct": 84.21
+    }
+  },
+  "coverage_files": {
+    "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isEmail.js": {
+      "lines": {
+        "total": 80,
+        "covered": 72,
+        "skipped": 0,
+        "pct": 90
+      },
+      "functions": {
+        "total": 3,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 84,
+        "covered": 76,
+        "skipped": 0,
+        "pct": 90.48
+      },
+      "branches": {
+        "total": 76,
+        "covered": 64,
+        "skipped": 0,
+        "pct": 84.21
+      }
+    }
+  },
+  "uncovered_details": {
+    "C:\\Users\\Yihe Huang\\TJU\\Sofrware_Testing\\Iterative_Software_Testcases_Generation_Tool\\source_code\\validator_js\\src\\lib\\/isEmail.js": {
+      "uncovered_statements": [
+        {
+          "statement_id": "17",
+          "line": 41,
+          "column": 4,
+          "line_text": "    return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 41: return false;"
+        },
+        {
+          "statement_id": "22",
+          "line": 55,
+          "column": 6,
+          "line_text": "      display_name_without_quotes.split('\"').length === display_name_without_quotes.split('\\\\\"').length;",
+          "source_excerpt": "display_name_without_quotes.split('\"').length === display_name_without_quotes.split('\\\\\"').length",
+          "summary": "Uncovered statement at line 55: display_name_without_quotes.split('\"').length === display_name_without_quotes.split('\\\\\"').length"
+        },
+        {
+          "statement_id": "23",
+          "line": 56,
+          "column": 4,
+          "line_text": "    if (!all_start_with_back_slash) {",
+          "source_excerpt": "if (!all_start_with_back_slash) {\n      return false;\n    }",
+          "summary": "Uncovered statement at line 56: if (!all_start_with_back_slash) {\n      return false;\n    }"
+        },
+        {
+          "statement_id": "24",
+          "line": 57,
+          "column": 6,
+          "line_text": "      return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 57: return false;"
+        },
+        {
+          "statement_id": "38",
+          "line": 89,
+          "column": 6,
+          "line_text": "      return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 89: return false;"
+        },
+        {
+          "statement_id": "40",
+          "line": 93,
+          "column": 4,
+          "line_text": "    return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 93: return false;"
+        },
+        {
+          "statement_id": "53",
+          "line": 125,
+          "column": 6,
+          "line_text": "      return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 125: return false;"
+        },
+        {
+          "statement_id": "60",
+          "line": 140,
+          "column": 4,
+          "line_text": "    return false;",
+          "source_excerpt": "return false;",
+          "summary": "Uncovered statement at line 140: return false;"
+        }
+      ],
+      "uncovered_branches": [
+        {
+          "branch_id": "1",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 40,
+          "column": 2,
+          "line_text": "  if (!display_name_without_quotes.trim()) {",
+          "source_excerpt": "if (!display_name_without_quotes.trim()) {\n    return false;\n  }",
+          "condition_excerpt": "!display_name_without_quotes.trim()",
+          "summary": "Uncovered if path `condition_true_branch` at line 40; condition: !display_name_without_quotes.trim()"
+        },
+        {
+          "branch_id": "3",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 49,
+          "column": 4,
+          "line_text": "    if (display_name_without_quotes === display_name) {",
+          "source_excerpt": "if (display_name_without_quotes === display_name) {\n      return false;\n    }",
+          "condition_excerpt": "display_name_without_quotes === display_name",
+          "summary": "Uncovered if path `condition_false_branch` at line 49; condition: display_name_without_quotes === display_name"
+        },
+        {
+          "branch_id": "4",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 56,
+          "column": 4,
+          "line_text": "    if (!all_start_with_back_slash) {",
+          "source_excerpt": "if (!all_start_with_back_slash) {\n      return false;\n    }",
+          "condition_excerpt": "!all_start_with_back_slash",
+          "summary": "Uncovered if path `condition_true_branch` at line 56; condition: !all_start_with_back_slash"
+        },
+        {
+          "branch_id": "4",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 56,
+          "column": 4,
+          "line_text": "    if (!all_start_with_back_slash) {",
+          "source_excerpt": "if (!all_start_with_back_slash) {\n      return false;\n    }",
+          "condition_excerpt": "!all_start_with_back_slash",
+          "summary": "Uncovered if path `condition_false_branch` at line 56; condition: !all_start_with_back_slash"
+        },
+        {
+          "branch_id": "8",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 81,
+          "column": 6,
+          "line_text": "      if (display_name.endsWith(' ')) {",
+          "source_excerpt": "if (display_name.endsWith(' ')) {\n        display_name = display_name.slice(0, -1);\n      }",
+          "condition_excerpt": "display_name.endsWith(' ')",
+          "summary": "Uncovered if path `condition_false_branch` at line 81; condition: display_name.endsWith(' ')"
+        },
+        {
+          "branch_id": "10",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 88,
+          "column": 11,
+          "line_text": "    } else if (options.require_display_name) {",
+          "source_excerpt": "} else if (options.require_display_name) {\n      return false;\n    }",
+          "condition_excerpt": null,
+          "summary": "Uncovered if path `condition_true_branch` at line 88; snippet: } else if (options.require_display_name) {\n      return false;\n    }"
+        },
+        {
+          "branch_id": "11",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 92,
+          "column": 2,
+          "line_text": "  if (!options.ignore_max_length && str.length > defaultMaxEmailLength) {",
+          "source_excerpt": "if (!options.ignore_max_length && str.length > defaultMaxEmailLength) {\n    return false;\n  }",
+          "condition_excerpt": "!options.ignore_max_length && str.length > defaultMaxEmailLength",
+          "summary": "Uncovered if path `condition_true_branch` at line 92; condition: !options.ignore_max_length && str.length > defaultMaxEmailLength"
+        },
+        {
+          "branch_id": "19",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 124,
+          "column": 4,
+          "line_text": "    if (!isByteLength(username.replace(/\\./g, ''), { min: 6, max: 30 })) {",
+          "source_excerpt": "if (!isByteLength(username.replace(/\\./g, ''), { min: 6, max: 30 })) {\n      return false;\n    }",
+          "condition_excerpt": "!isByteLength(username.replace(/\\./g, ''), { min: 6, max: 30 })",
+          "summary": "Uncovered if path `condition_true_branch` at line 124; condition: !isByteLength(username.replace(/\\./g, ''), { min: 6, max: 30 })"
+        },
+        {
+          "branch_id": "21",
+          "branch_type": "if",
+          "path_index": 0,
+          "branch_side": "condition_true_branch",
+          "line": 136,
+          "column": 2,
+          "line_text": "  if (options.ignore_max_length === false && (",
+          "source_excerpt": "if (options.ignore_max_length === false && (\n    !isByteLength(user, { max: 64 }) ||\n    !isByteLength(domain, { max: 254 }))\n  ) {\n    return false;\n  }",
+          "condition_excerpt": null,
+          "summary": "Uncovered if path `condition_true_branch` at line 136; snippet: if (options.ignore_max_length === false && (\n    !isByteLength(user, { max: 64 }) ||\n    !isByteLength(domain, { max: 254 }))\n  ) {\n    return false;\n  }"
+        },
+        {
+          "branch_id": "25",
+          "branch_type": "if",
+          "path_index": 1,
+          "branch_side": "condition_false_branch",
+          "line": 152,
+          "column": 4,
+          "line_text": "    if (!isIP(domain)) {",
+          "source_excerpt": "if (!isIP(domain)) {\n      if (!domain.startsWith('[') || !domain.endsWith(']')) {\n        return false;\n      }\n\n      let noBracketdomain = domain.slice(1, -1);\n\n      if (noBracketdomain.length === 0 || !isIP(noBracketdomain)) {\n        return false;\n      }\n    }",
+          "condition_excerpt": "!isIP(domain)",
+          "summary": "Uncovered if path `condition_false_branch` at line 152; condition: !isIP(domain)"
+        },
+        {
+          "branch_id": "34",
+          "branch_type": "cond-expr",
+          "path_index": 1,
+          "branch_side": "ternary_false_branch",
+          "line": 173,
+          "column": 6,
+          "line_text": "      quotedEmailUser.test(user);",
+          "source_excerpt": "quotedEmailUser.test(user)",
+          "condition_excerpt": null,
+          "summary": "Uncovered cond-expr path `ternary_false_branch` at line 173; snippet: quotedEmailUser.test(user)"
+        },
+        {
+          "branch_id": "35",
+          "branch_type": "cond-expr",
+          "path_index": 1,
+          "branch_side": "ternary_false_branch",
+          "line": 177,
+          "column": 24,
+          "line_text": "    emailUserUtf8Part : emailUserPart;",
+          "source_excerpt": "emailUserPart",
+          "condition_excerpt": null,
+          "summary": "Uncovered cond-expr path `ternary_false_branch` at line 177; snippet: emailUserPart"
+        }
+      ],
+      "uncovered_functions": []
+    }
+  }
+}
+
+Instructions:
+- You must use only the requirement (if provided), the current suite, coverage details, and uncovered details.
+- Do not infer or use any correctness signal, pass/fail summary, failed cases, or hidden oracle information.
+- Treat uncovered_details as exact white-box targets, not as vague hints.
+- Use the previous full suite as the baseline and return only the incremental patch groups.
+- Do not rewrite, delete, or duplicate the existing groups already shown in the current suite.
+- Add only groups that cover meaningfully new targets beyond the current suite.
+- Prefer at most 3 patch groups, each focused on one concrete uncovered condition or path family.
+- If an uncovered branch or statement cannot be operationalized from the provided coverage details, do not guess.
+- If uncovered_details are provided, use them only as white-box targets.
+- If uncovered_details are not provided, do not infer any hidden coverage gap.
+- Prefer minimal option-profile-specific groups.
+- Avoid broad extrapolation; every meaningful update should correspond to a concrete uncovered position or condition.
+- Do not mention or infer any golden test information.

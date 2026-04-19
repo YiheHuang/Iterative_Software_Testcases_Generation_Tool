@@ -1,0 +1,597 @@
+{
+  "cases": [
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "input_value": "user@example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Basic email validation (default options)",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "input_value": "user.name+tag+sorting@example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Basic email validation (default options)",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "input_value": "user_name@example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Basic email validation (default options)",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "input_value": "user-name@example.co.uk",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Basic email validation (default options)",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "input_value": "user123@example.org",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Basic email validation (default options)",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "input_value": "plainaddress",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Basic email validation (default options)",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "input_value": "@missinglocalpart.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Basic email validation (default options)",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "input_value": "user@.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Basic email validation (default options)",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "input_value": "user@com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Basic email validation (default options)",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "input_value": "user@domain..com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Basic email validation (default options)",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {}
+      ],
+      "input_value": "user@domain_with_underscore.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Basic email validation (default options)",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "input_value": "Display Name <user@example.com>",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Validation with allow_display_name=true",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "input_value": "Display Name <user.name+tag+sorting@example.com>",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Validation with allow_display_name=true",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "input_value": "Display Name <user-name@example.co.uk>",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Validation with allow_display_name=true",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "input_value": "Display Name user@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Validation with allow_display_name=true",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "input_value": "Display Name <user@domain..com>",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Validation with allow_display_name=true",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "input_value": "<user@example.com>",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Validation with allow_display_name=true",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_display_name": true
+        }
+      ],
+      "input_value": "Display Name <user@example.com>",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Validation with require_display_name=true",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_display_name": true
+        }
+      ],
+      "input_value": "Display Name <user.name+tag+sorting@example.com>",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Validation with require_display_name=true",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_display_name": true
+        }
+      ],
+      "input_value": "user@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Validation with require_display_name=true",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_display_name": true
+        }
+      ],
+      "input_value": "user.name+tag+sorting@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Validation with require_display_name=true",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_display_name": true
+        }
+      ],
+      "input_value": "Display Name user@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Validation with require_display_name=true",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_display_name": true
+        }
+      ],
+      "input_value": "<user@example.com>",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Validation with require_display_name=true",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_utf8_local_part": false
+        }
+      ],
+      "input_value": "user@example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Validation with allow_utf8_local_part=false",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_utf8_local_part": false
+        }
+      ],
+      "input_value": "user.name@example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Validation with allow_utf8_local_part=false",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_utf8_local_part": false
+        }
+      ],
+      "input_value": "üser@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Validation with allow_utf8_local_part=false",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_utf8_local_part": false
+        }
+      ],
+      "input_value": "用户@例子.广告",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Validation with allow_utf8_local_part=false",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_utf8_local_part": false
+        }
+      ],
+      "input_value": "user@例子.广告",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Validation with allow_utf8_local_part=false",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_tld": false
+        }
+      ],
+      "input_value": "user@example",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Validation with require_tld=false",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_tld": false
+        }
+      ],
+      "input_value": "user@localhost",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Validation with require_tld=false",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_tld": false
+        }
+      ],
+      "input_value": "user@subdomain.local",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Validation with require_tld=false",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_tld": false
+        }
+      ],
+      "input_value": "user@domain..com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Validation with require_tld=false",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_tld": false
+        }
+      ],
+      "input_value": "user@.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Validation with require_tld=false",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_ip_domain": true
+        }
+      ],
+      "input_value": "user@[192.168.1.1]",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Validation with allow_ip_domain=true",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_ip_domain": true
+        }
+      ],
+      "input_value": "user@[255.255.255.255]",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Validation with allow_ip_domain=true",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_ip_domain": true
+        }
+      ],
+      "input_value": "user@192.168.1.1",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Validation with allow_ip_domain=true",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_ip_domain": true
+        }
+      ],
+      "input_value": "user@[300.300.300.300]",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Validation with allow_ip_domain=true",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "blacklisted_chars": "!#$%"
+        }
+      ],
+      "input_value": "user@example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Validation with blacklisted_chars set",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "blacklisted_chars": "!#$%"
+        }
+      ],
+      "input_value": "user.name@example.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Validation with blacklisted_chars set",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "blacklisted_chars": "!#$%"
+        }
+      ],
+      "input_value": "user!name@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Validation with blacklisted_chars set",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "blacklisted_chars": "!#$%"
+        }
+      ],
+      "input_value": "user#name@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Validation with blacklisted_chars set",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "blacklisted_chars": "!#$%"
+        }
+      ],
+      "input_value": "user%name@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Validation with blacklisted_chars set",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "host_blacklist": [
+            "example.com",
+            "blacklisted.com"
+          ]
+        }
+      ],
+      "input_value": "user@allowed.com",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Validation with host_blacklist set",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "host_blacklist": [
+            "example.com",
+            "blacklisted.com"
+          ]
+        }
+      ],
+      "input_value": "user@safe.org",
+      "expected_kind": "return",
+      "expected": true,
+      "title": "Validation with host_blacklist set",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "host_blacklist": [
+            "example.com",
+            "blacklisted.com"
+          ]
+        }
+      ],
+      "input_value": "user@example.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Validation with host_blacklist set",
+      "obligations": []
+    },
+    {
+      "validator": "isEmail",
+      "args": [
+        {
+          "host_blacklist": [
+            "example.com",
+            "blacklisted.com"
+          ]
+        }
+      ],
+      "input_value": "user@blacklisted.com",
+      "expected_kind": "return",
+      "expected": false,
+      "title": "Validation with host_blacklist set",
+      "obligations": []
+    }
+  ],
+  "mode": "blackbox",
+  "approach": "naive",
+  "target_source_files": [
+    "src/lib/isEmail.js"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "obligations": [
+    {
+      "id": "OB-21",
+      "kind": "whitebox",
+      "rule": "Ensure rejection of TLDs containing spaces.",
+      "why": "Targets uncovered statement at line 42 and uncovered branch at line 41 (`condition_true_branch`).",
+      "minimal_valid": null,
+      "minimal_invalid": "example. com"
+    },
+    {
+      "id": "OB-22",
+      "kind": "whitebox",
+      "rule": "Ensure rejection of numeric TLDs when `allow_numeric_tld` is false.",
+      "why": "Targets uncovered statement at line 48 and uncovered branch at line 47 (`condition_true_branch`).",
+      "minimal_valid": "example.com",
+      "minimal_invalid": "example.123"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Reject spaces in TLD",
+      "validator": "isFQDN",
+      "args": [
+        {}
+      ],
+      "valid": [],
+      "invalid": [
+        "example. com",
+        "example. com.",
+        "sub.example. com"
+      ],
+      "rationale": "Tests rejection of TLDs containing spaces, targeting uncovered statement and branch at line 42 and line 41.",
+      "obligations": [
+        "OB-21"
+      ]
+    },
+    {
+      "title": "Reject numeric TLDs when disallowed",
+      "validator": "isFQDN",
+      "args": [
+        {
+          "allow_numeric_tld": false
+        }
+      ],
+      "valid": [
+        "example.com",
+        "example.xn--fiqs8s",
+        "sub.example.com"
+      ],
+      "invalid": [
+        "example.123",
+        "sub.example.456",
+        "example.789"
+      ],
+      "rationale": "Tests rejection of numeric TLDs when `allow_numeric_tld` is false, targeting uncovered statement and branch at line 48 and line 47.",
+      "obligations": [
+        "OB-22"
+      ]
+    }
+  ]
+}

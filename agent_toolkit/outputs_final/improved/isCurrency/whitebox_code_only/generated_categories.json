@@ -1,0 +1,53 @@
+{
+  "generated_categories": [
+    {
+      "generated_category_id": "GENC-1",
+      "name": "Default Behavior",
+      "description": "Tests the default behavior of the isCurrency validator without any custom options.",
+      "generated_group_ids": [
+        "GENERATED-1"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-2",
+      "name": "Symbol Requirements",
+      "description": "Tests related to the presence, placement, or allowance of the currency symbol.",
+      "generated_group_ids": [
+        "GENERATED-2",
+        "GENERATED-5"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-3",
+      "name": "Negative Value Handling",
+      "description": "Tests that validate the handling of negative values, including disallowing negatives, parentheses for negatives, and placement of the negative sign.",
+      "generated_group_ids": [
+        "GENERATED-3",
+        "GENERATED-4",
+        "GENERATED-12",
+        "GENERATED-13",
+        "GENERATED-14"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-4",
+      "name": "Decimal Handling",
+      "description": "Tests related to the presence, absence, or format of decimal values.",
+      "generated_group_ids": [
+        "GENERATED-6",
+        "GENERATED-7",
+        "GENERATED-8"
+      ]
+    },
+    {
+      "generated_category_id": "GENC-5",
+      "name": "Spacing Rules",
+      "description": "Tests that validate the allowance of spaces in various parts of the currency format.",
+      "generated_group_ids": [
+        "GENERATED-9",
+        "GENERATED-10",
+        "GENERATED-11"
+      ]
+    }
+  ]
+}

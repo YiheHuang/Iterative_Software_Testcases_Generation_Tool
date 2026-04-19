@@ -1,0 +1,127 @@
+{
+  "audit": [
+    {
+      "group_title": "Basic email structure validation",
+      "decision": "keep",
+      "reason": "All cases are clearly supported by the requirement for validating basic email structure.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Display name validation",
+      "decision": "keep",
+      "reason": "All cases are supported by the `allow_display_name` option.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Require display name",
+      "decision": "keep",
+      "reason": "All cases are supported by the `require_display_name` option.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Max length validation",
+      "decision": "trim",
+      "reason": "The invalid case 'a@b.' is not related to the maximum length constraint and should be removed.",
+      "removed_valid": [],
+      "removed_invalid": [
+        "a@b."
+      ]
+    },
+    {
+      "group_title": "UTF-8 local part validation",
+      "decision": "drop",
+      "reason": "The valid and invalid cases are identical, and the requirement does not specify this behavior.",
+      "removed_valid": [
+        "t\u0000e9st@example.com"
+      ],
+      "removed_invalid": [
+        "t\u0000e9st@example.com"
+      ]
+    },
+    {
+      "group_title": "TLD requirement",
+      "decision": "drop",
+      "reason": "The valid and invalid cases are identical, and the requirement does not specify this behavior.",
+      "removed_valid": [
+        "test@localhost"
+      ],
+      "removed_invalid": [
+        "test@localhost"
+      ]
+    },
+    {
+      "group_title": "IP domain validation",
+      "decision": "drop",
+      "reason": "The valid and invalid cases are identical, and the requirement does not specify this behavior.",
+      "removed_valid": [
+        "test@[127.0.0.1]"
+      ],
+      "removed_invalid": [
+        "test@[127.0.0.1]"
+      ]
+    },
+    {
+      "group_title": "Blacklisted characters",
+      "decision": "keep",
+      "reason": "All cases are supported by the `blacklisted_chars` option.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Host blacklist",
+      "decision": "keep",
+      "reason": "All cases are supported by the `host_blacklist` option.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Host whitelist",
+      "decision": "keep",
+      "reason": "All cases are supported by the `host_whitelist` option.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Gmail-specific validation",
+      "decision": "keep",
+      "reason": "All cases are supported by the `domain_specific_validation` option.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Quoted local part validation",
+      "decision": "drop",
+      "reason": "The valid and invalid cases are identical, and the requirement does not specify this behavior.",
+      "removed_valid": [
+        "\"quoted\"@example.com"
+      ],
+      "removed_invalid": [
+        "\"quoted\"@example.com"
+      ]
+    },
+    {
+      "group_title": "Invalid display name with only spaces",
+      "decision": "keep",
+      "reason": "The invalid case is supported by the requirement as it targets an uncovered statement for invalid display names with only spaces.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Illegal characters in display name without quotes",
+      "decision": "keep",
+      "reason": "The cases are supported by the requirement as they target an uncovered statement for illegal characters in display names without quotes.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Empty or invalid IP domain inside brackets",
+      "decision": "keep",
+      "reason": "The cases are supported by the requirement as they target an uncovered statement for empty or invalid IP domains inside brackets.",
+      "removed_valid": [],
+      "removed_invalid": []
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "obligations": [
+    {
+      "id": "OB-1",
+      "kind": "whitebox",
+      "rule": "Ensure the function validates strings with the default options.",
+      "why": "Default options are the baseline behavior and must be tested.",
+      "minimal_valid": "$123.45",
+      "minimal_invalid": "123.45"
+    },
+    {
+      "id": "OB-2",
+      "kind": "whitebox",
+      "rule": "Validate behavior when `require_symbol` is true.",
+      "why": "The presence of the currency symbol is enforced by this option.",
+      "minimal_valid": "$123.45",
+      "minimal_invalid": "123.45"
+    },
+    {
+      "id": "OB-3",
+      "kind": "whitebox",
+      "rule": "Validate behavior when `allow_negatives` is false.",
+      "why": "Negative amounts should be rejected when negatives are disallowed.",
+      "minimal_valid": "$123.45",
+      "minimal_invalid": "-$123.45"
+    },
+    {
+      "id": "OB-4",
+      "kind": "whitebox",
+      "rule": "Validate behavior when `parens_for_negatives` is true.",
+      "why": "Negative amounts should be enclosed in parentheses when this option is enabled.",
+      "minimal_valid": "($123.45)",
+      "minimal_invalid": "-$123.45"
+    },
+    {
+      "id": "OB-5",
+      "kind": "whitebox",
+      "rule": "Validate behavior when `symbol_after_digits` is true.",
+      "why": "The currency symbol should appear after the digits when this option is enabled.",
+      "minimal_valid": "123.45$",
+      "minimal_invalid": "$123.45"
+    },
+    {
+      "id": "OB-6",
+      "kind": "whitebox",
+      "rule": "Validate behavior when `allow_decimal` is false.",
+      "why": "Decimal amounts should be rejected when decimals are disallowed.",
+      "minimal_valid": "$123",
+      "minimal_invalid": "$123.45"
+    },
+    {
+      "id": "OB-7",
+      "kind": "whitebox",
+      "rule": "Validate behavior when `require_decimal` is true.",
+      "why": "Decimal amounts should be required when this option is enabled.",
+      "minimal_valid": "$123.45",
+      "minimal_invalid": "$123"
+    },
+    {
+      "id": "OB-8",
+      "kind": "whitebox",
+      "rule": "Validate behavior when `digits_after_decimal` allows multiple values.",
+      "why": "The function should accept decimal amounts with varying numbers of digits after the decimal point.",
+      "minimal_valid": "$123.4",
+      "minimal_invalid": "$123.456"
+    },
+    {
+      "id": "OB-9",
+      "kind": "whitebox",
+      "rule": "Validate behavior when `allow_space_after_symbol` is true.",
+      "why": "A space should be allowed after the currency symbol when this option is enabled.",
+      "minimal_valid": "$ 123.45",
+      "minimal_invalid": "$123.45"
+    },
+    {
+      "id": "OB-10",
+      "kind": "whitebox",
+      "rule": "Validate behavior when `allow_space_after_digits` is true.",
+      "why": "A space should be allowed after the digits when this option is enabled.",
+      "minimal_valid": "$123.45 ",
+      "minimal_invalid": "$123.45"
+    },
+    {
+      "id": "OB-11",
+      "kind": "whitebox",
+      "rule": "Validate behavior when `allow_negative_sign_placeholder` is true.",
+      "why": "A placeholder space should be allowed for the negative sign when this option is enabled.",
+      "minimal_valid": "$ 123.45",
+      "minimal_invalid": "$-123.45"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Default options",
+      "validator": "isCurrency",
+      "args": [{}],
+      "valid": ["$123.45", "$0.99", "$1,234.56"],
+      "invalid": ["123.45", "-$123.45", "$123.456", "$123", "$ 123.45"],
+      "rationale": "Covers the default behavior of the function.",
+      "obligations": ["OB-1"]
+    },
+    {
+      "title": "Require symbol",
+      "validator": "isCurrency",
+      "args": [{ "require_symbol": true }],
+      "valid": ["$123.45"],
+      "invalid": ["123.45", "123"],
+      "rationale": "Tests the enforcement of the currency symbol.",
+      "obligations": ["OB-2"]
+    },
+    {
+      "title": "Disallow negatives",
+      "validator": "isCurrency",
+      "args": [{ "allow_negatives": false }],
+      "valid": ["$123.45"],
+      "invalid": ["-$123.45", "($123.45)"],
+      "rationale": "Ensures negative amounts are rejected when disallowed.",
+      "obligations": ["OB-3"]
+    },
+    {
+      "title": "Parens for negatives",
+      "validator": "isCurrency",
+      "args": [{ "parens_for_negatives": true }],
+      "valid": ["($123.45)"],
+      "invalid": ["-$123.45", "$123.45"],
+      "rationale": "Tests the use of parentheses for negative amounts.",
+      "obligations": ["OB-4"]
+    },
+    {
+      "title": "Symbol after digits",
+      "validator": "isCurrency",
+      "args": [{ "symbol_after_digits": true }],
+      "valid": ["123.45$"],
+      "invalid": ["$123.45", "123.45"],
+      "rationale": "Ensures the currency symbol appears after the digits.",
+      "obligations": ["OB-5"]
+    },
+    {
+      "title": "Disallow decimals",
+      "validator": "isCurrency",
+      "args": [{ "allow_decimal": false }],
+      "valid": ["$123", "$1,234"],
+      "invalid": ["$123.45", "$123.4"],
+      "rationale": "Tests rejection of decimal amounts when disallowed.",
+      "obligations": ["OB-6"]
+    },
+    {
+      "title": "Require decimals",
+      "validator": "isCurrency",
+      "args": [{ "require_decimal": true }],
+      "valid": ["$123.45"],
+      "invalid": ["$123", "$1,234"],
+      "rationale": "Ensures decimal amounts are required when specified.",
+      "obligations": ["OB-7"]
+    },
+    {
+      "title": "Multiple digits after decimal",
+      "validator": "isCurrency",
+      "args": [{ "digits_after_decimal": [1, 2] }],
+      "valid": ["$123.4", "$123.45"],
+      "invalid": ["$123.456", "$123."],
+      "rationale": "Tests support for varying numbers of digits after the decimal.",
+      "obligations": ["OB-8"]
+    },
+    {
+      "title": "Allow space after symbol",
+      "validator": "isCurrency",
+      "args": [{ "allow_space_after_symbol": true }],
+      "valid": ["$ 123.45"],
+      "invalid": ["$123.45", "$ 123"],
+      "rationale": "Tests allowance of a space after the currency symbol.",
+      "obligations": ["OB-9"]
+    },
+    {
+      "title": "Allow space after digits",
+      "validator": "isCurrency",
+      "args": [{ "allow_space_after_digits": true }],
+      "valid": ["$123.45 "],
+      "invalid": ["$123.45", "$123.45  "],
+      "rationale": "Ensures a space is allowed after the digits.",
+      "obligations": ["OB-10"]
+    },
+    {
+      "title": "Allow negative sign placeholder",
+      "validator": "isCurrency",
+      "args": [{ "allow_negative_sign_placeholder": true }],
+      "valid": ["$ 123.45"],
+      "invalid": ["$-123.45", "$123.45"],
+      "rationale": "Tests the use of a placeholder space for the negative sign.",
+      "obligations": ["OB-11"]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "obligations": [],
+  "test_groups": [
+    {
+      "title": "Valid credit card numbers without provider specified",
+      "validator": "isCreditCard",
+      "args": [{}],
+      "valid": [
+        "4111111111111111",  "378282246310005", "6011111111111117"
+      ],
+      "invalid": [
+        "1234567890123456", "4111111111111", "abcdefg"
+      ],
+      "rationale": "Tests valid and invalid credit card numbers without specifying a provider"
+    },
+    {
+      "title": "Valid credit card numbers with provider specified",
+      "validator": "isCreditCard",
+      "args": [{"provider":"visa"}],
+      "valid": [
+        "4111111111111111"
+      ],
+      "invalid": [
+        "1234567890123456", "4111111111111", "abcdefg"
+      ],
+      "rationale": "Tests valid and invalid credit card numbers with a provider specified"
+    },
+    {
+      "title": "Invalid provider specified",
+      "validator": "isCreditCard",
+      "args": [{"provider":"invalid"}],
+      "valid": [],
+      "invalid": [
+        "4111111111111111"
+      ],
+      "rationale": "Tests invalid provider specified"
+    }
+  ]
+}

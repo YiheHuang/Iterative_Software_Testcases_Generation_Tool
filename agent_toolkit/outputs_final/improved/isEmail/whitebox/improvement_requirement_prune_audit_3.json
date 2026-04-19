@@ -1,0 +1,108 @@
+{
+  "audit": [
+    {
+      "group_title": "Basic email structure validation",
+      "decision": "keep",
+      "reason": "All cases are supported by the requirement to validate basic email structure.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Display name validation",
+      "decision": "keep",
+      "reason": "All cases are supported by the `allow_display_name` option.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Require display name",
+      "decision": "keep",
+      "reason": "All cases are supported by the `require_display_name` option.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Max length validation",
+      "decision": "keep",
+      "reason": "All cases are supported by the default max length behavior.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Blacklisted characters",
+      "decision": "keep",
+      "reason": "All cases are supported by the `blacklisted_chars` option.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Host blacklist",
+      "decision": "keep",
+      "reason": "All cases are supported by the `host_blacklist` option.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Host whitelist",
+      "decision": "keep",
+      "reason": "All cases are supported by the `host_whitelist` option.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Gmail-specific validation",
+      "decision": "keep",
+      "reason": "All cases are supported by the `domain_specific_validation` option.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Invalid display name with only spaces",
+      "decision": "keep",
+      "reason": "The invalid case is supported by the requirement to reject display names with only spaces.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Illegal characters in display name without quotes",
+      "decision": "drop",
+      "reason": "The group is redundant with another group that tests the same behavior (OB-20).",
+      "removed_valid": [],
+      "removed_invalid": [
+        "John Doe <email@example.com>"
+      ]
+    },
+    {
+      "group_title": "Empty or invalid IP domain inside brackets",
+      "decision": "keep",
+      "reason": "All cases are supported by the `allow_ip_domain` option and the requirement to validate IP domains.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Illegal characters in display name without quotes",
+      "decision": "drop",
+      "reason": "The group is redundant with another group that tests the same behavior (OB-20).",
+      "removed_valid": [
+        "\"John Doe\" <email@example.com>"
+      ],
+      "removed_invalid": [
+        "John Doe <email@example.com>"
+      ]
+    },
+    {
+      "group_title": "Improperly escaped quotes in display name",
+      "decision": "keep",
+      "reason": "All cases are supported by the requirement to validate properly escaped quotes in display names.",
+      "removed_valid": [],
+      "removed_invalid": []
+    },
+    {
+      "group_title": "Quoted local part validation",
+      "decision": "keep",
+      "reason": "All cases are supported by the `allow_utf8_local_part` option and the requirement to validate quoted local parts.",
+      "removed_valid": [],
+      "removed_invalid": []
+    }
+  ]
+}

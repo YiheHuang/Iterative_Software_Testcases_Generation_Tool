@@ -1,0 +1,87 @@
+{
+  "obligations": [
+    {
+      "id": "OB-13",
+      "kind": "whitebox",
+      "rule": "Cover the false branch of `display_name.endsWith(' ')` at line 81.",
+      "why": "This branch is currently uncovered and relates to trimming trailing spaces in display names.",
+      "minimal_valid": "\"John \" <john.doe@example.com>",
+      "minimal_invalid": "\"John \" <john.doe@example.com>"
+    },
+    {
+      "id": "OB-14",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of `options.require_display_name` at line 88.",
+      "why": "This branch is currently uncovered and ensures emails without display names are rejected when required.",
+      "minimal_valid": "\"John Doe\" <john.doe@example.com>",
+      "minimal_invalid": "john.doe@example.com"
+    },
+    {
+      "id": "OB-15",
+      "kind": "whitebox",
+      "rule": "Cover the true branch of `!options.ignore_max_length && str.length > defaultMaxEmailLength` at line 92.",
+      "why": "This branch is currently uncovered and ensures emails exceeding the maximum length are rejected when `ignore_max_length` is false.",
+      "minimal_valid": "a@b.com",
+      "minimal_invalid": "a_very_long_email_address_that_exceeds_the_maximum_length@example.com"
+    }
+  ],
+  "test_groups": [
+    {
+      "title": "Trailing space in display name",
+      "validator": "isEmail",
+      "args": [
+        {
+          "allow_display_name": true
+        }
+      ],
+      "valid": [
+        "\"John\" <john.doe@example.com>"
+      ],
+      "invalid": [
+        "\"John \" <john.doe@example.com>"
+      ],
+      "rationale": "Covers the false branch of `display_name.endsWith(' ')` to ensure trailing spaces in display names are handled correctly.",
+      "obligations": [
+        "OB-13"
+      ]
+    },
+    {
+      "title": "Require display name validation",
+      "validator": "isEmail",
+      "args": [
+        {
+          "require_display_name": true
+        }
+      ],
+      "valid": [
+        "\"John Doe\" <john.doe@example.com>"
+      ],
+      "invalid": [
+        "john.doe@example.com"
+      ],
+      "rationale": "Covers the true branch of `options.require_display_name` to ensure emails without display names are rejected when required.",
+      "obligations": [
+        "OB-14"
+      ]
+    },
+    {
+      "title": "Maximum email length validation",
+      "validator": "isEmail",
+      "args": [
+        {
+          "ignore_max_length": false
+        }
+      ],
+      "valid": [
+        "a@b.com"
+      ],
+      "invalid": [
+        "a_very_long_email_address_that_exceeds_the_maximum_length@example.com"
+      ],
+      "rationale": "Covers the true branch of `!options.ignore_max_length && str.length > defaultMaxEmailLength` to ensure emails exceeding the maximum length are rejected when `ignore_max_length` is false.",
+      "obligations": [
+        "OB-15"
+      ]
+    }
+  ]
+}
