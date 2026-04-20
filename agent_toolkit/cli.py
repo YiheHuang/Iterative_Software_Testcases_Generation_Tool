@@ -140,11 +140,16 @@ def main() -> None:
         evaluation = evaluator.evaluate(result)
         if evaluation.output_json_path:
             evaluation_payload = load_evaluation_payload(evaluation.output_json_path)
+        # Expose the per-kind accuracy buckets and confusion directions computed
+        # in run_validator_eval.js. Report §4.1 references these exact fields.
+        eval_summary = evaluation.summary or {}
         summary["evaluation"] = {
             "total_cases": evaluation.total_cases,
             "correct_cases": evaluation.correct_cases,
             "incorrect_cases": evaluation.incorrect_cases,
             "exact_match_rate": evaluation.exact_match_rate,
+            "by_expected_kind": eval_summary.get("by_expected_kind"),
+            "confusion": eval_summary.get("confusion"),
             "output_json_path": str(evaluation.output_json_path)
             if evaluation.output_json_path
             else None,

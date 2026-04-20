@@ -74,9 +74,53 @@ async function main() {
   const failedResults = results.filter((result) => !result.passed);
   const passedResults = results.filter((result) => result.passed);
 
+  // Accuracy breakdown by expected kind: valid / invalid / error
+  // Each bucket reports total / passed / failed / pass_rate so the report (§4.1)
+  // can cite precise per-kind accuracy rather than only a global exact_match_rate.
+  const bucketStats = (arr) => {
+    const passed = arr.filter((r) => r.passed).length;
+    return {
+      total: arr.length,
+      passed: passed,
+      failed: arr.length - passed,
+      pass_rate: arr.length === 0 ? null : passed / arr.length,
+    };
+  };
+  const validCases = results.filter(
+    (r) => r.expected_kind === 'return' && r.expected === true,
+  );
+  const invalidCases = results.filter(
+    (r) => r.expected_kind === 'return' && r.expected === false,
+  );
+  const errorCases = results.filter((r) => r.expected_kind === 'throw');
   const byExpectedKind = {
-    return: results.filter((result) => result.expected_kind === 'return').length,
-    throw: results.filter((result) => result.expected_kind === 'throw').length,
+    valid: bucketStats(validCases),
+    invalid: bucketStats(invalidCases),
+    error: bucketStats(errorCases),
+  };
+
+  // Confusion directions expose which way the LLM is wrong:
+  // - valid_misclassified_as_invalid: LLM said valid, real impl returns false
+  // - invalid_misclassified_as_valid: LLM said invalid, real impl returns true
+  // - error_not_thrown: LLM said TypeError expected, real impl did not throw
+  const confusion = {
+    valid_misclassified_as_invalid: results.filter(
+      (r) =>
+        r.expected_kind === 'return' &&
+        r.expected === true &&
+        !r.passed &&
+        r.actual_kind === 'return',
+    ).length,
+    invalid_misclassified_as_valid: results.filter(
+      (r) =>
+        r.expected_kind === 'return' &&
+        r.expected === false &&
+        !r.passed &&
+        r.actual_kind === 'return',
+    ).length,
+    error_not_thrown: results.filter(
+      (r) => r.expected_kind === 'throw' && !r.passed && r.actual_kind === 'return',
+    ).length,
   };
 
   const byTitle = {};
@@ -140,6 +184,7 @@ async function main() {
           incorrect_cases: incorrectCases,
           exact_match_rate: exactMatchRate,
           by_expected_kind: byExpectedKind,
+          confusion: confusion,
         },
         details: {
           passed_results: passedResults,
