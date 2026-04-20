@@ -3,17 +3,10 @@
 ## 1. 项目目标与研究问题
 
 本项目围绕一个 LLM 驱动的自动化测试生成工具展开，其中 `improved agent` 是本文的主要研究对象，`naive agent` 作为对照基线用于提供参考比较。  
-其中，`naive agent` 代表保守的一轮生成方案，用于回答一个基本问题：在不引入更强 prompt 设计与覆盖率驱动迭代的情况下，测试生成可以达到怎样的基线水平。
+其中，`naive agent` 代表保守的一轮生成方案，用于回答一个基本问题：在不引入更强 prompt 设计与Coverage驱动迭代的情况下，测试生成可以达到怎样的基线水平。
 
 在此基础上，本项目真正关注的是：  
 **通过更强的 prompt 设计与白盒迭代机制，`improved agent` 能否在真实开源项目上生成更高质量的测试用例。**
-
-基于上述设定，本文围绕以下研究问题展开：
-
-1. 在真实开源项目上，LLM 能否生成可执行、可用的测试用例？
-2. 在 `blackbox`、`whitebox`、`whitebox_code_only` 三种输入模式下，测试质量如何变化？
-3. 相较只作为 baseline 的 `naive agent`，`improved agent` 的 prompt 增强与 iteration 机制到底提升了什么？
-4. 在 `improved whitebox` 中，哪些设计是有效改进，哪些设计是错误方向？
 
 ## 2. 系统设计、输入与输出
 
@@ -27,8 +20,8 @@
 2. 根据 mode 构造 prompt，请 LLM 生成结构化测试用例。
 3. 将输出规范化为统一 JSON，包含 `obligations` 与 `test_groups`。
 4. 在真实实现上执行测试，得到 correctness。
-5. 收集代码覆盖率，得到 `Stmt / Branch / Func / Line` 四项指标。
-6. 与人工黄金测试做语义类别对齐，得到 `matched_golden_ratio`。
+5. 收集Code Coverage，得到 `Stmt / Branch / Func / Line` 四项指标。
+6. 与人工黄金测试做语义类别对齐，得到 `Golden Tests Match Ratio`。
 7. 若为 `improved` 白盒模式，则继续利用 coverage feedback 做 patch 迭代。
 
 ### 2.2 输入
@@ -43,8 +36,7 @@
 对于 `improved` 白盒迭代，每轮额外输入：
 
 - 当前完整 suite；
-- `coverage_total`；
-- `coverage_files`；
+- `coverage_details`；
 - `uncovered_details`。
 
 ### 2.3 输出
@@ -102,7 +94,7 @@
 
 #### 2.5.2 `whitebox` 模式
 
-在 `whitebox` 模式下，`improved agent` 是整个项目最核心的研发对象。
+`whitebox` 模式下的`improved agent` 是整个项目最核心的研发对象。
 
 其设计包括两层：
 
@@ -112,9 +104,9 @@
    - 引导模型枚举 structural white-box obligations；
    - 引导其关注 early return、helper-sensitive path、boundary-triggered branches。
 
-2. **动态覆盖率迭代**
+2. **动态Coverage迭代**
    - 每一轮都提供当前完整 suite；
-   - 提供 `requirement`、`coverage detail`、`uncovered_details`；
+   - 提供 `requirement`、`coverage_details`、`uncovered_details`；
    - 模型只输出 patch groups；
    - 系统做 `current suite + patch` 得到下一轮 suite。
 
@@ -138,7 +130,7 @@
 - 检验“只有代码时，LLM 能否做出接近白盒测试的决策”；
 - 暴露 requirement 缺失时的语义漂移风险。
 
-### 2.6 为什么 `improved` 的优势主要来自 prompt + iteration
+### 2.6 `improved` 的优势主要来自 prompt + iteration
 
 `improved` 的性能提升，不应被简单理解为“模型更强”。  
 更准确地说，它来自两类工程设计：
@@ -149,7 +141,7 @@
    - 在 code-only 中限制无依据推断。
 
 2. **Iteration 层面的增强**
-   - 在白盒场景下利用 coverage / uncovered details 做 patch refinement；
+   - 在白盒场景下利用 coverage / uncovered details 做 patch refinement，以此提升Coverage指标和Golden Tests Match Ratio；
    - 通过 `suite + patch` 保留已有有效 groups，避免整套重写带来的破坏。
 
 因此，`improved agent` 构成了本文的主要方法设计；`naive agent` 的作用则是提供稳定的对照基线。
@@ -171,24 +163,24 @@
 
 - correctness；
 - coverage；
-- semantic overlap。
+- golden tests match ratio。
 
 ## 4. 选择的三类核心评价指标
 
-### 4.1 正确率 `exact_match_rate`
+### 4.1 Correctness
 
 含义：生成测试在真实实现上执行后，判断正确的比例。
 
-它反映的是：
+它反映的是：  
 
 - 测试是否能真正执行；
 - 测试断言是否正确；
 - LLM 是否正确理解了函数的外部行为。
 
 选择原因：  
-如果测试断言写错，即使覆盖率很高，也不能视作高质量测试。
+如果测试断言写错，即使Coverage很高，也不能视作高质量测试。
 
-### 4.2 覆盖率 `Stmt / Branch / Func / Line`
+### 4.2 Coverage
 
 包括：
 
@@ -203,7 +195,7 @@
 - 白盒信息是否真正转化为了路径探索能力；
 - 迭代 patch 是否命中了之前未覆盖的代码位置。
 
-### 4.3 黄金测试重合率 `matched_golden_ratio`
+### 4.3 Golden Tests Match Ratio
 
 含义：生成测试与人工黄金测试在语义类别上的重合比例。
 
@@ -217,19 +209,29 @@
 
 本项目最重要的发现之一是：
 
-**correctness、coverage、golden overlap 三者相关，但并不等价。**
+**Correctness、Coverage、Golden Tests Match Ratio 三者相关，但并不等价。**
 
 例如在 `isCurrency` 上，经常出现：
 
-- coverage 很高，甚至达到 `100%`；
-- golden overlap 也很高；
-- 但 correctness 仍明显偏低。
+- Coverage很高，甚至达到 `100%`；
+- Golden Tests Match Ratio 也很高；
+- 但Correctness 仍明显偏低。
 
 这说明：
 
 - 走到代码路径，不等于断言就对；
 - 与专家测试类别相似，不等于每个 case 都正确；
-- 所以实验不能只看 coverage，也不能只看 correctness。
+- 所以实验不能只看Coverage和Golden Tests Match Ratio，Correctness也是不可忽视的指标。
+
+在其他函数上，也往往出现：
+
+- Correctness很高，甚至达到 `100%`；
+- Golden Tests Match Ratio和Coverage明显偏低。
+
+这说明：
+
+- agent在生成测试用例时过于保守，为追求贴合需求的Correctness而严重损失了创造性。
+- 这也说明了Coverage和Golden Tests Match Ratio存在的意义。
 
 ## 5. 实验设计
 
@@ -258,11 +260,10 @@
   - `whitebox`
   - `whitebox_code_only`
 
-之所以删除 `isUUID` 以及更早删除一些“太简单”或“golden 提取不稳定”的函数，是因为实践中发现：
+之所以删除一些“太简单”或“golden 提取不稳定”的函数，是因为实践中发现：
 
 - 太简单的函数会让所有方法都表现很好，稀释真正困难函数上的差异；
-- ground truth 不稳定的函数会破坏结论解释；
-- 高质量 benchmark 需要“有区分度 + 有可靠 ground truth”。
+- 高质量 benchmark 需要“有区分度 + 有充足的golden tests”。
 
 ## 6. 实验结果
 
@@ -274,16 +275,10 @@
 - 成功实验：`30`
 - 总 LLM 请求数：`140`
 - 总 token 消耗：`915,473`
-- 平均正确率：`0.8599`
-- 平均黄金测试重合率：`0.7915`
-- 平均语句覆盖率：`86.52`
-- 平均分支覆盖率：`80.21`
-- 平均函数覆盖率：`100.00`
-- 平均行覆盖率：`86.55`
 
 ### 6.2 按 `mode + approach` 汇总
 
-| Agent | Mode | Avg Tokens | Avg Exact Match | Avg Stmt Cov | Avg Branch Cov | Avg Func Cov | Avg Line Cov | Avg Golden Match |
+| Agent | Mode | Avg Tokens | Avg Correctness | Avg Stmt Cov | Avg Branch Cov | Avg Func Cov | Avg Line Cov | Avg Golden Tests Match Ratio |
 |---|---|---:|---:|---:|---:|---:|---:|---:|
 | `naive` | `blackbox` | 11259.80 | 0.8826 | 81.78 | 74.89 | 100.00 | 81.72 | 0.5942 |
 | `naive` | `whitebox` | 19494.40 | 0.9167 | 84.27 | 78.74 | 100.00 | 84.33 | 0.7714 |
@@ -294,7 +289,7 @@
 
 ### 6.3 完整结果矩阵
 
-| Validator | Agent | Mode | Status | Correct/Total | Exact Match Rate | Stmt Cov | Branch Cov | Func Cov | Line Cov | Matched Golden Ratio | Total Tokens | Note |
+| Validator | Agent | Mode | Status | Correct/Total | Correctness Rate | Stmt Cov | Branch Cov | Func Cov | Line Cov | Golden Tests Match Ratio | Total Tokens | Note |
 |---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
 | isEmail | naive | blackbox | success | 44/46 | 0.9565 | 73.81 | 68.42 | 100.00 | 73.75 | 0.5000 | 12093 | ok |
 | isEmail | naive | whitebox | success | 41/42 | 0.9762 | 73.81 | 68.42 | 100.00 | 73.75 | 0.6429 | 13194 | ok |
@@ -338,97 +333,117 @@
 
 #### 7.1.1 `blackbox`
 
-- `naive blackbox`：`Exact 0.8826`，`Golden 0.5942`，`Tokens 11259.80`
-- `improved blackbox`：`Exact 0.8823`，`Golden 0.9667`，`Tokens 21537.20`
+| Agent | Avg Tokens | Avg Correctness | Avg Stmt Cov | Avg Branch Cov | Avg Line Cov | Avg Golden Tests Match Ratio |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `naive blackbox` | 11259.80 | 0.8826 | 81.78 | 74.89 | 81.72 | 0.5942 |
+| `improved blackbox` | 21537.20 | 0.8823 | 83.98 | 78.53 | 84.09 | 0.9667 |
+
+![alt text](images\blackbox.png)
 
 结论：
 
-- correctness 几乎持平；
-- `improved` 的黄金命中率大幅提升；
-- 成本约增加一倍。
+- `Avg Correctness`（Correctness）几乎持平；
+- `improved` 的 `Avg Golden Tests Match Ratio` 大幅提升（从 0.5942 提升至 0.9667），且各项Code Coverage（`Avg Stmt/Branch/Line Cov`）也有小幅上升；
+- 成本（Tokens消耗）约增加一倍。
 
 原因：
 
 - `naive blackbox` 只是一个保守 baseline；
 - `improved blackbox` 使用 obligations extraction、category clustering 与 self-audit；
-- 因此更容易覆盖 requirement 中分散的语义类别和 option family。
+- 因此更容易覆盖 requirement 中分散的语义类别和 option family，此点直接反映在大幅拉升的 `Avg Golden Tests Match Ratio` 上。
 
 这说明在 blackbox 场景下，`improved` 的主要增益首先来自**prompt 增强**，而不是 iteration。
 
 #### 7.1.2 `whitebox`
 
-- `naive whitebox`：`Exact 0.9167`，`Stmt 84.27`，`Branch 78.74`，`Line 84.33`，`Golden 0.7714`，`Tokens 19494.40`
-- `improved whitebox`：`Exact 0.8132`，`Stmt 95.19`，`Branch 92.31`，`Line 95.02`，`Golden 0.9857`，`Tokens 58264.80`
+| Agent | Avg Tokens | Avg Correctness | Avg Stmt Cov | Avg Branch Cov | Avg Line Cov | Avg Golden Tests Match Ratio |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `naive whitebox` | 19494.40 | 0.9167 | 84.27 | 78.74 | 84.33 | 0.7714 |
+| `improved whitebox` | 58264.80 | 0.8132 | 95.19 | 92.31 | 95.02 | 0.9857 |
+
+![alt text](images\whitebox.png)
 
 结论：
 
-- baseline `naive` 的 correctness 更高；
-- `improved` 的 coverage 和 golden overlap 明显更高；
+- baseline `naive` 的 `Avg Correctness` 较强（0.9167 vs 0.8132）；
+- `improved` 的各项Code Coverage与 `Avg Golden Tests Match Ratio` 大幅领先（如 `Avg Stmt / Line Cov` 达 95%）；
 - `improved` 成本显著更高。
 
 原因：
 
-- `naive` 更保守，不主动追 coverage maximality，因此更不容易写歪 test case；
+- `naive` 更保守，不主动追 coverage maximality，因此更容易维系高 `Avg Correctness`；
 - `improved whitebox` 则结合了更强的 white-box prompt 与 coverage-guided patch 迭代；
-- 因而更容易补到分支与语义类别，但也更容易在参数、断言和边界细节上出错。
+- 因而更容易补到分支与语义类别，但也更易在参数、断言和边界细节上出错。
 
 这说明：  
-`improved whitebox` 的主要优势不是 correctness，而是**结构覆盖能力与语义覆盖能力**。
+`improved whitebox` 的主要优势不是Correctness，而是突出的**结构覆盖能力（Coverage）与语义覆盖能力（Golden Tests Match Ratio）**。
 
 #### 7.1.3 `whitebox_code_only`
 
-- `naive whitebox_code_only`：`Exact 0.8855`，`Golden 0.5002`，`Tokens 18603.80`
-- `improved whitebox_code_only`：`Exact 0.7793`，`Golden 0.9312`，`Tokens 53934.60`
+| Agent | Avg Tokens | Avg Correctness | Avg Stmt Cov | Avg Branch Cov | Avg Line Cov | Avg Golden Tests Match Ratio |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `naive whitebox_code_only` | 18603.80 | 0.8855 | 83.71 | 75.11 | 84.49 | 0.5002 |
+| `improved whitebox_code_only` | 53934.60 | 0.7793 | 90.19 | 81.70 | 89.66 | 0.9312 |
+
+![alt text](images\whitebox_code_only.png)
 
 结论：
 
-- `improved` 的黄金命中与 coverage 更强；
-- baseline `naive` 的 correctness 更稳；
-- `improved` 成本很高。
+- `improved` 的 `Avg Golden Tests Match Ratio` 与 各项Coverage表现全面超越 baseline；
+- 但 baseline `naive` 保留了更加稳定的 `Avg Correctness`；
+- `improved` 成本较高。
 
 原因：
 
 - code-only 情况下没有 requirement 约束；
-- `improved` 更积极地依据代码分支扩展测试类别；
-- 但越激进地从代码推断外部行为，越容易出现“路径上像对了、语义上却不完全对”的问题。
+- `improved` 更积极地依据代码分支扩展测试类别，拔高了 `Avg Stmt/Branch/Line Cov` 等维度；
+- 但越激进地从代码推断外部行为，越容易遭受“路径上像对了、语义上却不完全对”的惩罚，导致Correctness显著下跌。
 
 ### 7.2 同一 agent 内部：不同 mode 的比较
 
 #### 7.2.1 baseline `naive` 内部对比
 
-- `blackbox`：`Exact 0.8826`
-- `whitebox`：`Exact 0.9167`
-- `whitebox_code_only`：`Exact 0.8855`
+| Mode | Avg Correctness | Avg Stmt Cov | Avg Branch Cov | Avg Line Cov | Avg Golden Tests Match Ratio |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `blackbox` | 0.8826 | 81.78 | 74.89 | 81.72 | 0.5942 |
+| `whitebox` | 0.9167 | 84.27 | 78.74 | 84.33 | 0.7714 |
+| `whitebox_code_only` | 0.8855 | 83.71 | 75.11 | 84.49 | 0.5002 |
+
+![alt text](images\naive_agent.png)
 
 观察：
 
-1. `naive whitebox` 是 baseline 中表现最好的模式。
-2. `naive blackbox` 虽然 coverage 与 golden 不如 `whitebox`，但成本最低、correctness 也很稳。
-3. `naive whitebox_code_only` correctness 仍然不错，但 golden overlap 最低。
+1. `naive whitebox` 毫无疑问是 baseline 中表现最好的模式，各项指标全面领先。
+2. `naive blackbox` 虽然Coverage（如 `Avg Stmt Cov` 81.78）与 `Avg Golden Tests Match Ratio` 均不如 `whitebox`，但其成本最低，且 `Avg Correctness` 同处于高位段。
+3. `naive whitebox_code_only` 虽然仍能维持住较高的 `Avg Correctness` 和相对平稳的Coverage，但出现了最低的 `Avg Golden Tests Match Ratio`（0.5002）。
 
 解释：
 
 - 对 baseline 来说，requirement + code 的组合提供了最平衡的信息；
 - 只有 requirement 时，模型仍能写出较稳的一轮 baseline；
-- 只有 code 时，模型容易抓到 obvious branches，却不一定能恢复出专家测试的语义结构。
+- 只有 code 时，缺乏需求约束导致模型只能抓到 obvious branches 从而维持Coverage，却极易在此过程中遗漏专家测试具备的语义结构。
 
 #### 7.2.2 `improved` 内部对比
 
-- `blackbox`：`Exact 0.8823`，`Golden 0.9667`
-- `whitebox`：`Exact 0.8132`，`Golden 0.9857`，`Stmt 95.19`，`Branch 92.31`
-- `whitebox_code_only`：`Exact 0.7793`，`Golden 0.9312`
+| Mode | Avg Correctness | Avg Stmt Cov | Avg Branch Cov | Avg Line Cov | Avg Golden Tests Match Ratio |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `blackbox` | 0.8823 | 83.98 | 78.53 | 84.09 | 0.9667 |
+| `whitebox` | 0.8132 | 95.19 | 92.31 | 95.02 | 0.9857 |
+| `whitebox_code_only` | 0.7793 | 90.19 | 81.70 | 89.66 | 0.9312 |
+
+![alt text](images\improved_agent.png)
 
 观察：
 
-1. `improved blackbox` 是最平衡的模式。
-2. `improved whitebox` 是最强的 coverage 模式。
-3. `improved whitebox_code_only` 风险最大。
+1. `improved blackbox` 是最平衡的模式。它的Correctness（`Avg Correctness`）在三个模式中最高，且实现了同样极高的 `Avg Golden Tests Match Ratio`。
+2. `improved whitebox` 是最强的 coverage 模式。拿下了最优的Code Coverage（多项均突破 90% 大关）与几乎满分的 `Avg Golden Tests Match Ratio`，代价是牺牲部分Correctness。
+3. `improved whitebox_code_only` 风险最大。由于过度追赶覆盖路径，它的 `Avg Correctness` 断崖坠落得最为明显，尽管它仍能在没有 requirement 时维持不俗的覆盖和命中率。
 
 解释：
 
-- `improved blackbox` 主要依靠 prompt 增强，就已经能显著提升语义类别覆盖；
-- `improved whitebox` 则进一步利用代码结构与 uncovered feedback，把路径探索能力拉到最高；
-- `improved whitebox_code_only` 虽然也能追路径，但由于 requirement 缺失，更容易语义漂移。
+- `improved blackbox` 主要依靠 prompt 增强，就能显著提升语义类别泛化能力，且免受路径陷阱影响，最为均衡妥当；
+- `improved whitebox` 将代码逻辑同 uncovered feedback 相结合，把覆盖路径探索域最大化延展；
+- `improved whitebox_code_only` 同样致力于补足未知路径，但 requirement 的空白放大了其实施语义漂移的安全隐患。
 
 ## 8. 消融实验
 
@@ -453,18 +468,18 @@
 
 同口径 `5` 函数下，`improved whitebox` 对比如下：
 
-| Version | Avg Tokens | Avg Exact Match | Avg Stmt Cov | Avg Branch Cov | Avg Func Cov | Avg Line Cov | Avg Golden Match |
+| Version | Avg Tokens | Avg Correctness | Avg Stmt Cov | Avg Branch Cov | Avg Func Cov | Avg Line Cov | Avg Golden Tests Match Ratio |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | `experiment_ablation_1`（带 requirement 复检） | 79361.20 | 0.8849 | 88.38 | 82.59 | 100.00 | 88.49 | 0.7776 |
 | `final`（最终版） | 58264.80 | 0.8132 | 95.19 | 92.31 | 100.00 | 95.02 | 0.9857 |
 
 这个结果说明：
 
-1. requirement 复检确实能在这组数据里保住更高 correctness；
+1. requirement 复检确实能在这组数据里保住更高的 `Avg Correctness`（Correctness）；
 2. 但代价是：
-   - token 更高；
-   - coverage 更低；
-   - golden overlap 显著更低。
+   - Token 更高；
+   - Coverage（Coverage）更低；
+   - Golden Tests Match Ratio（`Avg Golden Tests Match Ratio`）显著更低。
 
 因此，对 `improved whitebox` 来说，复检机制并没有把它变成“更平衡”的方法，反而削弱了它原本最有价值的能力：
 
@@ -480,21 +495,19 @@
 
 同口径 `5` 函数下，`improved whitebox` 对比如下：
 
-| Version | Avg Tokens | Avg Exact Match | Avg Stmt Cov | Avg Branch Cov | Avg Func Cov | Avg Line Cov | Avg Golden Match |
+| Version | Avg Tokens | Avg Correctness | Avg Stmt Cov | Avg Branch Cov | Avg Func Cov | Avg Line Cov | Avg Golden Tests Match Ratio |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| `experiment_ablation_2` | 68342.80 | 0.8164 | 88.74 | 81.49 | 100.00 | 89.37 | 0.8430 |
+| `experiment_ablation_2`（全suite迭代） | 68342.80 | 0.8164 | 88.74 | 81.49 | 100.00 | 89.37 | 0.8430 |
 | `final`（suite + patch） | 58264.80 | 0.8132 | 95.19 | 92.31 | 100.00 | 95.02 | 0.9857 |
 
 这个结果说明：
 
-1. `suite + patch` 能显著降低 token 成本；
-2. `suite + patch` 能明显提升 coverage；
-3. `suite + patch` 能明显提升 golden overlap；
-4. correctness 基本持平，只是略微下降。
+1. `suite + patch` 能显著降低 Token 成本；
+2. `suite + patch` 能明显提升多项Coverage；
+3. `suite + patch` 能明显提升 `Avg Golden Tests Match Ratio`；
+4. `Avg Correctness` 基本持平，只是略微下降（0.8164 vs 0.8132）。
 
-因此，更准确的结论不是“`suite + patch` 大幅提高 correctness”，而是：
-
-**在几乎不损伤 correctness 的前提下，`suite + patch` 显著提升了 coverage / semantic overlap，并降低了成本。**
+**在几乎不损伤 `Avg Correctness` 的前提下，`suite + patch` 显著提升了Code Coverage与Golden Tests Match Ratio（`Avg Golden Tests Match Ratio`），并降低了成本。**
 
 ## 9. 项目实践经验
 
@@ -505,16 +518,16 @@
 太简单的函数会让所有方法都表现很好，从而稀释困难函数上的真实差异。  
 因此，benchmark 设计本身就是实验可信度的重要组成部分。
 
-### 9.2 高 coverage 不等于高质量测试
+### 9.2 高Coverage不等于高质量测试
 
 在 `isCurrency` 等案例上，多次出现：
 
-- coverage 很高；
-- golden overlap 很高；
-- 但 correctness 偏低。
+- Coverage各项（如 `Avg Stmt Cov`）极高；
+- `Avg Golden Tests Match Ratio` （命中专家测试的类别）极高；
+- 但Correctness（`Avg Correctness`）偏低。
 
-这说明 AI 生成测试时，不能只追 coverage。  
-如果没有 correctness 约束，高覆盖率可能只是“走到了很多路径”，并不意味着写对了测试。
+这说明 AI 生成测试时，不能只追Coverage。  
+如果没有Correctness约束，高Coverage可能只是“走到了很多路径”，并不意味着写对了测试用例。
 
 ### 9.3 code-only 模式天生更危险
 
@@ -539,7 +552,7 @@
 
 ### 10.1 人类专家修复的优点
 
-- correctness 更稳定；
+- Correctness（Correctness）更稳定；
 - requirement 误读更少；
 - 更容易做关键边界条件确认；
 - 更适合作为高风险 case 的最终把关。
@@ -549,20 +562,20 @@
 - 生成速度快；
 - 能快速扩展候选测试与语义类别；
 - 在白盒场景下有较强的路径探索能力；
-- 很适合做初始测试草案与覆盖率探索。
+- 很适合做初始测试草案与Coverage探索。
 
 ### 10.3 AI 方法的不足
 
 - 会误解 requirement；
 - 会写错参数结构或断言；
-- coverage 高不代表 correctness 高；
+- Coverage高不代表Correctness高；
 - 没有 requirement 时更容易语义漂移。
 
 ### 10.4 更现实的定位
 
 因此，本项目认为 AI 更适合作为：
 
-**测试设计加速器 / 草案生成器 / 覆盖率探索工具**
+**测试设计加速器 / 草案生成器 / Coverage探索工具**
 
 而不是完全替代人工测试工程师。
 
@@ -587,9 +600,9 @@
 
 尽管函数风格不同，实验中仍然能反复看到稳定模式：
 
-- baseline `naive` 更稳；
-- `improved` 更强 coverage / golden；
-- code-only 风险更高；
+- baseline `naive` 在各项Correctness上稳健；
+- `improved` 获取了极强的Code Coverage和黄金命中能力；
+- code-only 极高风险易导致语义漂移；
 - `suite + patch` 优于整套重写。
 
 这说明结论不是只在某一个函数上成立，而是在多个不同 validator 上都可重复观察到。
@@ -606,9 +619,9 @@
 
 实验表明：
 
-- 当 requirement 可得时，模型更容易保持 correctness；
-- 当 code 可得时，模型更容易提升 coverage；
-- 当只有 code 时，模型更容易语义漂移。
+- 当 requirement 可得时，模型更容易提振并保持它的测试Correctness；
+- 当 code 可得时，模型更容易针对性地提升Code Coverage广度；
+- 当只有 code 时，模型更容易发生语义漂移现象。
 
 这说明结论对不同测试输入场景都有解释力。
 
@@ -616,16 +629,15 @@
 
 本项目经历了多轮设计演化：
 
-- 带 requirement 复检；
-- 去掉 requirement 复检；
-- 纯 suite 重写；
-- `suite + patch` 迭代。
+- 带 requirement 复检 + `suite + patch` 迭代；
+- 不带 requirement 复检 + 纯 suite 重写；
+- 不带 requirement 复检 + `suite + patch` 迭代。
 
 在这些设计版本变化中，一些现象始终稳定存在：
 
-- `improved whitebox` 的核心优势是 coverage / golden，而不是 correctness；
-- baseline `naive` 的核心优势是 correctness 稳定性；
-- 仅代码模式更不稳定。
+- `improved whitebox` 的核心侧重与优势点是出众的结构覆盖 `Coverage` 与 `Avg Golden Tests Match Ratio`，而不是拔群的Correctness；
+- baseline `naive` 的核心优势立足于其长期的Correctness稳定性；
+- 仅代码模式则在缺乏监督的情形下更加动荡与不可信。
 
 这说明项目结论并不是偶然来自某一次实验，而是具有一定跨版本稳定性。
 
@@ -655,30 +667,58 @@
    - 各 mode / agent 的测试生成结果，位于 `agent_toolkit/outputs`。
 
 4. `Experimental analysis`
-   - 包括 correctness、coverage、golden overlap、token cost 与多轮 ablation，见各 `experiment_*.md`。
+   - 包括 Correctness、各类Coverage指标、Golden Tests Match Ratio、Avg Tokens 开销分析等多轮消融实验，见本文6、7节以及各 `experiment_*.md`。
 
 5. `Project report`
-   - 本文档为 `report_1.md`；原始分析材料见各实验报告。
+   - 本文档为 `report.md`；原始分析材料见各实验报告。
 
 本项目使用的模型为实验日志中记录的 `gpt-4o`，并记录 token usage 以支持成本分析。
 
-## 13. 总结
+## 13. 项目现状分析与未来演变
+
+### 13.1 五大失效机理归因
+基于对实验失败用例的深入分析，本项目总结了 LLM 在生成测试用例时的五类典型失效机理，这为后续的针对性优化提供了方向：
+1. **断言方向错误**：模型对语义理解出现偏差，将合法输入误判为非法，或反之，反映了基本逻辑推演的局限。
+2. **参数结构错误**：生成的参数不符合接口规约、数据类型或选项组合要求，属于对 API 约束提取不充分。
+3. **语义漂移**：特别是在白盒模式下，过度依赖代码路径逻辑而脱离了 requirement 约束，导致生成的测试偏离了真实的业务需求。
+4. **边界处理不稳定**：在处理极值、特殊字符、长字符串等边界时表现出稳定性不足，反映了模型对精细化数值推演能力的波动。
+5. **组装合并冲突**：在多轮迭代合并 patch 时，可能引入冗余测试或破坏原有测试组的一致性。
+
+### 13.2 综合成本开销模型
+实验显示，单纯的 Token 消耗不足以衡量工具的工程可用性。我们认为在未来的评估中应采用更全面的成本判据：
+**综合开销 = 模型 Token 费用 + 端到端生成时延 + 人工复核与修复成本**
+虽然 `improved agent` 显著提升了覆盖率，但也带来了更高的 Token 支出与交互时延。如果 Correctness 指标不能同步提升，增加的人工复核负担可能会抵消自动化带来的效率增益。
+
+### 13.3 从单体模型向“多角色协作”演进
+目前的系统主要依赖单智能体（Single Agent）的迭代路径。未来的演进方向是转向多角色协作架构（Multi-Role Collaboration）：
+- **领域专家（Expert）**：负责深度拆解需求契约与业务逻辑；
+- **测试工程师（Coder）**：负责具体的测试代码实现；
+- **质量审查员（Reviewer）**：负责寻找断言漏洞并提供负反馈。
+这种“交叉审查”机制有望在追求极致覆盖率的同时，通过内部反馈循环守住正确性的底线。
+
+### 13.4 验证范围的扩展需求
+目前项目主要在 `validator.js` 等无状态纯函数库上得到了验证，此类任务输入输出明确。未来需要将该方法进一步扩展到涉及全局状态、异步调用、文件系统/数据库持久化等具有复杂状态流转（Stateful）的真实工业系统中，以全面评价方法的稳健性。
+
+## 14. 项目分工
+
+本项目组共 4 人，分工如下：
+
+| 成员 | 职责 | 具体分工 |
+| :--- | :--- | :--- |
+| **黄一和 (组长)** | 项目整体设计与汇报 | 负责项目整体设计、实验方案设计、实验结果分析、核心技术报告撰写以及项目汇报 Presentation。 |
+| **夏浩博** | 核心算法实现 | 负责核心算法（`improved agent` 迭代逻辑）的工程化实现与 Prompt 调优。 |
+| **关镜文** | 实验流水线搭建 | 负责基于 `validator.js` 的自动化实验流水线（Pipeline）搭建、Coverage 收集与数据接口开发。 |
+| **黄弋涵** | 结果整理与 PPT 制作 | 负责实验结果整理汇总以及答辩 PPT 的设计与制作。 |
+
+## 15. 总结
 
 本项目在真实开源函数库 `validator.js` 上实现并评估了一个 LLM 驱动的测试生成工具，并围绕 `improved agent` 展开了系统性的设计与验证。
 
 最终可以得出以下结论：
 
-1. LLM 的确可以生成真实可执行测试，但测试质量必须用 correctness、coverage、golden overlap 联合评估。
-2. `naive agent` 作为 baseline，提供了一个稳定、保守、偏 correctness 的参考上界。
-3. `improved agent` 的核心贡献主要来自两部分：更强的 prompt 设计，以及覆盖率驱动的白盒 patch 迭代。
-4. `improved whitebox` 是 coverage 与 golden overlap 最强的方案，但 correctness 仍未追平 baseline `naive whitebox`。
-5. `improved blackbox` 是一个非常平衡的方案，说明 prompt 增强本身就能显著改善 black-box 测试生成。
-6. 对 `improved whitebox` 而言，requirement 复检是错误方向；`suite + patch` 才是更有效的迭代策略。
-7. 本方法已经在多个 validator-style functions、多个输入模式和多个设计版本上表现出一定泛化性，但距离更复杂系统级软件测试的全面泛化仍有距离。
+**1. 通过更强的 prompt 设计与白盒迭代机制，`improved agent` 能够在真实开源项目上，通过牺牲0~10%的Correctness并增加1~2倍的成本，生成Coverage、Golden Tests Match Ratio显著更高的测试用例。**
 
-因此，本项目的总体结论不是“AI 已经能够取代人工测试设计”，而是：
-
-**AI 最适合作为测试设计加速器与覆盖率探索工具；而高可靠测试质量，仍然需要更稳健的约束机制，甚至需要人工参与修正。**
+**2. AI 最适合作为测试设计加速器与Coverage探索工具；而高可靠测试质量，仍然需要更稳健的约束机制，并需要人工参与修正。**
 
 ## 附录 A：本项目使用的主要 Prompt
 
