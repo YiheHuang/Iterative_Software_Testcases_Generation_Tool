@@ -15,6 +15,7 @@ class LLMClient:
             "prompt_tokens": 0,
             "completion_tokens": 0,
             "total_tokens": 0,
+            "total_elapsed_ms": 0,
             "usage_reporting_available": False,
         }
 
@@ -42,6 +43,7 @@ class LLMClient:
             "prompt_tokens": int(self._usage["prompt_tokens"]),
             "completion_tokens": int(self._usage["completion_tokens"]),
             "total_tokens": int(self._usage["total_tokens"]),
+            "total_elapsed_ms": int(self._usage["total_elapsed_ms"]),
             "usage_reporting_available": bool(self._usage["usage_reporting_available"]),
             "model": self.config.model,
             "api_url": self.config.api_url,
@@ -69,8 +71,10 @@ class LLMClient:
         last_error: Exception | None = None
         for attempt in range(3):
             try:
+                start_ms = time.monotonic()
                 with request.urlopen(req, timeout=self.config.timeout_seconds) as response:
                     body = json.loads(response.read().decode("utf-8"))
+                self._usage["total_elapsed_ms"] += int((time.monotonic() - start_ms) * 1000)
                 self._record_usage(body)
                 break
             except error.HTTPError as exc:
